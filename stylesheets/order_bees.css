@@ -1,0 +1,89 @@
+@charset "utf-8";
+/* CSS Document */
+
+.mid_col .subtitle {
+    font-size: smaller;
+    margin-left: 20px;
+}
+
+.mid_col #spacer {
+    height: 15px;
+}
+
+.breed span, .queens span, .pickup td {
+    font-size: 0.95em;
+}
+
+.breed {
+    height: 140px;
+}
+
+.queens {
+    height: 170px;
+}
+
+.mid_col .title {
+    font-weight: bold;
+    font-size: 1.125em; /* 18px */
+}
+
+.desc {
+    padding: 10px 0px;
+}
+
+.sub {
+    margin-left: 30px;
+    display: block;
+}
+
+.breed input, .queens input {
+    width: 50px;
+}
+
+.breed .preference {
+    display: block;
+    height: 30px;
+}
+
+.breed .preference .images {
+    width: 120px;
+    float: left;
+    margin-top: 3px;
+}
+
+.breed .preference img {
+    height: 20px;
+}
+
+.breed .text {
+    float: left;
+}
+
+.queens .preference {
+    padding: 0px 0px 3px 25px;
+}
+
+.pickup table {
+    margin-top: 8px;
+    width: 100%;
+}
+
+.pickup table td {
+    padding-top: 3px;
+}
+
+.notes textarea {
+    margin-top: 10px;
+    width: 90%;
+    height: 100px;
+    resize: none;
+    padding: 10px;
+    font-family: "Times New Roman", cursive;
+    font-size: 1.125em; /* 18px */
+}
+
+.summary table {
+    width: 50%;
+    margin: 0px auto;
+    font-size: 1em; /* 16px */
+}

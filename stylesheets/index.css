@@ -1,0 +1,22 @@
+@charset "utf-8";
+/* CSS Document */
+
+.mid_col .half {
+    width: 48%;
+    height: 100%;
+    float: left;
+}
+
+.mid_col .right {
+    padding-left: 23px;
+}
+
+.mid_col .right_image img {
+    width: 100%;
+}
+
+.mid_col .right_image p {
+    margin-top: 5px;
+    margin-bottom: 40px;
+    text-align: center;
+}

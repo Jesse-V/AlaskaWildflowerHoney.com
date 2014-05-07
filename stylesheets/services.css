@@ -1,0 +1,36 @@
+@charset "utf-8";
+/* CSS Document */
+
+.mid_col .section {
+    width: 100%;
+    display: block;
+    float: left;
+}
+
+.mid_col img {
+    width: 100%;
+}
+
+.mid_col #hiving {
+    height: 500px;
+}
+
+.mid_col .section .half {
+    width: 45%;
+    margin: 10px;
+    float: left;
+}
+
+.mid_col #processingRates {
+    text-align: center;
+    font-weight: bold;
+}
+
+.mid_col table {
+    width: 60%;
+    margin: 0px auto;
+}
+
+.mid_col table td {
+    text-align: center;
+}
