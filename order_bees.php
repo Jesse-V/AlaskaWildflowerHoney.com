@@ -11,7 +11,7 @@
         <link rel="stylesheet" type="text/css" href="stylesheets/fancyHRandButtons.css" />
         <link rel="stylesheet" type="text/css" href="stylesheets/order_bees.css" />
         <?php
-            require_once('scripts/databaseConnect.php');
+            require_once('scripts/databaseConnect.secret');
             global $db;
 
             $result = $db->query("SELECT ID, price FROM bees");

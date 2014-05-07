@@ -1,50 +1,15 @@
-<!DOCTYPE html><html><!-- InstanceBegin template="/Templates/Main.dwt" codeOutsideHTMLIsLocked="false" -->
+<!DOCTYPE html>
+<html><!-- InstanceBegin template="/Templates/Main.dwt" codeOutsideHTMLIsLocked="false" -->
     <head>
         <!-- InstanceBeginEditable name="doctitle" -->
-        <title>Beekeeping Supplies - AlaskaWildflowerHoney.com</title>
+        <title>Services - AlaskaWildflowerHoney.com</title>
         <!-- InstanceEndEditable -->
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" type="text/css" href="stylesheets/main.css" />
         <script type="text/javascript" src="SpryAssets/SpryAccordion.js"></script>
         <link href="SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />
         <!-- InstanceBeginEditable name="head" -->
-        <link rel="stylesheet" type="text/css" href="stylesheets/fancyHRandButtons.css" />
-        <link rel="stylesheet" type="text/css" href="stylesheets/order_supplies.css" />
-
-        <?php
-        require_once('scripts/databaseConnect.secret');
-
-        function printRows($result)
-        {
-            while ($record = $result->fetch_assoc())
-            {
-                $id    = $record['ID'];
-                $code  = $record['code'];
-                $name  = $record['name'];
-                $desc  = $record['description'];
-                $price = $record['price'];
-
-                if (substr($price, -strlen(".00")) === ".00")
-                    $price = substr($price, 0, strlen($price) - strlen(".00"));
-
-                echo "
-                <tr>
-                    <td>$code</td>
-                    ";
-
-                if (strlen($desc) <= 1)
-                    echo "<td>$name</td>";
-                else
-                    echo "<td>$name<span class=\"desc\">$desc</span></td>";
-
-                echo "
-                    <td>$$price</td>
-                    <td><input name=\"$id\" type=\"number\" min=\"0\" value=\"0\"></td>
-                </tr>";
-            }
-        }
-        ?>
-
+        <link rel="stylesheet" type="text/css" href="stylesheets/services.css" />
         <!-- InstanceEndEditable -->
     </head>
     <body>
@@ -94,133 +59,100 @@
                         </div>
                     </div>
                     <!-- InstanceBeginEditable name="content" -->
-                    <div class="images">
-                        <img src="images/virginia_painting_1.gif" width="302" height="404" alt="Virginia painting a stack of supers 1"/>
-                        <div class="desc">My daughter Virginia painting some hives...<br><br>The coolest girl on the planet, and I was lucky to know her.</div>
-                        <img src="images/virginia_painting_2.gif" width="302" height="404" alt="Virginia painting a stack of supers 2"/>
-                    </div>
                 </div>
                 <div class="mid_col">
-                <form action="checkout/CartManager.php" method="post" autocomplete="on" name="frmProduct" id="frmProduct" accept-charset="UTF-8">
-                    <h3>Ordering Online</h3>
-                    <p>We generally do not ship mail order, although we do this for those beekeepers who have no other alternative. Mailing items within the state is less expensive than shipment from the lower 48, however when one adds the increased cost of postage to our prices it comes out very similar to direct orders from the states.</p>
 
-                    <h3>Delivery of Supplies</h3>
-                    <p>Supplies are usually delivered during our trips delivering bees in the spring. We also routinely deliver supplies to the monthly SABA beekeeping meetings in Eagle River on the 4th Monday of the month. We travel down to the Homer area several times during the summer and can bring supplies with us. Our trips to Anchorage are relatively rare but we do go there on occasion, and each time we find ourselves bringing equipment in. Our trips to Wasilla are much more frequent. The convenience of credit card orders allows beekeepers to purchase supplies for pickup by someone else, delivery on our occasional trips to town or drop off to another location.</p>
+                    <h1>Services</h1>
 
-                    <div class="subtitle">HIVE COMPONENTS</div>
-                    <table>
-                        <tr>
-                            <th>Mann Lake ID</th>
-                            <th>Description</th>
-                            <th>Price per unit</th>
-                            <th></th>
-                        </tr>
-
-                        <?php
-                        global $db;
-
-                        $result = $db->query("SELECT * FROM supplies WHERE category='HiveComponent'");
-                        if (!$result)
-                            die("Failed to connect to database. ".$db->error);
-
-                        printRows($result);
-                        $result->close();
-                        ?>
-                    </table>
-
-                    <div class="subtitle">TOOLS AND EQUIPMENT</div>
-                    <table>
-                        <tr>
-                            <th>Mann Lake ID</th>
-                            <th>Description</th>
-                            <th>Price per unit</th>
-                            <th></th>
-                        </tr>
-
-                        <?php
-                        global $db;
-
-                        $result = $db->query("SELECT * FROM supplies WHERE category='ToolsEquipment'");
-                        if (!$result)
-                            die("Failed to connect to database. ".$db->error);
-
-                        printRows($result);
-                        $result->close();
-                        ?>
-                    </table>
-
-                    <div class="subtitle">UNCOMMON ITEMS</div>
-                    <table>
-                        <tr>
-                            <th>Mann Lake ID</th>
-                            <th>Description</th>
-                            <th>Price per unit</th>
-                            <th></th>
-                        </tr>
-
-                        <?php
-                        global $db;
-
-                        $result = $db->query("SELECT * FROM supplies WHERE category='Uncommon'");
-                        if (!$result)
-                            die("Failed to connect to database. ".$db->error);
-
-                        printRows($result);
-                        $result->close();
-                        ?>
-                    </table>
-
-                    <div class="subtitle">BOTTLING SUPPLIES</div>
-                    <table>
-                        <tr>
-                            <th>Mann Lake ID</th>
-                            <th>Description</th>
-                            <th>Price per unit</th>
-                            <th></th>
-                        </tr>
-
-                        <?php
-                        global $db;
-
-                        $result = $db->query("SELECT * FROM supplies WHERE category='Bottling'");
-                        if (!$result)
-                            die("Failed to connect to database. ".$db->error);
-
-                        printRows($result);
-                        $result->close();
-                        ?>
-                    </table>
-
-                    <hr class="fancy">
-
-                    <div id="pickupPoint">
-                        <p>
-                            We generally don't do mail order for supplies. Instead, we deliver locally. We often bring supplies with us on our trips into town. Please call or email us to arrange for this. We travel to the peninsula several times in the summer and in and out of Wasilla often. Where would you like to pick up your items?
-                        </p>
-
-                        <p class="options">
-                            <div class="option">
-                                <input type="radio" name="pickupLoc" value="at the bee meeting"/>To be picked up at a SABA beekeepers meeting.
-                            </div>
-                            <div class="option">
-                                <input type="radio" name="pickupLoc" value="Big Lake"/>To be picked up at Big Lake.
-                            </div>
-                            <div class="option">
-                                <input type="radio" name="pickupLoc" value="along with the bee shipment"/>To be picked up with the spring bee shipment.
-                            </div>
-                        </p>
+                    <div class="section">
+                        <h2>Extracting</h2>
+                        <div class="half">
+                            <img src="images/processing/image356.jpg" alt="Extractors."/>
+                            <p>We provide extracting services for those who do not have time to process the honey themselves.  Our twin radials allow us to extract frames with less danger of blowout than tangential extractors.  We charge $.50 per pound with a 50 pound minimum charge.  We extract for others after our harvest is done to keep your honey separate from ours allowing you to be assured that the honey that you receive back comes from your own hives.</p>
+                        </div>
+                        <div class="half">
+                            <img src="images/processing/image505.jpg" alt="Uncapping a frame."/>
+                            <p>Please call before you come out so that we may be ready for your arrival.  Your supers need to be free of bees and brood and drop off times must be during non flight hours if at all possible.  We have our hives located very near our extracting room and robbing of supers in the back of someone's truck turns into a frenzy within 5 minutes of arrival during mid-day.  Please make sure that your truck is free of spilled honey from your supers so that when we have unloaded your supers there is nothing left to attract bees.
+                            </p>
+                            <p>We use a commercial grade mechanical uncapper—A Cowen Silver Queen that uses a pair of hot vibrating knives to uncap with.  Although uncommon, warped or damaged frames may not feed well through our machine and may need to be uncapped by hand.
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="summary">
-                        Total for items on this page: $<span id="total">0.00</span>
+                    <div class="section" id="hiving">
+                        <h2>Hiving</h2>
+                        <div class="half">
+                            <p>We can hive your packages of bees here in our own starter yard.  We started offering this service several years ago to beekeepers who were out of town or away on business during the package arrival time.
+                            </p>
+                            <p>You may bring your hive to our yard prior to the bees arriving as a single deep box.  We will install your package, release the queen and have the hive ready for pickup 2 weeks after hiving.  As many beekeepers understand, hives should not be transported  or radically disturbed for a couple of weeks after the new queen is released.  It is possible to transport hives prior to this but queens are not guaranteed under this situation.
+                            </p>
+                            <p>Your equipment should be in good serviceable shape and be able to be made bee tight for your return trip.
+                            </p>
+                        </div>
+                        <div class="half">
+                            <h3>Hiving rates:</h3>
+                            <p>
+                                Hiving: with queen caged $10<br>
+                                Indirect queen release: 2.50<br>
+                                Feeding $5 per week
+                            </p>
+
+                            <h3>For hiving on new equipment:</h3>
+                            <p>
+                                Starter Hive: $113<br>
+                                A lid with inner cover over a complete brood box with 9 frames of drawn comb and frame feeder on top of a bottom board
+                            </p>
+
+                            <h3>If you need new frames only:</h3>
+                            <p>New frames with drawn comb, $4 each
+                            </p>
+                        </div>
                     </div>
 
-                    <input type="hidden" name="format" value="supplies"/>
+                    <div class="section">
+                        <h2>Honey Processing</h2>
+                        <p>We also offer services for processing your honey as well.  When we extract your honey, cappings are kept separate from the comb.  These are placed in a small  container for you as well.  Your honey is caught straight out of the extractor into a new food grade 5 gallon bucket.  If you wish, you can provide your own buckets and we will extract into them instead.  This may save you some money as the new food grade buckets cost about $10.00 each.  Our extractors sit high enough to accept a 6 gallon bucket under the spout.
+                        </p>
+                        <p>If you wish, we can run the honey through more processing and skim the wax off the top for you.  We will do this after allowing the honey to settle for several days to allow all of the small wax particles to rise to the surface.
+                        </p>
+                        <p>We also have the ability to heat the honey to retard the tendency for the honey to crystallize and give it a longer liquid shelf life. Our heater system is set up for buckets of honey to be placed into a water bath heated to your chosen temperature.  Our heater controls are sensitive enough to maintain the set temperature within a couple of degrees.
+                        </p>
+                        <p>We also can filter your honey through a fine nylon cloth to remove most all of the visible particles.  Your honey will need to be above 100 degrees to do this.  Although we can filter honey at temperatures less than this it is more time consuming and an extra charge will have to be added.
+                        </p>
+                        <p>Let us know if you want your honey in a bucket with a bottling spout on it.  This is the most convenient method of receiving your honey ready for placing into your own containers.</p>
 
-                    <input type="submit" name="submit" id="moreBtn" value="Need bees or queens? Click here to save your order and visit the bees page."/>
-                    <input type="submit" name="submit" id="submitBtn" value="Finished? Click here to proceed to checkout."/>
-                </form>
+                        <div id="processingRates">Processing Rates for 2014 per pound with a 50-pound minimum order</div>
+                        <table>
+                            <tr>
+                                <th>Service</th>
+                                <th>Rate</th>
+                            </tr>
+                            <tr>
+                                <td>Extracting</td>
+                                <td>$0.50</td>
+                            </tr>
+                            <tr>
+                                <td>Skimming wax</td>
+                                <td>$0.10</td>
+                            </tr>
+                            <tr>
+                                <td>Heating Honey</td>
+                                <td>$0.10</td>
+                            </tr>
+                            <tr>
+                                <td>Filtering Honey (warm)</td>
+                                <td>$0.15</td>
+                            </tr>
+                            <tr>
+                                <td>Filtering Honey (cold)</td>
+                                <td>$0.25</td>
+                            </tr>
+                            <tr>
+                                <td>Bucket with bottling spout</td>
+                                <td>$25.00</td>
+                            </tr>
+                        </table>
+                    </div>
 
                 </div>
                 <div class="right_col">
@@ -305,11 +237,6 @@
         //-->
         </script>
         <!-- InstanceBeginEditable name="scripts" -->
-        <script src="scripts/jquery-1.10.2.js"></script>
-        <script src="scripts/order_supplies.js"></script>
         <!-- InstanceEndEditable -->
     </body>
 <!-- InstanceEnd --></html>
-<?php
-    $db->close();
-?>
