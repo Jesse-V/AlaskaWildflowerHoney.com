@@ -150,7 +150,7 @@
             ';
 
         $items = queryItems($sectionRecord['ID']);
-        $groupedItems = groupItems($items, $group, $groupID)
+        $groupedItems = groupItems($items, $groups, $groupID);
 
         foreach ($items as $item)
         {
@@ -175,19 +175,19 @@
                         <tr>
                             <td></td>
                             <td>
-                                <div class="groupedTD">
-                                    '.$subItem['name'].'<br>'
-                                    .$subItem['description'].'
+                                <div class="groupedTD">'
+                                    .'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$subItem['name'].'<br>'
+                                    .'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$subItem['description'].'
                                 </div>
                             </td>
                             <td>
                                 <div class="groupedTD">
-                                $'.$item['price'].'
+                                $'.$subItem['price'].'
                                 </div>
                             </td>
                             <td>
                                 <div class="groupedTD">
-                                <input name="'.$item['itemID'].'" type="number" min="0" value="0">
+                                <input name="'.$subItem['itemID'].'" type="number" min="0" value="0">
                                 </div>
                             </td>
                         </tr>';
@@ -203,7 +203,7 @@
                     <td></td>
                     <td>'.$item['name'].'</td>
                     <td>$'.$item['price'].'</td>
-                    <td><input name="'.$item['itemID'].'" type="number" min="0" value="0"><td>
+                    <td><input name="'.$item['itemID'].'" type="number" min="0" value="0"></td>
                 </tr>';
             }
         }
