@@ -47,6 +47,21 @@
         $itemSQL->close();
         return $items;
     }
+
+
+    function groupItems($items, $groups, $groupID)
+    {
+        $groupedItems = array();
+        foreach ($groups as $groupID => $group)
+        {
+            $groupedItems[$groupID] = array();
+            foreach ($items as $item)
+                if ($item['groupID'] == $groupID)
+                    array_push($groupedItems[$groupID], $item);
+        }
+
+        return $groupedItems;
+    }
 ?>
 
         <!-- InstanceEndEditable -->
@@ -127,6 +142,7 @@
         <div class="subtitle">'.$sectionRecord['name'].'</div>
         <table>
             <tr>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Price per unit</th>
                 <th></th>
@@ -134,16 +150,7 @@
             ';
 
         $items = queryItems($sectionRecord['ID']);
-
-        $groupedItems = array();
-        foreach ($groups as $groupID => $group)
-        {
-            $groupedItems[$groupID] = array();
-            foreach ($items as $item)
-                if ($item['groupID'] == $groupID)
-                    array_push($groupedItems[$groupID], $item);
-        }
-        //print_r($groupedItems);
+        $groupedItems = groupItems($items, $group, $groupID)
 
         foreach ($items as $item)
         {
@@ -152,24 +159,40 @@
                 if (!empty($groupedItems[$item['groupID']]))
                 { //part of a valid group and group hasn't already been printed
 
-                    //open group
-                    echo '<tr>';
+                    echo '
+                        <tr>
+                            <td></td>
+                            <td>'.$groups[$item['groupID']]['name'].'<br>'
+                                 .$groups[$item['groupID']]['description'].'
+                            </td>
+                            <td></td>
+                            <td></td>
+                        </tr>';
 
-                    echo $item['name']
+                    foreach ($groupedItems[$item['groupID']] as $subItem)
+                    {
+                        echo '
+                        <tr>
+                            <td></td>
+                            <td>
+                                <div class="groupedTD">
+                                    '.$subItem['name'].'<br>'
+                                    .$subItem['description'].'
+                                </div>
+                            </td>
+                            <td>
+                                <div class="groupedTD">
+                                $'.$item['price'].'
+                                </div>
+                            </td>
+                            <td>
+                                <div class="groupedTD">
+                                <input name="'.$item['itemID'].'" type="number" min="0" value="0">
+                                </div>
+                            </td>
+                        </tr>';
+                    }
 
-                    echo '<td>';
-                    foreach ($groupedItems[$item['groupID']] as $subItem)
-                        echo $subItem['name']."<br>"; //we don't care about DESCRIPTION
-                    echo '</td><td>';
-                    foreach ($groupedItems[$item['groupID']] as $subItem)
-                        echo '$'.$subItem['price'].'<br>';
-                    echo '</td><td>';
-                    foreach ($groupedItems[$item['groupID']] as $subItem)
-                        echo '<input name="'.$subItem['itemID'].'" type="number" min="0" value="0"><br>';
-                    echo '</td>';
-
-                    //close group
-                    echo '</tr>';
                     unset($groupedItems[$item['groupID']]);
                 }
             }
@@ -177,6 +200,7 @@
             {
                 echo '
                 <tr>
+                    <td></td>
                     <td>'.$item['name'].'</td>
                     <td>$'.$item['price'].'</td>
                     <td><input name="'.$item['itemID'].'" type="number" min="0" value="0"><td>
