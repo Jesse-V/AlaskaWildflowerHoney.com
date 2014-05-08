@@ -11,55 +11,43 @@
         <link rel="stylesheet" type="text/css" href="stylesheets/fancyHRandButtons.css" />
         <link rel="stylesheet" type="text/css" href="stylesheets/order_supplies.css" />
 
-        <?php
-        require_once('scripts/databaseConnect.secret');
+<?php
+    require_once('scripts/databaseConnect.secret');
 
-        function queryGroups()
-        {
-            global $db;
+    function queryGroups()
+    {
+        global $db;
 
-            $groupSQL = $db->query("SELECT * FROM SuppliesItemGroups");
-            if (!$groupSQL)
-                die("Failed to connect to database. ".$db->error);
+        $groupSQL = $db->query("SELECT * FROM SuppliesItemGroups");
+        if (!$groupSQL)
+            die("Failed to connect to database. ".$db->error);
 
-            $groups = array();
-            while ($record = $groupSQL->fetch_assoc())
-                $groups[$record['ID']] = $record;
+        $groups = array();
+        while ($record = $groupSQL->fetch_assoc())
+            $groups[$record['ID']] = $record;
 
-            $groupSQL->close();
-            return $groups;
-        }
+        $groupSQL->close();
+        return $groups;
+    }
 
-        function printRows($result)
-        {
-            while ($record = $result->fetch_assoc())
-            {
-                $id    = $record['ID'];
-                $code  = $record['code'];
-                $name  = $record['name'];
-                $desc  = $record['description'];
-                $price = $record['price'];
 
-                if (substr($price, -strlen(".00")) === ".00")
-                    $price = substr($price, 0, strlen($price) - strlen(".00"));
 
-                echo "
-                <tr>
-                    <td>$code</td>
-                    ";
+    function queryItems($sectionID)
+    {
+        global $db;
 
-                if (strlen($desc) <= 1)
-                    echo "<td>$name</td>";
-                else
-                    echo "<td>$name<span class=\"desc\">$desc</span></td>";
+        $itemSQL = $db->query("SELECT * FROM Supplies WHERE sectionID=$sectionID ORDER BY itemID");
+        if (!$itemSQL)
+            die("Failed to fetch data. ".$db->error);
 
-                echo "
-                    <td>$$price</td>
-                    <td><input name=\"$id\" type=\"number\" min=\"0\" value=\"0\"></td>
-                </tr>";
-            }
-        }
-        ?>
+        $items = array();
+        while ($record = $itemSQL->fetch_assoc())
+            array_push($items, $record);
+
+        $itemSQL->close();
+        return $items;
+    }
+?>
 
         <!-- InstanceEndEditable -->
     </head>
@@ -135,11 +123,6 @@
 
     while ($sectionRecord = $sectionsSQL->fetch_assoc())
     {
-        $sectionID = $sectionRecord['ID'];
-        $itemSQL = $db->query("SELECT * FROM Supplies WHERE sectionID=$sectionID");
-        if (!$itemSQL)
-            die("Failed to fetch data. ".$db->error);
-
         echo '
         <div class="subtitle">'.$sectionRecord['name'].'</div>
         <table>
@@ -150,68 +133,57 @@
             </tr>
             ';
 
-        $currGroup = -1;
-        $groupIndex = 0;
+        $items = queryItems($sectionRecord['ID']);
 
-        while ($item = $itemSQL->fetch_assoc())
+        $groupedItems = array();
+        foreach ($groups as $groupID => $group)
         {
-            $id = $item['itemID'];
-            $name = $item['name'];
-            $desc = $item['description'];
-            $price = $item['price'];
+            $groupedItems[$groupID] = array();
+            foreach ($items as $item)
+                if ($item['groupID'] == $groupID)
+                    array_push($groupedItems[$groupID], $item);
+        }
+        //print_r($groupedItems);
 
-            if (substr($price, -strlen(".00")) === ".00")
-                $price = substr($price, 0, strlen($price) - strlen(".00"));
-
-            if ($item['groupID'] != $currGroup)
-                echo "</tr>";
-
+        foreach ($items as $item)
+        {
             if ($item['groupID'] > 0)
-            {
-                if ($item['groupID'] == $currGroup)
-                {
-                    //$groupIndex++; //in same group, so count up
+            { //part of a group
+                if (!empty($groupedItems[$item['groupID']]))
+                { //part of a valid group and group hasn't already been printed
 
-                    if (strlen($desc) <= 1)
-                        echo "<td>$name</td>";
-                    else
-                        echo "<td>$name<span class=\"desc\">$desc</span></td>";
+                    //open group
+                    echo '<tr>';
 
-                    echo "
-                            <td>$$price</td>
-                            <td><input name=\"$id\" type=\"number\" min=\"0\" value=\"0\"></td>
-                        ";
+                    echo $item['name']
+
+                    echo '<td>';
+                    foreach ($groupedItems[$item['groupID']] as $subItem)
+                        echo $subItem['name']."<br>"; //we don't care about DESCRIPTION
+                    echo '</td><td>';
+                    foreach ($groupedItems[$item['groupID']] as $subItem)
+                        echo '$'.$subItem['price'].'<br>';
+                    echo '</td><td>';
+                    foreach ($groupedItems[$item['groupID']] as $subItem)
+                        echo '<input name="'.$subItem['itemID'].'" type="number" min="0" value="0"><br>';
+                    echo '</td>';
+
+                    //close group
+                    echo '</tr>';
+                    unset($groupedItems[$item['groupID']]);
                 }
-                else
-                { //starting a new group
-                    echo '
-                        <tr>
-                            <td>'.$groups['groupID']['name'].'</td>
-                            ';
-                    $currGroup = $item['groupID'];
-                    //$groupIndex = 0;
-                }
-
             }
-            else if ($item['groupID'] == 0)
+            else
             {
-                echo "
-                    <tr>
-                        ";
-
-                if (strlen($desc) <= 1)
-                    echo "<td>$name</td>";
-                else
-                    echo "<td>$name<span class=\"desc\">$desc</span></td>";
-
-                echo "
-                        <td>$$price</td>
-                        <td><input name=\"$id\" type=\"number\" min=\"0\" value=\"0\"></td>
-                    ";
+                echo '
+                <tr>
+                    <td>'.$item['name'].'</td>
+                    <td>$'.$item['price'].'</td>
+                    <td><input name="'.$item['itemID'].'" type="number" min="0" value="0"><td>
+                </tr>';
             }
         }
 
-        $itemSQL->close();
         echo '
             </table>';
     }
