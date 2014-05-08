@@ -14,6 +14,22 @@
         <?php
         require_once('scripts/databaseConnect.secret');
 
+        function queryGroups()
+        {
+            global $db;
+
+            $groupSQL = $db->query("SELECT * FROM SuppliesItemGroups");
+            if (!$groupSQL)
+                die("Failed to connect to database. ".$db->error);
+
+            $groups = array();
+            while ($record = $groupSQL->fetch_assoc())
+                $groups[$record['ID']] = $record;
+
+            $groupSQL->close();
+            return $groups;
+        }
+
         function printRows($result)
         {
             while ($record = $result->fetch_assoc())
@@ -108,89 +124,100 @@
                     <h3>Delivery of Supplies</h3>
                     <p>Supplies are usually delivered during our trips delivering bees in the spring. We also routinely deliver supplies to the monthly SABA beekeeping meetings in Eagle River on the 4th Monday of the month. We travel down to the Homer area several times during the summer and can bring supplies with us. Our trips to Anchorage are relatively rare but we do go there on occasion, and each time we find ourselves bringing equipment in. Our trips to Wasilla are much more frequent. The convenience of credit card orders allows beekeepers to purchase supplies for pickup by someone else, delivery on our occasional trips to town or drop off to another location.</p>
 
-                    <div class="subtitle">HIVE COMPONENTS</div>
-                    <table>
+<?php
+    global $db;
+
+    $sectionsSQL = $db->query("SELECT * FROM SuppliesSections");
+    if (!$sectionsSQL)
+        die("Failed to connect to database. ".$db->error);
+
+    $groups = queryGroups();
+
+    while ($sectionRecord = $sectionsSQL->fetch_assoc())
+    {
+        $sectionID = $sectionRecord['ID'];
+        $itemSQL = $db->query("SELECT * FROM Supplies WHERE sectionID=$sectionID");
+        if (!$itemSQL)
+            die("Failed to fetch data. ".$db->error);
+
+        echo '
+        <div class="subtitle">'.$sectionRecord['name'].'</div>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price per unit</th>
+                <th></th>
+            </tr>
+            ';
+
+        $currGroup = -1;
+        $groupIndex = 0;
+
+        while ($item = $itemSQL->fetch_assoc())
+        {
+            $id = $item['itemID'];
+            $name = $item['name'];
+            $desc = $item['description'];
+            $price = $item['price'];
+
+            if (substr($price, -strlen(".00")) === ".00")
+                $price = substr($price, 0, strlen($price) - strlen(".00"));
+
+            if ($item['groupID'] != $currGroup)
+                echo "</tr>";
+
+            if ($item['groupID'] > 0)
+            {
+                if ($item['groupID'] == $currGroup)
+                {
+                    //$groupIndex++; //in same group, so count up
+
+                    if (strlen($desc) <= 1)
+                        echo "<td>$name</td>";
+                    else
+                        echo "<td>$name<span class=\"desc\">$desc</span></td>";
+
+                    echo "
+                            <td>$$price</td>
+                            <td><input name=\"$id\" type=\"number\" min=\"0\" value=\"0\"></td>
+                        ";
+                }
+                else
+                { //starting a new group
+                    echo '
                         <tr>
-                            <th>Mann Lake ID</th>
-                            <th>Description</th>
-                            <th>Price per unit</th>
-                            <th></th>
-                        </tr>
+                            <td>'.$groups['groupID']['name'].'</td>
+                            ';
+                    $currGroup = $item['groupID'];
+                    //$groupIndex = 0;
+                }
 
-                        <?php
-                        global $db;
+            }
+            else if ($item['groupID'] == 0)
+            {
+                echo "
+                    <tr>
+                        ";
 
-                        $result = $db->query("SELECT * FROM supplies WHERE category='HiveComponent'");
-                        if (!$result)
-                            die("Failed to connect to database. ".$db->error);
+                if (strlen($desc) <= 1)
+                    echo "<td>$name</td>";
+                else
+                    echo "<td>$name<span class=\"desc\">$desc</span></td>";
 
-                        printRows($result);
-                        $result->close();
-                        ?>
-                    </table>
+                echo "
+                        <td>$$price</td>
+                        <td><input name=\"$id\" type=\"number\" min=\"0\" value=\"0\"></td>
+                    ";
+            }
+        }
 
-                    <div class="subtitle">TOOLS AND EQUIPMENT</div>
-                    <table>
-                        <tr>
-                            <th>Mann Lake ID</th>
-                            <th>Description</th>
-                            <th>Price per unit</th>
-                            <th></th>
-                        </tr>
+        $itemSQL->close();
+        echo '
+            </table>';
+    }
 
-                        <?php
-                        global $db;
-
-                        $result = $db->query("SELECT * FROM supplies WHERE category='ToolsEquipment'");
-                        if (!$result)
-                            die("Failed to connect to database. ".$db->error);
-
-                        printRows($result);
-                        $result->close();
-                        ?>
-                    </table>
-
-                    <div class="subtitle">UNCOMMON ITEMS</div>
-                    <table>
-                        <tr>
-                            <th>Mann Lake ID</th>
-                            <th>Description</th>
-                            <th>Price per unit</th>
-                            <th></th>
-                        </tr>
-
-                        <?php
-                        global $db;
-
-                        $result = $db->query("SELECT * FROM supplies WHERE category='Uncommon'");
-                        if (!$result)
-                            die("Failed to connect to database. ".$db->error);
-
-                        printRows($result);
-                        $result->close();
-                        ?>
-                    </table>
-
-                    <div class="subtitle">BOTTLING SUPPLIES</div>
-                    <table>
-                        <tr>
-                            <th>Mann Lake ID</th>
-                            <th>Description</th>
-                            <th>Price per unit</th>
-                            <th></th>
-                        </tr>
-
-                        <?php
-                        global $db;
-
-                        $result = $db->query("SELECT * FROM supplies WHERE category='Bottling'");
-                        if (!$result)
-                            die("Failed to connect to database. ".$db->error);
-
-                        printRows($result);
-                        $result->close();
-                        ?>
-                    </table>
+    $sectionsSQL->close();
+?>
 
                     <hr class="fancy">
 
