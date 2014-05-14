@@ -1,3 +1,151 @@
+<?php
+    require_once('scripts/databaseConnect.secret');
+
+    function queryGroups()
+    {
+        global $db;
+
+        $groupSQL = $db->query("SELECT * FROM SuppliesItemGroups");
+        if (!$groupSQL)
+            die("Failed to connect to database. ".$db->error);
+
+        $groups = array();
+        while ($record = $groupSQL->fetch_assoc())
+            $groups[$record['ID']] = $record;
+
+        $groupSQL->close();
+        return $groups;
+    }
+
+
+
+    function queryItems($sectionID)
+    {
+        global $db;
+
+        $itemSQL = $db->query("SELECT * FROM Supplies WHERE sectionID=$sectionID ORDER BY itemID");
+        if (!$itemSQL)
+            die("Failed to fetch data. ".$db->error);
+
+        $items = array();
+        while ($record = $itemSQL->fetch_assoc())
+            array_push($items, $record);
+
+        $itemSQL->close();
+        return $items;
+    }
+
+
+    function groupItems($items, $groups)
+    {
+        $groupedItems = array();
+        foreach ($groups as $groupID => $group)
+        {
+            $groupedItems[$groupID] = array();
+            foreach ($items as $item)
+                if ($item['groupID'] == $groupID)
+                    array_push($groupedItems[$groupID], $item);
+        }
+
+        return $groupedItems;
+    }
+
+
+    function printSection($sectionRecord, $groups)
+    {
+        echo '
+        <div class="subtitle">'.$sectionRecord['name'].'</div>
+        <div class="description">'.$sectionRecord['description'].'</div>
+        <table>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Price per unit</th>
+                <th></th>
+            </tr>
+            ';
+
+        $items = queryItems($sectionRecord['ID']);
+        $groupedItems = groupItems($items, $groups);
+
+        foreach ($items as $item)
+        {
+            if ($item['groupID'] > 0)
+            { //part of a group
+                if (!empty($groupedItems[$item['groupID']]))
+                { //part of a valid group and group hasn't already been printed
+                    $desc = $groups[$item['groupID']]['description'];
+
+                    echo '
+                        <tr class="group'.$item['groupID'].'">
+                            <td></td>
+                            <td>'.$groups[$item['groupID']]['name'];
+
+                    if (strlen($desc) > 0)
+                        echo '<br>'.$desc;
+
+                    echo '  </td>
+                            <td></td>
+                            <td></td>
+                        </tr>';
+
+                    foreach ($groupedItems[$item['groupID']] as $subItem)
+                    {
+                        $price = $subItem['price'];
+                        if (substr($price, -strlen(".00")) === ".00")
+                            $price = substr($price, 0, strlen($price) - strlen(".00"));
+
+                        $desc = $groups[$item['groupID']]['description'];
+
+                        echo '
+                        <tr class="subitem'.$item['groupID'].'">
+                            <td></td>
+                            <td>
+                                <div class="groupedTD">'
+                                    .'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$subItem['name'];
+
+                        if (strlen($subItem['description']) > 0)
+                            echo '<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$subItem['description'];
+
+                        echo '  </div>
+                            </td>
+                            <td>
+                                <div class="groupedTD">
+                                $'.$price.'
+                                </div>
+                            </td>
+                            <td>
+                                <div class="groupedTD">
+                                <input name="'.$subItem['itemID'].'" type="number" min="0" value="0">
+                                </div>
+                            </td>
+                        </tr>';
+                    }
+
+                    unset($groupedItems[$item['groupID']]);
+                }
+            }
+            else
+            {
+                $price = $item['price'];
+                if (substr($price, -strlen(".00")) === ".00")
+                    $price = substr($price, 0, strlen($price) - strlen(".00"));
+
+                echo '
+                <tr>
+                    <td></td>
+                    <td>'.$item['name'].'</td>
+                    <td>$'.$price.'</td>
+                    <td><input name="'.$item['itemID'].'" type="number" min="0" value="0"></td>
+                </tr>';
+            }
+        }
+
+        echo '
+            </table>';
+    }
+?>
+
 <!DOCTYPE html><html><!-- InstanceBegin template="/Templates/Main.dwt" codeOutsideHTMLIsLocked="false" -->
     <head>
         <!-- InstanceBeginEditable name="doctitle" -->
@@ -10,12 +158,6 @@
         <!-- InstanceBeginEditable name="head" -->
         <link rel="stylesheet" type="text/css" href="stylesheets/fancyHRandButtons.css" />
         <link rel="stylesheet" type="text/css" href="stylesheets/order_supplies.css" />
-
-<?php
-    require_once('scripts/databaseConnect.secret');
-    require_once('supplies/helper.php');
-?>
-
         <!-- InstanceEndEditable -->
     </head>
     <body>
@@ -73,11 +215,8 @@
                 </div>
                 <div class="mid_col">
                 <form action="checkout/CartManager.php" method="post" autocomplete="on" name="frmProduct" id="frmProduct" accept-charset="UTF-8">
-                    <h3>Ordering Online</h3>
-                    <p>We generally do not ship mail order, although we do this for those beekeepers who have no other alternative. Mailing items within the state is less expensive than shipment from the lower 48, however when one adds the increased cost of postage to our prices it comes out very similar to direct orders from the states.</p>
-
-                    <h3>Delivery of Supplies</h3>
-                    <p>Supplies are usually delivered during our trips delivering bees in the spring. We also routinely deliver supplies to the monthly SABA beekeeping meetings in Eagle River on the 4th Monday of the month. We travel down to the Homer area several times during the summer and can bring supplies with us. Our trips to Anchorage are relatively rare but we do go there on occasion, and each time we find ourselves bringing equipment in. Our trips to Wasilla are much more frequent. The convenience of credit card orders allows beekeepers to purchase supplies for pickup by someone else, delivery on our occasional trips to town or drop off to another location.</p>
+                    <h3>Supplies Store</h3>
+                    <p>We offer a variety of beekeeping products, ranging from common items such as beehive components, tools, and processing equipment to rarer and specialty items. We carry primarily Mann Lake products, as well as some of our own. We are the largest distributor of beekeeping supplies in the state of Alaska. We hope you will find this store efficient and convenient.</p>
 
 <?php
     global $db;
