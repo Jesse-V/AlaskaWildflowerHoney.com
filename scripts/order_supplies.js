@@ -14,11 +14,11 @@ function hideAllGroupItems(duration) {
 that.find("table tr").click(function() {
     if (this.className.lastIndexOf("group", 0) === 0) //startsWith
     {
-        hideAllGroupItems(300);
+        hideAllGroupItems(750);
 
         var groupNum = this.className.substring(5);
         var subitems = that.find("table .subItem" + groupNum);
-        subitems.show(600);
+        subitems.show(750);
     }
 });
 
@@ -45,7 +45,7 @@ function updateTotal() {
     var total = 0;
     that.find("tr").each(function() {
         var fields = $(this).find("td");
-        if (fields.length != 0 && $(fields[2]).html().length > 0) {
+        if (fields.length != 0 && $(fields[2]).html().length > 1) {
             var cost = parseFloat($(fields[2]).html().substr(1));
             var quantity = parseInt($($(fields[3]).children()[0]).val());
             total += cost * quantity;

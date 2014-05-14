@@ -27,6 +27,10 @@
                 return;
             }
 
+            print_r($_POST);
+
+            echo "<br><br>";
+
             $supplies = array();
 
             for ($index = 1; isset($_POST[$index]); $index++)
@@ -40,14 +44,18 @@
                 }
             }
 
+            print_r($supplies);
+
+            /*
             $_SESSION['supplies'] = $supplies;
             $_SESSION['suppliesPickup'] = $_POST['pickupLoc'];
 
             routeAccordingly("../order_bees.php");
+            */
         }
         else if ($_POST['format'] == "bees")
         {
-            if (!validateInputs())
+            if (!validateBeesInputs())
                 return;
 
             $packageCount = $_POST['singleItalian'] + $_POST['doubleItalian'] + $_POST['singleCarni'] + $_POST['doubleCarni'];
@@ -92,7 +100,7 @@
 
 <?php
 
-    function validateInputs()
+    function validateBeesInputs()
     {
         if ($_POST['singleItalian'] + $_POST['doubleItalian'] + $_POST['singleCarni'] + $_POST['doubleCarni'] + $_POST['ItalianQueens'] + $_POST['CarniQueens'] == 0)
             $error = "you forgot to order packages or queens. Please specify a preference and resubmit.";

@@ -85,8 +85,8 @@
                         echo '<br>'.$desc;
 
                     echo '  </td>
-                            <td></td>
-                            <td></td>
+                            <td>v</td>
+                            <td>v</td>
                         </tr>';
 
                     foreach ($groupedItems[$item['groupID']] as $subItem)
@@ -238,9 +238,11 @@
                             <div class="option">
                                 <input type="radio" name="pickupLoc" value="Big Lake"/>To be picked up at Big Lake.
                             </div>
+                            <!--
                             <div class="option">
                                 <input type="radio" name="pickupLoc" value="along with the bee shipment"/>To be picked up with the spring bee shipment.
                             </div>
+                            -->
                         </p>
                     </div>
 
