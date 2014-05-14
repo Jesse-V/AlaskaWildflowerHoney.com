@@ -98,27 +98,18 @@
                         $desc = $groups[$item['groupID']]['description'];
 
                         echo '
-                        <tr class="subitem'.$item['groupID'].'">
+                        <tr class="subItem subItem'.$item['groupID'].'">
                             <td></td>
                             <td>
-                                <div class="groupedTD">'
-                                    .'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$subItem['name'];
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$subItem['name'];
 
                         if (strlen($subItem['description']) > 0)
                             echo '<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$subItem['description'];
 
-                        echo '  </div>
+                        echo '
                             </td>
-                            <td>
-                                <div class="groupedTD">
-                                $'.$price.'
-                                </div>
-                            </td>
-                            <td>
-                                <div class="groupedTD">
-                                <input name="'.$subItem['itemID'].'" type="number" min="0" value="0">
-                                </div>
-                            </td>
+                            <td>$'.$price.'</td>
+                            <td><input name="'.$subItem['itemID'].'" type="number" min="0" value="0"></td>
                         </tr>';
                     }
 

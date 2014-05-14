@@ -1,9 +1,33 @@
 // JavaScript Document
 
 var that = $(".mid_col");
+hideAllGroupItems(0);
+
+
+function hideAllGroupItems(duration) {
+    var allGroupItems = that.find("table .subItem");
+    allGroupItems.hide(duration);
+}
+
+
+
+that.find("table tr").click(function() {
+    if (this.className.lastIndexOf("group", 0) === 0) //startsWith
+    {
+        hideAllGroupItems(300);
+
+        var groupNum = this.className.substring(5);
+        var subitems = that.find("table .subItem" + groupNum);
+        subitems.show(600);
+    }
+});
+
+
+
 var numInputs = $(".mid_col input[type=number]");
 numInputs.change(handlePrefChange);
 numInputs.keyup(handlePrefChange);
+updateTotal();
 
 
 function handlePrefChange() {
@@ -21,7 +45,7 @@ function updateTotal() {
     var total = 0;
     that.find("tr").each(function() {
         var fields = $(this).find("td");
-        if (fields.length != 0) {
+        if (fields.length != 0 && $(fields[2]).html().length > 0) {
             var cost = parseFloat($(fields[2]).html().substr(1));
             var quantity = parseInt($($(fields[3]).children()[0]).val());
             total += cost * quantity;
@@ -30,7 +54,6 @@ function updateTotal() {
 
     $("#total").html(total.toFixed(2));
 }
-updateTotal();
 
 
 
