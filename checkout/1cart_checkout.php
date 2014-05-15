@@ -4,9 +4,6 @@
     require_once('../scripts/cart_help_functions.php');
     require_once('authorizeNetVars.secret');
 
-    //require_once('order/Order.php');
-    //require_once('order/SuppliesOrder.php');
-
     session_start();
 ?>
 
@@ -86,10 +83,22 @@
     }
     else
     {
-        $total = 0;//echoCart();
+        echo '
+            <h3>New Checkout System!</h3>
+            <p>
+                <b>
+                We are please to announce a new checkout system to our online shopping cart. This new system is just as easy to use as the original, but should help address some problems that were encountered this spring and will streamline things for everyone. Enjoy!
+            </b>
+            </p>
+
+            <!--
+            <h2><b> Alert: we are currently doing some maintenance on the payment system. Please wait on proceeding through checkout until we have finished, so check back later. Thank you. </b></h2>
+            -->';
+
+        $total = echoCart();
         echo "<script>var total = $total;</script>";
         echo "<div class=\"total\">Total: $$total</div>";
-        print_r($_SESSION);
+        //print_r($_SESSION);
 
         echoIntroGreeting();
         echoDynamicForm($total);
@@ -194,17 +203,6 @@ $db->close();
 function echoIntroGreeting()
 {
     echo '
-        <h3>New Checkout System!</h3>
-        <p>
-            <b>
-            We are please to announce a new checkout system to our online shopping cart. This new system is just as easy to use as the original, but should help address some problems that were encountered this spring and will streamline things for everyone. Enjoy!
-        </b>
-        </p>
-
-        <!--
-        <h2><b> Alert: we are currently doing some maintenance on the payment system. Please wait on proceeding through checkout until we have finished, so check back later. Thank you. </b></h2>
-        -->
-
         <p>
             Welcome to the checkout. Please complete your order by providing the information below. You can purchase the items in your cart using most major credit/debit cards or by check. For online payment, we use Authorize.net, a popular payment gateway provider. They are compliant with the Payment Card Industry Data Security Standard (PCI DSS) and provide strong SSL certificates to protect your payment information. The SSL certificate that we use on this website uses some of the strongest cryptography and encryption procedures available to protect your information as well.
         </p>

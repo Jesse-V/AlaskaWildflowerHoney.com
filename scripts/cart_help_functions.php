@@ -1,10 +1,10 @@
 <?php
 
-session_start();
 require_once('databaseConnect.secret');
 require_once('../checkout/order/Order.php');
 require_once('../checkout/order/SuppliesOrder.php');
 
+session_start();
 
 function echoCart()
 {
@@ -25,7 +25,6 @@ function echoCart()
                     <th>Price</th>
                 </tr>';
 
-        print_r($_SESSION);
         $items = $_SESSION['supplies']->getItems();
         $subtotal = 0;
 
@@ -36,7 +35,7 @@ function echoCart()
 
             echo "
                 <tr>
-                    <td><img src=\"$item->imageURL_\" alt=\"item\"</td>
+                    <td><img src=\"$item->imageURL_\" alt=\"item\"/></td>
                     <td>
                         $item->name_ $item->groupName_
                         <br>
@@ -49,8 +48,7 @@ function echoCart()
 
         $total += $subtotal;
         echo '
-            </table>
-            <div class="subtotal">$$subtotal</div>';
+            </table>';
     }
 
     if (isset($_SESSION['beeOrder']))

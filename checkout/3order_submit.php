@@ -7,3 +7,4 @@ https://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-s
 
 
 <?php echo AuthorizeNetDPM::LIVE_URL ?>
+//<input type="hidden" name="x_description" value="<?php echo getOrderReceiptStr();"/>

@@ -63,6 +63,9 @@ class SupplyItem
 
         $this->groupName_        = $groupName;
         $this->groupDescription_ = $groupDesc;
+
+        if (strlen($this->imageURL_) == 0)
+            $this->imageURL_ = "noImage.png";
     }
 }
 
