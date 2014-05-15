@@ -74,95 +74,67 @@
                 <div class="mid_col">
 
                     <h1>Order Confirmation</h1>
-
+                    <form method="post" action="3order_submit.php">
 <?php
 
-    echo "<br><br><br>";
-    print_r($_SESSION);
-    echo "<br><br><br>";
-    print_r($_POST);
-    echo "<br><br><br>";
-    print_r($_GET);
+if (empty($_SESSION) || empty($_POST))
+{
+    echo 'Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="../order_supplies.php">Supplies page</a> or the <a href="../order_bees.php">Bees page</a>. Thanks!';
+}
+else
+{
+    echo '
+        <p>
+            This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. Thanks again for shopping with us!
+        </p>';
 
-    if (empty($_SESSION) || empty($_POST))
-    {
-        echo 'Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="../order_supplies.php">Supplies page</a> or the <a href="../order_bees.php">Bees page</a>. Thanks!';
-    }
-    else
-    {
-        echo '
-            <p>
-                This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. Thanks again for shopping with us!
-            </p>';
+    $total = echoCart();
+    echo "<script>var total = $total;</script>";
+    echo "<div class=\"total\">Total: $$total</div>";
 
-        $total = echoCart();
-        echo "<script>var total = $total;</script>";
-        echo "<div class=\"total\">Total: $$total</div>";
+    $_SESSION['paymentInfo'] = array();
+    foreach ($_POST as $key => $cardField)
+        $_SESSION['paymentInfo'][$key] = htmlentities(strip_tags($cardField));
 
-        $_SESSION['paymentInfo'] = array();
-        foreach ($_POST as $key => $cardField)
-            $_SESSION['paymentInfo'][$key] = htmlentities(strip_tags($cardField));
-//Additional Order Information
-        echo '
-            <h3>Billing</h3>
-            <p>
-                '.$_SESSION['paymentInfo']['x_card_num'].' ('.$_SESSION['paymentInfo']['x_card_code'].') Exp: '.$_SESSION['paymentInfo']['x_exp_date'].'
+    $x = $_SESSION['paymentInfo']; //just a smaller variable name
+    echo '
+    <table>
+        <tr>
+            <th>Billing</th>
+            <th>Shipping and Contact</th>
+        </tr>
+        <tr>
+            <td>
+                '.$x['x_card_num'].' ('.$x['x_card_code'].') Exp: '.$x['x_exp_date'].'
                 <br>
-                '.$_SESSION['paymentInfo']['x_first_name'].' '.$_SESSION['paymentInfo']['x_last_name'].'
+                '.$x['x_first_name'].' '.$x['x_last_name'].'
                 <br>
-                '.$_SESSION['paymentInfo']['x_address'].'
+                '.$x['x_address'].'
                 <br>
-                '.$_SESSION['paymentInfo']['x_city'].',
-                '.$_SESSION['paymentInfo']['x_state'].'
-                '.$_SESSION['paymentInfo']['x_zip'].'
-            </p>
-            <br>
-            <h3>Shipping and Contact</h3>
-            <p>
-                '.$_SESSION['paymentInfo']['x_ship_to_first_name'].' '.$_SESSION['paymentInfo']['x_ship_to_last_name'].'
+                '.$x['x_city'].',
+                '.$x['x_state'].'
+                '.$x['x_zip'].'
+            </td>
+            <td>
+                '.$x['x_ship_to_first_name'].' '.$x['x_ship_to_last_name'].'
                 <br>
-                Email: '.$_SESSION['paymentInfo']['x_email'].'
+                Email: '.$x['x_email'].'
                 <br>
-                Home Phone: '.$_SESSION['paymentInfo']['homePhone'].'
+                Home Phone: '.$x['homePhone'].'
                 <br>
-                Cell: '.$_SESSION['paymentInfo']['cellPhone'].', texting? '.$_SESSION['paymentInfo']['textCapable'].'
+                Cell: '.$x['cellPhone'].', texting? '.$x['textCapable'].'
                 <br>
-                Preferred Phone: '.$_SESSION['paymentInfo']['preferredPhone'].'
-            </p>
-            <p>
-                <button type="submit" id="confirm" class="submit">Confirm, this information is accurate.</button>
-            </p>
-            ';
-/*
-            [x_card_num] => asfd
-            [x_exp_date] => asdf
-            [x_card_code] => asdf
-            [x_first_name] => asf
-            [x_last_name] => asdf
-            [x_address] => asdf
-            [x_city] => asdf
-            [x_state] => AK
-            [x_zip] => asfd
-            [x_country] => US
-
-            [x_ship_to_first_name] => asdf
-            [x_ship_to_last_name] => asdf
-            [homePhone] => asfd
-            [preferredPhone] => home
-            [cellPhone] => asdf
-            [textCapable] => yes
-            [x_email] => asdf
-*/
-        echo "<br><br><br>";
-        print_r($_SESSION);
-        echo "<br><br><br>";
-        print_r($_POST);
-        echo "<br><br><br>";
-        print_r($_GET);
-    }
+                Preferred Phone: '.$x['preferredPhone'].'
+            </td>
+        </tr>
+    </table>
+    <p>
+        <button type="submit" id="confirm" class="submit">Confirm, this information is accurate.</button>
+    </p>';
+}
 
 ?>
-
+                    </form>
                 </div>
                 <div class="right_col">
                     <!-- InstanceEndEditable -->
