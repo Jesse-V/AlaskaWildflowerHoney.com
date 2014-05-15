@@ -20,7 +20,7 @@ class BeeOrder extends Order
     private $emailAddress_;
     private $notes_;
 
-    protected function _getTotal()
+    public function getTotal()
     {
         return 0.00;
     }

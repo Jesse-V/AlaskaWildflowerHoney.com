@@ -1,6 +1,6 @@
 <?php
 
-class Order
+abstract class Order
 {
-    abstract protected function _getTotal();
+    public abstract function getTotal();
 }
