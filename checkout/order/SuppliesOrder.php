@@ -22,9 +22,19 @@ class SuppliesOrder extends Order
 
 
 
+    public function getItems()
+    {
+        return $this->orderedItems_;
+    }
+
+
+
     public function getTotal()
     {
-        return 0.00;
+        $total = 0;
+        foreach ($this->orderedItems_ as $item)
+            $total += $item->price_ * $item->quantity_;
+        return $total;
     }
 }
 
@@ -33,14 +43,14 @@ class SuppliesOrder extends Order
 
 class SupplyItem
 {
-    private $name_;
-    private $description_;
-    private $imageURL_;
-    private $price_;
-    private $quantity_;
+    public $name_;
+    public $description_;
+    public $imageURL_;
+    public $price_;
+    public $quantity_;
 
-    private $groupName_;
-    private $groupDescription_;
+    public $groupName_;
+    public $groupDescription_;
 
 
     function __construct($name, $desc, $groupName, $groupDesc, $imageURL, $price, $quantity)

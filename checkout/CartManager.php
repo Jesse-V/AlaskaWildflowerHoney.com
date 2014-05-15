@@ -78,7 +78,7 @@
         $suppliesSQL->close();
 
         $_SESSION['supplies'] = $suppliesOrder;
-        //routeAccordingly("../order_bees.php");
+        routeAccordingly("../order_bees.php");
     }
     else if ($_POST['format'] == "bees")
     {
@@ -221,7 +221,7 @@
     function routeAccordingly($alternative)
     {
         //if submit contains checkout, then direct to checkout_form
-        $redirectURL = strpos($_POST['submit'], 'checkout') !== FALSE ? "checkout_form.php" : $alternative;
+        $redirectURL = strpos($_POST['submit'], 'checkout') !== FALSE ? "1cart_checkout.php" : $alternative;
 
         echo "
             <script language=\"javascript\">

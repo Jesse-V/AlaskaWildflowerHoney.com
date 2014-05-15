@@ -4,3 +4,6 @@ The email should make it clear that the order shouldn't/won't be processed until
 
 https://stackoverflow.com/questions/4578836/html-post-automatically
 https://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
+
+
+<?php echo AuthorizeNetDPM::LIVE_URL ?>

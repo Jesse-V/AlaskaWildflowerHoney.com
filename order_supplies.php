@@ -252,7 +252,7 @@
 
                     <input type="hidden" name="format" value="supplies"/>
 
-                    <input type="submit" name="submit" id="moreBtn" value="Need bees or queens? Click here to save your order and visit the bees page."/>
+                    <!--<input type="submit" name="submit" id="moreBtn" value="Need bees or queens? Click here to save your order and visit the bees page."/>-->
                     <input type="submit" name="submit" id="submitBtn" value="Finished? Click here to proceed to checkout."/>
                 </form>
 
