@@ -1,7 +1,6 @@
 <?php
 
 require_once('databaseConnect.secret');
-require_once('../checkout/order/Order.php');
 require_once('../checkout/order/SuppliesOrder.php');
 
 session_start();
