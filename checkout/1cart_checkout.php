@@ -11,7 +11,7 @@
     require_once('../common/header.php'); //opening HTML
 
 
-    echo "<h1>Checkout</h1>"
+    echo "<h1>Checkout</h1>";
 
     if (empty($_SESSION))
     {
@@ -39,7 +39,7 @@
         //print_r($_SESSION);
 
         echoIntroGreeting();
-        echoDynamicForm($total);
+        echoDynamicForm($total, "3order_submit.php");
     }
 
 
@@ -68,26 +68,31 @@
 
 
 
-    function echoDynamicForm($total)
+    function echoDynamicForm($total, $nextDest)
     {
         echo '
             <div id="dynamic">
                 <h1>YOU SHOULD NOT NORMALLY SEE THIS. Please enable Javascript or update your browser.</h1>
 
                 <form id="cardForm" method="post" action="2order_confirmation.php">
-                    <p>Please fill out the form below and submit when finished. We need your contact information for entering your order into our system, and your credit card information is used for expedited payments.</p>
+                    <input type="hidden" name="paymentMethod" value="card">
+                    <input type="hidden" name="nextDestination" value="'.$nextDest.'">
+
+                    <p>
+                        Please fill out the form below and submit when finished. We need your contact information for entering your order into our system, and your credit card information is used for expedited payments.
+                    </p>
                     <h3 id="billingInfo">Billing Information</h3>
                     ';
 
                     global $api_login_id, $transaction_key;
                     $target = "2order_confirmation.php";
-                    echo getCardFields($total, 0, $target, $api_login_id, $transaction_key); //todo: sensitive info?
+                    echo getCardFields($total, 0, $target, $api_login_id, $transaction_key);
 
         echo '
                 </form>
                 ';
 
-                echo getCheckForm("check_receipt.php");
+                echo getCheckForm("2order_confirmation.php", "5check_receipt.php");
                 echo getCommonFields();
 
         echo '
@@ -169,11 +174,13 @@
 
 
 
-    function getCheckForm($destination)
+    function getCheckForm($confirmDest, $nextDest)
     {
         return '
-            <form id="checkForm" method="post" action="$destination">
-                <input type="hidden" name="paymentMethod" value="checkOrCash">
+            <form id="checkForm" method="post" action="'.$confirmDest.'">
+                <input type="hidden" name="paymentMethod" value="check">
+                <input type="hidden" name="nextDestination" value="'.$nextDest.'">
+
                 <p>
                     Please send check to:<br>
                     Alaska Wildflower Honey<br>
@@ -181,7 +188,7 @@
                     Wasilla, AK 99623
                 </p>
                 <p>
-                    Please press the button below to complete your order. You will be shown a printable receipt, and your order will be sent to us.
+                    Please press the button below to submit your order. You will have a chance to confirm your order before it is sent to us.
                 </p>
             </form>';
     }

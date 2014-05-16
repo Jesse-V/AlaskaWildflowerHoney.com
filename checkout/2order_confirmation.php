@@ -10,16 +10,17 @@
     $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/checkout_form.css", "../stylesheets/cartTable.css");
     require_once('../common/header.php'); //opening HTML
 
-    echo '
-        <h1>Order Confirmation</h1>
-        <form method="post" action="3order_submit.php">';
 
-    if (empty($_SESSION) || empty($_POST))
+    if (empty($_SESSION) || empty($_POST) || !isset($_POST['nextDestination']) || !isset($_POST['paymentMethod']))
     {
         echo 'Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="../order_supplies.php">Supplies page</a> or the <a href="../order_bees.php">Bees page</a>. Thanks!';
     }
     else
     {
+        echo '
+        <h1>Order Confirmation</h1>
+        <form method="post" action="'.$_POST['nextDestination'].'">';
+
         echo '
             <p>
                 This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. Thanks again for shopping with us!
@@ -29,48 +30,58 @@
         echo "<script>var total = $total;</script>";
         echo "<div class=\"total\">Total: $$total</div>";
 
-        $_SESSION['paymentInfo'] = array();
-        foreach ($_POST as $key => $cardField)
-            $_SESSION['paymentInfo'][$key] = htmlentities(strip_tags($cardField));
+        if ($_POST['paymentMethod'] == "card")
+        { //it's a confirmation of a card checkout
 
-        $x = $_SESSION['paymentInfo']; //just a smaller variable name
+            $_SESSION['paymentInfo'] = array();
+            foreach ($_POST as $key => $cardField)
+                $_SESSION['paymentInfo'][$key] = htmlentities(strip_tags($cardField));
+
+            $x = $_SESSION['paymentInfo']; //just a smaller variable name
+            echo '
+            <table>
+                <tr>
+                    <th>Billing</th>
+                    <th>Shipping and Contact</th>
+                </tr>
+                <tr>
+                    <td>
+                        '.$x['x_card_num'].' ('.$x['x_card_code'].') Exp: '.$x['x_exp_date'].'
+                        <br>
+                        '.$x['x_first_name'].' '.$x['x_last_name'].'
+                        <br>
+                        '.$x['x_address'].'
+                        <br>
+                        '.$x['x_city'].',
+                        '.$x['x_state'].'
+                        '.$x['x_zip'].'
+                    </td>
+                    <td>
+                        '.echoShippingContact($x).'
+                    </td>
+                </tr>
+            </table>';
+        }
+        else
+        { //it's a confirmation of a check
+            //echo "<br><br>";
+            //print_r($_POST);
+            //echo "<br><br>";
+
+            echo '
+                <h3>Shipping and Contact</h3>
+                <p>
+                    '.echoShippingContact($_POST).'
+                </p>';
+        }
+
         echo '
-        <table>
-            <tr>
-                <th>Billing</th>
-                <th>Shipping and Contact</th>
-            </tr>
-            <tr>
-                <td>
-                    '.$x['x_card_num'].' ('.$x['x_card_code'].') Exp: '.$x['x_exp_date'].'
-                    <br>
-                    '.$x['x_first_name'].' '.$x['x_last_name'].'
-                    <br>
-                    '.$x['x_address'].'
-                    <br>
-                    '.$x['x_city'].',
-                    '.$x['x_state'].'
-                    '.$x['x_zip'].'
-                </td>
-                <td>
-                    '.$x['x_ship_to_first_name'].' '.$x['x_ship_to_last_name'].'
-                    <br>
-                    Email: '.$x['x_email'].'
-                    <br>
-                    Home Phone: '.$x['homePhone'].'
-                    <br>
-                    Cell: '.$x['cellPhone'].', texting? '.$x['textCapable'].'
-                    <br>
-                    Preferred Phone: '.$x['preferredPhone'].'
-                </td>
-            </tr>
-        </table>
         <p>
             <button type="submit" id="confirm" class="submit">Confirm, this information is accurate.</button>
-        </p>';
+        </p>
+        </form>';
     }
 
-    echo "</form>";
 
     $_JS_ = array("../scripts/jquery-1.10.2.js", "../scripts/checkout_form.js");
     require_once('../common/footer.php'); //closing HTML
@@ -107,5 +118,19 @@
         }
 
         return $str;
+    }
+
+
+    function echoShippingContact($x)
+    {
+        return  $x['x_ship_to_first_name'].' '.$x['x_ship_to_last_name'].'
+                <br>
+                Email: '.$x['x_email'].'
+                <br>
+                Home Phone: '.$x['homePhone'].'
+                <br>
+                Cell: '.$x['cellPhone'].', texting? '.$x['textCapable'].'
+                <br>
+                Preferred Phone: '.$x['preferredPhone'];
     }
 ?>

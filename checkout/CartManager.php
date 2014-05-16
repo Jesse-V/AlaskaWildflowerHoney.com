@@ -1,8 +1,9 @@
 <?php
-    session_start();
     require_once('../scripts/databaseConnect.secret');
     require_once('order/SuppliesOrder.php');
     require_once('order/BeeOrder.php');
+    session_start();
+
 
     function queryGroups() //copy of order_supplies.php
     {
@@ -19,15 +20,16 @@
         $groupSQL->close();
         return $groups;
     }
-?>
 
+    echo '
 <!DOCTYPE html>
 <html>
     <head>
         <title>Invisible Cart Manager!</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        ';
 
-<?php
+
     global $db;
 
     if (empty($_POST) || !isset($_POST['format']))
@@ -40,10 +42,6 @@
     {
         if (!validateSuppliesInputs())
             return;
-
-        print_r($_POST);
-
-        echo "<br><br>";
 
         $supplies = getSuppliesList();
 
@@ -73,8 +71,6 @@
             $suppliesOrder->addItem($item);
         }
 
-        print_r($suppliesOrder);
-        echo "<br><br>";
         $suppliesSQL->close();
 
         $_SESSION['supplies'] = $suppliesOrder;
@@ -116,15 +112,14 @@
         echo "<script>window.history.back()</script>";
         return;
     }
-?>
 
+    echo '
     </head>
     <body>
         Updating your cart and redirecting...
     </body>
-</html>
+</html>';
 
-<?php
 
     function validateSuppliesInputs()
     {
@@ -140,7 +135,6 @@
 
         return true;
     }
-
 
 
     function validateBeesInputs()
@@ -167,7 +161,6 @@
     }
 
 
-
     function getSuppliesList()
     {
         $supplies = array();
@@ -185,7 +178,6 @@
 
         return $supplies;
     }
-
 
 
     function getTransportationCharge($destination, $packageCount)
@@ -217,7 +209,6 @@
     }
 
 
-
     function routeAccordingly($alternative)
     {
         //if submit contains checkout, then direct to checkout_form
@@ -230,7 +221,6 @@
             <meta http-equiv=\"refresh\" content=\"0;url={$redirectURL}\">
         ";
     }
-
 
 
     function isNumber($str)

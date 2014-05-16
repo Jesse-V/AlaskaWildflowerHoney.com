@@ -1,7 +1,7 @@
 <?php
     require_once('../anet_php_sdk/AuthorizeNet.php');
     require_once('../scripts/databaseConnect.secret');
-    require_once('../scripts/helper_functions.php');
+    require_once('../scripts/cart_help_functions.php');
     session_start();
 
     $_REL_ = "../";
@@ -23,7 +23,6 @@
     {
         $total = echoCart();
         echo "<div class=\"total\">Total: $$total</div>";
-        sendOrderEmail($_POST['x_email'], "check", "$$total");
 
         echo "
             <p>
@@ -33,7 +32,9 @@
                 Wasilla, AK 99623<br>
             </p>
             <p>
-                If possible, please send a print-out of this page along with your check. We will hold your order for two weeks, awaiting the arrival of your check. This page is your only electronic receipt.<br>Thank you for ordering online!
+                <b>If possible, please send a print-out of this page along with your check.</b>
+                <br>
+                We will hold your order for two weeks, awaiting the arrival of your check. You will shortly receive an email receipt of your order. Thank you for ordering online!
             </p>";
 
         unset($_SESSION);
