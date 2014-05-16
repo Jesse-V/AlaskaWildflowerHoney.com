@@ -18,14 +18,14 @@ if ($response->isAuthorizeNet())
     {
         $rc = 1;
         $id = $response->transaction_id;
-        $hash = hash("sha256", $md5_setting.$rc."%*%".$id.$md5_setting);
+        $hash = hash("sha256", $md5_setting.$rc.$id.$md5_setting);
         $redirectURL .= "?rc=$rc&id=$id&hash=$hash");
     }
     else
     {
         $rc = $response->response_code;
         $resp = $response->response_reason_text;
-        $hash = hash("sha256", $md5_setting.$rc."*%*".$id.$md5_setting);
+        $hash = hash("sha256", $md5_setting.$rc.$id.$md5_setting);
         $redirectURL .= "?rc=$rc&resp=$resp&hash=$hash";
     }
 
