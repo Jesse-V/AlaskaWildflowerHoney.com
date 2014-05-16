@@ -30,15 +30,17 @@
 
         <div id="pickupPoint">
             <p>
-                We generally don't do mail order for supplies. Instead, we deliver locally. We often bring supplies with us on our trips into town. Please call or email us to arrange for this. We travel to the peninsula several times in the summer and in and out of Wasilla often. Where would you like to pick up your items?
+                We generally don't do mail order for supplies. Instead, our primary distribution point is out of our house in Big Lake. Ordering online allows us to gather your order and have it ready to be picked up at Big Lake at your convenience. It also makes it possible to have someone else pick up your order for you or for us to be able to bring things with us on our occasional trips into town. We are happy to bring supplies with us to your location but our trips are generally unscheduled and irregular. Therefore, the most reliable pickup is in Big Lake.
             </p>
 
             <p class="options">
+                <!--
                 <div class="option">
                     <input type="radio" name="pickupLoc" value="at the bee meeting"/>To be picked up at a SABA beekeepers meeting.
                 </div>
+                -->
                 <div class="option">
-                    <input type="radio" name="pickupLoc" value="Big Lake"/>To be picked up at Big Lake.
+                    <input checked type="radio" name="pickupLoc" value="Big Lake"/>To be picked up at Big Lake.
                 </div>
                 <!--
                 <div class="option">

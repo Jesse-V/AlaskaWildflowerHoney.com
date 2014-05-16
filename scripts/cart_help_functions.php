@@ -2,18 +2,19 @@
 
 require_once('databaseConnect.secret');
 require_once('../checkout/order/SuppliesOrder.php');
+//session_start(); //todo: need this somewhere?
 
-session_start();
 
-function echoCart()
+function getCart($suppliesObject)
 {
     $supplyInfo = queryFetchSuppliesTable();
     $beeInfo = queryFetchBeesTable();
     $total = 0;
+    $cartStr = "";
 
     if (isset($_SESSION['supplies']))
     {
-        echo '
+        $cartStr .= '
             <h2>Supplies</h2>
 
             <table id="cartTable">
@@ -32,7 +33,7 @@ function echoCart()
             $price = $item->price_ * $item->quantity_;
             $subtotal += $price;
 
-            echo "
+            $cartStr .= "
                 <tr>
                     <td><img src=\"$item->imageURL_\" alt=\"item\"/></td>
                     <td>
@@ -46,7 +47,7 @@ function echoCart()
         }
 
         $total += $subtotal;
-        echo '
+        $cartStr .= '
             </table>';
     }
 
@@ -61,7 +62,7 @@ function echoCart()
                 $price    = $beeInfo[$key]['price'] * $quantity;
                 $total += $price;
 
-                echo "
+                $cartStr .= "
                     <tr>
                         <td>$name</td>
                         <td>$quantity</td>
@@ -77,7 +78,7 @@ function echoCart()
             if ($dest == "Other")
                 $dest = $_SESSION['beeOrder']['destination'];
 
-            echo "
+            $cartStr .= "
                 <tr>
                     <td>Transportation Charge to $dest</td>
                     <td></td>
@@ -87,7 +88,7 @@ function echoCart()
         }
     }
 
-    return $total;
+    return array("total" => $total, "html" => $cartStr)
 }
 
 
@@ -110,7 +111,7 @@ function queryFetchSuppliesTable()
 
 
 
-function queryFetchBeesTable()
+function queryFetchBeesTable() //todo: does this work?
 {
     global $db;
 

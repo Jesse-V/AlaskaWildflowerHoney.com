@@ -155,19 +155,6 @@
 
 
 
-    function sendEmail($to, $from, $subject, $htmlMessage)
-    {
-        $headers = 'MIME-Version: 1.0' . "\r\n" .
-            'Content-type: text/html; charset=iso-8859-1' . "\r\n" .
-            "From: $from" . "\r\n" .
-            "Reply-To: $from" . "\r\n" .
-            'X-Mailer: PHP/' . phpversion();
-
-        mail($to, $subject, str_replace("\n.", "\n..", $htmlMessage), $headers);
-    }
-
-
-
     function getOrderForStr()
     {
         return "name: ".$_POST['x_ship_to_first_name'].' '.$_POST['x_ship_to_last_name'].", home #: ".$_POST['homePhone'].", cell #: ".$_POST['cellPhone'].", preferred phone: ".$_POST['preferredPhone'].", text capable: ".$_POST['textCapable'].", email: ".$_POST['x_email'];

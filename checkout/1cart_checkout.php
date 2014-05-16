@@ -30,13 +30,15 @@
             </p>
 
             <!--
-            <h2><b> Alert: we are currently doing some maintenance on the payment system. Please wait on proceeding through checkout until we have finished, so check back later. Thank you. </b></h2>
+                <h2><b> Alert: we are currently doing some maintenance on the payment system. Please wait on proceeding through checkout until we have finished, so check back later. Thank you.
+                </b></h2>
             -->';
 
-        $total = echoCart();
+        $cart = getCart($_SESSION['supplies']);
+        $total = $cart['total'];
+        echo $cart['html'];
         echo "<script>var total = $total;</script>";
         echo "<div class=\"total\">Total: $$total</div>";
-        //print_r($_SESSION);
 
         echoIntroGreeting();
         echoDynamicForm($total, "3order_submit.php");
@@ -85,8 +87,7 @@
                     ';
 
                     global $api_login_id, $transaction_key;
-                    $target = "2order_confirmation.php";
-                    echo getCardFields($total, 0, $target, $api_login_id, $transaction_key);
+                    echo getCardFields($total, 0, $api_login_id, $transaction_key);
 
         echo '
                 </form>
@@ -101,7 +102,7 @@
 
 
 
-    function getCardFields($amount, $fp_sequence, $relay_response_url, $api_login_id, $transaction_key, $prefill = false)
+    function getCardFields($amount, $fp_sequence, $api_login_id, $transaction_key, $prefill = false)
     {
         $time = time();
         $fp = AuthorizeNetDPM::getFingerprint($api_login_id, $transaction_key, $amount, $fp_sequence, $time);
@@ -112,7 +113,6 @@
             'x_fp_hash'       => $fp,
             'x_fp_timestamp'  => $time,
             'x_relay_response'=> "TRUE",
-            //'x_relay_url'     => $relay_response_url,
             'x_login'         => $api_login_id,
             )
         );

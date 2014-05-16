@@ -6,7 +6,7 @@
 
     $_REL_ = "../";
     $_TITLE_ = "Check Receipt - StevesBees.com";
-    $_STYLESHEETS_ = array("../stylesheets/check_receipt.css", "../stylesheets/cartTable.css");
+    $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/check_receipt.css", "../stylesheets/cartTable.css");
     require_once('../common/header.php'); //opening HTML
 
 
@@ -21,10 +21,12 @@
     }
     else
     {
-        $total = echoCart();
+        $cart = getCart($_SESSION['supplies']);
+        $total = $cart['total'];
+        echo $cart['html'];
         echo "<div class=\"total\">Total: $$total</div>";
 
-        echo "
+        echo '
             <p>
                 Thank you! Your order has been sent to us. Please send check to<br>
                 Alaska Wildflower Honey<br>
@@ -35,14 +37,33 @@
                 <b>If possible, please send a print-out of this page along with your check.</b>
                 <br>
                 We will hold your order for two weeks, awaiting the arrival of your check. You will shortly receive an email receipt of your order. Thank you for ordering online!
-            </p>";
+            </p>';
+
+        sendCustomerEmail($_SESSION['contactInfo']['x_email'],
+            'Alaska Wildflower Honey <victors@mtaonline.net>',
+            "Your online order is complete",
+            $_SESSION['contactInfo']['x_ship_to_first_name'],
+            $_SESSION['supplies']);
+
+        //sendDadEmail("victors@mtaonline.net",
+        //    'AlaskaWildflowerHoney.com <DoNotReply@stevesbees.com>',
+        //    "Form Submission: Online Order",
+        //    $_SESSION['supplies'])
+
+        //sendDadEmail("victors$_SESSION['contactInfo']);
 
         unset($_SESSION);
         session_destroy();
     }
 
+    echo '
+        <form method="get" action="../stevesbees_home.php">
+            <button type="submit">Click here to return to the StevesBees.com homepage</button>
+        </form>';
+
 
     $_JS_ = array();
     require_once('../common/footer.php'); //closing HTML
     $db->close();
+
 ?>

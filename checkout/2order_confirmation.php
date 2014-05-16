@@ -26,7 +26,9 @@
                 This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. Thanks again for shopping with us!
             </p>';
 
-        $total = echoCart();
+        $cart = getCart($_SESSION['supplies']);
+        $total = $cart['total'];
+        echo $cart['html'];
         echo "<script>var total = $total;</script>";
         echo "<div class=\"total\">Total: $$total</div>";
 
@@ -67,6 +69,10 @@
             //echo "<br><br>";
             //print_r($_POST);
             //echo "<br><br>";
+
+            $_SESSION['contactInfo'] = array();
+            foreach ($_POST as $key => $contactField)
+                $_SESSION['contactInfo'][$key] = htmlentities(strip_tags($contactField));
 
             echo '
                 <h3>Shipping and Contact</h3>

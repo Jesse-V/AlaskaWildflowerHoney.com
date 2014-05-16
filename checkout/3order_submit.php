@@ -27,13 +27,13 @@
         <p>
             Processing your order...
         </p>
-        <form name="AuthorizeNetForm" method="post" action="4relay_response.php">
+        <form name="AuthorizeNetForm" method="post" action="<?php echo AuthorizeNetDPM::LIVE_URL ?>">
 
         <?php
-        //<form method="post" action="<?php echo AuthorizeNetDPM::LIVE_URL ">
+        //<form name="AuthorizeNetForm" method="post" action="4relay_response.php">
             if (empty($_SESSION))
             {
-
+                echo "<p>Oops! You seemed to have reached this page in error.</p>"
             }
             else
             {
