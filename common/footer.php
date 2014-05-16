@@ -78,5 +78,9 @@
         <script type="text/javascript">
             var SpryAccordion1 = new Spry.Widget.Accordion("SpryAccordion1", {useFixedPanelHeights:false, defaultPanel:-1});
         </script>
+        <?php
+            foreach ($_JS_ as $jsSource)
+                echo '<script src="'.$jsSource.'"></script>';
+        ?>
     </body>
 </html>
