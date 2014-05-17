@@ -18,20 +18,20 @@
             $rc = 1;
             $id = $response->transaction_id;
             $hash = hash("sha256", $md5_setting.$rc.$id.$md5_setting);
-            $redirectURL .= "?rc=$rc&id=$id&hash=$hash");
+            $redirectURL .= "?rc=$rc&id=$id&hash=$hash";
         }
         else
         {
             $rc = $response->response_code;
-            $resp = $response->response_reason_text;
+            $id = $response->transaction_id;
             $hash = hash("sha256", $md5_setting.$rc.$id.$md5_setting);
+            $resp = $response->response_reason_text;
             $redirectURL .= "?rc=$rc&resp=$resp&hash=$hash";
         }
 
-
         echo '
             <script language="javascript">
-                window.location="$redirectURL";
+                window.location="'.$redirectURL.'";
             </script>
             <meta http-equiv="refresh" content="0;url='.$redirectURL.'">
         </head>

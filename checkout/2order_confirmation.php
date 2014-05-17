@@ -21,16 +21,17 @@
         <h1>Order Confirmation</h1>
         <form method="post" action="'.$_POST['nextDestination'].'">';
 
-        echo '
+        echo "
             <p>
-                This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. Thanks again for shopping with us!
-            </p>';
+                This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. If something needs adjustment, please click your browser's back button. Thanks again for shopping with us!
+            </p>";
 
         $cart = getCart($_SESSION['supplies']);
         $total = $cart['total'];
         echo $cart['html'];
         echo "<script>var total = $total;</script>";
         echo "<div class=\"total\">Total: $$total</div>";
+        echo "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
 
         if ($_POST['paymentMethod'] == "card")
         { //it's a confirmation of a card checkout
@@ -59,7 +60,7 @@
                         '.$x['x_zip'].'
                     </td>
                     <td>
-                        '.echoShippingContact($x).'
+                        '.getShippingContact($x).'
                     </td>
                 </tr>
             </table>';
@@ -77,7 +78,7 @@
             echo '
                 <h3>Shipping and Contact</h3>
                 <p>
-                    '.echoShippingContact($_POST).'
+                    '.getShippingContact($_POST).'
                 </p>';
         }
 
@@ -124,19 +125,5 @@
         }
 
         return $str;
-    }
-
-
-    function echoShippingContact($x)
-    {
-        return  $x['x_ship_to_first_name'].' '.$x['x_ship_to_last_name'].'
-                <br>
-                Email: '.$x['x_email'].'
-                <br>
-                Home Phone: '.$x['homePhone'].'
-                <br>
-                Cell: '.$x['cellPhone'].', texting? '.$x['textCapable'].'
-                <br>
-                Preferred Phone: '.$x['preferredPhone'];
     }
 ?>

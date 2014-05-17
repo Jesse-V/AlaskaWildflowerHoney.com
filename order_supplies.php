@@ -30,17 +30,18 @@
 
         <div id="pickupPoint">
             <p>
-                We generally don't do mail order for supplies. Instead, our primary distribution point is out of our house in Big Lake. Ordering online allows us to gather your order and have it ready to be picked up at Big Lake at your convenience. It also makes it possible to have someone else pick up your order for you or for us to be able to bring things with us on our occasional trips into town. We are happy to bring supplies with us to your location but our trips are generally unscheduled and irregular. Therefore, the most reliable pickup is in Big Lake.
+                We generally don't do mail order for supplies. Instead, our primary distribution point is <a href="contact_us.php">out of our house in Big Lake</a>. Ordering online allows us to gather your order and have it ready to be picked up at Big Lake at your convenience. It also makes it possible to have someone else pick up your order for you or for us to be able to bring things with us on our occasional trips into town. We are happy to bring supplies with us to your location but our trips are generally unscheduled and irregular. Therefore, the most reliable pickup is <a href="contact_us.php">in Big Lake</a>.
+            </p>
+            <p>
+                If you wish to have your items brought to a local beekeeping meeting, into your area, please allow amble time for us to do that. Although we do our best to satisfy all the needs of all of our clients, our schedule may not allow us to gather materials on the same day as beekeeping meetings or just prior to one of our trips into town. When we receive an order, we will put your items on the shelf, sorted by location. Therefore, for example when we make a trip into Anchorage we can grab all of the Anchorage items at once. It will be important that you are able to meet us on our trips to town as it is impractical to deliver directly to your door. All items that we take into town and especially to the beekeeping meetings must be pre-paid.
             </p>
 
             <p class="options">
-                <!--
                 <div class="option">
-                    <input type="radio" name="pickupLoc" value="at the bee meeting"/>To be picked up at a SABA beekeepers meeting.
+                    <input checked type="radio" name="pickupLoc" value="Big Lake"/>I will pick up my supplies at Big Lake.<br>
                 </div>
-                -->
                 <div class="option">
-                    <input checked type="radio" name="pickupLoc" value="Big Lake"/>To be picked up at Big Lake.
+                    <input type="radio" name="pickupLoc" value="at the bee meeting"/>I will pick these up at the next SABA beekeepers meeting.
                 </div>
                 <!--
                 <div class="option">
@@ -58,11 +59,11 @@
 
         <!--<input type="submit" name="submit" id="moreBtn" value="Need bees or queens? Click here to save your order and visit the bees page."/>-->
         <p>
-            <b>We are currently reworking our checkout process. Please wait until the 17th before placing any orders. Thanks.</b>
+            <b>We are currently reworking our checkout process. Please wait until the 18th before placing any orders. Thanks.</b>
         </p>
         <!--
-        <input type="submit" name="submit" id="submitBtn" value="Finished? Click here to proceed to checkout."/>
-        -->
+        <input type="submit" name="submit" id="submitBtn" value="Finished? Click here to proceed to checkout."/>-->
+
     </form>
 
 <?php
@@ -154,8 +155,8 @@
                         echo '<br>'.$desc;
 
                     echo '  </td>
-                            <td>v</td>
-                            <td>v</td>
+                            <td><span class="dropdownNotice">Types & Sizes</span></td>
+                            <td></td>
                         </tr>';
 
                     foreach ($groupedItems[$item['groupID']] as $subItem)

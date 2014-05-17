@@ -39,9 +39,10 @@
         echo $cart['html'];
         echo "<script>var total = $total;</script>";
         echo "<div class=\"total\">Total: $$total</div>";
+        echo "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
 
         echoIntroGreeting();
-        echoDynamicForm($total, "3order_submit.php");
+        echoDynamicForm(number_format((float)$total, 2, '.', ''), "3order_submit.php");
     }
 
 
@@ -117,7 +118,7 @@
             )
         );
 
-        //$prefill = true; //TEMPORARY!
+        $prefill = true; //TEMPORARY!
 
         return '
             '.$sim->getHiddenFieldString().'

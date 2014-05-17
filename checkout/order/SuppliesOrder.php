@@ -5,7 +5,7 @@ require_once('Order.php');
 class SuppliesOrder extends Order
 {
     private $orderedItems_ = array();
-    private $pickupLocation_;
+    public $pickupLocation_;
 
 
     function __construct($pickup)

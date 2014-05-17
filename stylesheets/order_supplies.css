@@ -88,6 +88,11 @@
     left: -50px;
 }
 
+.mid_col span.dropdownNotice {
+    text-decoration: underline;
+    color: blue;
+}
+
 .mid_col #pickupPoint {
     margin: 10px 0px;
 }

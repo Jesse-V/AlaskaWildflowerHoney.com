@@ -2,7 +2,6 @@
 
 require_once('databaseConnect.secret');
 require_once('../checkout/order/SuppliesOrder.php');
-//session_start(); //todo: need this somewhere?
 
 
 function getCart($suppliesObject)
@@ -92,7 +91,6 @@ function getCart($suppliesObject)
 }
 
 
-
 function queryFetchSuppliesTable()
 {
     global $db;
@@ -110,7 +108,6 @@ function queryFetchSuppliesTable()
 }
 
 
-
 function queryFetchBeesTable() //todo: does this work?
 {
     global $db;
@@ -125,6 +122,20 @@ function queryFetchBeesTable() //todo: does this work?
 
     $beesSQL->close();
     return $beeInfo;
+}
+
+
+function getShippingContact($x)
+{
+    return  $x['x_ship_to_first_name'].' '.$x['x_ship_to_last_name'].'
+            <br>
+            Email: '.$x['x_email'].'
+            <br>
+            Home Phone: '.$x['homePhone'].'
+            <br>
+            Cell: '.$x['cellPhone'].', texting? '.$x['textCapable'].'
+            <br>
+            Preferred Phone: '.$x['preferredPhone'];
 }
 
 ?>

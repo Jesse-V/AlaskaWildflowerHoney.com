@@ -45,7 +45,7 @@ function updateTotal() {
     var total = 0;
     that.find("tr").each(function() {
         var fields = $(this).find("td");
-        if (fields.length != 0 && $(fields[2]).html().length > 1) {
+        if (fields.length != 0 && ~$(fields[2]).html().indexOf('$')) {
             var cost = parseFloat($(fields[2]).html().substr(1));
             var quantity = parseInt($($(fields[3]).children()[0]).val());
             total += cost * quantity;

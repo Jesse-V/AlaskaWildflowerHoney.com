@@ -3,16 +3,10 @@
 
     //The email should make it clear that the order shouldn't/won't be processed until the transaction completes
 
-    //https://stackoverflow.com/questions/4578836/html-post-automatically
-    //https://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
     //<input type="hidden" name="x_description" value="<?php echo getOrderReceiptStr();"/>
 
-
     require_once('../anet_php_sdk/AuthorizeNet.php');
-    //require_once('../scripts/databaseConnect.secret');
-    //require_once('../scripts/cart_help_functions.php');
-    //require_once('authorizeNetVars.secret');
-
+    require_once('../scripts/email_functions.php');
     session_start();
 ?>
 
@@ -30,18 +24,34 @@
         <form name="AuthorizeNetForm" method="post" action="<?php echo AuthorizeNetDPM::LIVE_URL ?>">
 
         <?php
-        //<form name="AuthorizeNetForm" method="post" action="4relay_response.php">
+
             if (empty($_SESSION))
             {
-                echo "<p>Oops! You seemed to have reached this page in error.</p>"
+                echo "
+                    <p>
+                        Oops! Something went wrong, or you have reached this page in error. One possible explanation is that you have already submitted your order.
+                    </p>";
             }
             else
             {
-                //TODO: SEND EMAILS HERE
                 foreach ($_SESSION['paymentInfo'] as $key => $value)
                     echo "<input type=\"hidden\" name=\"$key\" value=\"$value\"/>";
-            }
 
+                $firstName = $_SESSION['paymentInfo']['x_first_name'];
+                $lastName  = $_SESSION['paymentInfo']['x_last_name'];
+
+                sendCardCustomerEmail1($_SESSION['paymentInfo'],
+                    'Alaska Wildflower Honey <victors@mtaonline.net>',
+                    "Thank you for your order",
+                    $firstName,
+                    $_SESSION['supplies']);
+
+                sendCardDadEmail1($_SESSION['paymentInfo'],
+                    'AlaskaWildflowerHoney.com <DoNotReply@stevesbees.com>',
+                    "Online Order Submission, Card - ".$firstName.' '.$lastName,
+                    $firstName, $lastName,
+                    $_SESSION['supplies']);
+            }
         ?>
 
         <input type="submit" value="HiddenGo">
@@ -50,18 +60,8 @@
     </body>
 
     <script type="text/javascript">
-        document.AuthorizeNetForm.submit();
+        //document.AuthorizeNetForm.submit();
+        //https://stackoverflow.com/questions/4578836/html-post-automatically
+        //https://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
     </script>
-
 </html>
-
-<?php
-
-?>
-
-
-
-
-
-
-
