@@ -1,10 +1,11 @@
 <?php
     require_once('../scripts/email_functions.php');
+    require_once('authorizeNetVars.secret');
     session_start();
 
     $_REL_ = "../";
     $_TITLE_ = "Card Receipt - StevesBees.com";
-    $_STYLESHEETS_ = array("../stylesheets/cartTable.css", "../stylesheets/card_receipt.css");
+    $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/cartTable.css", "../stylesheets/card_receipt.css");
     require_once('../common/header.php'); //opening HTML
 
 
@@ -56,9 +57,16 @@
     }
     else
     {
-        echo "Oops! Something went wrong during the transaction. Authorize.net was unable to fully process your card for the following reason: ".htmlentities($_GET['resp']);
+        echo "
+            <p>
+                Oops! Something went wrong during the transaction. Authorize.net was unable to fully process your card for the following reason: ".htmlentities($_GET['resp'])."
+            </p>";
     }
 
+    echo '
+        <form method="get" action="../stevesbees_home.php">
+            <button type="submit">Click here to return to the StevesBees.com homepage</button>
+        </form>';
 
     $_JS_ = array();
     require_once('../common/footer.php'); //closing HTML

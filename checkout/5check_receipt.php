@@ -7,7 +7,7 @@
 
     $_REL_ = "../";
     $_TITLE_ = "Check Receipt - StevesBees.com";
-    $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/check_receipt.css", "../stylesheets/cartTable.css");
+    $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/cartTable.css", "../stylesheets/check_receipt.css");
     require_once('../common/header.php'); //opening HTML
 
 

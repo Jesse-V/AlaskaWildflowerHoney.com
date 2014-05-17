@@ -73,6 +73,7 @@
 
     function echoDynamicForm($total, $nextDest)
     {
+        //"'.AuthorizeNetDPM::LIVE_URL.'"
         echo '
             <div id="dynamic">
                 <h1>YOU SHOULD NOT NORMALLY SEE THIS. Please enable Javascript or update your browser.</h1>
@@ -88,7 +89,7 @@
                     ';
 
                     global $api_login_id, $transaction_key;
-                    echo getCardFields($total, 0, $api_login_id, $transaction_key);
+                    echo getCardFields($total, 123, $api_login_id, $transaction_key);
 
         echo '
                 </form>
@@ -118,7 +119,7 @@
             )
         );
 
-        $prefill = true; //TEMPORARY!
+        //$prefill = true; //TEMPORARY!
 
         return '
             '.$sim->getHiddenFieldString().'

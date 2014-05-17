@@ -12,22 +12,13 @@
     $response = new AuthorizeNetSIM($api_login_id, $md5_setting);
     if ($response->isAuthorizeNet())
     {
-        $redirectURL = "https://www.alaskawildflowerhoney.com/checkout/5card_receipt.php";
-        if ($response->approved)
-        {
-            $rc = 1;
-            $id = $response->transaction_id;
-            $hash = hash("sha256", $md5_setting.$rc.$id.$md5_setting);
-            $redirectURL .= "?rc=$rc&id=$id&hash=$hash";
-        }
-        else
-        {
-            $rc = $response->response_code;
-            $id = $response->transaction_id;
-            $hash = hash("sha256", $md5_setting.$rc.$id.$md5_setting);
-            $resp = $response->response_reason_text;
-            $redirectURL .= "?rc=$rc&resp=$resp&hash=$hash";
-        }
+        $rc   = $response->response_code;
+        $id   = $response->transaction_id;
+        $resp = $response->approved ? "approved" : $response->response_reason_text;
+        $hash = hash("sha256", $md5_setting.$rc.$id.$md5_setting);
+
+        $redirectURL  = "https://www.alaskawildflowerhoney.com/checkout/5card_receipt.php";
+        $redirectURL .= "?rc=$rc&id=$id&resp=$resp&hash=$hash";
 
         echo '
             <script language="javascript">
