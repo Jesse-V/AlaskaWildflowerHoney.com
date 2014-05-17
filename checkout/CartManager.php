@@ -40,13 +40,12 @@
 
     if ($_POST['format'] == "supplies")
     {
-        if (!validateSuppliesInputs())
+        $orderList = getSuppliesList();
+        if (!validateSuppliesInputs($orderList))
             return;
 
-        $supplies = getSuppliesList();
-
         $itemIDs = "";
-        foreach ($supplies as $item)
+        foreach ($orderList as $item)
             $itemIDs .= $item['id'].',';
         $itemIDs = substr($itemIDs, 0, -1); //remove trailing comma
 
@@ -67,7 +66,7 @@
                 $groupDesc = $groups[$record['groupID']]['description'];
             }
 
-            $item = new SupplyItem($record['name'], $record['description'], $groupName, $groupDesc, $record['imageURL'], $record['price'], $supplies[$record['itemID']]['quantity']);
+            $item = new SupplyItem($record['name'], $record['description'], $groupName, $groupDesc, $record['imageURL'], $record['price'], $orderList[$record['itemID']]['quantity']);
             $suppliesOrder->addItem($item);
         }
 
@@ -121,12 +120,22 @@
 </html>';
 
 
-    function validateSuppliesInputs()
+    function validateSuppliesInputs($suppliesOrderList)
     {
+        if (empty($suppliesOrderList))
+        {
+            echo "<script>
+                window.alert(\"You forgot to order any supplies. You will be redirected back to the form after you press OK.\");
+                window.history.back();
+            </script>";
+
+            return false;
+        }
+
         if (!isset($_POST['pickupLoc']))
         {
             echo "<script>
-                window.alert(\"You forgot to specify where you'd like to pick up the supplies. You will be redirected back to the form after you press 'OK'.\");
+                window.alert(\"You forgot to specify where you'd like to pick up the supplies. You will be redirected back to the form after you press OK.\");
                 window.history.back();
             </script>";
 
@@ -151,7 +160,7 @@
         if (isset($error))
         {
             echo "<script>
-                    window.alert(\"We ran into a problem with your request: $error You will be redirected back to the form after you press 'OK'.\");
+                    window.alert(\"We ran into a problem with your request: $error You will be redirected back to the form after you press OK.\");
                     window.history.back();
                 </script>";
             return false;

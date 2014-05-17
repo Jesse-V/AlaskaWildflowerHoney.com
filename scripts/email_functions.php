@@ -4,7 +4,7 @@
 
     function sendCustomerEmail($to, $from, $subject, $firstName, $suppliesObject)
     {
-        $cart = getCart($suppliesObject);
+        $total = getCart($suppliesObject)['total'];
         $html = '
             <html>
                 <head>
@@ -13,7 +13,7 @@
                 <body>
                     <h3>Thank you!</h3>
                     <p style="text-indent: 2em;">
-                        Hello '.$firstName.', your online order with us is complete, and your total is '.$cart['total'].'. Please make your check out to Alaska Wildflower Honey.
+                        Hello '.$firstName.', your online order with us is complete, and your total is $'.$total.'. Please make your check out to Alaska Wildflower Honey.
                     </p>
                     <p>
                         You can send us the check to
@@ -26,15 +26,42 @@
                     <p>
                         or give it to us at the next opportunity. Thank you for your business!
                     </p>
+
                     <p>
-                        Your order is as follows:
+                        Your complete order is as follows:
                     </p>
-                    '.$cart['html'].'
+
+                    <h2>Supplies</h2>
+                    <table id="cartTable">
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>';
+
+        foreach ($suppliesObject->getItems() as $item)
+        {
+            $price = $item->price_ * $item->quantity_;
+            $html .= "
+                <tr>
+                    <td>
+                        $item->name_ $item->groupName_
+                    </td>
+                    <td>$item->quantity_</td>
+                    <td>$$price</td>
+                </tr>";
+        }
+
+        $html .=   '</table>
+                    <p>
+                        Total: $'.$total.'
+                    </p>
                 </body>
             </html>';
 
-        sendEmail($to, $from, $subjet, $html);
+        sendEmail($to, $from, $subject, $html);
     }
+
 
     function sendEmail($to, $from, $subject, $htmlMessage)
     {

@@ -2,6 +2,7 @@
     require_once('../anet_php_sdk/AuthorizeNet.php');
     require_once('../scripts/databaseConnect.secret');
     require_once('../scripts/cart_help_functions.php');
+    require_once('../scripts/email_functions.php');
     session_start();
 
     $_REL_ = "../";

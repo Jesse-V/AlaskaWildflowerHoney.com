@@ -88,7 +88,7 @@ function getCart($suppliesObject)
         }
     }
 
-    return array("total" => $total, "html" => $cartStr)
+    return array("total" => $total, "html" => $cartStr);
 }
 
 

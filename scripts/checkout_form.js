@@ -14,7 +14,6 @@ dynamic.html("");
 
 $(".mid_col #payOnline").click(function() {
     updateDynamic(cardFormHTML);
-    $(".mid_col .total").html("Total: $" + total * 1.025);
 });
 
 
