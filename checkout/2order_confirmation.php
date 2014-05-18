@@ -10,7 +10,6 @@
     $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/checkout_form.css", "../stylesheets/cartTable.css", "../stylesheets/order_confirmation.css");
     require_once('../common/header.php'); //opening HTML
 
-
     if (empty($_SESSION) || empty($_POST) || !isset($_POST['nextDestination']) || !isset($_POST['paymentMethod']))
     {
         echo 'Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="../order_supplies.php">Supplies page</a> or the <a href="../order_bees.php">Bees page</a>. Thanks!';
@@ -34,6 +33,9 @@
             $_SESSION['paymentInfo'] = array();
             foreach ($_POST as $key => $cardField)
                 $_SESSION['paymentInfo'][$key] = htmlentities(strip_tags($cardField));
+
+            $_SESSION['paymentInfo']['homePhone'] = formatPhone($_SESSION['paymentInfo']['homePhone']);
+            $_SESSION['paymentInfo']['cellPhone'] = formatPhone($_SESSION['paymentInfo']['cellPhone']);
 
             $x = $_SESSION['paymentInfo']; //just a smaller variable name
             echo '
@@ -66,6 +68,11 @@
             $_SESSION['contactInfo'] = array();
             foreach ($_POST as $key => $contactField)
                 $_SESSION['contactInfo'][$key] = htmlentities(strip_tags($contactField));
+
+            $homePhone = formatPhone($_SESSION['contactInfo']['homePhone']);
+            $cellPhone = formatPhone($_SESSION['contactInfo']['cellPhone']);
+            $_POST['homePhone'] = $_SESSION['contactInfo']['homePhone'] = $homePhone;
+            $_POST['cellPhone'] = $_SESSION['contactInfo']['cellPhone'] = $cellPhone;
 
             echo '
                 <h3>Shipping and Contact</h3>
@@ -117,5 +124,14 @@
         }
 
         return $str;
+    }
+
+
+    function formatPhone($number)
+    { //https://stackoverflow.com/questions/4708248/formatting-phone-numbers-in-php
+
+        $threeParts = preg_replace('~.*(\d{3})[^\d]*(\d{3})[^\d]*(\d{4}).*~', '($1) $2-$3', $number);
+        $twoParts = preg_replace('~.*(\d{3})[^\d]*(\d{4}).*~', '$1-$2', $number);
+        return strlen($number) == 7 ? $twoParts : $threeParts;
     }
 ?>
