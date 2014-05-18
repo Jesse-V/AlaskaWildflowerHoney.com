@@ -4,7 +4,7 @@ require_once('databaseConnect.secret');
 require_once('../checkout/order/SuppliesOrder.php');
 
 
-function echo($suppliesObject)
+function echoCart($suppliesObject)
 {
     $cart = getCart($_SESSION['supplies']);
     $total = $cart['total'];

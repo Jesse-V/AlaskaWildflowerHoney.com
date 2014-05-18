@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* CSS Document */
+
+table.paymentContact {
+    width: 80%;
+    margin: 0px auto;
+    text-align: center;
+    padding-bottom: 18px;
+}
+
+table.paymentContact td {
+    width: 50%;
+}

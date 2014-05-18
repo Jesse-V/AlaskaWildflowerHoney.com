@@ -172,9 +172,10 @@
 
     function getSuppliesList()
     {
+        $_MAXIMUM_NUM_OF_SUPPLIES = 250;
         $supplies = array();
 
-        for ($index = 1; isset($_POST[$index]); $index++)
+        for ($index = 1; $index < $_MAXIMUM_NUM_OF_SUPPLIES; $index++)
         {
             if ($_POST[$index] > 0)
             {

@@ -7,7 +7,7 @@
 
     $_REL_ = "../";
     $_TITLE_ = "Order Confirmation - StevesBees.com";
-    $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/checkout_form.css", "../stylesheets/cartTable.css");
+    $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/checkout_form.css", "../stylesheets/cartTable.css", "../stylesheets/order_confirmation.css");
     require_once('../common/header.php'); //opening HTML
 
 
@@ -37,7 +37,7 @@
 
             $x = $_SESSION['paymentInfo']; //just a smaller variable name
             echo '
-            <table>
+            <table class="paymentContact">
                 <tr>
                     <th>Billing</th>
                     <th>Shipping and Contact</th>
@@ -62,9 +62,6 @@
         }
         else
         { //it's a confirmation of a check
-            //echo "<br><br>";
-            //print_r($_POST);
-            //echo "<br><br>";
 
             $_SESSION['contactInfo'] = array();
             foreach ($_POST as $key => $contactField)
