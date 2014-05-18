@@ -22,11 +22,7 @@
     }
     else
     {
-        $cart = getCart($_SESSION['supplies']);
-        $total = $cart['total'];
-        echo $cart['html'];
-        echo "<div class=\"total\">Total: $$total</div>";
-        echo "<br>Pickup location: ".$_SESSION['supplies']->pickupLocation_;
+        echoCart($_SESSION['supplies']);
 
         $firstName = $_SESSION['contactInfo']['x_ship_to_first_name'];
         $lastName  = $_SESSION['contactInfo']['x_ship_to_last_name'];

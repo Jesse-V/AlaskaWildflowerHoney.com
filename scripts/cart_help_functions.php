@@ -4,6 +4,19 @@ require_once('databaseConnect.secret');
 require_once('../checkout/order/SuppliesOrder.php');
 
 
+function echo($suppliesObject)
+{
+    $cart = getCart($_SESSION['supplies']);
+    $total = $cart['total'];
+    echo $cart['html'];
+    echo "<script>var total = $total;</script>";
+    echo "<div class=\"total\">Total: $$total</div>";
+    echo "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
+
+    return $total;
+}
+
+
 function getCart($suppliesObject)
 {
     $supplyInfo = queryFetchSuppliesTable();

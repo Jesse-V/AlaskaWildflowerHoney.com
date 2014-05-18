@@ -34,13 +34,7 @@
                 </b></h2>
             -->';
 
-        $cart = getCart($_SESSION['supplies']);
-        $total = $cart['total'];
-        echo $cart['html'];
-        echo "<script>var total = $total;</script>";
-        echo "<div class=\"total\">Total: $$total</div>";
-        echo "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
-
+        $total = echoCart($_SESSION['supplies']);
         echoIntroGreeting();
         echoDynamicForm(number_format((float)$total, 2, '.', ''), "3order_submit.php");
     }

@@ -26,12 +26,7 @@
                 This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. If something needs adjustment, please click your browser's back button. Thanks again for shopping with us!
             </p>";
 
-        $cart = getCart($_SESSION['supplies']);
-        $total = $cart['total'];
-        echo $cart['html'];
-        echo "<script>var total = $total;</script>";
-        echo "<div class=\"total\">Total: $$total</div>";
-        echo "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
+        echoCart($_SESSION['supplies']);
 
         if ($_POST['paymentMethod'] == "card")
         { //it's a confirmation of a card checkout
