@@ -100,6 +100,7 @@ function getCart($suppliesObject)
         }
     }
 
+    $total = number_format((float)$total, 2, '.', '');
     return array("total" => $total, "html" => $cartStr);
 }
 

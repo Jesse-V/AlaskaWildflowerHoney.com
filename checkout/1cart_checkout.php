@@ -36,7 +36,7 @@
 
         $total = echoCart($_SESSION['supplies']);
         echoIntroGreeting();
-        echoDynamicForm(number_format((float)$total, 2, '.', ''), "3order_submit.php");
+        echoDynamicForm($total, "3order_submit.php");
     }
 
 

@@ -29,7 +29,7 @@
 
         echo '
             <p>
-                Thank you '.$firstName.'! Your order has been sent to us. Please send check to<br>
+                Thank you '.$firstName.'! Your order has been sent to us. Please send your check to<br>
                 Alaska Wildflower Honey<br>
                 7449 S. Babcock Blvd.<br>
                 Wasilla, AK 99623<br>

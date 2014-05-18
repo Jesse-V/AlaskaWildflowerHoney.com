@@ -63,8 +63,14 @@
             <b>We are currently reworking our checkout process. Please wait until the 18th before placing any orders. Thanks.</b>
         </p>
         -->
-        <input type="submit" name="submit" id="submitBtn" value="Finished? Click here to proceed to checkout."/>
 
+        <p>
+            <b>We are currently making change to our checkout process. We should be finished in approximately one hour. Thanks.</b>
+        </p>
+
+        <!--
+        <input type="submit" name="submit" id="submitBtn" value="Finished? Click here to proceed to checkout."/>
+        -->
     </form>
 
 <?php
