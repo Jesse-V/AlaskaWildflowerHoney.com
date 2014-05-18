@@ -57,20 +57,15 @@
 
         <input type="hidden" name="format" value="supplies"/>
 
+        <!--
+        <p>
+            <b>We are currently making change to our checkout process, so we have temporarily disabled it. We should be finished in approximately one hour. Please check back then.</b>
+        </p>
+        -->
+
         <!--<input type="submit" name="submit" id="moreBtn" value="Need bees or queens? Click here to save your order and visit the bees page."/>-->
-        <!--
-        <p>
-            <b>We are currently reworking our checkout process. Please wait until the 18th before placing any orders. Thanks.</b>
-        </p>
-        -->
-
-        <p>
-            <b>We are currently making change to our checkout process. We should be finished in approximately one hour. Thanks.</b>
-        </p>
-
-        <!--
         <input type="submit" name="submit" id="submitBtn" value="Finished? Click here to proceed to checkout."/>
-        -->
+
     </form>
 
 <?php
