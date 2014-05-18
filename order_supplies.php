@@ -126,7 +126,7 @@
     {
         echo '
         <div class="subtitle">'.$sectionRecord['name'].'</div>
-        <div class="description">'.$sectionRecord['description'].'</div>
+        <div class="sectionDesc">'.$sectionRecord['description'].'</div>
         <table>
             <tr>
                 <th>Image</th>
@@ -145,15 +145,15 @@
             { //part of a group
                 if (!empty($groupedItems[$item['groupID']]))
                 { //part of a valid group and group hasn't already been printed
-                    $desc = $groups[$item['groupID']]['description'];
 
                     echo '
                         <tr class="group'.$item['groupID'].'">
                             <td></td>
                             <td>'.$groups[$item['groupID']]['name'];
 
+                    $desc = $groups[$item['groupID']]['description'];
                     if (strlen($desc) > 0)
-                        echo '<br>'.$desc;
+                        echo '<div class="description">'.$desc.'</div>';
 
                     echo '  </td>
                             <td><span class="dropdownNotice">Types & Sizes</span></td>
@@ -166,16 +166,14 @@
                         if (substr($price, -strlen(".00")) === ".00")
                             $price = substr($price, 0, strlen($price) - strlen(".00"));
 
-                        $desc = $groups[$item['groupID']]['description'];
-
                         echo '
                         <tr class="subItem subItem'.$item['groupID'].'">
                             <td></td>
                             <td>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$subItem['name'];
+                                <div class="subItemName">'.$subItem['name'].'</div>';
 
                         if (strlen($subItem['description']) > 0)
-                            echo '<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'.$subItem['description'];
+                            echo '<div class="description">'.$subItem['description'].'</div>';
 
                         echo '
                             </td>
@@ -193,10 +191,14 @@
                 if (substr($price, -strlen(".00")) === ".00")
                     $price = substr($price, 0, strlen($price) - strlen(".00"));
 
+                $desc = "";
+                if (strlen($item['description']) > 0)
+                    $desc = '<div class="description">'.$item['description'].'</div>';
+
                 echo '
                 <tr>
                     <td></td>
-                    <td>'.$item['name'].'</td>
+                    <td>'.$item['name'].$desc.'</td>
                     <td>$'.$price.'</td>
                     <td><input name="'.$item['itemID'].'" type="number" min="0" value="0"></td>
                 </tr>';

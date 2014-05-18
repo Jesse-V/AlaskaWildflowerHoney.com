@@ -75,11 +75,23 @@
     width: 40px;
 }
 
-.mid_col .desc {
-    display: block;
-    padding-left: 20px;
+.mid_col .sectionDesc {
+    text-align: center;
     font-style: italic;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.mid_col .description {
+    margin-left: 20px;
+    font-style: italic;
+    font-size: 85%;
     font-weight: normal;
+}
+
+.mid_col .subItem div
+{
+    padding-left: 28px;
 }
 
 .mid_col hr {
