@@ -28,7 +28,7 @@
                 <body>
                     <h2>Your Receipt.</h2>
                     <p>
-                        Thank you '.$firstName.'! Your order has been sent to us, and your total is $'.$total.'. We will gather up your items once the transaction has been approved on the card ending with '.$lastFour.' Thank you for ordering online!
+                        Thank you '.$firstName.'! Your order has been sent to us, and your total is $'.$total.'. We will gather up your items once the transaction has been approved on the card ending with '.$lastFour.'. Thank you for ordering online!
                     </p>
                     <p>
                         Pickup location: '.$suppliesObject->pickupLocation_.'
@@ -56,6 +56,15 @@
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
                         '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        body {
+                            width: 80%;
+                            margin: 0px auto;
+                        }
+
+                        .centered {
+                            text-align: center;
+                            width: 75%;
+                        }
                     </style>
                 </head>
                 <body>
@@ -67,13 +76,14 @@
                     </div>
                     <p>
                         Pickup location: '.$suppliesObject->pickupLocation_.'
-                        <br>
+                    </p>
+                    <p class="centered">
                         <b>
                             Please gather the items once the payment has been approved. If it has been, another email will follow shortly.
                         </b>
                     </p>
-                    <h3>Shipping and Contact Information</h3>
-                    <p>
+                    <h3 class="centered">Shipping and Contact Information</h3>
+                    <p class="centered">
                         '.getShippingContact($contactArray).'
                     </p>
                 </body>
@@ -86,21 +96,31 @@
     //per ticket #21, if the customer's card goes through they will get an email from Authorize.net, so there's no need to send one ourself
 
 
-    function sendCardDadEmail2($contactArray, $from, $subject, $firstName, $lastName, $suppliesObject)
+    function sendCardDadEmail2($contactArray, $from, $subject, $firstName, $lastName, $transID, $suppliesObject)
     { //sent to dad after the customer's card has been approved by Authorize.net
 
         $total = getCart($suppliesObject)['total'];
+        $lastFour = substr($contactArray['x_card_num'], -4);
         $html = '
             <html>
                 <head>
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
                         '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        body {
+                            width: 80%;
+                            margin: 0px auto;
+                        }
+
+                        .centered {
+                            text-align: center;
+                            width: 75%;
+                        }
                     </style>
                 </head>
                 <body>
                     <p>
-                        The transaction for '.$firstName.' '.$lastName.'\'s order was successful and the payment went through. The items can now be gathered up and prepared for pickup. They ordered the following:
+                        The transaction for '.$firstName.' '.$lastName.'\'s order was successful and the payment (transaction #'.$transID.') went through on their card ending with '.$lastFour.'. The items can now be gathered up and prepared for pickup. They ordered the following:
                     </p>
                     <div id="cartWrapper">
                         '.getCartEmailHTML($suppliesObject, $total).'
@@ -108,8 +128,8 @@
                     <p>
                         Pickup location: '.$suppliesObject->pickupLocation_.'
                     </p>
-                    <h3>Shipping and Contact Information</h3>
-                    <p>
+                    <h3 class="centered">Shipping and Contact Information</h3>
+                    <p class="centered">
                         '.getShippingContact($contactArray).'
                     </p>
                 </body>
@@ -214,15 +234,21 @@
     }
 
 
-    function sendFailedCustomerEmail($contactArray, $from, $subject, $firstName, $resp)
+    function sendFailedCustomerEmail($contactArray, $from, $subject, $firstName, $resp, $suppliesObject)
     { //alert sent to customer if their card failed
 
+        $total = getCart($suppliesObject)['total'];
         $html = '
             <html>
                 <head>
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
                         '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        p {
+                            text-align: center;
+                            font-size: 1.25em;
+                        }
+
                         body {
                             width: 80%;
                             margin: 0px auto;
@@ -232,13 +258,13 @@
                 <body>
                     <h2>'.$subject.'</h2>
                     <p>
-                        '.$firstName.', your card was processed through Authorize.net, our payment processor, but the transaction failed. They sent the us the message: '.$resp.' The card\'s number may be invalid or has expired, the address or ZIP code may not match, or something else is wrong. Please try again or use a different card.
+                        Sorry '.$firstName.', your card was processed through Authorize.net (our payment processor) but the transaction failed. They sent the us the message: "'.$resp.'" The card\'s number may have been mistyped or has expired, the address or ZIP code may not match, or something else is wrong. Please try again or use a different card.
                     </p>
                     <p>
-                        If the transaction goes through, you will receive an email notification and see the approval on the website.
+                        Once the transaction goes through, you will receive an email notification and see the approval on the website.
                     </p>
                     <p>
-                        You ordered the following:
+                        You were ordering the following:
                     </p>
                     <div id="cartWrapper">
                         '.getCartEmailHTML($suppliesObject, $total).'
@@ -250,9 +276,10 @@
     }
 
 
-    function sendFailedDadEmail($contactArray, $from, $subject, $firstName, $lastName, $resp)
+    function sendFailedDadEmail($contactArray, $from, $subject, $firstName, $lastName, $resp, $suppliesObject)
     { //alert sent to dad if customer's card failed
 
+        $total = getCart($suppliesObject)['total'];
         $html = '
             <html>
                 <head>
@@ -263,12 +290,17 @@
                             width: 80%;
                             margin: 0px auto;
                         }
+
+                        .centered {
+                            text-align: center;
+                            width: 75%;
+                        }
                     </style>
                 </head>
                 <body>
                     <h2>'.$subject.'</h2>
                     <p>
-                        '.$firstName.' '.$firstName.' tried to pay via credit/debit card, but the transaction failed with the following message: '.$resp.' The customer has been notified and may try again.
+                        '.$firstName.' '.$lastName.' tried to pay via credit/debit card, but the transaction failed with the following message: "'.$resp.'" The customer has been notified and may try again.
                     </p>
                     <p>
                         They were trying to order the following:
@@ -276,10 +308,14 @@
                     <div id="cartWrapper">
                         '.getCartEmailHTML($suppliesObject, $total).'
                     </div>
+                    <h3 class="centered">Shipping and Contact Information</h3>
+                    <p class="centered">
+                        '.getShippingContact($contactArray).'
+                    </p>
                 </body>
             </html>';
 
-        sendEmail($contactArray['x_email'], $from, $subject, $html);
+        sendEmail("victors@mtaonline.net", $from, $subject, $html);
     }
 
 

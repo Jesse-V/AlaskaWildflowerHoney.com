@@ -54,13 +54,13 @@
             }
         ?>
 
-        <input type="submit" value="HiddenGo">
+        <input type="submit" value="Go">
 
         </form>
     </body>
 
     <script type="text/javascript">
-        //document.AuthorizeNetForm.submit();
+        document.AuthorizeNetForm.submit();
         //https://stackoverflow.com/questions/4578836/html-post-automatically
         //https://stackoverflow.com/questions/133925/javascript-post-request-like-a-form-submit
     </script>

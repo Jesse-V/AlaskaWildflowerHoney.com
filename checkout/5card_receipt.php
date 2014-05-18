@@ -38,7 +38,7 @@
             sendCardDadEmail2($_SESSION['paymentInfo'],
                 'AlaskaWildflowerHoney.com <DoNotReply@stevesbees.com>',
                 "Online Order Complete for ".$firstName.' '.$lastName,
-                $firstName, $lastName,
+                $firstName, $lastName, $_GET['id'],
                 $_SESSION['supplies']);
 
             unset($_SESSION);
@@ -55,21 +55,23 @@
     {
         echo "
             <p>
-                Oops! Something went wrong during the transaction. Authorize.net was unable to fully process your card for the following reason: ".htmlentities($_GET['resp'])." The card's number may be invalid or has expired, the address or ZIP code may not match, or something else is wrong. Please try again or use a different card. You have also received an email about this.
+                Oops! Something went wrong during the transaction. Authorize.net was unable to fully process your card for the following reason: \"".htmlentities($_GET['resp'])."\" The card's number may have been mistyped or has expired, the address or ZIP code may not match, or something else is wrong. Please try again or use a different card. You have also received an email about this.
             </p>";
 
         $firstName = $_SESSION['paymentInfo']['x_first_name'];
         $lastName  = $_SESSION['paymentInfo']['x_last_name'];
 
-        sendFailedCardCustomerEmail($_SESSION['paymentInfo'],
+        sendFailedCustomerEmail($_SESSION['paymentInfo'],
             'Alaska Wildflower Honey <victors@mtaonline.net>',
             "The transaction has failed",
-            $firstName, htmlentities($_GET['resp']));
+            $firstName, htmlentities($_GET['resp']),
+            $_SESSION['supplies']);
 
-        sendFailedCardDadEmail($_SESSION['paymentInfo'],
+        sendFailedDadEmail($_SESSION['paymentInfo'],
             'AlaskaWildflowerHoney.com <DoNotReply@stevesbees.com>',
             $firstName.' '.$lastName."'s card transaction failed",
-            $firstName, $lastName, htmlentities($_GET['resp']));
+            $firstName, $lastName, htmlentities($_GET['resp']),
+            $_SESSION['supplies']);
 
         echo '
             <form method="get" action="1cart_checkout.php">
