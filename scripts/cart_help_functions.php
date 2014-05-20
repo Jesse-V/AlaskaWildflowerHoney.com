@@ -47,7 +47,12 @@ function getCart($suppliesObject)
 
             $cartStr .= "
                 <tr>
-                    <td><img src=\"$item->imageURL_\" alt=\"item\"/></td>
+                    <td>";
+
+            if (strlen($item->imageURL_) > 0)
+                $cartStr .= "<img src=\"$item->imageURL_\" alt=\"item\"/>";
+
+            $cartStr .= "</td>
                     <td>
                         $item->name_ $item->groupName_
                         <br>
