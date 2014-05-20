@@ -258,7 +258,7 @@
                 <body>
                     <h2>'.$subject.'</h2>
                     <p>
-                        Sorry '.$firstName.', your card was processed through Authorize.net (our payment processor) but the transaction failed. They sent the us the message: "'.$resp.'" The card\'s number may have been mistyped or has expired, the address or ZIP code may not match, or something else is wrong. Please try again or use a different card.
+                        Sorry '.$firstName.', your card was processed through Authorize.net (our payment processor) but the transaction failed. They sent us the message: "'.$resp.'" The card\'s number may have been mistyped or has expired, the address or ZIP code may not match, or something else is wrong. Please try again or use a different card.
                     </p>
                     <p>
                         Once the transaction goes through, you will receive an email notification and see the approval on the website.

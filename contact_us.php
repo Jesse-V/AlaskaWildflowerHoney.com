@@ -5,19 +5,31 @@
     require_once('common/header.php');
 ?>
 
-    <img src="images/map_to_house.gif" alt="Map of Big Lake showing how to get to our location."/>
+    <div class="mapWrapper">
+        <a href="images/wasilla-biglake-map.jpg">
+            <img class="map" src="images/wasilla-biglake-map.jpg" alt="Map of Big Lake and Wasilla, showing our location and road route."/>
+        </a>
+        <a href="images/biglake-map.jpg">
+            <img class="map" src="images/biglake-map.jpg" alt="Map of Big Lake showing how to get to our location."/>
+        </a>
+    </div>
+
     <p>
         Driving directions to our place would be as follows:
         <br><br>
-        At mile 5.5 Big Lake road you will come to South Port Marina.  Echo Lake Drive takes off to the left just after the entrance to the marina.  Go 1.25 miles down Echo Lake Drive; the road will fork.  Take the left fork.  This road will take you to our place, another 1.25 miles  down the road.  You should be aware that there is a locked gate that keeps our community private and quiet.  Be sure to call us before you come out so that we can make sure that the gate is open.  A beehive marks the head of our driveway which is near our neighbors horse corral.
+        At mile 5.5 Big Lake road you will come to South Port Marina. Echo Lake Drive is the next left after the entrance to the marina. Go 1.25 miles down Echo Lake Drive; the road will fork, the left is unmarked and the right is labeled "Gondor Rd". Take the unmarked left fork. This road leads down a long straight stretch, and our place is 1.25 miles down the road. There is a locked gate with a big yellow sign that keeps our community private and quiet, so be sure to call us before you come out so that we can make sure that the gate is open. The entrance of our driveway is marked by a beehive, a yellow road-grader, and is straight ahead once you see our neighbor's horse corral.
     </p>
-    <p>Alaska Wildflower Honey
+    <p class="address">
+        Alaska Wildflower Honey
         <br>7449 S. Babcock Blvd.
         <br>Wasilla, AK 99623
     </p>
-    <p>Phone: (907) 892-6175</p>
-    <p>Steve@AlaskaWildflowerHoney.com</p>
-    <img src="images/half_pound.gif" alt="Half pound of honey."/>
+    <p class="phone">Phone: (907) 892-6175</p>
+    <p class="email">Steve@AlaskaWildflowerHoney.com</p>
+
+    <div class="honeyImgWrapper">
+        <img class="honey" src="images/half_pound.gif" alt="Half pound of honey."/>
+    </div>
 
 <?php
     $_JS_ = array();
