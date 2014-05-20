@@ -70,7 +70,7 @@
 
 <?php
 
-$_JS_ = array("scripts/jquery-1.10.2.js", "scripts/order_supplies.js");
+$_JS_ = array("scripts/jquery-1.11.1.min.js.js", "scripts/order_supplies.js");
 require_once('common/footer.php'); //closing HTML
 $db->close();
 

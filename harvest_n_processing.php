@@ -13,6 +13,6 @@
     </div>
 
 <?php
-    $_JS_ = array("scripts/jquery-1.10.2.js", "galleria/galleria-1.3.3.min.js", "scripts/harvest_n_processing.js");
+    $_JS_ = array("scripts/jquery-1.11.1.min.js.js", "galleria/galleria-1.3.3.min.js", "scripts/harvest_n_processing.js");
     require_once('common/footer.php'); //closing HTML
 ?>
