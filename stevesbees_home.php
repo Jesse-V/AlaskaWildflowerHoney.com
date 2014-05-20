@@ -7,6 +7,18 @@
 
     <h1>Steve's Bees - Packages of Honeybees</h1>
 
+    <h3>May 19, 2014</h3>
+    <p>
+        <b>Hello beekeepers!</b>
+    </p>
+    <p>
+        The flurry of bee deliveries is now over, and as summer progresses we are shifting gears once again from packages of honeybees to beekeeping supplies. Later in the season we may have some honey, wax, or pollen for sale, but for now we just have supplies. Since early this spring we have offered an online store here where you can buy items from our website and securely purchase them online, and we will continue to expand and use it throughout the season.
+    </p>
+    <p>
+        Our son, Jesse, arrived back from Utah State University and is currently working on overhauling the website and the online store. We hope to have a much smoother system this summer and throughout next season that will be much easier for everyone to use. We encourage you to use our online store as it helps use expedite your orders. Thanks!
+    </p>
+
+<!--
     <h3>April 23, 2014</h3>
     <p>
         <b>Hello ALL Beekeepers,</b>

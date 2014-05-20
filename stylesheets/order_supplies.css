@@ -27,7 +27,7 @@
 }
 
 .mid_col table {
-    width: 85%;
+    width: 95%;
     text-align: center;
     border-collapse: collapse;
     margin: 0px auto;
@@ -89,9 +89,12 @@
     font-weight: normal;
 }
 
-.mid_col .subItem div
-{
+.mid_col .subItem div {
     padding-left: 28px;
+}
+
+.mid_col tr input {
+    padding-left: 1px;
 }
 
 .mid_col hr {
