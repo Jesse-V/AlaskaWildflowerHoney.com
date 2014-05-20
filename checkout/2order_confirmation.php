@@ -89,7 +89,7 @@
     }
 
 
-    $_JS_ = array("../scripts/jquery-1.11.1.min.js.js", "../scripts/checkout_form.js");
+    $_JS_ = array("../scripts/jquery-1.11.1.min.js", "../scripts/checkout_form.js");
     require_once('../common/footer.php'); //closing HTML
     $db->close();
 
