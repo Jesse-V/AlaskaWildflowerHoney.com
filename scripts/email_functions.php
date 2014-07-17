@@ -1,12 +1,13 @@
 <?php
     require_once('../checkout/order/SuppliesOrder.php');
+    require_once('../checkout/order/OrderBees.php');
     require_once('cart_help_functions.php');
 
 
-    function sendCardCustomerEmail1($contactArray, $from, $subject, $firstName, $suppliesObject)
+    function sendCardCustomerEmail1($contactArray, $from, $subject, $firstName)
     { //receipt email sent before the processing through Authorize.net
 
-        $total = getCart($suppliesObject)['total'];
+        $total = getCart()['total'];
         $lastFour = substr($contactArray['x_card_num'], -4);
         $html = '
             <html>
@@ -31,13 +32,13 @@
                         Thank you '.$firstName.'! Your order has been sent to us, and your total is $'.$total.'. We will gather up your items once the transaction has been approved on the card ending with '.$lastFour.'. Thank you for ordering online!
                     </p>
                     <p>
-                        Pickup location: '.$suppliesObject->pickupLocation_.'
+                        Pickup location: '.$_SESSION['supplies']->pickupLocation_.'
                     </p>
                     <p>
                         Your complete order is as follows:
                     </p>
                     <div id="cartWrapper">
-                        '.getCartEmailHTML($suppliesObject, $total).'
+                        '.getCartEmailHTML($total).'
                     </div>
                 </body>
             </html>';
@@ -46,10 +47,10 @@
     }
 
 
-    function sendCardDadEmail1($contactArray, $from, $subject, $firstName, $lastName, $suppliesObject)
+    function sendCardDadEmail1($contactArray, $from, $subject, $firstName, $lastName)
     { //sent to dad before customer's card is sent through Authorize.net
 
-        $total = getCart($suppliesObject)['total'];
+        $total = getCart()['total'];
         $html = '
             <html>
                 <head>
@@ -72,10 +73,10 @@
                         '.$firstName.' '.$lastName.' has just placed an order for the following:
                     </p>
                     <div id="cartWrapper">
-                        '.getCartEmailHTML($suppliesObject, $total).'
+                        '.getCartEmailHTML($total).'
                     </div>
                     <p>
-                        Pickup location: '.$suppliesObject->pickupLocation_.'
+                        Pickup location: '.$_SESSION['supplies']->pickupLocation_.'
                     </p>
                     <p class="centered">
                         <b>
@@ -96,10 +97,10 @@
     //per ticket #21, if the customer's card goes through they will get an email from Authorize.net, so there's no need to send one ourself
 
 
-    function sendCardDadEmail2($contactArray, $from, $subject, $firstName, $lastName, $transID, $suppliesObject)
+    function sendCardDadEmail2($contactArray, $from, $subject, $firstName, $lastName, $transID)
     { //sent to dad after the customer's card has been approved by Authorize.net
 
-        $total = getCart($suppliesObject)['total'];
+        $total = getCart()['total'];
         $lastFour = substr($contactArray['x_card_num'], -4);
         $html = '
             <html>
@@ -123,10 +124,10 @@
                         The transaction for '.$firstName.' '.$lastName.'\'s order was successful and the payment (transaction #'.$transID.') went through on their card ending with '.$lastFour.'. The items can now be gathered up and prepared for pickup. They ordered the following:
                     </p>
                     <div id="cartWrapper">
-                        '.getCartEmailHTML($suppliesObject, $total).'
+                        '.getCartEmailHTML($total).'
                     </div>
                     <p>
-                        Pickup location: '.$suppliesObject->pickupLocation_.'
+                        Pickup location: '.$_SESSION['supplies']->pickupLocation_.'
                     </p>
                     <h3 class="centered">Shipping and Contact Information</h3>
                     <p class="centered">
@@ -139,10 +140,10 @@
     }
 
 
-    function sendCheckCustomerEmail($contactArray, $from, $subject, $firstName, $suppliesObject)
+    function sendCheckCustomerEmail($contactArray, $from, $subject, $firstName)
     { //sent to customer if they ordered by check
 
-        $total = getCart($suppliesObject)['total'];
+        $total = getCart()['total'];
         $html = '
             <html>
                 <head>
@@ -169,7 +170,7 @@
                         Wasilla, AK 99623<br>
                     </p>
                     <p>
-                        Pickup location: '.$suppliesObject->pickupLocation_.'
+                        Pickup location: '.$_SESSION['supplies']->pickupLocation_.'
                     </p>
                     <p>
                         We will hold your order for two weeks, awaiting the arrival of your check. Thank you for ordering online!
@@ -178,7 +179,7 @@
                         Your complete order is as follows:
                     </p>
                     <div id="cartWrapper">
-                        '.getCartEmailHTML($suppliesObject, $total).'
+                        '.getCartEmailHTML($total).'
                     </div>
                 </body>
             </html>';
@@ -187,10 +188,10 @@
     }
 
 
-    function sendCheckDadEmail($contactArray, $from, $subject, $firstName, $lastName, $suppliesObject)
+    function sendCheckDadEmail($contactArray, $from, $subject, $firstName, $lastName)
     { //receipt sent to dad if the customer ordered by check
 
-        $total = getCart($suppliesObject)['total'];
+        $total = getCart()['total'];
         $html = '
             <html>
                 <head>
@@ -213,10 +214,10 @@
                         '.$firstName.' '.$lastName.' has just placed an order for the following:
                     </p>
                     <div id="cartWrapper">
-                        '.getCartEmailHTML($suppliesObject, $total).'
+                        '.getCartEmailHTML($total).'
                     </div>
                     <p>
-                        Pickup location: '.$suppliesObject->pickupLocation_.'
+                        Pickup location: '.$_SESSION['supplies']->pickupLocation_.'
                     </p>
                     <p class="centered">
                         <b>
@@ -234,10 +235,10 @@
     }
 
 
-    function sendFailedCustomerEmail($contactArray, $from, $subject, $firstName, $resp, $suppliesObject)
+    function sendFailedCustomerEmail($contactArray, $from, $subject, $firstName, $resp)
     { //alert sent to customer if their card failed
 
-        $total = getCart($suppliesObject)['total'];
+        $total = getCart()['total'];
         $html = '
             <html>
                 <head>
@@ -267,7 +268,7 @@
                         You were ordering the following:
                     </p>
                     <div id="cartWrapper">
-                        '.getCartEmailHTML($suppliesObject, $total).'
+                        '.getCartEmailHTML($total).'
                     </div>
                 </body>
             </html>';
@@ -276,10 +277,10 @@
     }
 
 
-    function sendFailedDadEmail($contactArray, $from, $subject, $firstName, $lastName, $resp, $suppliesObject)
+    function sendFailedDadEmail($contactArray, $from, $subject, $firstName, $lastName, $resp)
     { //alert sent to dad if customer's card failed
 
-        $total = getCart($suppliesObject)['total'];
+        $total = getCart()['total'];
         $html = '
             <html>
                 <head>
@@ -306,7 +307,7 @@
                         They were trying to order the following:
                     </p>
                     <div id="cartWrapper">
-                        '.getCartEmailHTML($suppliesObject, $total).'
+                        '.getCartEmailHTML($total).'
                     </div>
                     <h3 class="centered">Shipping and Contact Information</h3>
                     <p class="centered">
@@ -319,7 +320,7 @@
     }
 
 
-    function getCartEmailHTML($suppliesObject, $total)
+    function getCartEmailHTML($total)
     { //HTML of the customer's cart, prepped for an email
 
         $html = '
@@ -331,7 +332,7 @@
                     <th>Price</th>
                 </tr>';
 
-        foreach ($suppliesObject->getItems() as $item)
+        foreach ($_SESSION['supplies']->getItems() as $item)
         {
             $price = $item->price_ * $item->quantity_;
             $html .= "

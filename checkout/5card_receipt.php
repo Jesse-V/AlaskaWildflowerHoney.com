@@ -38,8 +38,7 @@
             sendCardDadEmail2($_SESSION['paymentInfo'],
                 'AlaskaWildflowerHoney.com <DoNotReply@stevesbees.com>',
                 "Online Order Complete for ".$firstName.' '.$lastName,
-                $firstName, $lastName, $_GET['id'],
-                $_SESSION['supplies']);
+                $firstName, $lastName, $_GET['id']);
 
             unset($_SESSION);
             session_destroy();
@@ -64,14 +63,12 @@
         sendFailedCustomerEmail($_SESSION['paymentInfo'],
             'Alaska Wildflower Honey <victors@mtaonline.net>',
             "The transaction has failed",
-            $firstName, htmlentities($_GET['resp']),
-            $_SESSION['supplies']);
+            $firstName, htmlentities($_GET['resp']));
 
         sendFailedDadEmail($_SESSION['paymentInfo'],
             'AlaskaWildflowerHoney.com <DoNotReply@stevesbees.com>',
             $firstName.' '.$lastName."'s card transaction failed",
-            $firstName, $lastName, htmlentities($_GET['resp']),
-            $_SESSION['supplies']);
+            $firstName, $lastName, htmlentities($_GET['resp']));
 
         echo '
             <form method="get" action="1cart_checkout.php">

@@ -4,23 +4,6 @@
     require_once('order/BeeOrder.php');
     session_start();
 
-
-    function queryGroups() //copy of order_supplies.php
-    {
-        global $db;
-
-        $groupSQL = $db->query("SELECT * FROM SuppliesItemGroups");
-        if (!$groupSQL)
-            die("Failed to connect to database. ".$db->error);
-
-        $groups = array();
-        while ($record = $groupSQL->fetch_assoc())
-            $groups[$record['ID']] = $record;
-
-        $groupSQL->close();
-        return $groups;
-    }
-
     echo '
 <!DOCTYPE html>
 <html>
@@ -80,29 +63,17 @@
         if (!validateBeesInputs())
             return;
 
-        $packageCount = $_POST['singleItalian'] + $_POST['doubleItalian'] + $_POST['singleCarni'] + $_POST['doubleCarni'];
-
-        $beeOrder = array();
-        if ($_POST['singleItalian'] > 0)
-            $beeOrder['singleItalian'] = $_POST['singleItalian'];
-        if ($_POST['doubleItalian'] > 0)
-            $beeOrder['doubleItalian'] = $_POST['doubleItalian'];
-        if ($_POST['singleCarni'] > 0)
-            $beeOrder['singleCarni'] = $_POST['singleCarni'];
-        if ($_POST['doubleCarni'] > 0)
-            $beeOrder['doubleCarni'] = $_POST['doubleCarni'];
-
-        if ($_POST['ItalianQueens'] > 0)
-            $beeOrder['ItalianQueens'] = $_POST['ItalianQueens'];
-        if ($_POST['CarniQueens'] > 0)
-            $beeOrder['CarniQueens'] = $_POST['CarniQueens'];
-
-        $beeOrder['pickup'] = $_POST['pickupLoc'];
-        $beeOrder['destination'] = $_POST['customDest'];
-        $beeOrder['notes'] = $_POST['notes'];
-        $beeOrder['transCharge'] = getTransportationCharge($beeOrder['pickup'], $packageCount);
-
-        $_SESSION['beeOrder'] = $beeOrder;
+        $_SESSION['beeOrder'] = new BeeOrder(
+            $_POST['singleItalian'],
+            $_POST['doubleItalian'],
+            $_POST['singleCarni'],
+            $_POST['doubleCarni'],
+            $_POST['ItalianQueens'],
+            $_POST['CarniQueens'],
+            $_POST['pickupLoc'],
+            $_POST['customDest'],
+            $_POST['notes']
+        );
 
         routeAccordingly("../order_supplies.php");
     }
@@ -170,6 +141,23 @@
     }
 
 
+    function queryGroups() //duplicate of method in order_supplies.php
+    {
+        global $db;
+
+        $groupSQL = $db->query("SELECT * FROM SuppliesItemGroups");
+        if (!$groupSQL)
+            die("Failed to connect to database. ".$db->error);
+
+        $groups = array();
+        while ($record = $groupSQL->fetch_assoc())
+            $groups[$record['ID']] = $record;
+
+        $groupSQL->close();
+        return $groups;
+    }
+
+
     function getSuppliesList()
     {
         $_MAXIMUM_NUM_OF_SUPPLIES = 250;
@@ -187,35 +175,6 @@
         }
 
         return $supplies;
-    }
-
-
-    function getTransportationCharge($destination, $packageCount)
-    {
-        switch ($destination)
-        {
-            case 'Anchorage':
-            case 'Wasilla':
-            case 'Palmer':
-            case 'Eagle River':
-            case 'Big Lake':
-                return 0;
-
-            case 'Soldotna':
-                return 5 * $packageCount;
-
-            case 'Homer':
-            case 'Healy':
-            case 'Nenana':
-            case 'Fairbanks':
-                return 10 * $packageCount;
-
-            case 'Other':
-                return max($packageCount * 5, 10);
-
-            default:
-                return 0;
-        }
     }
 
 

@@ -2,22 +2,25 @@
 
 require_once('databaseConnect.secret');
 require_once('../checkout/order/SuppliesOrder.php');
+require_once('../checkout/order/OrderBees.php');
 
 
-function echoCart($suppliesObject)
+function echoCart()
 {
-    $cart = getCart($_SESSION['supplies']);
+    $cart = getCart();
     $total = $cart['total'];
     echo $cart['html'];
     echo "<script>var total = $total;</script>";
     echo "<div class=\"total\">Total: $$total</div>";
-    echo "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
+
+    if (isset($_SESSION['supplies']))
+        echo "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
 
     return $total;
 }
 
 
-function getCart($suppliesObject)
+function getCart()
 {
     $supplyInfo = queryFetchSuppliesTable();
     $beeInfo = queryFetchBeesTable();
@@ -65,44 +68,58 @@ function getCart($suppliesObject)
 
         $total += $subtotal;
         $cartStr .= '
-            </table>';
+            </table>
+            <div class=\"total\">Total: $$subtotal</div>';
     }
 
     if (isset($_SESSION['beeOrder']))
-    { //todo: redo
-        foreach ($_SESSION['beeOrder'] as $key => $value)
-        {
-            if (isset($beeInfo[$key]))
-            {
-                $name     = $beeInfo[$key]['name'];
-                $quantity = $value;
-                $price    = $beeInfo[$key]['price'] * $quantity;
-                $total += $price;
+    {
+        $prices = $_SESSION['beeOrder']->getPrices();
 
-                $cartStr .= "
-                    <tr>
-                        <td>$name</td>
-                        <td>$quantity</td>
-                        <td>$$price</td>
-                    </tr>";
-            }
+        $cartStr .= '
+            <h2>Bees</h2>
+
+            <table id="beesTable">
+                <tr>
+                    <th>Item</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>';
+
+        $subtotal = 0;
+        $orderItems = $_SESSION['beeOrder']->getPackageOrder();
+        foreach ($orderItems as $item)
+        {
+            $cartStr .= '
+                <tr>
+                    <td>'.$item['name'].'</td>
+                    <td>'.$item['quantity'].'</td>
+                    <td>$'.$item['price'].'</td>
+                </tr>';
+            $subtotal += $item['quantity'] * $item['price'];
         }
 
-        if (isset($_SESSION['beeOrder']['transCharge']) && $_SESSION['beeOrder']['transCharge'] > 0)
+        $transpCharge = $_SESSION['beeOrder']->getTransportationCharge();
+        if ($transpCharge > 0)
         {
-            $charge = $_SESSION['beeOrder']['transCharge'];
-            $dest = $_SESSION['beeOrder']['pickup'];
+            $dest = $_SESSION['beeOrder']->getPickupPoint();
             if ($dest == "Other")
-                $dest = $_SESSION['beeOrder']['destination'];
+                $dest = $_SESSION['beeOrder']->getCustomPickupPt()
 
             $cartStr .= "
                 <tr>
                     <td>Transportation Charge to $dest</td>
                     <td></td>
-                    <td>$$charge</td>
+                    <td>$$transpCharge</td>
                 </tr>";
-            $total += $charge;
+
+            $subtotal += $transpCharge;
         }
+
+        $total += $subtotal;
+        $cartStr .= '
+            </table>
+            <div class=\"total\">Total: $$subtotal</div>';
     }
 
     $total = number_format((float)$total, 2, '.', '');

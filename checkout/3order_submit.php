@@ -43,14 +43,12 @@
                 sendCardCustomerEmail1($_SESSION['paymentInfo'],
                     'Alaska Wildflower Honey <victors@mtaonline.net>',
                     "Thank you for your order",
-                    $firstName,
-                    $_SESSION['supplies']);
+                    $firstName);
 
                 sendCardDadEmail1($_SESSION['paymentInfo'],
                     'AlaskaWildflowerHoney.com <DoNotReply@stevesbees.com>',
                     "Online Order Submission, Card - ".$firstName.' '.$lastName,
-                    $firstName, $lastName,
-                    $_SESSION['supplies']);
+                    $firstName, $lastName);
             }
         ?>
 

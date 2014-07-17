@@ -41,14 +41,12 @@
         sendCheckCustomerEmail($_SESSION['contactInfo'],
             'Alaska Wildflower Honey <victors@mtaonline.net>',
             "Your online order is complete",
-            $_SESSION['contactInfo']['x_ship_to_first_name'],
-            $_SESSION['supplies']);
+            $_SESSION['contactInfo']['x_ship_to_first_name']);
 
         sendCheckDadEmail($_SESSION['contactInfo'],
             'AlaskaWildflowerHoney.com <DoNotReply@stevesbees.com>',
             "Online Order Submission, Check - ".$firstName.' '.$lastName,
-            $firstName, $lastName,
-            $_SESSION['supplies']);
+            $firstName, $lastName);
 
         unset($_SESSION);
         session_destroy();

@@ -1,6 +1,25 @@
 @charset "utf-8";
 /* CSS Document */
 
+#breedFAQ {
+    width: 75%;
+    margin: 10px auto 0px auto;
+    padding: 5px 0px;
+
+    text-align: center;
+    font-size: 1.1em;
+    color: blue;
+    text-decoration: underline;
+    background-color: rgb(210, 210, 210);
+    border-radius: 15px;
+}
+
+#breedWriteup {
+    background-color: rgb(210, 210, 210);
+    padding: 3px 8px;
+    border-radius: 8px;
+}
+
 .mid_col .subtitle {
     font-size: smaller;
     margin-left: 20px;
@@ -86,4 +105,8 @@
     width: 50%;
     margin: 0px auto;
     font-size: 1em; /* 16px */
+}
+
+input {
+    text-align: center;
 }

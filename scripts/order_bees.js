@@ -8,14 +8,14 @@ pickup.find("table td").click(function() {
     update(radioB);
 });
 
-update($('input[name=pickupLoc]:checked', '.pickup table'));
+//update($('input[name=pickupLoc]:checked', '.pickup table'));
 //$(pickup.find("table td")[0]).find("input")
 
 function update(radioB) {
     var tChargeEl = pickup.find("#transCharge");
 
     tChargeEl.hide();
-    var transRate = updateTransCharge(radioB, tChargeEl);
+    var transRate = updateTransCharge(radioB);
     tChargeEl.fadeIn("slow");
 
     updateTotals(transRate);
@@ -32,9 +32,9 @@ function updateTotals(transRate) {
     var nItQ    = parseInt(midColEl.find("input[name=ItalianQueens]").val());
     var nCarniQ = parseInt(midColEl.find("input[name=CarniQueens]").val());
 
-    var subtotal = sItCount * singleItalian + dItCount * doubleItalian;
-    subtotal += sCCount * singleCarni + dCCount * doubleCarni;
-    subtotal += nItQ * ItalianQueens + nCarniQ * CarniQueens;
+    var subtotal = sItCount * singlePrice + dItCount * doublePrice;
+    subtotal += sCCount * singlePrice + dCCount * doublePrice;
+    subtotal += nItQ * queenPrice + nCarniQ * queenPrice;
 
     var transTotal = (sItCount + dItCount + sCCount + dCCount) * transRate;
     var total = subtotal + transTotal;
@@ -47,7 +47,9 @@ function updateTotals(transRate) {
 
 
 
-function updateTransCharge(radioB, tCharge) {
+function updateTransCharge(radioB) {
+    var tCharge = pickup.find("#transCharge");
+
     switch (radioB.val()) {
         case 'Anchorage':
             tCharge.html("<p>No transportation charge for Anchorage.</p>");
@@ -111,5 +113,11 @@ function handlePrefChange() {
     if (this.value == "")
         this.value = 0;
 
-    updateTotals(updateTransCharge($(".pickup table td input:checked"), pickup.find("#transCharge")));
+    updateTotals(updateTransCharge($(".pickup table td input:checked")));
 }
+
+
+$("#breedWriteup").hide();
+$("#breedFAQ, #breedWriteup").click(function() {
+    $("#breedWriteup").toggle("blind", 900);
+});
