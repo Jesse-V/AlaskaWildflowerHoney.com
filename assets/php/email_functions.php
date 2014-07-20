@@ -1,6 +1,6 @@
 <?php
-    require_once('../checkout/order/SuppliesOrder.php');
-    require_once('../checkout/order/OrderBees.php');
+    require_once('../assets/php/classes/SuppliesOrder.php');
+    require_once('../assets/php/classes/OrderBees.php');
     require_once('cart_help_functions.php');
 
 
@@ -14,7 +14,7 @@
                 <head>
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
-                        '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        '.file_get_contents('../assets/css/cartTable.css', TRUE).'
                         p {
                             text-align: center;
                             font-size: 1.25em;
@@ -56,7 +56,7 @@
                 <head>
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
-                        '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        '.file_get_contents('../assets/css/cartTable.css', TRUE).'
                         body {
                             width: 80%;
                             margin: 0px auto;
@@ -107,7 +107,7 @@
                 <head>
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
-                        '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        '.file_get_contents('../assets/css/cartTable.css', TRUE).'
                         body {
                             width: 80%;
                             margin: 0px auto;
@@ -149,7 +149,7 @@
                 <head>
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
-                        '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        '.file_get_contents('../assets/css/cartTable.css', TRUE).'
                         p {
                             text-align: center;
                             font-size: 1.25em;
@@ -197,7 +197,7 @@
                 <head>
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
-                        '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        '.file_get_contents('../assets/css/cartTable.css', TRUE).'
                         body {
                             width: 80%;
                             margin: 0px auto;
@@ -244,7 +244,7 @@
                 <head>
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
-                        '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        '.file_get_contents('../assets/css/cartTable.css', TRUE).'
                         p {
                             text-align: center;
                             font-size: 1.25em;
@@ -286,7 +286,7 @@
                 <head>
                     <title>'.$subject.' -- AlaskaWildflowerHoney.com</title>
                     <style type="text/css">
-                        '.file_get_contents('../stylesheets/cartTable.css', TRUE).'
+                        '.file_get_contents('../assets/css/cartTable.css', TRUE).'
                         body {
                             width: 80%;
                             margin: 0px auto;

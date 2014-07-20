@@ -1,14 +1,17 @@
 <?php
-    require_once('../anet_php_sdk/AuthorizeNet.php');
-    require_once('../scripts/databaseConnect.secret');
-    require_once('../scripts/cart_help_functions.php');
-    require_once('authorizeNetVars.secret');
+    require_once('../assets/anet_php_sdk/AuthorizeNet.php');
+    require_once('../assets/php/databaseConnect.secret');
+    require_once('../assets/php/cart_help_functions.php');
+    require_once('../assets/php/authorizeNetVars.secret');
     session_start();
 
     $_REL_ = "../";
     $_TITLE_ = "Order Confirmation - StevesBees.com";
-    $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/checkout_form.css", "../stylesheets/cartTable.css", "../stylesheets/order_confirmation.css");
-    require_once('../common/header.php'); //opening HTML
+    $_STYLESHEETS_ = array("../assets/css/fancyHRandButtons.css",
+        "../assets/css/checkout_form.css",
+        "../assets/css/cartTable.css",
+        "../assets/css/order_confirmation.css");
+    require_once('../assets/common/header.php'); //opening HTML
 
     if (empty($_SESSION) || empty($_POST) || !isset($_POST['nextDestination']) || !isset($_POST['paymentMethod']))
     {
@@ -89,8 +92,8 @@
     }
 
 
-    $_JS_ = array("../scripts/jquery-1.11.1.min.js", "../scripts/checkout_form.js");
-    require_once('../common/footer.php'); //closing HTML
+    $_JS_ = array("../assets/js/jquery-1.11.1.min.js", "../assets/js/checkout_form.js");
+    require_once('../assets/common/footer.php'); //closing HTML
     $db->close();
 
 

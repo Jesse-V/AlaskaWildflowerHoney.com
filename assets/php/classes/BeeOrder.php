@@ -12,7 +12,7 @@ class BeeOrder extends Order
 
 
     function __construct($nSingleItalians, $nDoubleItalians, $nSingleCarniolans,
-        $nDoubleCarniolans, $nItalianQueens, nCarniolanQueens, $pickupPoint,
+        $nDoubleCarniolans, $nItalianQueens, $nCarniolanQueens, $pickupPoint,
         $customPickupLoc, $notes)
     {
         $this->nSIts_ = htmlentities(strip_tags($nSingleItalians));
@@ -47,32 +47,32 @@ class BeeOrder extends Order
         if ($this->nSIts_ > 0)
             array_push($order,
                 array("name" => $names['singleI'], "quantity" => $this->nSIts_,
-                    "price" => $this->prices_->getSQPackagePrice());
+                    "price" => $this->prices_->getSQPackagePrice()));
 
         if ($this->nDIts_ > 0)
             array_push($order,
                 array("name" => $names['doubleI'], "quantity" => $this->nDIts_,
-                    "price" => $this->prices_->getDQPackagePrice());
+                    "price" => $this->prices_->getDQPackagePrice()));
 
         if ($this->nSCarnis_ > 0)
             array_push($order,
                 array("name" => $names['singleC'], "quantity" => $this->nSCarnis_,
-                    "price" => $this->prices_->getSQPackagePrice());
+                    "price" => $this->prices_->getSQPackagePrice()));
 
         if ($this->nDCarnis_ > 0)
             array_push($order,
                 array("name" => $names['doubleC'], "quantity" => $this->nDCarnis_,
-                    "price" => $this->prices_->getDQPackagePrice());
+                    "price" => $this->prices_->getDQPackagePrice()));
 
         if ($this->nItQ_ > 0)
             array_push($order,
                 array("name" => $names['ItalianQ'], "quantity" => $this->nItQ_,
-                    "price" => $this->prices_->getQueenPrice());
+                    "price" => $this->prices_->getQueenPrice()));
 
         if ($this->nCarniQ_ > 0)
             array_push($order,
                 array("name" => $names['CarniQ'], "quantity" => $this->nCarniQ_,
-                    "price" => $this->prices_->getQueenPrice());
+                    "price" => $this->prices_->getQueenPrice()));
 
         return $order;
     }
@@ -181,7 +181,7 @@ class BeeOrder extends Order
         while ($record = $beesSQL->fetch_assoc())
             $prices[$record['name']] = $prices['price'];
 
-        return new BeeOrder($prices['single'], prices['double'], prices['queen']);
+        return new BeeOrder($prices['single'], $prices['double'], $prices['queen']);
     }
 }
 

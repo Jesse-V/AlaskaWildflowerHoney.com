@@ -1,8 +1,8 @@
 <?php //opening HTML
     $_REL_ = "";
     $_TITLE_ = "Home";
-    $_STYLESHEETS_ = array("stylesheets/index.css");
-    require_once('common/header.php');
+    $_STYLESHEETS_ = array("assets/css/index.css");
+    require_once('assets/common/header.php');
 ?>
 
     <div class="left half">
@@ -19,7 +19,7 @@
     </div>
     <div class="right half">
         <div class="right_image">
-            <img src="images/hives_in_grass.gif" alt="Five beehives in our beeyard, tucked away behind grass."/>
+            <img src="assets/images/hives_in_grass.gif" alt="Five beehives in our beeyard, tucked away behind grass."/>
             <p>Our hives behind our house on Fish Creek</p>
         </div>
         <h3>CLASSES</h3>
@@ -31,5 +31,5 @@
 
 <?php
     $_JS_ = array();
-    require_once('common/footer.php'); //closing HTML
+    require_once('assets/common/footer.php'); //closing HTML
 ?>

@@ -1,12 +1,16 @@
 // JavaScript Document
 
 var that = $(".mid_col");
-hideAllGroupItems(0);
+//hideAllGroupItems(0);
 
 
 function hideAllGroupItems(duration) {
     var allGroupItems = that.find("table .subItem");
-    allGroupItems.hide(duration);
+    for (var i = 0; i < allGroupItems.length; i++) {
+        var inputVal = $($(allGroupItems[i]).find("input")[0]).val();
+        if (inputVal == 0 || inputVal == undefined)
+            $(allGroupItems[i]).hide(duration);
+    }
 }
 
 
@@ -45,7 +49,8 @@ function updateTotal() {
     var total = 0;
     that.find("tr").each(function() {
         var fields = $(this).find("td");
-        if (fields.length != 0 && ~$(fields[2]).html().indexOf('$')) {
+        if (fields.length != 0 && ~$(fields[2]).html().indexOf('$'))
+        {
             var cost = parseFloat($(fields[2]).html().substr(1));
             var children = $(fields[3]).children();
 

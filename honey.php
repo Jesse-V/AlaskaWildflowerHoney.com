@@ -1,14 +1,14 @@
 <?php //opening HTML
     $_REL_ = "";
     $_TITLE_ = "Honey";
-    $_STYLESHEETS_ = array("stylesheets/honey.css");
-    require_once('common/header.php');
+    $_STYLESHEETS_ = array("assets/css/honey.css");
+    require_once('assets/common/header.php');
 ?>
 
     <div class="images">
-        <img src="images/half_pound.gif" alt="Half-pound container of honey."/>
-        <img src="images/single_hive.gif" alt="Single beehive."/>
-        <img src="images/half_pound.gif" alt="Half-pound container of honey."/>
+        <img src="assets/images/half_pound.gif" alt="Half-pound container of honey."/>
+        <img src="assets/images/single_hive.gif" alt="Single beehive."/>
+        <img src="assets/images/half_pound.gif" alt="Half-pound container of honey."/>
     </div>
 
     <h3>WHY OUR HONEY IS DIFFERENT</h3>
@@ -25,5 +25,5 @@
 
 <?php
     $_JS_ = array();
-    require_once('common/footer.php'); //closing HTML
+    require_once('assets/common/footer.php'); //closing HTML
 ?>

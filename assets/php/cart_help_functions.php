@@ -1,8 +1,8 @@
 <?php
 
 require_once('databaseConnect.secret');
-require_once('../checkout/order/SuppliesOrder.php');
-require_once('../checkout/order/OrderBees.php');
+require_once('classes/SuppliesOrder.php');
+//require_once('classes/OrderBees.php');
 
 
 function echoCart()
@@ -69,7 +69,7 @@ function getCart()
         $total += $subtotal;
         $cartStr .= '
             </table>
-            <div class=\"total\">Total: $$subtotal</div>';
+            <!--<div class=\"total\">Total: $'.$subtotal.'</div>-->';
     }
 
     if (isset($_SESSION['beeOrder']))
@@ -104,7 +104,7 @@ function getCart()
         {
             $dest = $_SESSION['beeOrder']->getPickupPoint();
             if ($dest == "Other")
-                $dest = $_SESSION['beeOrder']->getCustomPickupPt()
+                $dest = $_SESSION['beeOrder']->getCustomPickupPt();
 
             $cartStr .= "
                 <tr>

@@ -1,16 +1,16 @@
 <?php //opening HTML
     $_REL_ = "";
     $_TITLE_ = "Contact Us";
-    $_STYLESHEETS_ = array("stylesheets/contact_us.css");
-    require_once('common/header.php');
+    $_STYLESHEETS_ = array("assets/css/contact_us.css");
+    require_once('assets/common/header.php');
 ?>
 
     <div class="mapWrapper">
-        <a href="images/wasilla-biglake-map.jpg">
-            <img class="map" src="images/wasilla-biglake-map.jpg" alt="Map of Big Lake and Wasilla, showing our location and road route."/>
+        <a href="assets/images/wasilla-biglake-map.jpg">
+            <img class="map" src="assets/images/wasilla-biglake-map.jpg" alt="Map of Big Lake and Wasilla, showing our location and road route."/>
         </a>
-        <a href="images/biglake-map.jpg">
-            <img class="map" src="images/biglake-map.jpg" alt="Map of Big Lake showing how to get to our location."/>
+        <a href="assets/images/biglake-map.jpg">
+            <img class="map" src="assets/images/biglake-map.jpg" alt="Map of Big Lake showing how to get to our location."/>
         </a>
     </div>
 
@@ -28,10 +28,10 @@
     <p class="email">Steve@AlaskaWildflowerHoney.com</p>
 
     <div class="honeyImgWrapper">
-        <img class="honey" src="images/half_pound.gif" alt="Half pound of honey."/>
+        <img class="honey" src="assets/images/half_pound.gif" alt="Half pound of honey."/>
     </div>
 
 <?php
     $_JS_ = array();
-    require_once('common/footer.php'); //closing HTML
+    require_once('assets/common/footer.php'); //closing HTML
 ?>

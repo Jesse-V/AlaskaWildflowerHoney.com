@@ -1,7 +1,7 @@
 <?php
-    require_once('../scripts/databaseConnect.secret');
-    require_once('order/SuppliesOrder.php');
-    require_once('order/BeeOrder.php');
+    require_once('../assets/php/databaseConnect.secret');
+    require_once('../assets/php/classes/SuppliesOrder.php');
+    require_once('../assets/php/classes/BeeOrder.php');
     session_start();
 
     echo '

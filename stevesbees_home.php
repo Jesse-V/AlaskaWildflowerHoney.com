@@ -1,8 +1,8 @@
 <?php //opening HTML
     $_REL_ = "";
     $_TITLE_ = "StevesBees.com Home";
-    $_STYLESHEETS_ = array("stylesheets/stevesbees_home.css");
-    require_once('common/header.php');
+    $_STYLESHEETS_ = array("assets/css/stevesbees_home.css");
+    require_once('assets/common/header.php');
 ?>
 
     <h1>Steve's Bees - Packages of Honeybees</h1>
@@ -250,5 +250,7 @@
 
 <?php
     $_JS_ = array();
-    require_once('common/footer.php'); //closing HTML
+    require_once('assets/common/footer.php'); //closing HTML
+
+    print_r($_SERVER);
 ?>

@@ -1,14 +1,16 @@
 <?php
-    require_once('../anet_php_sdk/AuthorizeNet.php');
-    require_once('../scripts/databaseConnect.secret');
-    require_once('../scripts/cart_help_functions.php');
-    require_once('authorizeNetVars.secret');
+    require_once('../assets/anet_php_sdk/AuthorizeNet.php');
+    require_once('../assets/php/databaseConnect.secret');
+    require_once('../assets/php/cart_help_functions.php');
+    require_once('../assets/php/authorizeNetVars.secret');
     session_start();
 
     $_REL_ = "../";
     $_TITLE_ = "Cart Checkout - StevesBees.com";
-    $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/checkout_form.css", "../stylesheets/cartTable.css");
-    require_once('../common/header.php'); //opening HTML
+    $_STYLESHEETS_ = array("../assets/css/fancyHRandButtons.css",
+        "../assets/css/checkout_form.css",
+        "../assets/css/cartTable.css");
+    require_once('../assets/common/header.php'); //opening HTML
 
 
     echo "<h1>Checkout</h1>";
@@ -21,18 +23,12 @@
     }
     else
     {
-        echo '
-            <h3>New Checkout System!</h3>
-            <p>
-                <b>
-                We are please to announce a new checkout system to our online shopping cart. This new system is just as easy to use as the original, but should help address some problems that were encountered this spring and will streamline things for everyone. Enjoy!
-            </b>
-            </p>
-
-            <!--
-                <h2><b> Alert: we are currently doing some maintenance on the payment system. Please wait on proceeding through checkout until we have finished, so check back later. Thank you.
-                </b></h2>
-            -->';
+        /*
+         echo '
+            <h2><b> Alert: we are currently doing some maintenance on the payment system. Please wait on proceeding through checkout until we have finished, so check back later. Thank you.
+            </b></h2>
+            ';
+        */
 
         $total = echoCart($_SESSION['supplies']);
         echoIntroGreeting();
@@ -40,8 +36,8 @@
     }
 
 
-    $_JS_ = array("../scripts/jquery-1.11.1.min.js", "../scripts/checkout_form.js");
-    require_once('../common/footer.php'); //closing HTML
+    $_JS_ = array("../assets/js/jquery-1.11.1.min.js", "../assets/js/checkout_form.js");
+    require_once('../assets/common/footer.php'); //closing HTML
     $db->close();
 
 
@@ -49,7 +45,7 @@
     {
         echo '
             <p>
-                Welcome to the checkout. Please complete your order by providing the information below. You can purchase the items in your cart using most major credit/debit cards or by check. For online payment, we use Authorize.net, a popular payment gateway provider. They are compliant with the Payment Card Industry Data Security Standard (PCI DSS) and provide strong SSL certificates to protect your payment information. The SSL certificate that we use on this website uses some of the strongest cryptography and encryption procedures available to protect your information as well.
+                Welcome to the checkout. Please complete your order by providing the information below. You can purchase the items in your cart using most major credit/debit cards or by check. For online payment, we use Authorize.net, a popular payment gateway provider. They are compliant with the Payment Card Industry Data Security Standard (PCI DSS) and provide strong SSL certificates to protect your payment information.
             </p>
             <p>
                 We offer two methods of payment: electronic via credit/debit cards and checks. Electronic payment is nearly instantaneous and is highly recommended, but if you wish you may mail us a check manually. Please choose your preferred method below, and then fill out any forms that appear. Thank you for shopping with us!

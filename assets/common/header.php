@@ -5,9 +5,9 @@
         echo '
         <title>'.$_TITLE_.' - AlaskaWildflowerHoney.com</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" href="'.$_REL_.'stylesheets/main.css" />
-        <script type="text/javascript" src="'.$_REL_.'SpryAssets/SpryAccordion.js"></script>
-        <link href="'.$_REL_.'SpryAssets/SpryAccordion.css" rel="stylesheet" type="text/css" />';
+        <link rel="stylesheet" type="text/css" href="'.$_REL_.'assets/css/main.css" />
+        <script type="text/javascript" src="'.$_REL_.'assets/spry/SpryAccordion.js"></script>
+        <link href="'.$_REL_.'assets/spry/SpryAccordion.css" rel="stylesheet" type="text/css" />';
 
         foreach ($_STYLESHEETS_ as $sheet)
             echo '<link rel="stylesheet" type="text/css" href="'.$sheet.'" />';

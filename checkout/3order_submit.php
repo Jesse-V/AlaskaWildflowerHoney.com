@@ -5,8 +5,8 @@
 
     //<input type="hidden" name="x_description" value="<?php echo getOrderReceiptStr();"/>
 
-    require_once('../anet_php_sdk/AuthorizeNet.php');
-    require_once('../scripts/email_functions.php');
+    require_once('../assets/anet_php_sdk/AuthorizeNet.php');
+    require_once('../assets/php/email_functions.php');
     session_start();
 ?>
 

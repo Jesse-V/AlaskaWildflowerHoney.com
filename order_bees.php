@@ -1,13 +1,14 @@
 <?php //opening HTML
     $_REL_ = "";
     $_TITLE_ = "Order Packages & Queens - StevesBees.com";
-    $_STYLESHEETS_ = array("stylesheets/fancyHRandButtons.css", "stylesheets/order_bees.css");
-    require_once('common/header.php');
+    $_STYLESHEETS_ = array("assets/css/fancyHRandButtons.css",
+        "assets/css/order_bees.css");
+    require_once('assets/common/header.php');
 ?>
 
 <?php
 
-    require_once('scripts/databaseConnect.secret');
+    require_once('assets/php/databaseConnect.secret');
     global $db;
 
     $beesSQL = $db->query("SELECT * FROM Bees");
@@ -69,7 +70,7 @@
             <div class="add sub">
                 <div class="preference">
                     <div class="images">
-                        <img src="images/queen-bee.jpg" alt="Queen bee."/>
+                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
                     </div>
                     <div class="text">
                         <span>I'd like</span>
@@ -79,8 +80,8 @@
                 </div>
                 <div class="preference">
                     <div class="images">
-                        <img src="images/queen-bee.jpg" alt="Queen bee."/>
-                        <img src="images/queen-bee.jpg" alt="Queen bee."/>
+                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
+                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
                     </div>
                     <div class="text">
                         <span>I'd like</span>
@@ -97,7 +98,7 @@
             <div class="add sub">
                 <div class="preference">
                     <div class="images">
-                        <img src="images/queen-bee.jpg" alt="Queen bee."/>
+                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
                     </div>
                     <div class="text">
                         <span>I'd like</span>
@@ -107,8 +108,8 @@
                 </div>
                 <div class="preference">
                     <div class="images">
-                        <img src="images/queen-bee.jpg" alt="Queen bee."/>
-                        <img src="images/queen-bee.jpg" alt="Queen bee."/>
+                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
+                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
                     </div>
                     <div class="text">
                         <span>I'd like</span>
@@ -194,8 +195,10 @@
     </form>
 
 <?php
-    $_JS_ = array("scripts/jquery-1.11.1.min.js", "scripts/jquery-ui-1.10.4.custom.min.js", "scripts/order_bees.js");
-    require_once('common/footer.php'); //closing HTML
+    $_JS_ = array("assets/js/jquery-1.11.1.min.js",
+        "assets/js/jquery-ui-1.10.4.custom.min.js",
+        "assets/js/order_bees.js");
+    require_once('assets/common/footer.php'); //closing HTML
 
     $db->close();
 ?>

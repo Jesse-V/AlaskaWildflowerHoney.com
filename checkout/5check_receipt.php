@@ -1,14 +1,15 @@
 <?php
-    require_once('../anet_php_sdk/AuthorizeNet.php');
-    require_once('../scripts/databaseConnect.secret');
-    require_once('../scripts/cart_help_functions.php');
-    require_once('../scripts/email_functions.php');
+    require_once('../assets/anet_php_sdk/AuthorizeNet.php');
+    require_once('../assets/php/databaseConnect.secret');
+    require_once('../assets/php/cart_help_functions.php');
+    require_once('../assets/php/email_functions.php');
     session_start();
 
     $_REL_ = "../";
     $_TITLE_ = "Check Receipt - StevesBees.com";
-    $_STYLESHEETS_ = array("../stylesheets/fancyHRandButtons.css", "../stylesheets/cartTable.css", "../stylesheets/check_receipt.css");
-    require_once('../common/header.php'); //opening HTML
+    $_STYLESHEETS_ = array("../assets/css/fancyHRandButtons.css",
+        "../assets/css/cartTable.css", "../assets/css/check_receipt.css");
+    require_once('../assets/common/header.php'); //opening HTML
 
 
     echo '<h1>Your receipt</h1>';
@@ -59,7 +60,7 @@
 
 
     $_JS_ = array();
-    require_once('../common/footer.php'); //closing HTML
+    require_once('../assets/common/footer.php'); //closing HTML
     $db->close();
 
 ?>

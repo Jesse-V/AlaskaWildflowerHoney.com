@@ -1,11 +1,11 @@
 <?php //opening HTML
     $_REL_ = "";
     $_TITLE_ = "Aerial View";
-    $_STYLESHEETS_ = array("stylesheets/aerial_view.css");
-    require_once('common/header.php');
+    $_STYLESHEETS_ = array("assets/css/aerial_view.css");
+    require_once('assets/common/header.php');
 ?>
 
-    <img src="images/matsu_google_earth.gif" alt="Google Earth map of Mat-Su, showing our location in Alaska."/>
+    <img src="assets/images/matsu_google_earth.gif" alt="Google Earth map of Mat-Su, showing our location in Alaska."/>
     <p>
         This is an overview of the area where we live and have our hives.
     </p>
@@ -15,9 +15,9 @@
     <p>
         As the picture indicates there are no agricultural activities and very few houses.  This ensures that the bees are foraging primarily on the natural vegetation of the area.  The viewer may note that there are a couple of areas that look like they may be farm fields.  These are the old abandoned prove up fields that were cleared in 1960 when my family and our neighbors homesteaded the area.  During the wildfire of 1996 the old piled up rows of logs and brush were worked over with heavy equipment to put out the smoldering fires inside them.  The photos that are shown are from Google Earth.
     </p>
-    <img src="images/yard_locations_google_earth.gif" alt="Google Earth map of our beeyard locations."/>
+    <img src="assets/images/yard_locations_google_earth.gif" alt="Google Earth map of our beeyard locations."/>
 
 <?php
     $_JS_ = array();
-    require_once('common/footer.php'); //closing HTML
+    require_once('assets/common/footer.php'); //closing HTML
 ?>
