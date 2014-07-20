@@ -1,8 +1,8 @@
 <?php
-    require_once('../assets/anet_php_sdk/AuthorizeNet.php');
-    require_once('../assets/php/databaseConnect.secret');
-    require_once('../assets/php/cart_help_functions.php');
-    require_once('../assets/php/authorizeNetVars.secret');
+    require_once(__DIR__.'/../assets/anet_php_sdk/AuthorizeNet.php');
+    require_once(__DIR__.'/../assets/php/databaseConnect.secret');
+    require_once(__DIR__.'/../assets/php/checkout/cart_help_functions.php');
+    require_once(__DIR__.'/../assets/php/checkout/authorizeNetVars.secret');
     session_start();
 
     $_REL_ = "../";
@@ -10,7 +10,7 @@
     $_STYLESHEETS_ = array("../assets/css/fancyHRandButtons.css",
         "../assets/css/checkout_form.css",
         "../assets/css/cartTable.css");
-    require_once('../assets/common/header.php'); //opening HTML
+    require_once(__DIR__.'/../assets/common/header.php'); //opening HTML
 
 
     echo "<h1>Checkout</h1>";
@@ -37,7 +37,7 @@
 
 
     $_JS_ = array("../assets/js/jquery-1.11.1.min.js", "../assets/js/checkout_form.js");
-    require_once('../assets/common/footer.php'); //closing HTML
+    require_once(__DIR__.'/../assets/common/footer.php'); //closing HTML
     $db->close();
 
 

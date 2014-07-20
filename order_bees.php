@@ -3,12 +3,12 @@
     $_TITLE_ = "Order Packages & Queens - StevesBees.com";
     $_STYLESHEETS_ = array("assets/css/fancyHRandButtons.css",
         "assets/css/order_bees.css");
-    require_once('assets/common/header.php');
+    require_once(__DIR__.'/assets/common/header.php');
 ?>
 
 <?php
 
-    require_once('assets/php/databaseConnect.secret');
+    require_once(__DIR__.'/assets/php/databaseConnect.secret');
     global $db;
 
     $beesSQL = $db->query("SELECT * FROM Bees");
@@ -198,7 +198,7 @@
     $_JS_ = array("assets/js/jquery-1.11.1.min.js",
         "assets/js/jquery-ui-1.10.4.custom.min.js",
         "assets/js/order_bees.js");
-    require_once('assets/common/footer.php'); //closing HTML
+    require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
 
     $db->close();
 ?>

@@ -1,8 +1,8 @@
 <?php
 
-require_once('databaseConnect.secret');
-require_once('classes/SuppliesOrder.php');
-//require_once('classes/OrderBees.php');
+require_once(__DIR__.'/../databaseConnect.secret');
+require_once(__DIR__.'/../classes/SuppliesOrder.php');
+//require_once(__DIR__.'/../classes/OrderBees.php');
 
 
 function echoCart()

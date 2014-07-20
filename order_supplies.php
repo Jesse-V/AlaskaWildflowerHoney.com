@@ -3,7 +3,7 @@
     $_TITLE_ = "Beekeeping Supplies";
     $_STYLESHEETS_ = array("assets/css/fancyHRandButtons.css",
         "assets/css/order_supplies.css");
-    require_once('assets/common/header.php');
+    require_once(__DIR__.'/assets/common/header.php');
 ?>
 
     <form action="checkout/CartManager.php" method="post" autocomplete="on" name="frmProduct" id="frmProduct" accept-charset="UTF-8">
@@ -12,8 +12,8 @@
 
 <?php
 
-    require_once('assets/php/databaseConnect.secret');
-    require_once('assets/php/supplies_list_helper.php');
+    require_once(__DIR__.'/assets/php/databaseConnect.secret');
+    require_once(__DIR__.'/assets/php/suppliesPrinter.php');
     global $db;
 
     $sectionsSQL = $db->query("SELECT * FROM SuppliesSections");
@@ -73,7 +73,7 @@
 <?php
 //assets/js/jquery-1.11.1.min.js
 $_JS_ = array("assets/js/jquery-1.11.1.min.js", "temp/jquery-ui.js", "assets/js/order_supplies.js");
-require_once('assets/common/footer.php'); //closing HTML
+require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
 $db->close();
 
 ?>

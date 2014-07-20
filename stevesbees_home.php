@@ -2,7 +2,7 @@
     $_REL_ = "";
     $_TITLE_ = "StevesBees.com Home";
     $_STYLESHEETS_ = array("assets/css/stevesbees_home.css");
-    require_once('assets/common/header.php');
+    require_once(__DIR__.'/assets/common/header.php');
 ?>
 
     <h1>Steve's Bees - Packages of Honeybees</h1>
@@ -250,7 +250,5 @@
 
 <?php
     $_JS_ = array();
-    require_once('assets/common/footer.php'); //closing HTML
-
-    print_r($_SERVER);
+    require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
 ?>

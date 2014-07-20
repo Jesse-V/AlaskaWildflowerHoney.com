@@ -1,6 +1,6 @@
 <?php
 
-require_once('Order.php');
+require_once(__DIR__.'/Order.php');
 
 class BeeOrder extends Order
 {
@@ -170,7 +170,7 @@ class BeeOrder extends Order
 
     private function queryPrices()
     {
-        require_once('scripts/databaseConnect.secret');
+        require_once(__DIR__.'/../databaseConnect.secret');
         global $db;
 
         $beesSQL = $db->query("SELECT * FROM Bees");
