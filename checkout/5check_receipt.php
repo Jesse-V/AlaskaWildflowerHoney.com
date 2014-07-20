@@ -62,5 +62,4 @@
     $_JS_ = array();
     require_once(__DIR__.'/../assets/common/footer.php'); //closing HTML
     $db->close();
-
 ?>

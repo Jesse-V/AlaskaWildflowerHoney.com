@@ -3,6 +3,7 @@
     require_once(__DIR__.'/../assets/php/databaseConnect.secret');
     require_once(__DIR__.'/../assets/php/checkout/cart_help_functions.php');
     require_once(__DIR__.'/../assets/php/checkout/authorizeNetVars.secret');
+    require_once(__DIR__.'/../assets/php/checkout/checkoutCartFields.php');
     session_start();
 
     $_REL_ = "../";
@@ -18,7 +19,7 @@
     if (empty($_SESSION))
     {
         echo '<p>
-                Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="../order_supplies.php">Supplies page</a> or the <a href="../order_bees.php">Bees page</a>. Thanks!
+                Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="'.__DIR__.'/../order_supplies.php">Supplies page</a> or the <a href="'.__DIR__.'/../order_bees.php">Bees page</a>. Thanks!
             </p>';
     }
     else

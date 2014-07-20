@@ -22,8 +22,8 @@ function echoCart()
 
 function getCart()
 {
-    $supplyInfo = queryFetchSuppliesTable();
-    $beeInfo = queryFetchBeesTable();
+    //$supplyInfo = queryFetchSuppliesTable();
+    //$beeInfo = queryFetchBeesTable();
     $total = 0;
     $cartStr = "";
 

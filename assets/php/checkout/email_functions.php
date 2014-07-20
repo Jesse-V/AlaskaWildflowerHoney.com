@@ -1,6 +1,6 @@
 <?php
-    require_once(__DIR__.'/../../assets/php/classes/SuppliesOrder.php');
-    require_once(__DIR__.'/../../assets/php/classes/OrderBees.php');
+    require_once(__DIR__.'/../classes/SuppliesOrder.php');
+    require_once(__DIR__.'/../classes/BeeOrder.php');
     require_once(__DIR__.'/cart_help_functions.php');
 
 
