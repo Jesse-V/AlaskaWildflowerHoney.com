@@ -10,11 +10,11 @@
     <div class="section">
         <h2>Extracting</h2>
         <div class="half">
-            <img src="images/processing/image356.jpg" alt="Extractors."/>
+            <img src="assets/images/processing/image356.jpg" alt="Extractors."/>
             <p>We provide extracting services for those who do not have time to process the honey themselves.  Our twin radials allow us to extract frames with less danger of blowout than tangential extractors.  We charge $.50 per pound with a 50 pound minimum charge.  We extract for others after our harvest is done to keep your honey separate from ours allowing you to be assured that the honey that you receive back comes from your own hives.</p>
         </div>
         <div class="half">
-            <img src="images/processing/image505.jpg" alt="Uncapping a frame."/>
+            <img src="assets/images/processing/image505.jpg" alt="Uncapping a frame."/>
             <p>Please call before you come out so that we may be ready for your arrival.  Your supers need to be free of bees and brood and drop off times must be during non flight hours if at all possible.  We have our hives located very near our extracting room and robbing of supers in the back of someone's truck turns into a frenzy within 5 minutes of arrival during mid-day.  Please make sure that your truck is free of spilled honey from your supers so that when we have unloaded your supers there is nothing left to attract bees.
             </p>
             <p>We use a commercial grade mechanical uncapper—A Cowen Silver Queen that uses a pair of hot vibrating knives to uncap with.  Although uncommon, warped or damaged frames may not feed well through our machine and may need to be uncapped by hand.

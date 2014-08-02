@@ -73,7 +73,7 @@ function printSection($sectionRecord, $groups)
     <div class="sectionDesc">'.$sectionRecord['description'].'</div>
     <table>
         <tr>
-            <th>Image</th>
+            <th></th>
             <th>Name</th>
             <th>Price per unit</th>
             <th></th>

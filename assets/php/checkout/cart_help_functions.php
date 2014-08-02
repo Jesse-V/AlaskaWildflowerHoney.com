@@ -2,7 +2,7 @@
 
 require_once(__DIR__.'/../databaseConnect.secret');
 require_once(__DIR__.'/../classes/SuppliesOrder.php');
-//require_once(__DIR__.'/../classes/OrderBees.php');
+require_once(__DIR__.'/../classes/BeeOrder.php');
 
 
 function echoCart()
@@ -13,17 +13,12 @@ function echoCart()
     echo "<script>var total = $total;</script>";
     echo "<div class=\"total\">Total: $$total</div>";
 
-    if (isset($_SESSION['supplies']))
-        echo "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
-
     return $total;
 }
 
 
 function getCart()
 {
-    //$supplyInfo = queryFetchSuppliesTable();
-    //$beeInfo = queryFetchBeesTable();
     $total = 0;
     $cartStr = "";
 
@@ -32,9 +27,8 @@ function getCart()
         $cartStr .= '
             <h2>Supplies</h2>
 
-            <table id="cartTable">
+            <table class="cartTable">
                 <tr>
-                    <th>Image</th>
                     <th>Item</th>
                     <th>Quantity</th>
                     <th>Price</th>
@@ -50,12 +44,6 @@ function getCart()
 
             $cartStr .= "
                 <tr>
-                    <td>";
-
-            if (strlen($item->imageURL_) > 0)
-                $cartStr .= "<img src=\"$item->imageURL_\" alt=\"item\"/>";
-
-            $cartStr .= "</td>
                     <td>
                         $item->name_ $item->groupName_
                         <br>
@@ -69,17 +57,18 @@ function getCart()
         $total += $subtotal;
         $cartStr .= '
             </table>
-            <!--<div class=\"total\">Total: $'.$subtotal.'</div>-->';
+            <div class="subtotal">Subtotal: $'.$subtotal.'</div>';
+
+        if (isset($_SESSION['supplies']))
+           $cartStr .= "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
     }
 
     if (isset($_SESSION['beeOrder']))
     {
-        $prices = $_SESSION['beeOrder']->getPrices();
-
         $cartStr .= '
             <h2>Bees</h2>
 
-            <table id="beesTable">
+            <table class="cartTable">
                 <tr>
                     <th>Item</th>
                     <th>Quantity</th>
@@ -108,7 +97,7 @@ function getCart()
 
             $cartStr .= "
                 <tr>
-                    <td>Transportation Charge to $dest</td>
+                    <td>Transportation to $dest</td>
                     <td></td>
                     <td>$$transpCharge</td>
                 </tr>";
@@ -119,7 +108,7 @@ function getCart()
         $total += $subtotal;
         $cartStr .= '
             </table>
-            <div class=\"total\">Total: $$subtotal</div>';
+            <div class="subtotal">Subtotal: $'.$subtotal.'</div>';
     }
 
     $total = number_format((float)$total, 2, '.', '');

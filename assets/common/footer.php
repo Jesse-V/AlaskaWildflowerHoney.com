@@ -1,6 +1,19 @@
 
                 </div>
                 <div class="right_col">
+                    <?php
+                        echo '
+                            <div id="storeNav">
+                                <div class="store">
+                                    <div class="title">Honeybee Store</div>
+                                    <a href="'.$_REL_.'order_bees.php"><span class="link"></span></a>
+                                </div>
+                                <div class="store">
+                                    <div class="title">Supplies Store</div>
+                                    <a href="'.$_REL_.'order_supplies.php"><span class="link"></span></a>
+                                </div>
+                            </div>';
+                    ?>
                     <div id="SpryAccordion1" class="Accordion" tabindex="0">
                         <div class="AccordionPanel">
                             <div class="AccordionPanelTab">

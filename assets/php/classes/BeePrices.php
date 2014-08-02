@@ -1,15 +1,40 @@
 <?php
 
+require_once(__DIR__.'/../databaseConnect.secret');
+
 class BeePrices
 {
+    private static $instance;
     private $singleP_, $doubleP_, $queen_;
 
 
-    function __construct($singlePackage, $doublePackage, $queen)
+    private function __construct()
     {
-        $this->singleP_ = $singlePackage;
-        $this->doubleP_ = $doublePackage;
-        $this->queen_   = $queen;
+        global $db;
+
+        $beesSQL = $db->query("SELECT * FROM Bees");
+        if (!$beesSQL)
+            die("Failed to connect to database. ".$db->error);
+
+        $prices = array();
+        while ($record = $beesSQL->fetch_assoc())
+            $prices[$record['name']] = $record['price'];
+
+        $this->singleP_ = $prices['singlePrice'];
+        $this->doubleP_ = $prices['doublePrice'];
+        $this->queen_   = $prices['queenPrice'];
+    }
+
+
+    public static function getInstance()
+    {
+        if (!isset(self::$instance))
+        {
+            $c = __CLASS__;
+            self::$instance = new $c;
+        }
+
+        return self::$instance;
     }
 
 

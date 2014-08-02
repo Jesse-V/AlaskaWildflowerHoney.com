@@ -1,6 +1,7 @@
 <?php
 
 require_once(__DIR__.'/Order.php');
+require_once(__DIR__.'/BeePrices.php');
 
 class BeeOrder extends Order
 {
@@ -8,10 +9,9 @@ class BeeOrder extends Order
     private $nSCarnis_ = 0, $nDCarnis_ = 0;
     private $nItQ_   = 0, $nCarniQ_ = 0;
     private $pickupPoint_, $customLoc_, $notes_;
-    private $prices_;
 
 
-    function __construct($nSingleItalians, $nDoubleItalians, $nSingleCarniolans,
+    public function __construct($nSingleItalians, $nDoubleItalians, $nSingleCarniolans,
         $nDoubleCarniolans, $nItalianQueens, $nCarniolanQueens, $pickupPoint,
         $customPickupLoc, $notes)
     {
@@ -27,8 +27,6 @@ class BeeOrder extends Order
         $this->pickupPoint_ = htmlentities(strip_tags($pickupPoint));
         $this->customLoc_   = htmlentities(strip_tags($customPickupLoc));
         $this->notes_       = htmlentities(strip_tags($notes));
-
-        $this->prices_ = queryPrices();
     }
 
 
@@ -47,32 +45,32 @@ class BeeOrder extends Order
         if ($this->nSIts_ > 0)
             array_push($order,
                 array("name" => $names['singleI'], "quantity" => $this->nSIts_,
-                    "price" => $this->prices_->getSQPackagePrice()));
+                    "price" => BeePrices::getInstance()->getSQPackagePrice()));
 
         if ($this->nDIts_ > 0)
             array_push($order,
                 array("name" => $names['doubleI'], "quantity" => $this->nDIts_,
-                    "price" => $this->prices_->getDQPackagePrice()));
+                    "price" => BeePrices::getInstance()->getDQPackagePrice()));
 
         if ($this->nSCarnis_ > 0)
             array_push($order,
                 array("name" => $names['singleC'], "quantity" => $this->nSCarnis_,
-                    "price" => $this->prices_->getSQPackagePrice()));
+                    "price" => BeePrices::getInstance()->getSQPackagePrice()));
 
         if ($this->nDCarnis_ > 0)
             array_push($order,
                 array("name" => $names['doubleC'], "quantity" => $this->nDCarnis_,
-                    "price" => $this->prices_->getDQPackagePrice()));
+                    "price" => BeePrices::getInstance()->getDQPackagePrice()));
 
         if ($this->nItQ_ > 0)
             array_push($order,
                 array("name" => $names['ItalianQ'], "quantity" => $this->nItQ_,
-                    "price" => $this->prices_->getQueenPrice()));
+                    "price" => BeePrices::getInstance()->getQueenPrice()));
 
         if ($this->nCarniQ_ > 0)
             array_push($order,
                 array("name" => $names['CarniQ'], "quantity" => $this->nCarniQ_,
-                    "price" => $this->prices_->getQueenPrice()));
+                    "price" => BeePrices::getInstance()->getQueenPrice()));
 
         return $order;
     }
@@ -165,23 +163,6 @@ class BeeOrder extends Order
     public function getTotal()
     {
         return 0.00; //todo: ?
-    }
-
-
-    private function queryPrices()
-    {
-        require_once(__DIR__.'/../databaseConnect.secret');
-        global $db;
-
-        $beesSQL = $db->query("SELECT * FROM Bees");
-        if (!$beesSQL)
-            die("Failed to connect to database. ".$db->error);
-
-        $prices = array();
-        while ($record = $beesSQL->fetch_assoc())
-            $prices[$record['name']] = $prices['price'];
-
-        return new BeeOrder($prices['single'], $prices['double'], $prices['queen']);
     }
 }
 

@@ -7,26 +7,21 @@
 ?>
 
 <?php
+    require_once(__DIR__.'/assets/php/classes/BeePrices.php');
+    $beePrices = BeePrices::getInstance();
 
-    require_once(__DIR__.'/assets/php/databaseConnect.secret');
-    global $db;
+    //create PHP vars
+    $SINGLE_PRICE = $beePrices->getSQPackagePrice();
+    $DOUBLE_PRICE = $beePrices->getDQPackagePrice();
+    $QUEEN_PRICE  = $beePrices->getQueenPrice();
 
-    $beesSQL = $db->query("SELECT * FROM Bees");
-    if (!$beesSQL)
-        die("Failed to connect to database. ".$db->error);
-
-    echo "<script>";
-
-    $prices = array();
-    while ($record = $beesSQL->fetch_assoc())
-    {
-        $name  = $record['name'];
-        $price = $record['price'];
-        $prices[$name] = $price; //convert from MySQL to PHP array variable
-        echo "var $name = $price;"; //convert from MySQL to Javascript variables
-    }
-
-    echo "</script>";
+    //create Javascript vars
+    echo "
+        <script>
+            var singlePrice = $SINGLE_PRICE;
+            var doublePrice = $DOUBLE_PRICE;
+            var queenPrice  = $QUEEN_PRICE;
+        </script>";
 ?>
 
     <form action="checkout/CartManager.php" method="post" autocomplete="on" accept-charset="UTF-8">
@@ -75,7 +70,7 @@
                     <div class="text">
                         <span>I'd like</span>
                         <input type="number" id="singleItalian" name="singleItalian" min="0" max="200" value="0">
-                        <span>single-queen package(s) of Italians at $<?php echo $prices['singlePrice']; ?>/each.</span>
+                        <span>single-queen package(s) of Italians at $<?php echo $SINGLE_PRICE; ?>/each.</span>
                     </div>
                 </div>
                 <div class="preference">
@@ -86,7 +81,7 @@
                     <div class="text">
                         <span>I'd like</span>
                         <input type="number" id="doubleItalian" name="doubleItalian" min="0" max="200" value="0">
-                        <span>double-queen package(s) of Italians at $<?php echo $prices['doublePrice']; ?>/each.</span>
+                        <span>double-queen package(s) of Italians at $<?php echo $DOUBLE_PRICE; ?>/each.</span>
                     </div>
                 </div>
             </div>
@@ -103,7 +98,7 @@
                     <div class="text">
                         <span>I'd like</span>
                         <input type="number" id="singleCarni" name="singleCarni" min="0" max="200" value="0">
-                        <span>single-queen package(s) of Carniolans at $<?php echo $prices['singlePrice']; ?>/each.</span>
+                        <span>single-queen package(s) of Carniolans at $<?php echo $SINGLE_PRICE; ?>/each.</span>
                     </div>
                 </div>
                 <div class="preference">
@@ -114,7 +109,7 @@
                     <div class="text">
                         <span>I'd like</span>
                         <input type="number" id="doubleCarni" name="doubleCarni" min="0" max="200" value="0">
-                        <span>double-queen package(s) of Carniolans at $<?php echo $prices['doublePrice']; ?>/each.</span>
+                        <span>double-queen package(s) of Carniolans at $<?php echo $DOUBLE_PRICE; ?>/each.</span>
                     </div>
                 </div>
             </div>
@@ -122,17 +117,17 @@
 
         <div class="queens">
             <span class="title">Just Queens</span>
-            <span class="desc sub">Interested in just queen bees? These queens come without packages of honeybees will be delivered on the same day and to the same location as the regular packages. Also, keep in mind that packages include one or two queens, and the queens typically transport better this way.</span>
+            <span class="desc sub">Interested in just queen bees? These queens come without packages of honeybees and will be delivered on the same day and to the same location as the regular packages. Keep in mind that packages include one or two queens, and the queens typically transport better this way.</span>
             <div class="add sub">
                 <div class="preference text">
                     <span>I'd like</span>
                     <input type="number" name="ItalianQueens" min="0" max="200" value="0">
-                    <span>separate Italian queens at $<?php echo $prices['queenPrice']; ?>/each.</span>
+                    <span>separate Italian queens at $<?php echo $QUEEN_PRICE; ?>/each.</span>
                 </div>
                 <div class="preference text">
                     <span>I'd like</span>
                     <input type="number" name="CarniQueens" min="0" max="200" value="0">
-                    <span>separate Carniolan queens at $<?php echo $prices['queenPrice']; ?>/each.</span>
+                    <span>separate Carniolan queens at $<?php echo $QUEEN_PRICE; ?>/each.</span>
                 </div>
             </div>
         </div>

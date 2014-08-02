@@ -63,6 +63,9 @@
         if (!validateBeesInputs())
             return;
 
+        if (!isset($_POST['customDest']))
+            $_POST['customDest'] = "";
+
         $_SESSION['beeOrder'] = new BeeOrder(
             $_POST['singleItalian'],
             $_POST['doubleItalian'],
@@ -93,17 +96,7 @@
 
     function validateSuppliesInputs($suppliesOrderList)
     {
-        if (empty($suppliesOrderList))
-        {
-            echo "<script>
-                window.alert(\"You forgot to order any supplies. You will be redirected back to the form after you press OK.\");
-                window.history.back();
-            </script>";
-
-            return false;
-        }
-
-        if (!isset($_POST['pickupLoc']))
+        if (!empty($suppliesOrderList) && !isset($_POST['pickupLoc']))
         {
             echo "<script>
                 window.alert(\"You forgot to specify where you'd like to pick up the supplies. You will be redirected back to the form after you press OK.\");

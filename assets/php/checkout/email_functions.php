@@ -325,7 +325,7 @@
 
         $html = '
             <h2>Supplies</h2>
-            <table id="cartTable">
+            <table class="cartTable">
                 <tr>
                     <th>Item</th>
                     <th>Quantity</th>

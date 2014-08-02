@@ -43,7 +43,7 @@
     -moz-border-top-left-radius: 18px;
     -webkit-border-top-left-radius: 18px;
     border-top-left-radius: 18px;
-    width: 40px;
+    width: 50px;
 }
 
 .mid_col table th:nth-child(3) {
@@ -129,10 +129,7 @@
     text-align: center;
 }
 
-.mid_col #moreBtn {
-    width: 700px;
+.mid_col #submitBtn {
+    width: 70%;
 }
 
-.mid_col #finishedBtn {
-    width: 400px;
-}

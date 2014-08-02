@@ -116,6 +116,8 @@ function handlePrefChange() {
     updateTotals(updateTransCharge($(".pickup table td input:checked")));
 }
 
+updateTotals(updateTransCharge($(".pickup table td input:checked")));
+
 
 $("#breedWriteup").hide();
 $("#breedFAQ, #breedWriteup").click(function() {
