@@ -71,14 +71,26 @@
     margin-top: 3px;
 }
 
-.breed .preference img {
-    height: 20px;
-}
-
 .breed .text {
     float: left;
 }
 
+.queens {
+    margin-bottom: 20px;
+}
+
+.queens .images img {
+    width: 160px;
+}
+
+.queens .sub {
+    margin-left: 10px;
+}
+/*
+.queens .text {
+    float: right;
+}
+*/
 .queens .preference {
     padding: 0px 0px 3px 25px;
 }

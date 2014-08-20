@@ -162,7 +162,7 @@
             {
                 $item = array();
                 $item['id'] = $index;
-                $item['quantity'] = $_POST[$index];
+                $item['quantity'] = ltrim($_POST[$index], '0'); //strip leading 0s
                 $supplies[$item['id']] = $item;
             }
         }

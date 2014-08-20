@@ -3,11 +3,48 @@
     $_TITLE_ = "StevesBees.com Home";
     $_STYLESHEETS_ = array("assets/css/stevesbees_home.css");
     require_once(__DIR__.'/assets/common/header.php');
+    require_once(__DIR__.'/assets/php/databaseConnect.secret');
+    global $db;
+
+
+    $newsSQL = $db->query("SELECT * FROM News ORDER BY ID DESC");
+    if (!$newsSQL)
+        die("Failed to connect to database. ".$db->error);
+
+    echo "<h1>Steve's Bees - Packages of Honeybees</h1>";
+    while ($newsRecord = $newsSQL->fetch_assoc())
+        echo translateToHTML($newsRecord);
+
+
+    function wrapParagraphs(&$item1, $key)
+    {
+        $item1 = "<p>$item1</p>";
+    }
+
+
+    function translateToHTML($markedupObj)
+    {
+        $paragraphs = preg_split('/\n/', $markedupObj['content']);
+        array_walk($paragraphs, 'wrapParagraphs');
+        $content = implode("", $paragraphs);
+
+        $content = preg_replace('/\n\r/', "<p>$1</p>", $content);   //paragraphs
+        $content = preg_replace('/\*\*([^\*]+)\*\*/', "<b>$1</b>", $content); //bold
+        $content = preg_replace('/\*([^\*]+)\*/', "<i>$1</i>", $content); //italic
+
+        return '<div class="newsPiece">
+                    <h3>'.$markedupObj['date'].'</h3>
+                    <p><b>'.$markedupObj['title'].'</b></p>
+                    '.$content.'
+                </div>';
+    }
 ?>
 
-    <h1>Steve's Bees - Packages of Honeybees</h1>
+<!--
 
-    <h3>August 1, 2014</h3>
+
+
+    <h3>August 15, 2014</h3>
     <p>
         <b>Packages of honeybees now available</b>
     </p>
@@ -15,7 +52,8 @@
         Hello beekeepers! We have reopened our honeybee store, available through the button on the right. You can now order Carniolan or Italian honeybees for next year. Bee delivery is in April and packages go quickly, so please place your order as soon as possible to avoid being left out.
     </p>
 
-<!--
+
+
     <h3>April 23, 2014</h3>
     <p>
         <b>Hello ALL Beekeepers,</b>

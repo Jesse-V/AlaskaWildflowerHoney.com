@@ -4,9 +4,29 @@
     $_STYLESHEETS_ = array("assets/css/fancyHRandButtons.css",
         "assets/css/order_bees.css");
     require_once(__DIR__.'/assets/common/header.php');
-?>
+    require_once(__DIR__.'/assets/php/databaseConnect.secret');
+    global $db;
 
-<?php
+    $storeStatusSQL = $db->query("SELECT * FROM StoreStatus");
+    if (!$storeStatusSQL)
+        die("Failed to connect to database. ".$db->error);
+
+    while ($record = $storeStatusSQL->fetch_assoc())
+        $storeStatus[$record['Store']] = $record['Status'];
+
+    if ($storeStatus['Bees'] == 0)
+    {
+        echo '<p>We have closed this store temporarily for the time being. Please check back later.</p>';
+
+        $_JS_ = array("assets/js/jquery-1.11.1.min.js",
+            "assets/js/jquery-ui-1.10.4.custom.min.js",
+            "assets/js/order_bees.js");
+        require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+        $db->close();
+
+        exit();
+    }
+
     require_once(__DIR__.'/assets/php/classes/BeePrices.php');
     $beePrices = BeePrices::getInstance();
 
@@ -64,9 +84,6 @@
             <span class="desc sub"></span>
             <div class="add sub">
                 <div class="preference">
-                    <div class="images">
-                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
-                    </div>
                     <div class="text">
                         <span>I'd like</span>
                         <input type="number" id="singleItalian" name="singleItalian" min="0" max="200" value="0">
@@ -74,10 +91,6 @@
                     </div>
                 </div>
                 <div class="preference">
-                    <div class="images">
-                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
-                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
-                    </div>
                     <div class="text">
                         <span>I'd like</span>
                         <input type="number" id="doubleItalian" name="doubleItalian" min="0" max="200" value="0">
@@ -92,9 +105,6 @@
             <span class="desc sub"></span>
             <div class="add sub">
                 <div class="preference">
-                    <div class="images">
-                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
-                    </div>
                     <div class="text">
                         <span>I'd like</span>
                         <input type="number" id="singleCarni" name="singleCarni" min="0" max="200" value="0">
@@ -102,10 +112,6 @@
                     </div>
                 </div>
                 <div class="preference">
-                    <div class="images">
-                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
-                        <img src="assets/images/queen-bee.jpg" alt="Queen bee."/>
-                    </div>
                     <div class="text">
                         <span>I'd like</span>
                         <input type="number" id="doubleCarni" name="doubleCarni" min="0" max="200" value="0">
@@ -117,19 +123,28 @@
 
         <div class="queens">
             <span class="title">Just Queens</span>
-            <span class="desc sub">Interested in just queen bees? These queens come without packages of honeybees and will be delivered on the same day and to the same location as the regular packages. Keep in mind that packages include one or two queens, and the queens typically transport better this way.</span>
-            <div class="add sub">
-                <div class="preference text">
-                    <span>I'd like</span>
-                    <input type="number" name="ItalianQueens" min="0" max="200" value="0">
-                    <span>separate Italian queens at $<?php echo $QUEEN_PRICE; ?>/each.</span>
-                </div>
-                <div class="preference text">
-                    <span>I'd like</span>
-                    <input type="number" name="CarniQueens" min="0" max="200" value="0">
-                    <span>separate Carniolan queens at $<?php echo $QUEEN_PRICE; ?>/each.</span>
-                </div>
-            </div>
+            <table>
+                <tr>
+                    <td class="images">
+                        <img src="assets/images/queen_and_attendants.jpg" alt="Queen bee."/>
+                    </td>
+                    <td class="text">
+                        <span class="desc sub">Interested in just queen bees? These queens come without packages of honeybees and will be delivered on the same day and to the same location as the regular packages. Keep in mind that packages include one or two queens, and the queens typically transport better this way.</span>
+                        <div class="add sub">
+                            <div class="preference text">
+                                <span>I'd like</span>
+                                <input type="number" name="ItalianQueens" min="0" max="200" value="0">
+                                <span>separate Italian queens at $<?php echo $QUEEN_PRICE; ?>/each.</span>
+                            </div>
+                            <div class="preference text">
+                                <span>I'd like</span>
+                                <input type="number" name="CarniQueens" min="0" max="200" value="0">
+                                <span>separate Carniolan queens at $<?php echo $QUEEN_PRICE; ?>/each.</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
         </div>
 
         <div class="pickup">

@@ -46,7 +46,7 @@ class BeePrices
 
     function getDQPackagePrice()
     {
-        return $this->singleP_;
+        return $this->doubleP_;
     }
 
 

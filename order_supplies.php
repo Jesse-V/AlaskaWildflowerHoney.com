@@ -6,15 +6,37 @@
     require_once(__DIR__.'/assets/common/header.php');
 ?>
 
-    <form action="checkout/CartManager.php" method="post" autocomplete="on" name="frmProduct" id="frmProduct" accept-charset="UTF-8">
-        <h3>Supplies Store</h3>
-        <p>We offer a variety of beekeeping products, ranging from common items such as beehive components, tools, and processing equipment to rarer and specialty items. We carry primarily Mann Lake products, as well as some of our own. We are the largest distributor of beekeeping supplies in the state of Alaska. We hope you will find this store efficient and convenient.</p>
+
 
 <?php
 
     require_once(__DIR__.'/assets/php/databaseConnect.secret');
     require_once(__DIR__.'/assets/php/suppliesPrinter.php');
     global $db;
+
+    $storeStatusSQL = $db->query("SELECT * FROM StoreStatus");
+    if (!$storeStatusSQL)
+        die("Failed to connect to database. ".$db->error);
+
+    while ($record = $storeStatusSQL->fetch_assoc())
+        $storeStatus[$record['Store']] = $record['Status'];
+
+    if ($storeStatus['Supplies'] == 0)
+    {
+        echo '<p>We have closed this store temporarily for the time being. Please check back later.</p>';
+
+        //assets/js/jquery-1.11.1.min.js
+        $_JS_ = array("assets/js/jquery-1.11.1.min.js", "assets/js/order_supplies.js");
+        require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+        $db->close();
+
+        exit();
+    }
+
+    echo '
+        <form action="checkout/CartManager.php" method="post" autocomplete="on" name="frmProduct" id="frmProduct" accept-charset="UTF-8">
+            <h3>Supplies Store</h3>
+            <p>We offer a variety of beekeeping products, ranging from common items such as beehive components, tools, and processing equipment to rarer and specialty items. We carry primarily Mann Lake products, as well as some of our own. We are the largest distributor of beekeeping supplies in the state of Alaska. We hope you will find this store efficient and convenient.</p>';
 
     $sectionsSQL = $db->query("SELECT * FROM SuppliesSections");
     if (!$sectionsSQL)
@@ -72,7 +94,7 @@
 
 <?php
 //assets/js/jquery-1.11.1.min.js
-$_JS_ = array("assets/js/jquery-1.11.1.min.js", "temp/jquery-ui.js", "assets/js/order_supplies.js");
+$_JS_ = array("assets/js/jquery-1.11.1.min.js", "assets/js/order_supplies.js");
 require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
 $db->close();
 

@@ -6,7 +6,7 @@
     $_REL_ = "../";
     $_TITLE_ = "Card Receipt - StevesBees.com";
     $_STYLESHEETS_ = array("../assets/css/fancyHRandButtons.css",
-        "../assets/css/cartTable.css", "../assets/css/card_receipt.css");
+        "../assets/css/cartTable.css");
     require_once(__DIR__.'/../assets/common/header.php'); //opening HTML
 
 

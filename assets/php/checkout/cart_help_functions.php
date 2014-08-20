@@ -116,40 +116,6 @@ function getCart()
 }
 
 
-function queryFetchSuppliesTable()
-{
-    global $db;
-
-    $suppliesSQL = $db->query("SELECT * FROM Supplies");
-    if (!$suppliesSQL)
-        die("Failed to connect to database. Could not fetch supplies information for the following reason: ".$db->error);
-
-    $supplyInfo = array();
-    while ($record = $suppliesSQL->fetch_assoc())
-        $supplyInfo[$record['itemID']] = $record;
-
-    $suppliesSQL->close();
-    return $supplyInfo;
-}
-
-
-function queryFetchBeesTable() //todo: does this work?
-{
-    global $db;
-
-    $beesSQL = $db->query("SELECT * FROM Bees");
-    if (!$beesSQL)
-        die("Failed to connect to database. Could not fetch bee prices for the following reason: ".$db->error);
-
-    $beeInfo = array();
-    while ($record = $beesSQL->fetch_assoc())
-        $beeInfo[$record['ID']] = $record;
-
-    $beesSQL->close();
-    return $beeInfo;
-}
-
-
 function getShippingContact($x)
 {
     return  $x['x_ship_to_first_name'].' '.$x['x_ship_to_last_name'].'

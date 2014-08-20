@@ -78,8 +78,7 @@ class BeeOrder extends Order
 
     public function getTransportationCharge()
     {
-        $nPackages = $this->nSIts_ + $this->nDIts_ +
-                        $this->nSCarnis_ + $this->nDCarnis_;
+        $nPackages = $this->countPackages();
 
         switch ($this->pickupPoint_)
         {
@@ -137,10 +136,19 @@ class BeeOrder extends Order
         return $this->nItQ_;
     }
 
+
     public function getCarniolanQueenCount()
     {
         return $this->nCarniQ_;
     }
+
+
+    public function countPackages()
+    {
+        return $this->nSIts_ + $this->nDIts_ +
+            $this->nSCarnis_ + $this->nDCarnis_;
+    }
+
 
     public function getPickupPoint()
     {
@@ -151,6 +159,15 @@ class BeeOrder extends Order
     public function getCustomPickupPt()
     {
         return $this->customLoc_;
+    }
+
+
+    public function getActualDestination()
+    {
+        $dest = $this->getPickupPoint();
+        if ($dest == "Other")
+            $dest = $this->getCustomPickupPt();
+        return $dest;
     }
 
 
