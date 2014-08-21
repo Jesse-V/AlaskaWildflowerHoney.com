@@ -200,7 +200,14 @@
         </div>
 
         <input type="hidden" name="format" value="bees"/>
-        <button type="submit" name="submit" class="submit" value="supplies">Need supplies, tools, or bee food?<br>Click here to save your order and visit the supplies store.</button>
+
+        <?php
+            if ($storeStatus['Supplies'] == 1)
+            {
+                echo '<button type="submit" name="submit" class="submit" value="supplies">Need supplies, tools, or bee food?<br>Click here to save your order and visit the supplies store.</button>';
+            }
+        ?>
+
         <button type="submit" name="submit" class="submit" value="checkout">Finished? Click here to proceed to checkout.</button>
     </form>
 

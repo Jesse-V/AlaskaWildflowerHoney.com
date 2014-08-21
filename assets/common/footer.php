@@ -79,6 +79,48 @@
                             </div>
                         </div>
                     </div>
+                    <div class="shoppingCart">
+                        <div class="title">Shopping Cart</div>
+    <?php
+        if (empty($_SESSION))
+        {
+            echo '<div class="empty">Currently empty</div>';
+        }
+        else
+        {
+            echo "<table>";
+
+            if (isset($_SESSION['supplies']))
+            {
+                $items = $_SESSION['supplies']->getItems();
+                foreach ($items as $item)
+                {
+                    echo "<tr>
+                            <td>$item->name_ $item->groupName_</td>
+                            <td>$item->quantity_</td>
+                        </tr>";
+                }
+            }
+
+            if (isset($_SESSION['beeOrder']))
+            {
+                $orderItems = $_SESSION['beeOrder']->getPackageOrder();
+                foreach ($orderItems as $item)
+                {
+                    echo "<tr>
+                            <td>".$item['name']."</td>
+                            <td>".$item['quantity']."</td>
+                        </tr>";
+                }
+            }
+
+            echo "</table>";
+
+            require_once(__DIR__."/../php/checkout/cart_help_functions.php");
+            echo '<div class="total">Total: $'.getCart()['total'].'</div>';
+        }
+    ?>
+                    </div>
                 </div>
                 <div class="clear_both"></div>
             </div>

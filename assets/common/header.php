@@ -1,3 +1,10 @@
+<?php
+    require_once(__DIR__.'/../php/classes/SuppliesOrder.php');
+    require_once(__DIR__.'/../php/classes/BeeOrder.php');
+    if(!isset($_SESSION))
+        session_start();
+?>
+
 <!DOCTYPE html>
 <html>
     <head>

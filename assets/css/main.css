@@ -153,6 +153,35 @@ h3 {
     border-radius: 8px;
 }
 
+.right_col .shoppingCart {
+    margin-top: 20px;
+    border: 1px dotted rgb(64, 64, 64);;
+    border-radius: 7px;
+    padding: 5px;
+}
+
+.right_col .shoppingCart .title {
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.right_col .shoppingCart .empty {
+    text-align: center;
+    font-size: 0.8em;
+}
+
+.right_col .shoppingCart table {
+    width: 100%;
+    font-size: 0.7em;
+    padding: 5px 0px;
+}
+
+.right_col .shoppingCart .total {
+    text-align: center;
+    font-size: 0.85em;
+}
+
 
 /* --- Footer Area --- */
 .footerArea {

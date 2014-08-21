@@ -4,12 +4,6 @@
     $_STYLESHEETS_ = array("assets/css/fancyHRandButtons.css",
         "assets/css/order_supplies.css");
     require_once(__DIR__.'/assets/common/header.php');
-?>
-
-
-
-<?php
-
     require_once(__DIR__.'/assets/php/databaseConnect.secret');
     require_once(__DIR__.'/assets/php/suppliesPrinter.php');
     global $db;
@@ -87,7 +81,13 @@
         </p>
         -->
 
-        <input type="submit" name="submit" id="moreBtn" value="Need bees or queens? Click to save and visit the bees page."/>
+        <?php
+            if ($storeStatus['Bees'] == 1)
+            {
+                echo '<input type="submit" name="submit" id="moreBtn" value="Need bees or queens? Click to save and visit the bees page."/>';
+            }
+        ?>
+
         <input type="submit" name="submit" id="submitBtn" value="Finished? Click to proceed to checkout."/>
 
     </form>
