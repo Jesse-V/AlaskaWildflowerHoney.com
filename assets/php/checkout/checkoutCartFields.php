@@ -14,9 +14,7 @@ function getCardFields($amount, $fp_sequence, $api_login_id, $transaction_key, $
         'x_login'         => $api_login_id,
         )
     );
-
-    //$prefill = true; //TEMPORARY!
-
+//Same as recipient (below)
     return '
         '.$sim->getHiddenFieldString().'
         <fieldset>
@@ -41,6 +39,7 @@ function getCardFields($amount, $fp_sequence, $api_login_id, $transaction_key, $
             <div>
                 <label>Last Name on card</label>
                 <input required type="text" class="text" size="14" name="x_last_name" value="'.($prefill ? 'Doe' : '').'"></input>
+                <input type="button" id="sameName" value="Also the order recipient" onClick="copyName()"></input>
             </div>
         </fieldset>
         <fieldset>
@@ -63,8 +62,7 @@ function getCardFields($amount, $fp_sequence, $api_login_id, $transaction_key, $
                 <input required type="text" class="text" size="9" name="x_zip" value="'.($prefill ? '02142' : '').'"></input>
             </div>
             <div>
-                <label>Country</label>
-                <input required type="text" class="text" size="5" name="x_country" value="US"></input>
+                <input required type="hidden" class="text" size="5" name="x_country" value="US"></input>
             </div>
         </fieldset>
     ';
@@ -118,16 +116,12 @@ function getCommonFields()
                     <label>Phone numbers. If you have both cell and home numbers, please list both and click the "preferred" button accordingly.</label><br>
                     <table id="phoneTable">
                         <tr>
-                            <td>Home:</td>
+                            <td>Primary Phone:</td>
                             <td><input type="text" class="text" name="homePhone"/></td>
-                            <td><input type="radio" name="preferredPhone" value="home"/>Preferred</td>
-                            <td></td>
                         </tr>
                         <tr>
-                            <td>Cell:</td>
+                            <td>Secondary Phone:</td>
                             <td><input type="text" class="text" name="cellPhone"/></td>
-                            <td><input type="radio" name="preferredPhone" value="cell"/>Preferred</td>
-                            <td><input type="checkbox" name="textCapable" value="yes"/>Text Capable</td>
                         </tr>
                     </table>
                 </div>

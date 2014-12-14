@@ -30,3 +30,11 @@ function updateDynamic(html)
 
     $(".mid_col #paymentChoice").html("");
 }
+
+function copyName()
+{
+    var first = $("input[name=x_first_name]").val();
+    var last  = $("input[name=x_last_name]").val();
+    $("input[name=x_ship_to_first_name]").val(first);
+    $("input[name=x_ship_to_last_name]").val(last);
+}

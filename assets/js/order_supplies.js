@@ -47,7 +47,7 @@ function handlePrefChange() {
 
 function updateTotal() {
     var total = 0;
-    that.find("tr").each(function() {
+    that.find("#supplyOrder tr").each(function() {
         var fields = $(this).find("td");
         if (fields.length != 0 && ~$(fields[2]).html().indexOf('$'))
         {
@@ -62,7 +62,7 @@ function updateTotal() {
         }
     });
 
-    $("#total").html(total.toFixed(2));
+    $("#suppliesTotal").html(total.toFixed(2));
 }
 
 

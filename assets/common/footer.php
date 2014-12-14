@@ -95,8 +95,12 @@
                 $items = $_SESSION['supplies']->getItems();
                 foreach ($items as $item)
                 {
+                    $name = "$item->name_ $item->groupName_";
+                    if (strlen($name) > 35)
+                        $name = substr($name, 0, 32)."...";
+
                     echo "<tr>
-                            <td>$item->name_ $item->groupName_</td>
+                            <td>$name</td>
                             <td>$item->quantity_</td>
                         </tr>";
                 }

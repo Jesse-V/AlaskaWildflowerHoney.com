@@ -122,11 +122,9 @@ function getShippingContact($x)
             <br>
             Email: '.$x['x_email'].'
             <br>
-            Home Phone: '.$x['homePhone'].'
+            Primary Phone: '.$x['homePhone'].'
             <br>
-            Cell: '.$x['cellPhone'].', texting? '.$x['textCapable'].'
-            <br>
-            Preferred Phone: '.$x['preferredPhone'];
+            Secondary Phone: '.$x['cellPhone'];
 }
 
 ?>

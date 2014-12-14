@@ -13,11 +13,11 @@
         die("Failed to connect to database. ".$db->error);
 
     while ($record = $storeStatusSQL->fetch_assoc())
-        $storeStatus[$record['Store']] = $record['Status'];
+        $storeData[$record['Store']] = $record;
 
-    if ($storeStatus['Supplies'] == 0)
+    if ($storeData['Supplies']['Status'] == 0)
     {
-        echo '<p>We have closed this store temporarily for the time being. Please check back later.</p>';
+        echo '<p>'.$storeData['Supplies']['CloseText'].'</p>';
 
         //assets/js/jquery-1.11.1.min.js
         $_JS_ = array("assets/js/jquery-1.11.1.min.js", "assets/js/order_supplies.js");
@@ -30,7 +30,8 @@
     echo '
         <form action="checkout/CartManager.php" method="post" autocomplete="on" name="frmProduct" id="frmProduct" accept-charset="UTF-8">
             <h3>Supplies Store</h3>
-            <p>We offer a variety of beekeeping products, ranging from common items such as beehive components, tools, and processing equipment to rarer and specialty items. We carry primarily Mann Lake products, as well as some of our own. We are the largest distributor of beekeeping supplies in the state of Alaska. We hope you will find this store efficient and convenient.</p>';
+            <p>We offer a variety of beekeeping products, ranging from common items such as beehive components, tools, and processing equipment to rarer and specialty items. We carry primarily Mann Lake products, as well as some of our own. We are the largest distributor of beekeeping supplies in the state of Alaska. We hope you will find this store efficient and convenient.</p>
+            <div id="supplyOrder">';
 
     $sectionsSQL = $db->query("SELECT * FROM SuppliesSections");
     if (!$sectionsSQL)
@@ -70,7 +71,7 @@
         </div>
 
         <div class="summary">
-            Total for items on this page: $<span id="total">0.00</span>
+            Total for items on this page: $<span id="suppliesTotal">0.00</span>
         </div>
 
         <input type="hidden" name="format" value="supplies"/>
@@ -82,7 +83,7 @@
         -->
 
         <?php
-            if ($storeStatus['Bees'] == 1)
+            if ($storeData['Bees']['Status'] == 1)
             {
                 echo '<input type="submit" name="submit" id="moreBtn" value="Need bees or queens? Click to save and visit the bees page."/>';
             }
@@ -90,7 +91,8 @@
 
         <input type="submit" name="submit" id="submitBtn" value="Finished? Click to proceed to checkout."/>
 
-    </form>
+    </div>
+</form>
 
 <?php
 //assets/js/jquery-1.11.1.min.js

@@ -40,9 +40,9 @@ function updateTotals(transRate) {
     var total = subtotal + transTotal;
 
     var summary = midColEl.find(".summary");
-    summary.find("#subtotal").html(subtotal.toFixed(2));
+    summary.find("#beeSubtotal").html(subtotal.toFixed(2));
     summary.find("#transTotal").html(transTotal.toFixed(2));
-    summary.find("#total").html(total.toFixed(2));
+    summary.find("#beeTotal").html(total.toFixed(2));
 }
 
 

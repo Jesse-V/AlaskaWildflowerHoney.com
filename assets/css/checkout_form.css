@@ -100,3 +100,13 @@ input[type="submit"], button[type="submit"] {
 .mid_col #checkForm p {
     text-align: center;
 }
+
+input#sameName
+{
+    margin-left: 15px;
+    padding: 3px 8px;
+    color: blue;
+    font-size: 0.85em; /* 16px */
+    font-weight: bold;
+    border-radius: 3px;
+}

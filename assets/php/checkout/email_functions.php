@@ -3,6 +3,8 @@
     require_once(__DIR__.'/../classes/BeeOrder.php');
     require_once(__DIR__.'/cart_help_functions.php');
 
+    date_default_timezone_set('America/Anchorage');
+
 
     function sendCardCustomerEmail1($contactArray, $from, $subject, $firstName)
     { //receipt email sent before the processing through Authorize.net
@@ -29,16 +31,16 @@
                 <body>
                     <h2>Your Receipt.</h2>
                     <p>
-                        Thank you '.$firstName.'! Your order has been sent to us, and your total is $'.$cartData['total'];
+                        Thank you '.$firstName.'! Your order has been sent to us, and your total is $'.$cartData['total'].'. ';
 
         if (isset($_SESSION['beeOrder']) && isset($_SESSION['supplies']))
-            echo "We will gather up your items and record your bee order";
+            $html .= "We will gather up your items and record your bee order";
         else if (isset($_SESSION['supplies']))
-            echo "We will gather up your items";
+            $html .= "We will gather up your items";
         else if (isset($_SESSION['beeOrder']))
-            echo "We will record your bee order";
+            $html .= "We will record your bee order";
 
-                        echo ' once the transaction has been approved on the card ending with '.$lastFour.'. Thank you for ordering online!
+                        $html .= ' once the transaction has been approved on the card ending with '.$lastFour.'. Thank you for ordering online!
                     </p>
                     <p>
                         Your complete order is as follows:
@@ -91,13 +93,13 @@
                         <b>';
 
         if (isset($_SESSION['beeOrder']) && isset($_SESSION['supplies']))
-            echo "Please record the bee order and gather the items";
+            $html .= "Please record the bee order and gather the items";
         else if (isset($_SESSION['supplies']))
-            echo "Please gather the items";
+            $html .= "Please gather the items";
         else if (isset($_SESSION['beeOrder']))
-            echo "Please record the bee order";
+            $html .= "Please record the bee order";
 
-                        echo ' once the payment has been approved. If it has been, another email will follow shortly.
+                        $html .= ' once the payment has been approved. If it has been, another email will follow shortly.
                         </b>
                     </p>
                     <h3 class="centered">Shipping and Contact Information</h3>
@@ -138,19 +140,29 @@
                 </head>
                 <body>
                     <p>
-                        The transaction for '.$firstName.' '.$lastName.'\'s order was successful and the payment (transaction #'.$transID.') went through on their card ending with '.$lastFour.'.';
+                        Data stream:<br>';
+
+            if (isset($_SESSION['beeOrder']))
+                $html .= '<pre>'.getBeeOrderString("card", $cartData['total']).'</pre><br>';
+                //echo '<pre>'.getBeeOrderString("card", $cartData['total']).'</pre><br>';
+
+            if (isset($_SESSION['supplies']))
+                $html .= '<pre>'.getSuppliesOrderString("card", $cartData['total']).'</pre><br>';
+                //echo '<pre>'.getSuppliesOrderString("card", $cartData['total']).'</pre><br>';
+
+            $html .= '
+                    </p>
+                    <p>
+                        The transaction for '.$firstName.' '.$lastName.'\'s order was successful and the payment (transaction #'.$transID.') went through on their card ending with '.$lastFour.'. ';
 
         if (isset($_SESSION['beeOrder']) && isset($_SESSION['supplies']))
-            echo "The bee order can be recorded and the items prepared for pickup.";
+            $html .= "The bee order can be recorded and the items prepared for pickup.";
         else if (isset($_SESSION['supplies']))
-            echo "The items can be prepared for pickup.";
+            $html .= "The items can be prepared for pickup.";
         else if (isset($_SESSION['beeOrder']))
-            echo "The bee order can be recorded.";
+            $html .= "The bee order can be recorded.";
 
-        if (isset($_SESSION['beeOrder']))
-            echo 'Data stream:<br><pre>'.getDataString("card", $cartData['total']).'</pre><br>';
-
-                        echo ' They ordered the following:
+            $html .= ' They ordered the following:
                     </p>
                     <div id="cartWrapper">
                         '.$cartData['html'].'
@@ -239,12 +251,21 @@
                     </style>
                 </head>
                 <body>
-                    <p>';
+                    <p>
+                        Data stream:<br>';
 
         if (isset($_SESSION['beeOrder']))
-            echo 'Data stream:<br><pre>'.getDataString("check", $cartData['total']).'</pre><br>';
+            $html .= '<pre>'.getBeeOrderString("check", $cartData['total']).'</pre><br>';
+            //echo '<pre>'.getBeeOrderString("check", $cartData['total']).'</pre><br>';
 
-                        echo $firstName.' '.$lastName.' has just placed an order for the following:
+        if (isset($_SESSION['supplies']))
+            $html .= '<pre>'.getSuppliesOrderString("check", $cartData['total']).'</pre><br>';
+            //echo '<pre>'.getSuppliesOrderString("check", $cartData['total']).'</pre><br>';
+
+        $html .=   '</p>
+                    <p>
+                        '.$firstName.' '.$lastName.' has just placed an order
+                            for the following:
                     </p>
                     <div id="cartWrapper">
                         '.$cartData['html'].'
@@ -412,40 +433,66 @@
     }
 
 
-    function getDataString($paymentType, $total)
+
+    function getBeeOrderString($paymentType, $total)
     {
-        $order = $_SESSION['beeOrder'];
-        $dest = $order->getActualDestination();
+        $beeOrder = $_SESSION['beeOrder'];
 
-        $str = todaysDate()."   ws      ".$dest."       ".$order->getSingleItalianCount().' '.$order->getDoubleItalianCount().' '.$order->getSingleCarniolanCount().'   '.$order->getDoubleCarniolanCount()."   ".$order->countPackages();
+        $date = todaysDate();
+        $pickupPoint = $beeOrder->getActualDestination();
+        $notes = $beeOrder->getNotes();
 
-        /*
-        $dest = $_SESSION['beeOrder']['pickup'] == "Other" ?
-            $_SESSION['beeOrder']['destination'] : $_SESSION['beeOrder']['pickup'];
+        $numSingleIt = $beeOrder->getSingleItalianCount();
+        $numDoubleIt = $beeOrder->getDoubleItalianCount();
+        $numSingleCarn = $beeOrder->getSingleCarniolanCount();
+        $numDoubleCarn = $beeOrder->getDoubleCarniolanCount();
+        $totalPkgs = $beeOrder->countPackages();
 
-        $str = todaysDate()."   ws      ".$order['pickup']."    ".getSuppliesOrderStr()."   ".$order['singleItalian'].' '.$order['doubleItalian'].' '.$order['singleCarni'].'   '.$order['doubleCarni']."   ".sumPackages()."   ".$_POST['x_ship_to_last_name']."   ".$_POST['x_ship_to_first_name']."  ";
+        $personalInfo = $paymentType == "check" ? $_SESSION['contactInfo'] : $_SESSION['paymentInfo'];
+        $firstName = $personalInfo['x_ship_to_first_name'];
+        $lastName  = $personalInfo['x_ship_to_last_name'];
+        $homePhone = $personalInfo['homePhone'];
+        $cellPhone = $personalInfo['cellPhone'];
+        $texting   = $personalInfo['textCapable'] == "yes" ? "y" : "n";
+        $emailAddr = $personalInfo['x_email'];
 
-        if ($_POST['preferredPhone'] == "cell")
-            $str .= $_POST['homePhone']."   **".$_POST['cellPhone']."**";
-        else if ($_POST['preferredPhone'] == "home")
-            $str .= "**".$_POST['homePhone']."**    ".$_POST['cellPhone'];
-        else
-            $str .= $_POST['homePhone']."   ".$_POST['cellPhone'];
+        $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t\t$total\t$total\t$date";
 
-        $str .= "   ".textCapableStr()."                    ".$_POST['x_email'].'   '.$dest;
+        return "$date\tws\t$pickupPoint\t\t$notes\t$numSingleIt\t$numDoubleIt\t$numSingleCarn\t$numDoubleCarn\t$totalPkgs\t$firstName\t$lastName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t\t$paymentInfo";
+    }
 
-        if ($paymentMethod != "check")
-            $str .= "   cc  ".$total."  ".todaysDate();
 
-        return $str;*/
+    function getSuppliesOrderString($paymentType, $total)
+    {
+        $suppliesOrder = $_SESSION['supplies'];
 
-        echo $str;
+        $date = todaysDate();
+        $pickupLoc = $suppliesOrder->pickupLocation_;
+
+        $personalInfo = $paymentType == "check" ? $_SESSION['contactInfo'] : $_SESSION['paymentInfo'];
+        $firstName = $personalInfo['x_ship_to_first_name'];
+        $lastName  = $personalInfo['x_ship_to_last_name'];
+        $homePhone = $personalInfo['homePhone'];
+        $cellPhone = $personalInfo['cellPhone'];
+        $texting   = $personalInfo['textCapable'] == "yes" ? "y" : "n";
+        $emailAddr = $personalInfo['x_email'];
+
+        $order = "";
+        $supplyOrderItems = $suppliesOrder->getItems();
+        foreach ($supplyOrderItems as $item)
+            $order .= $item->groupName_.' '.$item->name_.' ('.$item->quantity_.'), ';
+        $order = trim($order, ", ");
+
+        $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t\t$total\t$total\t$date";
+
+        return "$date\tws\t$pickupLoc\t\t\t\t\t\t\t\t$firstName\t$lastName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t$order\t$paymentInfo";
     }
 
 
     function todaysDate()
     {
         $date = getdate();
-        return $date['mon'].'/'.$date['mday'].'/'.$date['year'].' '.($date['hours'] - 2).':'.$date['minutes'].':'.$date['seconds'];
+        return $date['mon'].'/'.$date['mday'].'/'.$date['year'];
+        //.' '.($date['hours'] - 2).':'.$date['minutes'].':'.$date['seconds'];
     }
 ?>

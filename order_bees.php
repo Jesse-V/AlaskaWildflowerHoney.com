@@ -12,11 +12,11 @@
         die("Failed to connect to database. ".$db->error);
 
     while ($record = $storeStatusSQL->fetch_assoc())
-        $storeStatus[$record['Store']] = $record['Status'];
+        $storeData[$record['Store']] = $record;
 
-    if ($storeStatus['Bees'] == 0)
+    if ($storeData['Bees']['Status'] == 0)
     {
-        echo '<p>We have closed this store temporarily for the time being. Please check back later.</p>';
+        echo '<p>'.$storeData['Bees']['CloseText'].'</p>';
 
         $_JS_ = array("assets/js/jquery-1.11.1.min.js",
             "assets/js/jquery-ui-1.10.4.custom.min.js",
@@ -186,7 +186,7 @@
             <table>
                 <tr>
                     <td>Subtotal for items on this page:</td>
-                    <td>$<span id="subtotal">0.00</span></td>
+                    <td>$<span id="beeSubtotal">0.00</span></td>
                 </tr>
                 <tr>
                     <td>Additional transportation charges:</td>
@@ -194,7 +194,7 @@
                 </tr>
                 <tr>
                     <td>Total for items on this page:</td>
-                    <td>$<span id="total">0.00</span></td>
+                    <td>$<span id="beeTotal">0.00</span></td>
                 </tr>
             </table>
         </div>
@@ -202,7 +202,7 @@
         <input type="hidden" name="format" value="bees"/>
 
         <?php
-            if ($storeStatus['Supplies'] == 1)
+            if ($storeData['Supplies']['Status'] == 1)
             {
                 echo '<button type="submit" name="submit" class="submit" value="supplies">Need supplies, tools, or bee food?<br>Click here to save your order and visit the supplies store.</button>';
             }
