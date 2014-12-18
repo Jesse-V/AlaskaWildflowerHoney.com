@@ -456,7 +456,7 @@
         $texting   = $personalInfo['textCapable'] == "yes" ? "y" : "n";
         $emailAddr = $personalInfo['x_email'];
 
-        $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t\t$total\t$total\t$date";
+        $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t$total\t$total\t$date";
 
         return "$date\tws\t$pickupPoint\t\t$notes\t$numSingleIt\t$numDoubleIt\t$numSingleCarn\t$numDoubleCarn\t$totalPkgs\t$firstName\t$lastName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t\t$paymentInfo";
     }
@@ -483,7 +483,7 @@
             $order .= $item->groupName_.' '.$item->name_.' ('.$item->quantity_.'), ';
         $order = trim($order, ", ");
 
-        $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t\t$total\t$total\t$date";
+        $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t$total\t$total\t$date";
 
         return "$date\tws\t$pickupLoc\t\t\t\t\t\t\t\t$firstName\t$lastName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t$order\t$paymentInfo";
     }
