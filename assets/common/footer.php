@@ -122,10 +122,19 @@
 
             require_once(__DIR__."/../php/checkout/cart_help_functions.php");
             echo '<div class="total">Total: $'.getCart()['total'].'</div>';
+
+            echo '<div class="cartActions">
+                    <form action="http://google.com">
+                        <input type="submit" value="Edit Cart">
+                    </form>
+                    <form action="http://google.com">
+                        <input type="submit" value="Proceed to Checkout">
+                    </form>
+                </div>';
         }
     ?>
-                    </div>
-                </div>
+                    </div> <!-- close shopping cart -->
+                </div> <!-- close right_col -->
                 <div class="clear_both"></div>
             </div>
         </div>

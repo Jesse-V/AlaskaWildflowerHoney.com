@@ -9,7 +9,7 @@
 
     $storeStatusSQL = $db->query("SELECT * FROM StoreStatus");
     if (!$storeStatusSQL)
-        die("Failed to connect to database. ".$db->error);
+        die("A fatal database issue was encountered in orderBees.php, storeStatus query. Specifically, ".$db->error);
 
     while ($record = $storeStatusSQL->fetch_assoc())
         $storeData[$record['Store']] = $record;

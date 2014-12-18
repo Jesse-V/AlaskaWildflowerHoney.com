@@ -32,9 +32,12 @@
             $itemIDs .= $item['id'].',';
         $itemIDs = substr($itemIDs, 0, -1); //remove trailing comma
 
+        if (empty($orderList))
+            routeAccordingly("../order_bees.php");
+
         $suppliesSQL = $db->query("SELECT * FROM Supplies WHERE itemID IN ($itemIDs)");
         if (!$suppliesSQL)
-            die("Failed to fetch data. ".$db->error);
+            die("A fatal database issue was encountered in CartManager.php, Supplies query. Specifically, ".$db->error);
 
         $groups = queryGroups();
         $suppliesOrder = new SuppliesOrder($_POST['pickupLoc']);
@@ -140,7 +143,7 @@
 
         $groupSQL = $db->query("SELECT * FROM SuppliesItemGroups");
         if (!$groupSQL)
-            die("Failed to connect to database. ".$db->error);
+            die("A fatal database issue was encountered in CartManager.php - Group query. Specifically, ".$db->error);
 
         $groups = array();
         while ($record = $groupSQL->fetch_assoc())
@@ -153,12 +156,17 @@
 
     function getSuppliesList()
     {
-        $_MAXIMUM_NUM_OF_SUPPLIES = 250;
-        $supplies = array();
+        global $db;
 
-        for ($index = 1; $index < $_MAXIMUM_NUM_OF_SUPPLIES; $index++)
+        $incrementSQL = $db->query("SELECT AUTO_INCREMENT FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Supplies';");
+        if (!$incrementSQL)
+            die("A fatal database issue was encountered in CartManager.php, AutoIncrement query. Specifically, ".$db->error);
+
+        $supplies = array();
+        $autoIncrementVal = $incrementSQL->fetch_assoc()['AUTO_INCREMENT'];
+        for ($index = 1; $index < $autoIncrementVal; $index++)
         {
-            if ($_POST[$index] > 0)
+            if (isset($_POST[$index]) && $_POST[$index] > 0)
             {
                 $item = array();
                 $item['id'] = $index;

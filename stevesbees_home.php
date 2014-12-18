@@ -9,7 +9,7 @@
 
     $newsSQL = $db->query("SELECT * FROM News ORDER BY ID DESC");
     if (!$newsSQL)
-        die("Failed to connect to database. ".$db->error);
+        die("A fatal database issue was encountered in home.php, News query. Specifically, ".$db->error);
 
     echo "<h1>Steve's Bees - Packages of Honeybees</h1>";
     while ($newsRecord = $newsSQL->fetch_assoc())

@@ -14,7 +14,7 @@ class BeePrices
 
         $beesSQL = $db->query("SELECT * FROM Bees");
         if (!$beesSQL)
-            die("Failed to connect to database. ".$db->error);
+            die("A fatal database issue was encountered in index.php, Bees query. Specifically, ".$db->error);
 
         $prices = array();
         while ($record = $beesSQL->fetch_assoc())

@@ -6,7 +6,7 @@ function queryGroups()
 
     $groupSQL = $db->query("SELECT * FROM SuppliesItemGroups");
     if (!$groupSQL)
-        die("Failed to connect to database. ".$db->error);
+        die("A fatal database issue was encountered in suppliesPrinter.php, Groups query. Specifically, ".$db->error);
 
     $groups = array();
     while ($record = $groupSQL->fetch_assoc())
@@ -23,7 +23,7 @@ function queryItems($sectionID)
 
     $itemSQL = $db->query("SELECT * FROM Supplies WHERE sectionID=$sectionID ORDER BY itemID");
     if (!$itemSQL)
-        die("Failed to fetch data. ".$db->error);
+        die("A fatal database issue was encountered in suppliesPrinter.php, Items query. Specifically, ".$db->error);
 
     $items = array();
     while ($record = $itemSQL->fetch_assoc())
@@ -55,7 +55,7 @@ function queryInventoryStatus()
 
     $statusSQL = $db->query("SELECT * FROM InventoryStatus");
     if (!$statusSQL)
-        die("Failed to connect to database. ".$db->error);
+        die("A fatal database issue was encountered in suppliesPrinter.php, Status query. Specifically, ".$db->error);
 
     $invStatus = array();
     while ($record = $statusSQL->fetch_assoc())
