@@ -458,7 +458,7 @@
 
         $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t$total\t$total\t$date";
 
-        return "$date\tws\t$pickupPoint\t\t$notes\t$numSingleIt\t$numDoubleIt\t$numSingleCarn\t$numDoubleCarn\t$totalPkgs\t$firstName\t$lastName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t\t$paymentInfo";
+        return "$date\tws\t$pickupPoint\t\t$notes\t$numSingleIt\t$numDoubleIt\t$numSingleCarn\t$numDoubleCarn\t$totalPkgs\t$lastName\t$firstName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t\t$paymentInfo";
     }
 
 
@@ -485,7 +485,7 @@
 
         $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t$total\t$total\t$date";
 
-        return "$date\tws\t$pickupLoc\t\t\t\t\t\t\t\t$firstName\t$lastName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t$order\t$paymentInfo";
+        return "$date\tws\t$pickupLoc\t\t\t\t\t\t\t\t$lastName\t$firstName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t$order\t$paymentInfo";
     }
 
 
