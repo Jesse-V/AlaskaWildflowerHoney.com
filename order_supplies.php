@@ -18,8 +18,8 @@
     {
         echo '<p>'.$storeData['Supplies']['CloseText'].'</p>';
 
-        //assets/js/jquery-1.11.1.min.js
-        $_JS_ = array("/assets/js/jquery-1.11.1.min.js", "/assets/js/order_supplies.js");
+        //assets/js/jquery-1.11.2.min.js
+        $_JS_ = array("/assets/js/jquery-1.11.2.min.js", "/assets/js/order_supplies.js");
         require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
         $db->close();
 
@@ -95,7 +95,7 @@
 
 <?php
 
-$_JS_ = array("/assets/js/jquery-1.11.1.min.js", "/assets/js/order_supplies.js");
+$_JS_ = array("/assets/js/jquery-1.11.2.min.js", "/assets/js/order_supplies.js");
 require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 $db->close();
 

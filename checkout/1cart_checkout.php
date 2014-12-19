@@ -36,7 +36,7 @@
     }
 
 
-    $_JS_ = array("/assets/js/jquery-1.11.1.min.js", "/assets/js/checkout_form.js");
+    $_JS_ = array("/assets/js/jquery-1.11.2.min.js", "/assets/js/checkout_form.js");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
     $db->close();
 
