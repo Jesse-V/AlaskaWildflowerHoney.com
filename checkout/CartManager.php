@@ -32,7 +32,7 @@
         $itemIDs = substr($itemIDs, 0, -1); //remove trailing comma
 
         if (empty($orderList))
-            routeAccordingly("../order_bees.php");
+            routeAccordingly("/order_bees.php");
 
         $suppliesSQL = $db->query("SELECT * FROM Supplies WHERE itemID IN ($itemIDs)");
         if (!$suppliesSQL)
@@ -58,7 +58,7 @@
         $suppliesSQL->close();
 
         $_SESSION['supplies'] = $suppliesOrder;
-        routeAccordingly("../order_bees.php");
+        routeAccordingly("/order_bees.php");
     }
     else if ($_POST['format'] == "bees")
     {
@@ -80,7 +80,7 @@
             $_POST['notes']
         );
 
-        routeAccordingly("../order_supplies.php");
+        routeAccordingly("/order_supplies.php");
     }
     else
     {

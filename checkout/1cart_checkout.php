@@ -7,9 +7,9 @@
     session_start();
 
     $_TITLE_ = "Cart Checkout - StevesBees.com";
-    $_STYLESHEETS_ = array("../assets/css/fancyHRandButtons.css",
-        "../assets/css/checkout_form.css",
-        "../assets/css/cartTable.css");
+    $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",
+        "/assets/css/checkout_form.css",
+        "/assets/css/cartTable.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php'); //opening HTML
 
 
@@ -36,7 +36,7 @@
     }
 
 
-    $_JS_ = array("../assets/js/jquery-1.11.1.min.js", "../assets/js/checkout_form.js");
+    $_JS_ = array("/assets/js/jquery-1.11.1.min.js", "/assets/js/checkout_form.js");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
     $db->close();
 

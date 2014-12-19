@@ -1,6 +1,6 @@
 <?php //opening HTML
     $_TITLE_ = "Contact Us";
-    $_STYLESHEETS_ = array("assets/css/contact_us.css");
+    $_STYLESHEETS_ = array("/assets/css/contact_us.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
 ?>
 

@@ -1,6 +1,6 @@
 <?php //opening HTML
     $_TITLE_ = "Aerial View";
-    $_STYLESHEETS_ = array($_SERVER['DOCUMENT_ROOT'].'/assets/css/aerial_view.css');
+    $_STYLESHEETS_ = array('/assets/css/aerial_view.css');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
 ?>
 

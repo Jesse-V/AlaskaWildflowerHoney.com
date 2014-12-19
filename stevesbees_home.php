@@ -1,6 +1,6 @@
 <?php //opening HTML
     $_TITLE_ = "StevesBees.com Home";
-    $_STYLESHEETS_ = array("assets/css/stevesbees_home.css");
+    $_STYLESHEETS_ = array("/assets/css/stevesbees_home.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     global $db;

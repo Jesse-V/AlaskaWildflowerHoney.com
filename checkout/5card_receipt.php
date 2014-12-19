@@ -4,8 +4,8 @@
     session_start();
 
     $_TITLE_ = "Card Receipt - StevesBees.com";
-    $_STYLESHEETS_ = array("../assets/css/fancyHRandButtons.css",
-        "../assets/css/cartTable.css");
+    $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",
+        "/assets/css/cartTable.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php'); //opening HTML
 
 
@@ -77,7 +77,7 @@
     }
 
     echo '
-        <form method="get" action="../stevesbees_home.php">
+        <form method="get" action="/stevesbees_home.php">
             <button type="submit">Click here to return to the StevesBees.com homepage</button>
         </form>';
 

@@ -1,7 +1,7 @@
 <?php //opening HTML
     $_TITLE_ = "Order Packages & Queens - StevesBees.com";
-    $_STYLESHEETS_ = array("assets/css/fancyHRandButtons.css",
-        "assets/css/order_bees.css");
+    $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",
+        "/assets/css/order_bees.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     global $db;
@@ -17,9 +17,9 @@
     {
         echo '<p>'.$storeData['Bees']['CloseText'].'</p>';
 
-        $_JS_ = array("assets/js/jquery-1.11.1.min.js",
-            "assets/js/jquery-ui-1.10.4.custom.min.js",
-            "assets/js/order_bees.js");
+        $_JS_ = array("/assets/js/jquery-1.11.1.min.js",
+            "/assets/js/jquery-ui-1.10.4.custom.min.js",
+            "/assets/js/order_bees.js");
         require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
         $db->close();
 
@@ -211,9 +211,9 @@
     </form>
 
 <?php
-    $_JS_ = array("assets/js/jquery-1.11.1.min.js",
-        "assets/js/jquery-ui-1.10.4.custom.min.js",
-        "assets/js/order_bees.js");
+    $_JS_ = array("/assets/js/jquery-1.11.1.min.js",
+        "/assets/js/jquery-ui-1.10.4.custom.min.js",
+        "/assets/js/order_bees.js");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 
     $db->close();

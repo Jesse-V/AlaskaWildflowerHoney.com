@@ -1,6 +1,6 @@
 <?php //opening HTML
     $_TITLE_ = "Home";
-    $_STYLESHEETS_ = array("assets/css/index.css");
+    $_STYLESHEETS_ = array("/assets/css/index.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
 ?>
 
