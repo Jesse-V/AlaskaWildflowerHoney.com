@@ -6,11 +6,11 @@
                             <div id="storeNav">
                                 <div class="store">
                                     <div class="title">Honeybee Store</div>
-                                    <a href="'.$_REL_.'order_bees.php"><span class="link"></span></a>
+                                    <a href="/order_bees.php"><span class="link"></span></a>
                                 </div>
                                 <div class="store">
                                     <div class="title">Supplies Store</div>
-                                    <a href="'.$_REL_.'order_supplies.php"><span class="link"></span></a>
+                                    <a href="/order_supplies.php"><span class="link"></span></a>
                                 </div>
                             </div>';
                     ?>
@@ -120,17 +120,26 @@
 
             echo "</table>";
 
-            require_once(__DIR__."/../php/checkout/cart_help_functions.php");
+            require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
             echo '<div class="total">Total: $'.getCart()['total'].'</div>';
 
+            //cart action controls, edit cart and proceed to checkout
             echo '<div class="cartActions">
-                    <form action="http://google.com">
+                    <form action="/checkout/CartEditor.php">
                         <input type="submit" value="Edit Cart">
-                    </form>
-                    <form action="http://google.com">
+                    </form>';
+
+            //don't show "proceed to checkout" if already in cart checkout
+            if (strpos($_SERVER['PHP_SELF'], '1cart_checkout.php') === false)
+            {
+                echo '
+                    <form action="/checkout/1cart_checkout.php">
                         <input type="submit" value="Proceed to Checkout">
-                    </form>
-                </div>';
+                    </form>';
+            }
+
+            //close cart action control div
+            echo '</div>';
         }
     ?>
                     </div> <!-- close shopping cart -->

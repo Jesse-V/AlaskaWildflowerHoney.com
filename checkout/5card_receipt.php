@@ -1,13 +1,12 @@
 <?php
-    require_once(__DIR__.'/../assets/php/checkout/email_functions.php');
-    require_once(__DIR__.'/../assets/php/checkout/authorizeNetVars.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/email_functions.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
     session_start();
 
-    $_REL_ = "../";
     $_TITLE_ = "Card Receipt - StevesBees.com";
     $_STYLESHEETS_ = array("../assets/css/fancyHRandButtons.css",
         "../assets/css/cartTable.css");
-    require_once(__DIR__.'/../assets/common/header.php'); //opening HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php'); //opening HTML
 
 
     echo '<h1>Your receipt</h1>';
@@ -83,6 +82,6 @@
         </form>';
 
     $_JS_ = array();
-    require_once(__DIR__.'/../assets/common/footer.php'); //closing HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
     $db->close();
 ?>

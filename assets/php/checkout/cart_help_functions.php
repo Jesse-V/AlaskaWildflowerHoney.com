@@ -1,8 +1,8 @@
 <?php
 
-require_once(__DIR__.'/../databaseConnect.secret');
-require_once(__DIR__.'/../classes/SuppliesOrder.php');
-require_once(__DIR__.'/../classes/BeeOrder.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
+require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/SuppliesOrder.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/BeeOrder.php');
 
 
 function echoCart()

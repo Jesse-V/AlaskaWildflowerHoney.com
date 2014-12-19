@@ -1,8 +1,7 @@
 <?php //opening HTML
-    $_REL_ = "";
     $_TITLE_ = "Installing";
     $_STYLESHEETS_ = array();
-    require_once(__DIR__.'/assets/common/header.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
 ?>
 
     <img src="assets/images/map_to_house.gif" alt="Map of Big Lake showing how to get to our location."/>
@@ -20,5 +19,5 @@ At mile 5.5 Big Lake road you will come to South Port Marina.  Echo Lake Drive t
 
 <?php
     $_JS_ = array();
-    require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 ?>

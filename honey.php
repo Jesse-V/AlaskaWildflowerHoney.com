@@ -1,8 +1,7 @@
 <?php //opening HTML
-    $_REL_ = "";
     $_TITLE_ = "Honey";
     $_STYLESHEETS_ = array("assets/css/honey.css");
-    require_once(__DIR__.'/assets/common/header.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
 ?>
 
     <div class="images">
@@ -25,5 +24,5 @@
 
 <?php
     $_JS_ = array();
-    require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 ?>

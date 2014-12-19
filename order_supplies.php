@@ -1,11 +1,10 @@
 <?php //opening HTML
-    $_REL_ = "";
     $_TITLE_ = "Beekeeping Supplies";
     $_STYLESHEETS_ = array("assets/css/fancyHRandButtons.css",
         "assets/css/order_supplies.css");
-    require_once(__DIR__.'/assets/common/header.php');
-    require_once(__DIR__.'/assets/php/databaseConnect.secret');
-    require_once(__DIR__.'/assets/php/suppliesPrinter.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/suppliesPrinter.php');
     global $db;
 
     $storeStatusSQL = $db->query("SELECT * FROM StoreStatus");
@@ -21,7 +20,7 @@
 
         //assets/js/jquery-1.11.1.min.js
         $_JS_ = array("assets/js/jquery-1.11.1.min.js", "assets/js/order_supplies.js");
-        require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+        require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
         $db->close();
 
         exit();
@@ -97,7 +96,7 @@
 <?php
 //assets/js/jquery-1.11.1.min.js
 $_JS_ = array("assets/js/jquery-1.11.1.min.js", "assets/js/order_supplies.js");
-require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 $db->close();
 
 ?>

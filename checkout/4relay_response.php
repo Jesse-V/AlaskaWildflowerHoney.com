@@ -6,8 +6,8 @@
         <title>Relay Response</title>
 
 <?php
-    require_once(__DIR__.'/../assets/php/anet_php_sdk/AuthorizeNet.php');
-    require_once(__DIR__.'/../assets/php/checkout/authorizeNetVars.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/anet_php_sdk/AuthorizeNet.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
 
     $response = new AuthorizeNetSIM($api_login_id, $md5_setting);
     if ($response->isAuthorizeNet())

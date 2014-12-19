@@ -1,9 +1,8 @@
 <?php //opening HTML
-    $_REL_ = "";
     $_TITLE_ = "StevesBees.com Home";
     $_STYLESHEETS_ = array("assets/css/stevesbees_home.css");
-    require_once(__DIR__.'/assets/common/header.php');
-    require_once(__DIR__.'/assets/php/databaseConnect.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     global $db;
 
 
@@ -285,5 +284,5 @@
 
 <?php
     $_JS_ = array();
-    require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 ?>

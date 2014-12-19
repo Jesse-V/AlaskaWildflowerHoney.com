@@ -1,8 +1,7 @@
 <?php //opening HTML
-    $_REL_ = "";
     $_TITLE_ = "Harvest & Processing";
     $_STYLESHEETS_ = array("assets/css/harvest_n_processing.css");
-    require_once(__DIR__.'/assets/common/header.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
 ?>
 
     <h1>This page is under construction</h1>
@@ -16,5 +15,5 @@
     $_JS_ = array("assets/js/jquery-1.11.1.min.js",
         "assets/galleria/galleria-1.3.3.min.js",
         "assets/js/harvest_n_processing.js");
-    require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 ?>

@@ -1,17 +1,16 @@
 <?php
-    require_once(__DIR__.'/../assets/anet_php_sdk/AuthorizeNet.php');
-    require_once(__DIR__.'/../assets/php/databaseConnect.secret');
-    require_once(__DIR__.'/../assets/php/checkout/cart_help_functions.php');
-    require_once(__DIR__.'/../assets/php/checkout/authorizeNetVars.secret');
-    require_once(__DIR__.'/../assets/php/checkout/checkoutCartFields.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/anet_php_sdk/AuthorizeNet.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/checkoutCartFields.php');
     session_start();
 
-    $_REL_ = "../";
     $_TITLE_ = "Cart Checkout - StevesBees.com";
     $_STYLESHEETS_ = array("../assets/css/fancyHRandButtons.css",
         "../assets/css/checkout_form.css",
         "../assets/css/cartTable.css");
-    require_once(__DIR__.'/../assets/common/header.php'); //opening HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php'); //opening HTML
 
 
     echo "<h1>Checkout</h1>";
@@ -19,7 +18,7 @@
     if (empty($_SESSION))
     {
         echo '<p>
-                Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="'.__DIR__.'/../order_supplies.php">Supplies page</a> or the <a href="'.__DIR__.'/../order_bees.php">Bees page</a>. Thanks!
+                Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="/order_supplies.php">Supplies page</a> or the <a href="/order_bees.php">Bees page</a>. Thanks!
             </p>';
     }
     else
@@ -38,7 +37,7 @@
 
 
     $_JS_ = array("../assets/js/jquery-1.11.1.min.js", "../assets/js/checkout_form.js");
-    require_once(__DIR__.'/../assets/common/footer.php'); //closing HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
     $db->close();
 
 

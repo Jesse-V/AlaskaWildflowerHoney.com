@@ -1,8 +1,7 @@
 <?php //opening HTML
-    $_REL_ = "";
     $_TITLE_ = "Services";
     $_STYLESHEETS_ = array("assets/css/services.css");
-    require_once(__DIR__.'/assets/common/header.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
 ?>
 
     <h1>Services</h1>
@@ -99,5 +98,5 @@
 
 <?php
     $_JS_ = array();
-    require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 ?>

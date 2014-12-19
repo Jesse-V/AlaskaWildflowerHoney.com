@@ -1,7 +1,7 @@
 <?php
-    require_once(__DIR__.'/../assets/php/databaseConnect.secret');
-    require_once(__DIR__.'/../assets/php/classes/SuppliesOrder.php');
-    require_once(__DIR__.'/../assets/php/classes/BeeOrder.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/SuppliesOrder.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/BeeOrder.php');
     session_start();
 
     echo '
@@ -11,7 +11,6 @@
         <title>Invisible Cart Manager!</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         ';
-
 
     global $db;
 

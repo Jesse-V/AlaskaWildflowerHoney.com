@@ -1,8 +1,8 @@
 <?php
-    require_once(__DIR__.'/../../anet_php_sdk/AuthorizeNet.php');
-    require_once(__DIR__.'/../databaseConnect.secret');
-    require_once(__DIR__.'/cart_help_functions.php');
-    require_once(__DIR__.'/authorizeNetVars.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/anet_php_sdk/AuthorizeNet.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/databaseConnect.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/anet_php_sdk/authorizeNetVars.secret');
     session_start();
 
 

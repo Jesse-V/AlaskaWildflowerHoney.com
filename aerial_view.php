@@ -1,8 +1,7 @@
 <?php //opening HTML
-    $_REL_ = "";
     $_TITLE_ = "Aerial View";
-    $_STYLESHEETS_ = array(__DIR__.'/assets/css/aerial_view.css');
-    require_once(__DIR__.'/assets/common/header.php');
+    $_STYLESHEETS_ = array($_SERVER['DOCUMENT_ROOT'].'/assets/css/aerial_view.css');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
 ?>
 
     <img src="assets/images/matsu_google_earth.gif" alt="Google Earth map of Mat-Su, showing our location in Alaska."/>
@@ -19,5 +18,5 @@
 
 <?php
     $_JS_ = array();
-    require_once(__DIR__.'/assets/common/footer.php'); //closing HTML
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 ?>
