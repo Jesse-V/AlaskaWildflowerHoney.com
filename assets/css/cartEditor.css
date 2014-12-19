@@ -1,0 +1,56 @@
+
+.mid_col table {
+    width: 95%;
+    margin: 30px auto 0px auto;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.mid_col table th {
+    background-color: #fffacd; /* #BDB76B; */
+    padding: 8px 5px;
+    font-size: 1.2em;
+}
+
+.mid_col table th:first-child {
+    -moz-border-top-left-radius: 18px;
+    -webkit-border-top-left-radius: 18px;
+    border-top-left-radius: 18px;
+    width: 63%;
+}
+
+.mid_col table th:nth-child(2) {
+    width: 15%;
+}
+
+.mid_col table th:last-child {
+    -moz-border-top-right-radius: 18px;
+    -webkit-border-top-right-radius: 18px;
+    border-top-right-radius: 18px;
+    width: 10%;
+}
+
+.mid_col td {
+    background-color: #fffaf0 /*#FFFFE0 possible background:  #e0ffff*/;
+    border: 1px solid #e6e6fa /*#BDB76B*/;
+    border-bottom: 2px solid  #e6e6fa /*#BDB76B*/;
+    padding: 5px;
+    font-size: 1.1em;
+}
+
+.mid_col input.trash {
+    width: 33px;
+    height: 36px;
+    background-image: url('/assets/images/trashcan_wikimedia.png');
+    background-size: 100% 100%;
+    cursor: pointer;
+    border: none;
+}
+
+.mid_col .total {
+    width: 96%;
+    text-align: right;
+    padding: 15px 0px;
+    font-weight: bold;
+    font-size: 1.2em;
+}
