@@ -134,7 +134,7 @@ function getCommonFields()
                 </div>
             </fieldset>
 
-            <input type="submit" value="Checkout and Complete Purchase" class="submit buy"/>
+            <input type="submit" value="Checkout and Complete Purchase" class="submit fancy buy"/>
         </div>';
 }
 

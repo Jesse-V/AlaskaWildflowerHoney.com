@@ -1,19 +1,14 @@
 
                 </div>
                 <div class="right_col">
-                    <?php
-                        echo '
-                            <div id="storeNav">
-                                <div class="store">
-                                    <div class="title">Honeybee Store</div>
-                                    <a href="/order_bees.php"><span class="link"></span></a>
-                                </div>
-                                <div class="store">
-                                    <div class="title">Supplies Store</div>
-                                    <a href="/order_supplies.php"><span class="link"></span></a>
-                                </div>
-                            </div>';
-                    ?>
+                    <div id="storeNav">
+                        <form action="/order_bees.php">
+                            <input type="submit" value="Honeybee Store">
+                        </form>
+                        <form action="/order_supplies.php">
+                            <input type="submit" value="Supplies Store">
+                        </form>
+                    </div>
                     <div id="SpryAccordion1" class="Accordion" tabindex="0">
                         <div class="AccordionPanel">
                             <div class="AccordionPanelTab">
@@ -123,11 +118,17 @@
             require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
             echo '<div class="total">Total: $'.getCart()['total'].'</div>';
 
-            //cart action controls, edit cart and proceed to checkout
-            echo '<div class="cartActions">
+            //open cart action control div
+            echo '<div class="cartActions">';
+
+            //don't show "Edit Cart" if already in cart editor
+            if (strpos($_SERVER['PHP_SELF'], 'CartEditor.php') === false)
+            {
+                echo '
                     <form action="/checkout/CartEditor.php">
                         <input type="submit" value="Edit Cart">
                     </form>';
+            }
 
             //don't show "proceed to checkout" if already in cart checkout
             if (strpos($_SERVER['PHP_SELF'], '1cart_checkout.php') === false)

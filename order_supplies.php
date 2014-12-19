@@ -84,11 +84,11 @@
         <?php
             if ($storeData['Bees']['Status'] == 1)
             {
-                echo '<input type="submit" name="submit" id="moreBtn" value="Need bees or queens? Click to save and visit the bees page."/>';
+                echo '<input type="submit" name="submit" class="fancy" id="moreBtn" value="Need bees or queens? Click to save and visit the bees page."/>';
             }
         ?>
 
-        <input type="submit" name="submit" id="submitBtn" value="Finished? Click to proceed to checkout."/>
+        <input type="submit" name="submit" class="fancy" id="submitBtn" value="Finished? Click to proceed to checkout."/>
 
     </div>
 </form>

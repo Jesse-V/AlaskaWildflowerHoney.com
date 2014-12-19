@@ -54,8 +54,8 @@
             <div class="spacer"></div>
 
             <div id="paymentChoice">
-                <button type="submit" id="payOnline" class="submit">Pay online with a credit or debit card.</button>
-                <button type="submit" id="payCheck" class="submit">Pay using check</button>
+                <button type="submit" id="payOnline" class="submit fancy">Pay online with a credit or debit card.</button>
+                <button type="submit" id="payCheck" class="submit fancy">Pay using check</button>
             </div>';
     }
 

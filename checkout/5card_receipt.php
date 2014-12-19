@@ -78,7 +78,7 @@
 
     echo '
         <form method="get" action="/stevesbees_home.php">
-            <button type="submit">Click here to return to the StevesBees.com homepage</button>
+            <button type="submit" class="fancy">Click here to return to the StevesBees.com homepage</button>
         </form>';
 
     $_JS_ = array();

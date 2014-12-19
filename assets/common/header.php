@@ -12,7 +12,7 @@
         echo '
         <title>'.$_TITLE_.' - AlaskaWildflowerHoney.com</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <link rel="stylesheet" type="text/css" href="/assets/css/main.css" />
+        <link rel="stylesheet" type="text/css" href="/assets/css/common.css" />
         <script type="text/javascript" src="/assets/spry/SpryAccordion.js"></script>
         <link href="/assets/spry/SpryAccordion.css" rel="stylesheet" type="text/css" />';
 

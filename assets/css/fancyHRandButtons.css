@@ -23,7 +23,7 @@ hr.fancy:before { /* Not really supposed to work, but does */
     border-radius: 20px;
 }
 
-input[type="submit"], button[type="submit"]
+input[type="submit"].fancy, button[type="submit"].fancy
 {
     width: 80%;
     height: 50px;
