@@ -30,6 +30,36 @@ class BeeOrder extends Order
     }
 
 
+
+    public function removeOrderByID($id) //matches ids in getPackageOrder()
+    {
+        switch ($id)
+        {
+            case 1:
+                $this->nSIts_ = 0;
+                return true;
+            case 2:
+                $this->nDIts_ = 0;
+                return true;
+            case 3:
+                $this->nSCarnis_ = 0;
+                return true;
+            case 4:
+                $this->nDCarnis_ = 0;
+                return true;
+            case 5:
+                $this->nItQ_ = 0;
+                return true;
+            case 6:
+                $this->nCarniQ_ = 0;
+                return true;
+        }
+
+        return false;
+    }
+
+
+
     public function getPackageOrder()
     {
         $order = array();
@@ -44,36 +74,43 @@ class BeeOrder extends Order
 
         if ($this->nSIts_ > 0)
             array_push($order,
-                array("name" => $names['singleI'], "quantity" => $this->nSIts_,
+                array("id" => 1, "name" => $names['singleI'],
+                    "quantity" => $this->nSIts_,
                     "price" => BeePrices::getInstance()->getSQPackagePrice()));
 
         if ($this->nDIts_ > 0)
             array_push($order,
-                array("name" => $names['doubleI'], "quantity" => $this->nDIts_,
+                array("id" => 2, "name" => $names['doubleI'],
+                    "quantity" => $this->nDIts_,
                     "price" => BeePrices::getInstance()->getDQPackagePrice()));
 
         if ($this->nSCarnis_ > 0)
             array_push($order,
-                array("name" => $names['singleC'], "quantity" => $this->nSCarnis_,
+                array("id" => 3, "name" => $names['singleC'],
+                    "quantity" => $this->nSCarnis_,
                     "price" => BeePrices::getInstance()->getSQPackagePrice()));
 
         if ($this->nDCarnis_ > 0)
             array_push($order,
-                array("name" => $names['doubleC'], "quantity" => $this->nDCarnis_,
+                array("id" => 4, "name" => $names['doubleC'],
+                    "quantity" => $this->nDCarnis_,
                     "price" => BeePrices::getInstance()->getDQPackagePrice()));
 
         if ($this->nItQ_ > 0)
             array_push($order,
-                array("name" => $names['ItalianQ'], "quantity" => $this->nItQ_,
+                array("id" => 5, "name" => $names['ItalianQ'],
+                    "quantity" => $this->nItQ_,
                     "price" => BeePrices::getInstance()->getQueenPrice()));
 
         if ($this->nCarniQ_ > 0)
             array_push($order,
-                array("name" => $names['CarniQ'], "quantity" => $this->nCarniQ_,
+                array("id" => 6, "name" => $names['CarniQ'],
+                    "quantity" => $this->nCarniQ_,
                     "price" => BeePrices::getInstance()->getQueenPrice()));
 
         return $order;
     }
+
 
 
     public function getTransportationCharge()
@@ -105,6 +142,7 @@ class BeeOrder extends Order
                 return 0;
         }
     }
+
 
 
     public function getSingleCarniolanCount()

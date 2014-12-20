@@ -83,40 +83,10 @@
         }
         else
         {
-            echo "<table>";
-
-            if (isset($_SESSION['supplies']))
-            {
-                $items = $_SESSION['supplies']->getItems();
-                foreach ($items as $item)
-                {
-                    $name = "$item->name_ $item->groupName_";
-                    if (strlen($name) > 35)
-                        $name = substr($name, 0, 32)."...";
-
-                    echo "<tr>
-                            <td>$name</td>
-                            <td>$item->quantity_</td>
-                        </tr>";
-                }
-            }
-
-            if (isset($_SESSION['beeOrder']))
-            {
-                $orderItems = $_SESSION['beeOrder']->getPackageOrder();
-                foreach ($orderItems as $item)
-                {
-                    echo "<tr>
-                            <td>".$item['name']."</td>
-                            <td>".$item['quantity']."</td>
-                        </tr>";
-                }
-            }
-
-            echo "</table>";
-
-            require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
-            echo '<div class="total">Total: $'.getCart()['total'].'</div>';
+            //display preview of shopping cart
+            require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/ajax/cartPreviewView.php');
+            echo getPreviewHTML();
+            echo getPreviewTotal();
 
             //open cart action control div
             echo '<div class="cartActions">';

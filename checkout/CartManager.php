@@ -47,11 +47,11 @@
             $groupDesc = "";
             if ($record['groupID'] > 0)
             {
-                $groupName = $groups[$record['groupID']]['name'];
-                $groupDesc = $groups[$record['groupID']]['description'];
+                $groupName = trim($groups[$record['groupID']]['name']);
+                $groupDesc = trim($groups[$record['groupID']]['description']);
             }
 
-            $item = new SupplyItem($record['name'], $record['description'], $groupName, $groupDesc, $record['imageURL'], $record['price'], $orderList[$record['itemID']]['quantity']);
+            $item = new SupplyItem($record['itemID'], trim($record['name']), trim($record['description']), $groupName, $groupDesc, $record['imageURL'], $record['price'], $orderList[$record['itemID']]['quantity']);
             $suppliesOrder->addItem($item);
         }
 
