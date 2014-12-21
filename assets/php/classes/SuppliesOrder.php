@@ -41,7 +41,7 @@ class SuppliesOrder extends Order
         $countBefore = count($this->orderedItems_);
 
         foreach ($this->orderedItems_ as $index => $item)
-            if ($item->name_ == $itemID)
+            if ($item->itemID_ == $itemID)
                 break;
 
         unset($this->orderedItems_[$index]);
