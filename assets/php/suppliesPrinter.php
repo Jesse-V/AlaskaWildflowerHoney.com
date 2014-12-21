@@ -149,8 +149,15 @@ function echoItem($item, $invStatus, $subItem = false)
             <td>$'.$price.'</td>
             <td>';
 
+    $quantity = 0; //zero, unless the customer has previously selected it
+    if (isset($_SESSION['supplies']))
+        foreach ($_SESSION['supplies']->getItems() as $sessionItem)
+            if ($sessionItem->itemID_ == $item['itemID'])
+                $quantity = $sessionItem->quantity_;
+
+    //show if in stock, show non-zero quantity if already ordered
     if ($item['stockStatus'] != 3) //if not out of stock
-        echo '<input name="'.$item['itemID'].'" type="number" min="0" value="0">';
+        echo '<input name="'.$item['itemID'].'" type="number" min="0" value="'.$quantity.'">';
 
     echo '</td>
         </tr>';
