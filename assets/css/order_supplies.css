@@ -1,63 +1,44 @@
 @charset "utf-8";
-/* CSS Document */
 
-.left_col .images {
-    position: relative;
-    width: 270px;
-    text-align: center;
-}
-
-.left_col .images .desc {
-    padding: 0px 20px;
-}
-
-.left_col .images img:first-child {
-    margin-top: 60px;
-}
-
-.left_col .images img {
-    max-width: 100%;
-    padding: 20px 0px;
-}
-
-.mid_col .subtitle {
+/* for every section header */
+#supplyOrder .subtitle {
     font-size: 1.25em; /* 20px */
     margin: 40px 0px 10px 0px;
     text-align: center;
 }
 
-.mid_col table {
+#supplyOrder table {
     width: 95%;
     text-align: center;
     border-collapse: collapse;
     margin: 0px auto;
 }
 
-.mid_col th {
+#supplyOrder th {
     background-color: #fffacd; /* #BDB76B; */
     padding: 8px 5px;
     font-size: 1.125em; /* 18px */
 }
 
-.mid_col table th:first-child {
+#supplyOrder table th:first-child {
     -moz-border-top-left-radius: 18px;
     -webkit-border-top-left-radius: 18px;
     border-top-left-radius: 18px;
     width: 50px;
 }
 
-.mid_col table th:nth-child(3) {
+#supplyOrder table th:nth-child(3) {
     width: 100px;
 }
 
-.mid_col table th:last-child {
+#supplyOrder table th:last-child {
     -moz-border-top-right-radius: 18px;
     -webkit-border-top-right-radius: 18px;
     border-top-right-radius: 18px;
     width: 60px;
 }
 
-.mid_col td {
+#supplyOrder td {
     background-color: #fffaf0 /*#FFFFE0 possible background:  #e0ffff*/;
     border: 1px solid #e6e6fa /*#BDB76B*/;
     border-bottom: 2px solid  #e6e6fa /*#BDB76B*/;
@@ -66,70 +47,80 @@
     font-weight: bold;
 }
 
-.mid_col table td:nth-child(2) {
+#supplyOrder table td:nth-child(2) {
     text-align: left;
     padding-left: 10px;
 }
 
-.mid_col table input {
+#supplyOrder table input {
     width: 40px;
 }
 
-.mid_col .sectionDesc {
+#supplyOrder .sectionDesc {
     text-align: center;
     font-style: italic;
     margin-top: -5px;
     margin-bottom: 10px;
 }
 
-.mid_col .description {
+/* item description */
+#supplyOrder .description {
     margin-left: 20px;
     font-style: italic;
     font-size: 85%;
     font-weight: normal;
 }
 
-.mid_col .subItem div {
+#supplyOrder .subItem div {
     padding-left: 28px;
 }
 
-.mid_col tr input {
+#supplyOrder tr input {
     padding-left: 1px;
 }
 
-.mid_col hr {
+#supplyOrder hr {
     width: 740px;
     position: relative;
     left: -50px;
 }
 
-.mid_col span.dropdownNotice {
+#supplyOrder span.dropdownNotice {
     text-decoration: underline;
     color: blue;
 }
 
-.mid_col #pickupPoint {
+#supplyOrder #pickupPoint {
     margin: 10px 0px;
 }
 
-.mid_col #pickupPoint .option {
+#supplyOrder #pickupPoint .option {
     display: block;
     margin-left: 40px;
 }
 
-.mid_col .summary {
+#supplyOrder .summary {
     text-align: center;
     margin: 25px 0px;
 }
 
+/*
 .mid_col .beesSoldOut {
     width: 75%;
     font-weight: bold;
     margin: 0px auto;
     text-align: center;
+}*/
+
+#footerNavigation, #footerNavigation tr {
+    width: 100%;
 }
 
-.mid_col #submitBtn {
-    width: 70%;
+#footerNavigation td {
+    width: 50%;
+    margin: 0px auto;
 }
 
+#footerNavigation input {
+    width: 90%;
+}

@@ -1,9 +1,9 @@
-// JavaScript Document
 
 var that = $(".mid_col");
-//hideAllGroupItems(0);
+hideAllGroupItems(0); //start out by hiding all group items
 
 
+//hide all supplies in a group
 function hideAllGroupItems(duration) {
     var allGroupItems = that.find("table .subItem");
     for (var i = 0; i < allGroupItems.length; i++) {
@@ -14,7 +14,7 @@ function hideAllGroupItems(duration) {
 }
 
 
-
+//hide all other item groups, then expose the one the customer wants
 that.find("table tr").click(function() {
     if (this.className.lastIndexOf("group", 0) === 0) //startsWith
     {
@@ -27,24 +27,67 @@ that.find("table tr").click(function() {
 });
 
 
-
+//take action whenever a quantity input changes
 var numInputs = $(".mid_col input[type=number]");
-numInputs.change(handlePrefChange);
-numInputs.keyup(handlePrefChange);
+numInputs.change(handleQuantityUpdate);
+numInputs.keyup(handleQuantityUpdate);
 updateTotal();
 
 
-function handlePrefChange() {
+//filter input, update the total based on updated selection
+function handleQuantityUpdate() {
     if (this.value != this.value.replace(/[^0-9\.]/g, ''))
        this.value = this.value.replace(/[^0-9\.]/g, '');
     if (this.value == "")
         this.value = 0;
 
-    updateTotal();
+    updateSessionOrder();
+    updateTotal(); //TODO: AJAX-powered subtotal calculation?
 }
 
 
+//AJAX call to update session order en-masse
+function updateSessionOrder() {
+    var inputs = $(".mid_col input[type=number]");
 
+    //identify itemIDs and quantities of selected items
+    var selection = {};
+    for (i = 0; i < inputs.length; i++)
+        if (inputs[i].value != 0)
+            selection[$(inputs[i]).prop('name')] = $(inputs[i]).val();
+
+    if (Object.keys(selection).length > 0) //https://stackoverflow.com/questions/5223/length-of-a-javascript-object-that-is-associative-array
+    {
+        //AJAX to update supply order
+        $.ajax({
+            url: "/assets/php/ajax/cartManager.php",
+            data: {
+                action: "updateOrder",
+                page: "supplies",
+                selection: selection,
+                pickupLoc: $('input[name=pickupLoc]:checked', '#pickupPoint').val()
+            }
+        })
+        .done(function(retVal) {
+            if (retVal == "Success") {
+                updateSidebarCartPreview(); //method in cartPreviewUpdater.js
+                console.log("Supplies order successfully updated.");
+            }
+            else if (retVal == "Failure") {
+                console.log(retVal); //TODO
+            }
+            else {
+                console.log(retVal); //TODO
+            }
+        })
+        .fail(function(info, status) {
+            alert("Sorry, an issue was encountered, specifically, " + info.statusText);
+        });
+    }
+}
+
+
+//recalculate the total
 function updateTotal() {
     var total = 0;
     that.find("#supplyOrder tr").each(function() {
@@ -66,7 +109,7 @@ function updateTotal() {
 }
 
 
-
+//allow clicking on text next to the radio buttons to make the selection
 var pickup = $("#pickupPoint");
 pickup.find(".option").click(function() {
     var radioB = $(this).find("input");
