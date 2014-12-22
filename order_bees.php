@@ -17,8 +17,7 @@
     {
         echo '<p>'.$storeData['Bees']['CloseText'].'</p>';
 
-        $_JS_ = array("/assets/js/jquery-1.11.2.min.js",
-            "/assets/js/jquery-ui-1.10.4.custom.min.js",
+        $_JS_ = array("/assets/js/jquery-ui-1.10.4.custom.min.js",
             "/assets/js/order_bees.js");
         require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
         $db->close();
@@ -211,8 +210,7 @@
     </form>
 
 <?php
-    $_JS_ = array("/assets/js/jquery-1.11.2.min.js",
-        "/assets/js/jquery-ui-1.10.4.custom.min.js",
+    $_JS_ = array("/assets/js/jquery-ui-1.10.4.custom.min.js",
         "/assets/js/order_bees.js");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 

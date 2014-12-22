@@ -126,6 +126,8 @@
         <script type="text/javascript">
             var SpryAccordion1 = new Spry.Widget.Accordion("SpryAccordion1", {useFixedPanelHeights:false, defaultPanel:-1});
         </script>
+        <script src="/assets/js/jquery-1.11.2.min.js"></script>
+        <script src="/assets/js/ajaxHeartbeat.js"></script>
         <?php
             foreach ($_JS_ as $jsSource)
                 echo '<script src="'.$jsSource.'"></script>';

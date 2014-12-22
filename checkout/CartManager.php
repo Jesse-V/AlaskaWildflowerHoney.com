@@ -69,12 +69,12 @@
             $_POST['customDest'] = "";
 
         $_SESSION['beeOrder'] = new BeeOrder(
-            $_POST['singleItalian'],
-            $_POST['doubleItalian'],
-            $_POST['singleCarni'],
-            $_POST['doubleCarni'],
-            $_POST['ItalianQueens'],
-            $_POST['CarniQueens'],
+            ltrim($_POST['singleItalian'], "0"), //strip leading 0s (issue #46)
+            ltrim($_POST['doubleItalian'], "0"),
+            ltrim($_POST['singleCarni'],   "0"),
+            ltrim($_POST['doubleCarni'],   "0"),
+            ltrim($_POST['ItalianQueens'], "0"),
+            ltrim($_POST['CarniQueens'],   "0"),
             $_POST['pickupLoc'],
             $_POST['customDest'],
             $_POST['notes']

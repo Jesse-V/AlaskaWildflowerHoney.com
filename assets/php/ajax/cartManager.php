@@ -7,6 +7,9 @@
 
     try
     {
+        if (empty($_GET['action']))
+            return;
+
         if ($_GET['action'] == 'deleteItem')
         {
             if ($_GET['table'] == 'suppliesTable')
@@ -89,7 +92,7 @@
             $item = new SupplyItem($record['itemID'], trim($record['name']),
                 trim($record['description']), trim($groupName), trim($groupDesc),
                 $record['imageURL'], $record['price'],
-                $selection[$record['itemID']]);
+                trim($selection[$record['itemID']], "0")); //fixes issue #46
             $suppliesOrder->addItem($item);
         }
 
