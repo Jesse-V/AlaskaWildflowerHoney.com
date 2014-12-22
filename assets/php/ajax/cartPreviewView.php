@@ -5,14 +5,17 @@
     session_start();
 
 
-    if ($_GET['action'] == 'getHTML')
-        echo getPreviewHTML();
-    if ($_GET['action'] == 'getTotal')
-        echo getPreviewTotal();
-    if ($_GET['action'] == 'getAll')
+    if (!empty($_GET))
     {
-        header('Content-Type: application/json');
-        echo json_encode(array('html' => getPreviewHTML(), 'total' => getPreviewTotal()));
+        if ($_GET['action'] == 'getHTML')
+            echo getPreviewHTML();
+        if ($_GET['action'] == 'getTotal')
+            echo getPreviewTotal();
+        if ($_GET['action'] == 'getAll')
+        {
+            header('Content-Type: application/json');
+            echo json_encode(array('html' => getPreviewHTML(), 'total' => getPreviewTotal()));
+        }
     }
 
 

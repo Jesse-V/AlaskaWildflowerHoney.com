@@ -1,8 +1,8 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/anet_php_sdk/AuthorizeNet.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/databaseConnect.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/anet_php_sdk/authorizeNetVars.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
     session_start();
 
 
@@ -79,44 +79,11 @@
 
         echo '
         <p>
-            <button type="submit" id="confirm" class="submit">Confirm, this information is accurate.</button>
+            <button type="submit" id="confirm" class="submit fancy">Confirm, this information is accurate.</button>
         </p>
         </form>';
     }
 
-
-
-    function getOrderReceiptStr()
-    {
-        $str = "";
-
-        $beeOrder = $_SESSION['beeOrder'];
-
-        if (isset($beeOrder['singleItalian']))
-            $str .= $beeOrder['singleItalian']." I., ";
-        if (isset($beeOrder['doubleItalian']))
-            $str .= $beeOrder['doubleItalian']." II., ";
-
-        if (isset($beeOrder['singleCarni']))
-            $str .= $beeOrder['singleCarni']." C., ";
-        if (isset($beeOrder['doubleCarni']))
-            $str .= $beeOrder['doubleCarni']." CC., ";
-
-        if (isset($beeOrder['ItalianQueens']))
-            $str .= $beeOrder['ItalianQueens']." I. queens, ";
-        if (isset($beeOrder['CarniQueens']))
-            $str .= $beeOrder['CarniQueens']." C. queens, ";
-
-        $supplyInfo = querySuppliesTable();
-        foreach ($_SESSION['supplies'] as &$item)
-        {
-            $name     = $supplyInfo[$item['id']]['name'];
-            $quantity = $item['quantity'];
-            $str .= "$quantity $name, ";
-        }
-
-        return $str;
-    }
 
 
     function formatPhone($number)
