@@ -36,10 +36,17 @@ updateTotal();
 
 //filter input, update the total based on updated selection
 function handleQuantityUpdate() {
-    if (this.value != this.value.replace(/[^0-9\.]/g, ''))
-       this.value = this.value.replace(/[^0-9\.]/g, '');
-    if (this.value == "")
-        this.value = 0;
+    if (this.value == "" || this.value.indexOf('.') > -1)
+        this.value = ""; //Chrome/FF have "" if the field contains nonnumerics
+
+    var i = 0;
+    while (i < this.value.length && this.value[i] == '0') {
+        i++;
+    }
+
+    //trim leading zeros, except if the whole thing is zeros
+    if (i > 0 && i != this.value.length)
+        this.value = this.value.substring(i, this.value.length);
 
     updateSessionOrder();
     updateTotal(); //TODO: AJAX-powered subtotal calculation?

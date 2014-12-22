@@ -26,9 +26,9 @@
                 <span class="site_logo">Steve's Bees<br><span class="subtitle">Alaska Wildflower Honey</span></span>
             </div>
         </div>
-
+<!--
         <p style="text-align: center; font-size: 1.2em; font-weight: bold; color: white;">We are currently conducting maintenance on this site;<br>please wait on placing any orders until this banner disappears.</p>
-
+-->
         <div class="contentArea">
             <div class="container">
                 <div class="left_col">

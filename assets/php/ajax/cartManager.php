@@ -92,7 +92,7 @@
             $item = new SupplyItem($record['itemID'], trim($record['name']),
                 trim($record['description']), trim($groupName), trim($groupDesc),
                 $record['imageURL'], $record['price'],
-                trim($selection[$record['itemID']], "0")); //fixes issue #46
+                ltrim($selection[$record['itemID']], "0")); //fixes issue #46
             $suppliesOrder->addItem($item);
         }
 
