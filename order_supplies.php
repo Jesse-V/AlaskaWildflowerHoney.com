@@ -29,8 +29,18 @@
     }
 
     //intro
-    echo '  <h3>Supplies Store</h3>
-            <p>We offer a variety of beekeeping products, ranging from common items such as beehive components, tools, and processing equipment to rarer and specialty items. We carry primarily Mann Lake products, as well as some of our own. We are the largest distributor of beekeeping supplies in the state of Alaska. We hope you will find this store efficient and convenient.</p>
+    echo '  <div id="introLeft">
+                <h1>Supplies Store</h1>
+
+                <p>We offer a variety of beekeeping products, ranging from common items such as beehive components, tools, and processing equipment to rarer and specialty items. We carry primarily Mann Lake products, as well as some of our own. We are the largest distributor of beekeeping supplies in the state of Alaska. We hope you will find this store efficient and convenient.</p>
+            </div>
+
+            <div id="introRight">
+                <img src="assets/images/Bee boxes on pallet.jpg" alt="Bee boxes on a pallet, courtesy Flickr."/>
+                <div class="attribute">
+                    courtesy <a href="https://www.flickr.com/photos/32917625@N02/3614389353">Flickr</a> & <a href="https://commons.wikimedia.org/wiki/File:Bee_boxes_at_an_organic_farm.jpg">Wikimedia</a>
+                </div>
+            </div>
             <div id="supplyOrder">';
 
     //fetch the list of supplies sections

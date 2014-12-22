@@ -131,7 +131,24 @@ h3 {
 
     /* edit: fixes overlap error in IE7/8,
     make sure you have an empty gif */
-    background-image: url('empty.gif');
+    background-image: url('/assets/images/empty.gif');
+}
+
+
+#navFooter {
+    width: 100%;
+}
+
+#navFooter img {
+    padding-top: 34px;
+    width: 100%;
+}
+
+#navFooter .attribute {
+    text-align: right;
+    font-style: italic;
+    font-size: 0.7em;
+    padding-right: 6px;
 }
 
 

@@ -1,5 +1,31 @@
 @charset "utf-8";
-/* CSS Document */
+
+
+#introLeft, #introRight {
+    width: 48%;
+    float: left;
+}
+
+#introLeft {
+    padding-top: 50px;
+}
+
+#introRight {
+    padding-left: 10px;
+    margin-bottom: 20px;
+}
+
+#introRight img {
+    width: 100%;
+}
+
+#introRight .attribute {
+    text-align: right;
+    font-style: italic;
+    font-size: 0.7em;
+}
+
+
 
 #breedFAQ {
     width: 75%;
@@ -22,7 +48,7 @@
 }
 
 .mid_col .subtitle {
-    font-size: smaller;
+    font-size: 70%;
     margin-left: 20px;
 }
 
@@ -122,4 +148,23 @@
 
 input {
     text-align: center;
+}
+
+
+
+#footerPic {
+    width: 85%;
+    margin: 0px auto;
+    padding-top: 30px;
+}
+
+#footerPic img {
+    width: 100%;
+}
+
+#footerPic .attribute {
+    text-align: right;
+    font-style: italic;
+    font-size: 0.8em;
+    padding-right: 10px;
 }

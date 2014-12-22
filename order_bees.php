@@ -43,7 +43,15 @@
 ?>
 
     <form action="checkout/CartManager.php" method="post" autocomplete="on" accept-charset="UTF-8">
-        <h1>Ready to order bees?<br><span class="subtitle">You've come to the right place.</span></h1>
+        <div id="introLeft">
+            <h1>Ready to order bees?<br><span class="subtitle">You've come to the right place.</span></h1>
+        </div>
+        <div id="introRight">
+            <img src="assets/images/Apis mellifera 08.jpg" alt="A honeybee visiting a pink flower, courtesy Wikimedia."/>
+            <div class="attribute">
+                courtesy <a href="https://commons.wikimedia.org/wiki/File:Apis_mellifera(js)08.jpg">Wikimedia</a>
+            </div>
+        </div>
 
         <p>
             Each package contains four pounds of clean honeybees. We supply two breeds, each with their own distinct characteristics. If you are new to the decision, please click the question below for a brief synopsis of the different types of honeybees. Once you have decided, please make your selection below. Thank you for ordering online!
@@ -208,6 +216,13 @@
 
         <button type="submit" name="submit" class="submit fancy" value="checkout">Finished? Click here to proceed to checkout.</button>
     </form>
+
+    <div id="footerPic">
+        <img src="assets/images/Apis mellifera 01.jpg" alt="A honeybee visiting a purple flower, courtesy Wikimedia."/>
+        <div class="attribute">
+            courtesy <a href="https://commons.wikimedia.org/wiki/File:Apis_mellifera(js)01.jpg">Wikimedia</a>
+        </div>
+    </div>
 
 <?php
     $_JS_ = array("/assets/js/jquery-ui-1.10.4.custom.min.js",

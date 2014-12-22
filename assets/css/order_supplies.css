@@ -1,5 +1,27 @@
 @charset "utf-8";
 
+#introLeft, #introRight {
+    width: 48%;
+    float: left;
+}
+
+#introRight  {
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+#introRight img {
+    width: 100%;
+}
+
+#introRight .attribute {
+    text-align: right;
+    font-style: italic;
+    font-size: 0.7em;
+}
+
+
+
 /* for every section header */
 #supplyOrder .subtitle {
     font-size: 1.25em; /* 20px */
