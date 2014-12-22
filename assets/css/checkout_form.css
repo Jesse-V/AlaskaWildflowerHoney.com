@@ -17,6 +17,11 @@
     padding-left: 30px;
 }
 
+#phoneTable td label {
+    padding-right: 5px;
+    text-align: right;
+}
+
 input, textarea
 {
     padding-left: 2px;

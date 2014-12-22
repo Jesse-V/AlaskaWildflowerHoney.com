@@ -116,11 +116,11 @@ function getCommonFields()
                     <label>Phone numbers. If you have both cell and home numbers, please list both and click the "preferred" button accordingly.</label><br>
                     <table id="phoneTable">
                         <tr>
-                            <td>Primary Phone:</td>
+                            <td><label>Primary Phone:</label></td>
                             <td><input type="text" class="text" name="homePhone"/></td>
                         </tr>
                         <tr>
-                            <td>Secondary Phone:</td>
+                            <td><label>Secondary Phone:</label></td>
                             <td><input type="text" class="text" name="cellPhone"/></td>
                         </tr>
                     </table>
