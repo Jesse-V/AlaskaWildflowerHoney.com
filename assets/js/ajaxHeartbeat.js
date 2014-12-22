@@ -1,5 +1,5 @@
 
-//setInterval(heatbeat, 30000); //30 seconds
+setInterval(heatbeat, 5 * 60 * 1000); //heartbeat every 5 minutes
 
 function heatbeat(button) {
     $.ajax({
