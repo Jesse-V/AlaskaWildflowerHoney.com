@@ -73,7 +73,7 @@
     <div id="navFooter">
         <img src="assets/images/Canadian honeybee thin.jpg" alt="Honeybee in Canada, courtesy Yvan Leduc / Wikimedia."/>
         <div class="attribute">
-            <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC SA</a>, courtesy <a href="https://commons.wikimedia.org/wiki/File:NKN-2007-07-02_101750b_Honey_Bee_(_in_Canada_)_(Yvan_Leduc_author_for_Wikipedia).jpg">Wikimedia</a>
+            <a href="https://creativecommons.org/licenses/by-sa/3.0/deed.en">CC SA</a>, by <a href="https://commons.wikimedia.org/wiki/User:Yvan_leduc">Yvan Leduc</a><br>courtesy <a href="https://commons.wikimedia.org/wiki/File:NKN-2007-07-02_101750b_Honey_Bee_(_in_Canada_)_(Yvan_Leduc_author_for_Wikipedia).jpg">Wikimedia</a>
         </div>
     </div>
 

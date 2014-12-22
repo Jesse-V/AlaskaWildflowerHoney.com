@@ -38,7 +38,7 @@
             <div id="introRight">
                 <img src="assets/images/Bee boxes on pallet.jpg" alt="Bee boxes on a pallet, courtesy Flickr."/>
                 <div class="attribute">
-                    courtesy <a href="https://www.flickr.com/photos/32917625@N02/3614389353">Flickr</a> & <a href="https://commons.wikimedia.org/wiki/File:Bee_boxes_at_an_organic_farm.jpg">Wikimedia</a>
+                    by Jessica Reeder, courtesy <a href="https://www.flickr.com/photos/32917625@N02/3614389353">Flickr</a> & <a href="https://commons.wikimedia.org/wiki/File:Bee_boxes_at_an_organic_farm.jpg">Wikimedia</a>
                 </div>
             </div>
             <div id="supplyOrder">';

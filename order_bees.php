@@ -49,7 +49,7 @@
         <div id="introRight">
             <img src="assets/images/Apis mellifera 08.jpg" alt="A honeybee visiting a pink flower, courtesy Wikimedia."/>
             <div class="attribute">
-                courtesy <a href="https://commons.wikimedia.org/wiki/File:Apis_mellifera(js)08.jpg">Wikimedia</a>
+                by Jerzy Strzelecki, courtesy <a href="https://commons.wikimedia.org/wiki/File:Apis_mellifera(js)08.jpg">Wikimedia</a>
             </div>
         </div>
 
@@ -220,7 +220,7 @@
     <div id="footerPic">
         <img src="assets/images/Apis mellifera 01.jpg" alt="A honeybee visiting a purple flower, courtesy Wikimedia."/>
         <div class="attribute">
-            courtesy <a href="https://commons.wikimedia.org/wiki/File:Apis_mellifera(js)01.jpg">Wikimedia</a>
+            by Jerzy Strzelecki, courtesy <a href="https://commons.wikimedia.org/wiki/File:Apis_mellifera(js)01.jpg">Wikimedia</a>
         </div>
     </div>
 
