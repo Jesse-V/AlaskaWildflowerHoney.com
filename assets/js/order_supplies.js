@@ -1,15 +1,14 @@
 
 var that = $(".mid_col");
-hideAllGroupItems(0); //start out by hiding all group items
 
-
-//hide all supplies in a group
-function hideAllGroupItems(duration) {
-    var allGroupItems = that.find("table .subItem");
-    for (var i = 0; i < allGroupItems.length; i++) {
-        var inputVal = $($(allGroupItems[i]).find("input")[0]).val();
-        if (inputVal == 0 || inputVal == undefined)
-            $(allGroupItems[i]).hide(duration);
+//hide all items that aren't in the desired group or are non-zero
+function hideAllGroupItems(duration, desiredGroupID) {
+    var subItems = that.find("table .subItem");
+    for (var i = 0; i < subItems.length; i++) {
+        var inputVal = $($(subItems[i]).find("input")[0]).val();
+        if (!$(subItems[i]).hasClass("subItem" + desiredGroupID)
+            && (inputVal == '0' || inputVal == undefined))
+            $(subItems[i]).hide(duration);
     }
 }
 
@@ -18,9 +17,10 @@ function hideAllGroupItems(duration) {
 that.find("table tr").click(function() {
     if (this.className.lastIndexOf("group", 0) === 0) //startsWith
     {
-        hideAllGroupItems(750);
-
         var groupNum = this.className.substring(5);
+        hideAllGroupItems(750, groupNum);
+
+        //expose the items in the group the customer wants
         var subitems = that.find("table .subItem" + groupNum);
         subitems.show(750);
     }

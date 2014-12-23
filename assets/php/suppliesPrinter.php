@@ -122,17 +122,30 @@ function printSection($sectionRecord, $groups)
 
 function echoItem($item, $invStatus, $subItem = false)
 {
+    $quantity = 0; //zero, unless the customer has previously selected it
+    if (isset($_SESSION['supplies']))
+        foreach ($_SESSION['supplies']->getItems() as $sessionItem)
+            if ($sessionItem->itemID_ == $item['itemID'])
+                $quantity = $sessionItem->quantity_;
+
     if ($subItem)
-        echo '
-            <tr class="subItem subItem'.$item['groupID'].'" style="display: none;">
-                <td></td>
+    {
+        if ($quantity > 0) //if so, show rather than hide (issue #43)
+            echo '<tr class="subItem subItem'.$item['groupID'].'">';
+        else
+            echo '<tr class="subItem subItem'.$item['groupID'].'" style="display: none;">';
+
+        echo '<td></td>
                 <td>
                     <div class="subItemName">'.$item['name'].'</div>';
+    }
     else
+    {
         echo '
             <tr>
                 <td></td>
                 <td>'.$item['name'];
+    }
 
     //print description or special inventory
     $desc = $item['description'];
@@ -148,12 +161,6 @@ function echoItem($item, $invStatus, $subItem = false)
     echo '</td>
             <td>$'.$price.'</td>
             <td>';
-
-    $quantity = 0; //zero, unless the customer has previously selected it
-    if (isset($_SESSION['supplies']))
-        foreach ($_SESSION['supplies']->getItems() as $sessionItem)
-            if ($sessionItem->itemID_ == $item['itemID'])
-                $quantity = $sessionItem->quantity_;
 
     //show if in stock, show non-zero quantity if already ordered
     if ($item['stockStatus'] != 3) //if not out of stock
