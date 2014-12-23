@@ -37,3 +37,17 @@ input[type="submit"].fancy, button[type="submit"].fancy
     display: block;
     margin: 15px auto;
 }
+
+
+#footerNavigation, #footerNavigation tr {
+    width: 100%;
+}
+
+#footerNavigation td {
+    width: 50%;
+    margin: 0px auto;
+}
+
+#footerNavigation input {
+    width: 90%;
+}

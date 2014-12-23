@@ -28,6 +28,7 @@
 
 
 
+
 #breedFAQ {
     width: 75%;
     margin: 10px auto 0px auto;
@@ -87,79 +88,121 @@
     height: 15px;
 }
 
-.breed span, .queens span, .pickup td {
-    font-size: 0.95em;
+
+
+
+/* nearly identical style to the supplies page table */
+table.order, table.pickup, table#queenDesc {
+    width: 85%;
+    text-align: center;
+    border-collapse: collapse;
+    margin: 10px auto;
 }
 
-.breed {
-    height: 140px;
+table.order th, table.pickup th {
+    background-color: #fffacd;
+    padding: 8px 5px;
+    font-size: 1.125em;
 }
 
-.queens {
-    height: 170px;
+table.order th:first-child, table.pickup th:first-child {
+    -moz-border-top-left-radius: 18px;
+    -webkit-border-top-left-radius: 18px;
+    border-top-left-radius: 18px;
 }
 
-.mid_col .title {
-    font-weight: bold;
-    font-size: 1.125em; /* 18px */
+table.order th:first-child {
+    width: 70%;
 }
 
-.desc {
+table.order th:last-child, table.pickup th:last-child {
+    -moz-border-top-right-radius: 18px;
+    -webkit-border-top-right-radius: 18px;
+    border-top-right-radius: 18px;
+}
+
+table.order th:last-child {
+    width: 60px;
+}
+
+table.order td, table.pickup td {
+    background-color: #fffaf0;
+    border: 1px solid #e6e6fa;
+    border-bottom: 2px solid #e6e6fa;
+    padding: 5px;
+    font-size: 1em;
+}
+
+table.order input {
+    width: 40px;
+}
+
+
+
+
+table#queenDesc {
+    text-align: left;
+    margin-top: 50px;
+
+}
+
+.sectionTitle {
+    text-align: center;
+    color: #ac913b;
+    font-size: 1.5em;
+    margin-left: 0px;
+    padding-bottom: 10px;
+}
+
+table#queenDesc img {
+    width: 225px;
+}
+
+table#queenDesc p {
+    padding-left: 10px;
+    text-indent: 10px;
+    margin: 0px;
+}
+
+
+
+
+.pickupTitle {
+    margin-top: 50px;
+}
+
+table.pickup {
+}
+
+table.pickup .point {
+    display: inline-block;
+    float: left;
+    width: 100%;
+    padding: 3px 0px;
+}
+
+table.pickup th {
+    width: 33%;
+}
+
+table.pickup td {
+    padding-left: 50px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+table.pickup input, table.pickup label {
+    float: left;
+}
+
+table.pickup input {
     padding: 10px 0px;
 }
 
-.sub {
-    margin-left: 30px;
-    display: block;
-}
 
-.breed input, .queens input {
-    width: 50px;
-}
 
-.breed .preference {
-    display: block;
-    height: 30px;
-}
 
-.breed .preference .images {
-    width: 120px;
-    float: left;
-    margin-top: 3px;
-}
 
-.breed .text {
-    float: left;
-}
-
-.queens {
-    margin-bottom: 20px;
-}
-
-.queens .images img {
-    width: 160px;
-}
-
-.queens .sub {
-    margin-left: 10px;
-}
-/*
-.queens .text {
-    float: right;
-}
-*/
-.queens .preference {
-    padding: 0px 0px 3px 25px;
-}
-
-.pickup table {
-    margin-top: 8px;
-    width: 100%;
-}
-
-.pickup table td {
-    padding-top: 3px;
-}
 
 .notes textarea {
     margin-top: 10px;

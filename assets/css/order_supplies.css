@@ -135,15 +135,4 @@
     text-align: center;
 }*/
 
-#footerNavigation, #footerNavigation tr {
-    width: 100%;
-}
 
-#footerNavigation td {
-    width: 50%;
-    margin: 0px auto;
-}
-
-#footerNavigation input {
-    width: 90%;
-}
