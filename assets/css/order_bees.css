@@ -48,6 +48,36 @@
     font-size: 0.9em;
 }
 
+#breedWriteup p {
+    color: black;
+}
+
+#breedWriteup .intro {
+    margin: 10px;
+    text-indent: 10px;
+}
+
+#breedWriteup .breedDesc {
+    border: 1px gray dotted;
+    padding: 12px;
+    margin: 5px 0px;
+    border-radius: 10px;
+}
+
+#breedWriteup .breedDesc .breedIntro {
+    text-align: center;
+}
+
+#breedWriteup .breedDesc p {
+    margin: 5px 0px;
+}
+
+#breedWriteup ul, #breedWriteup ol {
+    margin: 5px 0px;
+}
+
+
+
 .mid_col .subtitle {
     font-size: 70%;
     margin-left: 20px;
