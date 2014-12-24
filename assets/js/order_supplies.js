@@ -48,8 +48,16 @@ function handleQuantityUpdate() {
     if (i > 0 && i != this.value.length)
         this.value = this.value.substring(i, this.value.length);
 
-    updateSessionOrder();
+    queueOrderUpdate();
     updateTotal(); //TODO: AJAX-powered subtotal calculation?
+}
+
+
+//triggers an order update after a timeout, regulating the refresh rate (#44)
+var updateCountdownID = 0;
+function queueOrderUpdate() {
+    clearTimeout(updateCountdownID);
+    updateCountdownID = setTimeout(updateSessionOrder, 250);
 }
 
 
