@@ -90,6 +90,11 @@
 
 
 
+input {
+    text-align: center;
+}
+
+
 
 /* nearly identical style to the supplies page table */
 table.order, table.pickup, table#queenDesc {
@@ -219,14 +224,19 @@ table.pickup input {
     font-size: 1.125em; /* 18px */
 }
 
+
+#pickupWarning {
+    text-indent: 15px;
+    width: 95%;
+    margin: 0px auto;
+    padding-bottom: 20px;
+}
+
+
 .summary table {
     width: 50%;
     margin: 0px auto;
     font-size: 1em; /* 16px */
-}
-
-input {
-    text-align: center;
 }
 
 

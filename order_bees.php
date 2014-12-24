@@ -247,6 +247,10 @@
 
     <hr class="fancy">
 
+    <p id="pickupWarning">
+        Bees are live animals and they have to picked up on the day of delivery. It's still cold in April and its critical that the bees find a home as soon as possible. In the checkout page, be sure to provide us with a way to contact you that you will be monitoring during the time of delivery. This is essential for proper delivery. Thank you!
+    </p>
+
     <div class="summary">
         <table>
             <tr>

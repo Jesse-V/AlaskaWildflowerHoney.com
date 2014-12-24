@@ -11,14 +11,15 @@ $("#breedFAQ, #breedWriteup").click(function() {
 $("table.pickup").find(".point").click(function() {
     var radioB = $(this).find("input");
     radioB.prop('checked', true);
-    update(radioB);
+    changePickupLocation(radioB);
 });
 
 
 
-function update(radioB) {
+function changePickupLocation(radioB) {
     var tChargeEl = $("#transCharge");
 
+    updateSessionOrder();
     updateTotals(updateTransCharge(radioB));
     tChargeEl.hide();
     tChargeEl.fadeIn("slow");
@@ -131,3 +132,4 @@ function handleQuantityUpdate() {
 
     updateTotals(updateTransCharge($("table.pickup input:checked")));
 }
+
