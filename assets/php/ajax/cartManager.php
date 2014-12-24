@@ -36,20 +36,37 @@
         }
         else if ($_GET['action'] == 'updateOrder')
         {
+            //add items to order in batch, replacing any existing supplies order
             if ($_GET['page'] == 'supplies')
             {
-                //add items to order in batch, replacing any existing supplies order
-                $success = applySuppliesOrder($_GET['selection'], $_GET['pickupLoc']);
+                $success = updateSuppliesOrder($_GET['selection'], $_GET['pickupLoc']);
                 echo $success ? "Success" : "Failure";
-
-                //print_r($_GET);
             }
             else if ($_GET['page'] == 'bees')
             {
+                $count = 0;
+                foreach ($_GET['selection'] as $item)
+                    $count += $item;
+
+                header('Content-Type: application/json');
+                if ($count == 0) //if no packages or queens are selected
+                {
+                    unset($_SESSION['beeOrder']);
+                    echo json_encode(array("status" => "Success",
+                        "transCharge" => 0, "subtotal" => 0));
+                }
+                else
+                {
+                    $success = updateBeeOrder($_GET['selection'], $_GET['pickup']) ?
+                        "Success" : "Failure";
+                    $transCharge = $_SESSION['beeOrder']->getTransportationCharge();
+                    $subtotal = $_SESSION['beeOrder']->getSubtotal();
+
+                    echo json_encode(array("status" => $success,
+                        "transCharge" => $transCharge, "subtotal" => $subtotal));
+                }
             }
         }
-
-        //TODO: edit quantity, change pickup, etc
     }
     catch (Exception $ex)
     {
@@ -58,7 +75,7 @@
 
 
 
-    function applySuppliesOrder($selection, $pickupLoc)
+    function updateSuppliesOrder($selection, $pickupLoc)
     {
         global $db;
 
@@ -98,6 +115,25 @@
 
         $suppliesSQL->close();
         $_SESSION['supplies'] = $suppliesOrder;
+
+        return true;
+    }
+
+
+
+    function updateBeeOrder($selection, $pickup)
+    {
+        $_SESSION['beeOrder'] = new BeeOrder(
+            ltrim($selection['singleItalian'], "0"), //strip leading 0s (issue #46)
+            ltrim($selection['doubleItalian'], "0"),
+            ltrim($selection['singleCarni'],   "0"),
+            ltrim($selection['doubleCarni'],   "0"),
+            ltrim($selection['ItalianQueens'], "0"),
+            ltrim($selection['CarniQueens'],   "0"),
+            trim($pickup['pickupLoc']),
+            trim($pickup['customDest']),
+            trim($pickup['notes'])
+        );
 
         return true;
     }

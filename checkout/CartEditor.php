@@ -10,7 +10,7 @@
     if (empty($_SESSION))
     {
         echo '<p>
-                Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the honeybee or beekeeping supplies store, available through the <a href="/stevesbees_home.php">stevesbees.com home page</a>, and find something that interests you. Thanks!
+                Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="/order_supplies.php">Supplies page</a> or the <a href="/order_bees.php">Bees page</a>. Thanks!
             </p>';
     }
     else

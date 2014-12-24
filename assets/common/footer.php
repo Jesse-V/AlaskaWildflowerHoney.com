@@ -76,6 +76,7 @@
                     </div>
                     <div class="shoppingCart">
                         <div class="title">Shopping Cart</div>
+                        <div class="contents">
     <?php
         if (empty($_SESSION))
         {
@@ -113,6 +114,7 @@
             echo '</div>';
         }
     ?>
+                        </div> <!-- close cart content -->
                     </div> <!-- close shopping cart -->
                 </div> <!-- close right_col -->
                 <div class="clear_both"></div>

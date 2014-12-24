@@ -239,6 +239,10 @@ table.pickup input {
     font-size: 1em; /* 16px */
 }
 
+.itemsAdded {
+    text-align: center;
+}
+
 
 
 #footerPic {

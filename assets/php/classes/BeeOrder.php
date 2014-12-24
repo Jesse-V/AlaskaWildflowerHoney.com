@@ -113,6 +113,17 @@ class BeeOrder extends Order
 
 
 
+    public function getSubtotal()
+    {
+        $subtotal = 0;
+        $order = $this->getPackageOrder();
+        foreach ($order as $item)
+            $subtotal += $item['quantity'] * $item['price'];
+        return $subtotal;
+    }
+
+
+
     public function getTransportationCharge()
     {
         $nPackages = $this->countPackages();

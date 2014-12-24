@@ -123,22 +123,22 @@
         <tr>
             <td>Italian single-queen package</td>
             <td>$<?php echo $SINGLE_PRICE; ?></td>
-            <td><input type="number" id="singleItalian" name="singleItalian" min="0" max="200" value="0"></td>
+            <td><input type="number" name="singleItalian" min="0" max="200" value="0"></td>
         </tr>
         <tr>
             <td>Italian double-queen package</td>
             <td>$<?php echo $DOUBLE_PRICE; ?></td>
-            <td><input type="number" id="doubleItalian" name="doubleItalian" min="0" max="200" value="0"></td>
+            <td><input type="number" name="doubleItalian" min="0" max="200" value="0"></td>
         </tr>
         <tr>
             <td>Carniolan single-queen package</td>
             <td>$<?php echo $SINGLE_PRICE; ?></td>
-            <td><input type="number" id="singleCarni" name="singleCarni" min="0" max="200" value="0"></td>
+            <td><input type="number" name="singleCarni" min="0" max="200" value="0"></td>
         </tr>
         <tr>
             <td>Carniolan double-queen package</td>
             <td>$<?php echo $DOUBLE_PRICE; ?></td>
-            <td><input type="number" id="doubleCarni" name="doubleCarni" min="0" max="200" value="0"></td>
+            <td><input type="number" name="doubleCarni" min="0" max="200" value="0"></td>
         </tr>
     </table>
 
@@ -213,7 +213,7 @@
                 </div>
                 <div class="point">
                     <input type="radio" name="pickupLoc" value="Other"/>
-                    <label>(Other)</label>
+                    <label><i>(Other)</i></label>
                 </div>
             </td>
             <td>
@@ -231,7 +231,7 @@
                 </div>
                 <div class="point">
                     <input type="radio" name="pickupLoc" value="Other"/>
-                    <label>(Other)</label>
+                    <label><i>(Other)</i></label>
                 </div>
             </td>
         </tr>
@@ -254,15 +254,15 @@
     <div class="summary">
         <table>
             <tr>
-                <td>Subtotal for items on this page:</td>
+                <td>Subtotal for the bee order:</td>
                 <td>$<span id="beeSubtotal">0.00</span></td>
             </tr>
             <tr>
-                <td>Additional transportation charges:</td>
+                <td>Transportation charges:</td>
                 <td>$<span id="transTotal">0.00</span></td>
             </tr>
             <tr>
-                <td>Total for items on this page:</td>
+                <td>Total for the bee order:</td>
                 <td>$<span id="beeTotal">0.00</span></td>
             </tr>
         </table>
@@ -287,6 +287,9 @@
                 </form>
             </td>
         </tr>
+        <p class="itemsAdded">
+            These items have been added to your shopping cart.
+        </p>
     </table>
 
     <div id="footerPic">
@@ -298,7 +301,7 @@
 
 <?php
     $_JS_ = array("/assets/js/jquery-ui-1.10.4.custom.min.js",
-        "/assets/js/order_bees.js");
+        "/assets/js/cartPreviewUpdater.js", "/assets/js/order_bees.js");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
 
     $db->close();

@@ -20,91 +20,67 @@ function changePickupLocation(radioB) {
     var tChargeEl = $("#transCharge");
 
     updateSessionOrder();
-    updateTotals(updateTransCharge(radioB));
+    updateTransportationMessage(radioB);
     tChargeEl.hide();
     tChargeEl.fadeIn("slow");
 }
 
-function updateTotals(transRate) {
-    var midColEl = $(".mid_col");
-
-    var sItCount = parseInt($("#singleItalian").val());
-    var dItCount = parseInt($("#doubleItalian").val());
-    var sCCount = parseInt($("#singleCarni").val());
-    var dCCount = parseInt($("#doubleCarni").val());
-
-    var nItQ    = parseInt(midColEl.find("input[name=ItalianQueens]").val());
-    var nCarniQ = parseInt(midColEl.find("input[name=CarniQueens]").val());
-
-    var subtotal = sItCount * singlePrice + dItCount * doublePrice;
-    subtotal += sCCount * singlePrice + dCCount * doublePrice;
-    subtotal += nItQ * queenPrice + nCarniQ * queenPrice;
-
-    var transTotal = (sItCount + dItCount + sCCount + dCCount) * transRate;
-    var total = subtotal + transTotal;
-
-    var summary = midColEl.find(".summary");
-    summary.find("#beeSubtotal").html(subtotal.toFixed(2));
-    summary.find("#transTotal").html(transTotal.toFixed(2));
-    summary.find("#beeTotal").html(total.toFixed(2));
-}
 
 
-
-function updateTransCharge(radioB) {
+function updateTransportationMessage(radioB) {
     var tCharge = $("#transCharge");
     tCharge.css("padding-bottom", "0px");
 
     switch (radioB.val()) {
         case 'Anchorage':
             tCharge.html('<p>No transportation charge for Anchorage.</p>');
-            return 0;
+            return;
 
         case 'Wasilla':
             tCharge.html('<p>No transportation charge for Wasilla.</p>');
-            return 0;
+            return;
 
         case 'Palmer':
             tCharge.html('<p>No transportation charge for Palmer.</p>');
-            return 0;
+            return;
 
         case 'Soldotna':
             tCharge.html('<p>There is a $5/package transporation charge for Soldotna.</p>');
-            return 5;
+            return;
 
         case 'Homer':
             tCharge.html('<p class="mediumHeight">There is a $10/package transportation charge for Homer. Our farthest drop point is Soldotna, so half of this charge goes to compensate the beekeeper that drives up from Homer to collect the bees.</p>');
             tCharge.css("padding-bottom", "25px");
-            return 10;
+            return;
 
         case 'Eagle River':
             tCharge.html('<p>No transportation charge for Eagle River.</p>');
-            return 0;
+            return;
 
         case 'Big Lake':
             tCharge.html('<p>No transportation charge for Big Lake.</p>');
-            return 0;
+            return;
 
         case 'Healy':
             tCharge.html('<p>There is a $10/package transporation charge for Healy.</p>');
-            return 10;
+            return;
 
         case 'Nenana':
             tCharge.html('<p>There is a $10/package transporation charge for Nenana.</p>');
-            return 10;
+            return;
 
         case 'Fairbanks':
             tCharge.html('<p>There is a $10/package transporation charge for Fairbanks.</p>');
-            return 10;
+            return;
 
         case 'Other':
-            tCharge.html('<p class="tallHeight">If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $5/package ($10 minimum) drop-off fee.<br>Please provide the destination: <input type=\"text\" name=\"customDest\" id=\"customDest\" style=\"padding: 2px 5px; 5px; margin-top: 4px;\"/> <br> You can also provide additional instructions in the box below.</p>');
-            setTimeout(function() { tCharge.find("#customDest").focus(); }, 250);
+            tCharge.html('<p class="tallHeight">If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $5/package ($10 minimum) drop-off fee.<br>Please provide the destination: <input type="text" name="customDest" style="padding: 2px 5px; 5px; margin-top: 4px;"/> <br> You can also provide additional instructions in the box below.</p>');
+            setTimeout(function() { tCharge.find("input[name=customDest]").focus(); }, 250);
             tCharge.css("padding-bottom", "75px");
-            return 0;
+            return;
 
         default:
-            return 0;
+            return;
     }
 }
 
@@ -114,7 +90,7 @@ function updateTransCharge(radioB) {
 var numInputs = $(".mid_col input[type=number]");
 numInputs.change(handleQuantityUpdate);
 numInputs.keyup(handleQuantityUpdate);
-updateTotals(updateTransCharge($("table.pickup input:checked")));
+updateTransportationMessage($("table.pickup input:checked"));
 
 function handleQuantityUpdate() {
     //same filter as order_supplies.js
@@ -130,6 +106,59 @@ function handleQuantityUpdate() {
     if (i > 0 && i != this.value.length)
         this.value = this.value.substring(i, this.value.length);
 
-    updateTotals(updateTransCharge($("table.pickup input:checked")));
+    updateSessionOrder();
+    updateTransportationMessage($("table.pickup input:checked"));
 }
 
+
+
+//AJAX call to update session order en-masse
+function updateSessionOrder() {
+
+    var selection = {};
+    selection['singleItalian'] = $("input[name=singleItalian]").val();
+    selection['doubleItalian'] = $("input[name=doubleItalian]").val();
+    selection['singleCarni']   = $("input[name=singleCarni]").val();
+    selection['doubleCarni']   = $("input[name=doubleCarni]").val();
+    selection['ItalianQueens'] = $("input[name=ItalianQueens]").val();
+    selection['CarniQueens']   = $("input[name=CarniQueens]").val();
+
+    var pickup = {};
+    pickup['pickupLoc'] = $('input[name=pickupLoc]:checked', 'table.pickup').val();
+    pickup['notes'] = $(".notes textarea").val();
+    pickup['customLoc'] = $("input[name=customDest]").length == 0 ? "" : $("input[name=customDest]").val();
+
+    //AJAX to update supply order
+    $.ajax({
+        url: "/assets/php/ajax/cartManager.php",
+        data: {
+            action: "updateOrder",
+            page: "bees",
+            selection: selection,
+            pickup: pickup
+        }
+    })
+    .done(function(retVal) {
+
+        if (retVal.status == "Success") {
+            updateSidebarCartPreview(); //method in cartPreviewUpdater.js
+
+            var summary = $(".summary");
+            var total = retVal.subtotal + retVal.transCharge;
+            summary.find("#beeSubtotal").html(retVal.subtotal.toFixed(2));
+            summary.find("#transTotal").html(retVal.transCharge.toFixed(2));
+            summary.find("#beeTotal").html(total.toFixed(2));
+
+            console.log("Bee order successfully updated.");
+        }
+        else if (retVal.status == "Failure") {
+            console.log(retVal); //TODO
+        }
+        else {
+            console.log(retVal); //TODO
+        }
+    })
+    .fail(function(info, status) {
+        alert("Sorry, an issue was encountered, specifically, " + info.statusText);
+    });
+}

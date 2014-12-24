@@ -8,9 +8,12 @@ function updateSidebarCartPreview() {
         }
     })
     .done(function(retVal) {
-        var emptyDiv = $(".right_col .shoppingCart .empty");
-        if (emptyDiv.length == 1) { //if cart empty
-            emptyDiv.prop('outerHTML', retVal.html + retVal.total +
+        var contents = $(".right_col .shoppingCart .contents");
+        if (retVal.total.indexOf('$0.00') >= 0) {
+            contents.html('<div class="empty">Currently empty</div>');
+        }
+        else {
+            contents.html(retVal.html + retVal.total +
                 '<div class="cartActions">' +
                     '<form action="/checkout/CartEditor.php">' +
                         '<input type="submit" value="Edit Cart">' +
@@ -20,11 +23,6 @@ function updateSidebarCartPreview() {
                     '</form>' +
                 '</div>');
         }
-        else { //if cart has items, then just update them
-            $(".right_col .shoppingCart table").prop('outerHTML', retVal.html);
-            $(".right_col .shoppingCart .total").prop('outerHTML', retVal.total);
-        }
-        //$(".right_col .shoppingCart .empty").prop('outerHTML', retVal.html + retVal.total);
     })
     .fail(function(info, status) {
         console.log("FAIL");
