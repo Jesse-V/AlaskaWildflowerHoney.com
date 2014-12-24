@@ -8,9 +8,11 @@ $("#breedFAQ, #breedWriteup").click(function() {
 
 //allow clicking on text next to the radio buttons to make the selection
 //update pickup box and total based on pickup preference
+updateTransportationMessage($("table.pickup input:checked"));
 $("table.pickup").find(".point").click(function() {
     var radioB = $(this).find("input");
     radioB.prop('checked', true);
+    updateTransportationMessage(radioB);
     changePickupLocation(radioB);
 });
 
@@ -20,7 +22,6 @@ function changePickupLocation(radioB) {
     var tChargeEl = $("#transCharge");
 
     updateSessionOrder();
-    updateTransportationMessage(radioB);
     tChargeEl.hide();
     tChargeEl.fadeIn("slow");
 }
@@ -29,57 +30,59 @@ function changePickupLocation(radioB) {
 
 function updateTransportationMessage(radioB) {
     var tCharge = $("#transCharge");
-    tCharge.css("padding-bottom", "0px");
 
     switch (radioB.val()) {
         case 'Anchorage':
-            tCharge.html('<p>No transportation charge for Anchorage.</p>');
-            return;
-
         case 'Wasilla':
-            tCharge.html('<p>No transportation charge for Wasilla.</p>');
-            return;
-
         case 'Palmer':
-            tCharge.html('<p>No transportation charge for Palmer.</p>');
+        case 'Eagle River':
+        case 'Big Lake':
+            tCharge.html('<p id="dateChoice">' +
+                    'Please choose the day you would like your bees to arrive:' +
+                    '<br>' +
+                    '<span class="option" onclick="choseDate(this)">' +
+                        '<input type="radio" name="dateChoice" value="11"/>' +
+                        '<label>April 11th</label>' +
+                    '</span>' +
+                    '<span class="option" onclick="choseDate(this)">' +
+                        '<input type="radio"  name="dateChoice" value="25"/>' +
+                        '<label>April 25th</label>' +
+                    '</span>' +
+                '</p>');
             return;
 
         case 'Soldotna':
-            tCharge.html('<p>There is a $5/package transporation charge for Soldotna.</p>');
+            tCharge.html('<p>There is a $5/package transportation charge for Soldotna. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
             return;
 
         case 'Homer':
-            tCharge.html('<p class="mediumHeight">There is a $10/package transportation charge for Homer. Our farthest drop point is Soldotna, so half of this charge goes to compensate the beekeeper that drives up from Homer to collect the bees.</p>');
-            tCharge.css("padding-bottom", "25px");
-            return;
-
-        case 'Eagle River':
-            tCharge.html('<p>No transportation charge for Eagle River.</p>');
-            return;
-
-        case 'Big Lake':
-            tCharge.html('<p>No transportation charge for Big Lake.</p>');
+            tCharge.html('<p class="mediumHeight">There is a $10/package transportation charge for Homer. Our farthest drop point is Soldotna, so half of this charge goes to compensate the beekeeper that drives up from Homer to collect the bees. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
             return;
 
         case 'Healy':
-            tCharge.html('<p>There is a $10/package transporation charge for Healy.</p>');
+            tCharge.html('<p>There is a $10/package transportation charge for Healy. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
             return;
 
         case 'Nenana':
-            tCharge.html('<p>There is a $10/package transporation charge for Nenana.</p>');
+            tCharge.html('<p>There is a $10/package transportation charge for Nenana. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
             return;
 
         case 'Fairbanks':
-            tCharge.html('<p>There is a $10/package transporation charge for Fairbanks.</p>');
+            tCharge.html('<p>There is a $10/package transportation charge for Fairbanks. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
+            return;
+
+        case 'Valdez (Copper River Basin)':
+        case 'Palmer (Copper River Basin)':
+            tCharge.html('<p>Copper River Basin and Valdez bees are distributed by us as far as Palmer. In years past, we have had a beekeeper travel from the Basin to Palmer and pick up all of the bees going in that direction. This has worked well. It saves everyone from having to make the long journey. You should expect to contribute gas money. If you are uncomfortable having someone else transport your bees for you, please select the Palmer option. <br><b>Expected arrival date is Saturday, April 25th.</b></p>');
+            return;
+
+        case 'Fairbanks (Delta Junction)':
+            tCharge.html('<p>Delta Junction bees are distributed by us as far as Fairbanks. This year, we have had a beekeeper volunteer to drive up to Fairbanks to collect the bees for the Delta area. It will save everyone from having to make the longer journey. You should expect to contribute gas money. If you are uncomfortable having someone else transport your bees for you, please select the Fairbanks option. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
             return;
 
         case 'Other':
-            tCharge.html('<p class="tallHeight">If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $5/package ($10 minimum) drop-off fee.<br>Please provide the destination: <input type="text" name="customDest" style="padding: 2px 5px; 5px; margin-top: 4px;"/> <br> You can also provide additional instructions in the box below.</p>');
+            tCharge.html('<p class="tallHeight">Please add your final destination to the notes box. If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $10/package drop-off fee.<br>Please provide the destination: <input type="text" name="customDest" value="' + sessionCustomDest + '" style="padding: 2px 5px; 5px; margin-top: 4px;"/> <br> You can also provide additional instructions in the box below. <b>It will be necesssary for you to make all of the flight arrangements and complete any paperwork required by the air carrier.</b> We are dealing with hundreds of packages on the same day that yours need to be dropped off, so it is necessary that everything is prepared for the arrival of the bees at the drop-off point. </p>');
             setTimeout(function() { tCharge.find("input[name=customDest]").focus(); }, 250);
-            tCharge.css("padding-bottom", "75px");
-            return;
-
-        default:
             return;
     }
 }
@@ -90,24 +93,26 @@ function updateTransportationMessage(radioB) {
 var numInputs = $(".mid_col input[type=number]");
 numInputs.change(handleQuantityUpdate);
 numInputs.keyup(handleQuantityUpdate);
-updateTransportationMessage($("table.pickup input:checked"));
+handleQuantityUpdate();
 
 function handleQuantityUpdate() {
-    //same filter as order_supplies.js
-    if (this.value == "" || this.value.indexOf('.') > -1)
-        this.value = ""; //Chrome/FF have "" if the field contains nonnumerics
+    if (this.value != undefined)
+    {
+        //same filter as order_supplies.js
+        if (this.value == "" || this.value.indexOf('.') > -1)
+            this.value = ""; //Chrome/FF have "" if the field contains nonnumerics
 
-    var i = 0;
-    while (i < this.value.length && this.value[i] == '0') {
-        i++;
+        var i = 0;
+        while (i < this.value.length && this.value[i] == '0') {
+            i++;
+        }
+
+        //trim leading zeros, except if the whole thing is zeros
+        if (i > 0 && i != this.value.length)
+            this.value = this.value.substring(i, this.value.length);
     }
 
-    //trim leading zeros, except if the whole thing is zeros
-    if (i > 0 && i != this.value.length)
-        this.value = this.value.substring(i, this.value.length);
-
     updateSessionOrder();
-    updateTransportationMessage($("table.pickup input:checked"));
 }
 
 

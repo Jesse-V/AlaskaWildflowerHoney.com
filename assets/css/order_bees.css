@@ -177,6 +177,7 @@ table#queenDesc p {
 }
 
 table.pickup {
+    width: 90%;
 }
 
 table.pickup .point {
@@ -187,13 +188,22 @@ table.pickup .point {
 }
 
 table.pickup th {
-    width: 33%;
+    width: 20%;
+}
+
+table.pickup th:last-child {
+    width: 22%;
 }
 
 table.pickup td {
-    padding-left: 50px;
+    padding-left: 30px;
     padding-top: 10px;
     padding-bottom: 10px;
+    vertical-align: top;
+}
+
+table.pickup td:last-child {
+    padding-left: 0px;
 }
 
 table.pickup input, table.pickup label {
@@ -204,24 +214,38 @@ table.pickup input {
     padding: 10px 0px;
 }
 
+#dateChoice {
+    width: 100%;
+    margin: 0px auto;
+    text-align: center;
+    font-weight: bold;
+}
+
+#dateChoice span:last-child {
+    margin-left: 25px;
+}
+
 
 
 
 #transCharge {
     width: 80%;
     margin: 0px auto;
-    height: 50px;
+    padding-bottom: 10px;
 }
 
+.notes .title {
+    text-align: left;
+}
 
 .notes textarea {
-    margin-top: 10px;
     width: 90%;
+    margin-left: 25px;
     height: 100px;
     resize: none;
     padding: 10px;
     font-family: "Times New Roman", cursive;
-    font-size: 1.125em; /* 18px */
+    font-size: 1em;
 }
 
 

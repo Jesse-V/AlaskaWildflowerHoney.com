@@ -33,14 +33,41 @@
     $DOUBLE_PRICE = $beePrices->getDQPackagePrice();
     $QUEEN_PRICE  = $beePrices->getQueenPrice();
 
+    //load session data, used for autofilling an existing order
+    $singleIQuantity = isset($_SESSION['beeOrder']) ? $_SESSION['beeOrder']->getSingleItalianCount() : "0";
+    $doubleIQuantity = isset($_SESSION['beeOrder']) ? $_SESSION['beeOrder']->getDoubleItalianCount() : "0";
+    $singleCQuantity = isset($_SESSION['beeOrder']) ? $_SESSION['beeOrder']->getSingleCarniolanCount() : "0";
+    $doubleCQuantity = isset($_SESSION['beeOrder']) ? $_SESSION['beeOrder']->getDoubleCarniolanCount() : "0";
+
+    $IQueenQuantity = isset($_SESSION['beeOrder']) ? $_SESSION['beeOrder']->getItalianQueenCount() : "0";
+    $CQueenQuantity = isset($_SESSION['beeOrder']) ? $_SESSION['beeOrder']->getCarniolanQueenCount() : "0";
+
+    $sessionPickupPt = isset($_SESSION['beeOrder']) ? $_SESSION['beeOrder']->getPickupPoint() : "Anchorage";
+    $sessionNotes = isset($_SESSION['beeOrder']) ? $_SESSION['beeOrder']->getNotes() : "";
+
+    //generate empty quotes for Javascript if value isn't set, otherwise set to value
+    $sessionCustomDest = "''";
+    if (isset($_SESSION['beeOrder']) && $_SESSION['beeOrder']->getCustomPickupPt().length > 0)
+        $sessionCustomDest = $_SESSION['beeOrder']->getCustomPickupPt();
+
+
     //create Javascript vars
     echo "
         <script>
             var singlePrice = $SINGLE_PRICE;
             var doublePrice = $DOUBLE_PRICE;
             var queenPrice  = $QUEEN_PRICE;
+            var sessionCustomDest = $sessionCustomDest;
         </script>";
 ?>
+
+    <script>
+        //allows selection of text in pickup date option
+        function choseDate(chosenOption) {
+            var radioB = $(chosenOption).find("input");
+            radioB.prop('checked', true);
+        }
+    </script>
 
     <div id="introLeft">
         <h1>Ready to order bees?<br><span class="subtitle">You've come to the right place.</span></h1>
@@ -123,22 +150,22 @@
         <tr>
             <td>Italian single-queen package</td>
             <td>$<?php echo $SINGLE_PRICE; ?></td>
-            <td><input type="number" name="singleItalian" min="0" max="200" value="0"></td>
+            <td><input type="number" name="singleItalian" min="0" max="200" value="<?php echo $singleIQuantity; ?>"></td>
         </tr>
         <tr>
             <td>Italian double-queen package</td>
             <td>$<?php echo $DOUBLE_PRICE; ?></td>
-            <td><input type="number" name="doubleItalian" min="0" max="200" value="0"></td>
+            <td><input type="number" name="doubleItalian" min="0" max="200" value="<?php echo $doubleIQuantity; ?>"></td>
         </tr>
         <tr>
             <td>Carniolan single-queen package</td>
             <td>$<?php echo $SINGLE_PRICE; ?></td>
-            <td><input type="number" name="singleCarni" min="0" max="200" value="0"></td>
+            <td><input type="number" name="singleCarni" min="0" max="200" value="<?php echo $singleCQuantity; ?>"></td>
         </tr>
         <tr>
             <td>Carniolan double-queen package</td>
             <td>$<?php echo $DOUBLE_PRICE; ?></td>
-            <td><input type="number" name="doubleCarni" min="0" max="200" value="0"></td>
+            <td><input type="number" name="doubleCarni" min="0" max="200" value="<?php echo $doubleCQuantity; ?>"></td>
         </tr>
     </table>
 
@@ -156,82 +183,107 @@
 
     <table class="order">
         <tr>
-            <th>Individual Queen Breed</th>
+            <th>Individual Queen Bees</th>
             <th>Price</th>
             <th></th>
         </tr>
         <tr>
             <td>Separate Italian queen</td>
             <td>$<?php echo $QUEEN_PRICE; ?></td>
-            <td><input type="number" name="ItalianQueens" min="0" max="200" value="0"></td>
+            <td><input type="number" name="ItalianQueens" min="0" max="200" value="<?php echo $IQueenQuantity; ?>"></td>
         </tr>
         <tr>
             <td>Separate Carniolan queen</td>
             <td>$<?php echo $QUEEN_PRICE; ?></td>
-            <td><input type="number" name="CarniQueens" min="0" max="200" value="0"></td>
+            <td><input type="number" name="CarniQueens" min="0" max="200" value="<?php echo $CQueenQuantity; ?>"></td>
         </tr>
     </table>
 
     <div class="sectionTitle pickupTitle">Pickup Location</div>
     <table class="pickup">
         <tr>
-            <th>Mat-Su Valley</th>
-            <th>Kenai Peninsula</th>
-            <th>Central Alaska</th>
+            <th>Anchorage / Valley</th>
+            <th>Peninsula</th>
+            <th>Interior</th>
+            <th>Other</th>
         </tr>
         <tr>
             <td>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Anchorage" checked/>
+                    <input type="radio" name="pickupLoc" value="Anchorage" <?php
+                        if ($sessionPickupPt == "Anchorage") echo "checked"; ?>/>
                     <label>Anchorage</label>
                 </div>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Wasilla"/>
+                    <input type="radio" name="pickupLoc" value="Wasilla" <?php
+                        if ($sessionPickupPt == "Wasilla") echo "checked"; ?>/>
                     <label>Wasilla</label>
                 </div>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Palmer"/>
+                    <input type="radio" name="pickupLoc" value="Palmer" <?php
+                        if ($sessionPickupPt == "Palmer") echo "checked"; ?>/>
                     <label>Palmer</label>
                 </div>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Eagle River"/>
+                    <input type="radio" name="pickupLoc" value="Eagle River" <?php
+                        if ($sessionPickupPt == "Eagle River") echo "checked"; ?>/>
                     <label>Eagle River</label>
                 </div>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Big Lake"/>
+                    <input type="radio" name="pickupLoc" value="Big Lake" <?php
+                        if ($sessionPickupPt == "Big Lake") echo "checked"; ?>/>
                     <label>Big Lake</label>
                 </div>
             </td>
             <td>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Homer"/>
+                    <input type="radio" name="pickupLoc" value="Homer" <?php
+                        if ($sessionPickupPt == "Homer") echo "checked"; ?>/>
                     <label>Homer</label>
                 </div>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Soldotna"/>
+                    <input type="radio" name="pickupLoc" value="Soldotna" <?php
+                        if ($sessionPickupPt == "Soldotna") echo "checked"; ?>/>
                     <label>Soldotna</label>
-                </div>
-                <div class="point">
-                    <input type="radio" name="pickupLoc" value="Other"/>
-                    <label><i>(Other)</i></label>
                 </div>
             </td>
             <td>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Fairbanks"/>
+                    <input type="radio" name="pickupLoc" value="Fairbanks" <?php
+                        if ($sessionPickupPt == "Fairbanks") echo "checked"; ?>/>
                     <label>Fairbanks</label>
                 </div>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Healy"/>
+                    <input type="radio" name="pickupLoc" value="Healy" <?php
+                        if ($sessionPickupPt == "Healy") echo "checked"; ?>/>
                     <label>Healy</label>
                 </div>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Nenana"/>
+                    <input type="radio" name="pickupLoc" value="Nenana" <?php
+                        if ($sessionPickupPt == "Nenana") echo "checked"; ?>/>
                     <label>Nenana</label>
                 </div>
+            </td>
+            <td>
                 <div class="point">
-                    <input type="radio" name="pickupLoc" value="Other"/>
-                    <label><i>(Other)</i></label>
+                    <input type="radio" name="pickupLoc" value="Palmer (Copper River Basin)" <?php
+                        if ($sessionPickupPt == "Nenana") echo "checked"; ?>/>
+                    <label>Copper River Basin</label>
+                </div>
+                <div class="point">
+                    <input type="radio" name="pickupLoc" value="Valdez (Copper River Basin)" <?php
+                        if ($sessionPickupPt == "Nenana") echo "checked"; ?>/>
+                    <label>Valdez</label>
+                </div>
+                <div class="point">
+                    <input type="radio" name="pickupLoc" value="Fairbanks (Delta Junction)" <?php
+                        if ($sessionPickupPt == "Other") echo "checked"; ?>/>
+                    <label>Delta Junction</label>
+                </div>
+                <div class="point">
+                    <input type="radio" name="pickupLoc" value="Other" <?php
+                        if ($sessionPickupPt == "Other") echo "checked"; ?>/>
+                    <label><i>(Other / Bush)</i></label>
                 </div>
             </td>
         </tr>
@@ -241,14 +293,14 @@
     </div>
 
     <div class="notes">
-        <span class="title">Special Notes</span>
-        <textarea name="notes"></textarea>
+        <div class="title sectionTitle">Special Notes</div>
+        <textarea><?php echo $sessionNotes; ?></textarea>
     </div>
 
     <hr class="fancy">
 
     <p id="pickupWarning">
-        Bees are live animals and they have to picked up on the day of delivery. It's still cold in April and its critical that the bees find a home as soon as possible. In the checkout page, be sure to provide us with a way to contact you that you will be monitoring during the time of delivery. This is essential for proper delivery. Thank you!
+        Bees are live animals and they have to picked up on the day of delivery. The feed can in the package contains just enough nourishment to make the trip to Alaska and is not designed for prolonged use. It's critical that the bees are picked up as soon as possible. In the checkout page, be sure to provide us with a way to contact you that you will be monitoring during the time of delivery. This is essential for proper delivery.
     </p>
 
     <div class="summary">

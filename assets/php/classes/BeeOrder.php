@@ -11,18 +11,17 @@ class BeeOrder extends Order
     private $pickupPoint_, $customLoc_, $notes_;
 
 
-    public function __construct($nSingleItalians, $nDoubleItalians, $nSingleCarniolans,
-        $nDoubleCarniolans, $nItalianQueens, $nCarniolanQueens, $pickupPoint,
-        $customPickupLoc, $notes)
+    public function __construct($nSingleIt, $nDoubleIt, $nSingleC,
+        $nDoubleC, $nItQ, $nCarniQ, $pickupPoint, $customPickupLoc, $notes)
     {
-        $this->nSIts_ = htmlentities(strip_tags($nSingleItalians));
-        $this->nDIts_ = htmlentities(strip_tags($nDoubleItalians));
+        $this->nSIts_ = htmlentities(strip_tags($nSingleIt == "" ? "0" : $nSingleIt));
+        $this->nDIts_ = htmlentities(strip_tags($nDoubleIt == "" ? "0" : $nDoubleIt));
 
-        $this->nSCarnis_ = htmlentities(strip_tags($nSingleCarniolans));
-        $this->nDCarnis_ = htmlentities(strip_tags($nDoubleCarniolans));
+        $this->nSCarnis_ = htmlentities(strip_tags($nSingleC == "" ? "0" : $nSingleC));
+        $this->nDCarnis_ = htmlentities(strip_tags($nDoubleC == "" ? "0" : $nDoubleC));
 
-        $this->nItQ_    = htmlentities(strip_tags($nItalianQueens));
-        $this->nCarniQ_ = htmlentities(strip_tags($nCarniolanQueens));
+        $this->nItQ_    = htmlentities(strip_tags($nItQ == "" ? "0" : $nItQ));
+        $this->nCarniQ_ = htmlentities(strip_tags($nCarniQ == "" ? "0" : $nCarniQ));
 
         $this->pickupPoint_ = htmlentities(strip_tags($pickupPoint));
         $this->customLoc_   = htmlentities(strip_tags($customPickupLoc));
@@ -147,7 +146,7 @@ class BeeOrder extends Order
                 return 10 * $nPackages;
 
             case 'Other':
-                return max($nPackages * 5, 10);
+                return $nPackages * 10;
 
             default:
                 return 0;
