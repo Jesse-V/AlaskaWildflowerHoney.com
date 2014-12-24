@@ -46,7 +46,7 @@
         <h1>Ready to order bees?<br><span class="subtitle">You've come to the right place.</span></h1>
     </div>
     <div id="introRight">
-        <img src="assets/images/Apis mellifera 08.jpg" alt="A honeybee visiting a pink flower, courtesy Wikimedia."/>
+        <img src="/assets/images/Apis%20mellifera%2008.jpg" alt="A honeybee visiting a pink flower, courtesy Wikimedia."/>
         <div class="attribute">
             by Jerzy Strzelecki, courtesy <a href="https://commons.wikimedia.org/wiki/File:Apis_mellifera(js)08.jpg">Wikimedia</a>
         </div>
@@ -236,13 +236,13 @@
             </td>
         </tr>
     </table>
-    <div id="transCharge" class="sub">
+    <div id="transCharge">
         <br>
     </div>
 
     <div class="notes">
         <span class="title">Special Notes</span>
-        <textarea class="sub" name="notes"></textarea>
+        <textarea name="notes"></textarea>
     </div>
 
     <hr class="fancy">
@@ -286,7 +286,7 @@
     </table>
 
     <div id="footerPic">
-        <img src="assets/images/Apis mellifera 01.jpg" alt="A honeybee visiting a purple flower, courtesy Wikimedia."/>
+        <img src="/assets/images/Apis%20mellifera%2001.jpg" alt="A honeybee visiting a purple flower, courtesy Wikimedia."/>
         <div class="attribute">
             by Jerzy Strzelecki, courtesy <a href="https://commons.wikimedia.org/wiki/File:Apis_mellifera(js)01.jpg">Wikimedia</a>
         </div>
