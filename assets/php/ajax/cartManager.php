@@ -57,8 +57,8 @@
                 }
                 else
                 {
-                    $success = updateBeeOrder($_GET['selection'], $_GET['pickup']) ?
-                        "Success" : "Failure";
+                    $success = updateBeeOrder($_GET['selection'],
+                        $_GET['pickup']) ? "Success" : "Failure";
                     $transCharge = $_SESSION['beeOrder']->getTransportationCharge();
                     $subtotal = $_SESSION['beeOrder']->getSubtotal();
 
@@ -123,6 +123,18 @@
 
     function updateBeeOrder($selection, $pickup)
     {
+        if (isset($_SESSION['beeOrder']))
+        {
+            //if choice is already other and custom location stored, and given other with no custom location, then migrate choice
+            if ($_SESSION['beeOrder']->getPickupPoint() == "Other" &&
+                strlen($_SESSION['beeOrder']->getCustomPickupPt()) > 0 &&
+                $pickup['pickupLoc'] == "Other" &&
+                strlen($pickup['customDest']) == 0)
+                $pickup['customDest'] = $_SESSION['beeOrder']->getCustomPickupPt();
+        }
+
+        //$pickup['pickupDate'] //TODO
+
         $_SESSION['beeOrder'] = new BeeOrder(
             ltrim($selection['singleItalian'], "0"), //strip leading 0s (issue #46)
             ltrim($selection['doubleItalian'], "0"),
@@ -132,6 +144,7 @@
             ltrim($selection['CarniQueens'],   "0"),
             trim($pickup['pickupLoc']),
             trim($pickup['customDest']),
+            trim($pickup['pickupDate']),
             trim($pickup['notes'])
         );
 

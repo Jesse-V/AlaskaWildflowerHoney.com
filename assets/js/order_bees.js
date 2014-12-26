@@ -45,7 +45,7 @@ function updateTransportationMessage(radioB) {
                         '<label>April 11th</label>' +
                     '</span>' +
                     '<span class="option" onclick="choseDate(this); queueOrderUpdate();">' +
-                        '<input type="radio"  name="dateChoice" value="25"/>' +
+                        '<input type="radio" name="dateChoice" value="25"/>' +
                         '<label>April 25th</label>' +
                     '</span>' +
                 '</p>');
@@ -139,7 +139,8 @@ function updateSessionOrder() {
     var pickup = {};
     pickup['pickupLoc'] = $('input[name=pickupLoc]:checked', 'table.pickup').val();
     pickup['notes'] = $(".notes textarea").val();
-    pickup['customLoc'] = $("input[name=customDest]").length == 0 ? "" : $("input[name=customDest]").val();
+    pickup['customDest'] = $("input[name=customDest]").val();
+    pickup['pickupDate'] = $("input[name=dateChoice]:checked").val();
 
     //AJAX to update supply order
     $.ajax({

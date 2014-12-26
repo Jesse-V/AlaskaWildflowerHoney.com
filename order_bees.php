@@ -47,8 +47,8 @@
 
     //generate empty quotes for Javascript if value isn't set, otherwise set to value
     $sessionCustomDest = "''";
-    if (isset($_SESSION['beeOrder']) && $_SESSION['beeOrder']->getCustomPickupPt().length > 0)
-        $sessionCustomDest = $_SESSION['beeOrder']->getCustomPickupPt();
+    if (isset($_SESSION['beeOrder']) && strlen($_SESSION['beeOrder']->getCustomPickupPt()) > 0)
+        $sessionCustomDest = "'".$_SESSION['beeOrder']->getCustomPickupPt()."'";
 
 
     //create Javascript vars

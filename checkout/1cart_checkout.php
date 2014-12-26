@@ -23,13 +23,6 @@
     }
     else
     {
-        /*
-         echo '
-            <h2><b> Alert: we are currently doing some maintenance on the payment system. Please wait on proceeding through checkout until we have finished, so check back later. Thank you.
-            </b></h2>
-            ';
-        */
-
         $total = echoCart($_SESSION['supplies']);
         echoIntroGreeting();
         echoDynamicForm($total, "3order_submit.php");

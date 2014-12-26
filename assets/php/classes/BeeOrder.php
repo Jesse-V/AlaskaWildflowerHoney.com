@@ -8,11 +8,11 @@ class BeeOrder extends Order
     private $nSIts_ = 0, $nDIts_ = 0;
     private $nSCarnis_ = 0, $nDCarnis_ = 0;
     private $nItQ_   = 0, $nCarniQ_ = 0;
-    private $pickupPoint_, $customLoc_, $notes_;
+    private $pickupPoint_, $customLoc_, $pickupDate_, $notes_;
 
 
     public function __construct($nSingleIt, $nDoubleIt, $nSingleC,
-        $nDoubleC, $nItQ, $nCarniQ, $pickupPoint, $customPickupLoc, $notes)
+        $nDoubleC, $nItQ, $nCarniQ, $pickupPoint, $customPickupLoc, $pickupDate, $notes)
     {
         $this->nSIts_ = htmlentities(strip_tags($nSingleIt == "" ? "0" : $nSingleIt));
         $this->nDIts_ = htmlentities(strip_tags($nDoubleIt == "" ? "0" : $nDoubleIt));
@@ -25,6 +25,7 @@ class BeeOrder extends Order
 
         $this->pickupPoint_ = htmlentities(strip_tags($pickupPoint));
         $this->customLoc_   = htmlentities(strip_tags($customPickupLoc));
+        $this->pickupDate_   = htmlentities(strip_tags($pickupDate));
         $this->notes_       = htmlentities(strip_tags($notes));
     }
 
