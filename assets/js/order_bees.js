@@ -31,6 +31,10 @@ function changePickupLocation(radioB) {
 function updateTransportationMessage(radioB) {
     var tCharge = $("#transCharge");
 
+    //autofill radio buttons from session variable
+    var checked11 = sessionPickupDate == "11" ? "checked" : "";
+    var checked25 = sessionPickupDate == "25" ? "checked" : "";
+
     switch (radioB.val()) {
         case 'Anchorage':
         case 'Wasilla':
@@ -41,11 +45,13 @@ function updateTransportationMessage(radioB) {
                     'Please choose the day you would like your bees to arrive:' +
                     '<br>' +
                     '<span class="option" onclick="choseDate(this); queueOrderUpdate();">' +
-                        '<input type="radio" name="dateChoice" value="11"/>' +
+                        '<input type="radio" name="dateChoice" value="11" ' +
+                            checked11 + '/>' +
                         '<label>April 11th</label>' +
                     '</span>' +
                     '<span class="option" onclick="choseDate(this); queueOrderUpdate();">' +
-                        '<input type="radio" name="dateChoice" value="25"/>' +
+                        '<input type="radio" name="dateChoice" value="25" ' +
+                            checked25 + '/>' +
                         '<label>April 25th</label>' +
                     '</span>' +
                 '</p>');

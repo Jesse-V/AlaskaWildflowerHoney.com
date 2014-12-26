@@ -50,6 +50,10 @@
     if (isset($_SESSION['beeOrder']) && strlen($_SESSION['beeOrder']->getCustomPickupPt()) > 0)
         $sessionCustomDest = "'".$_SESSION['beeOrder']->getCustomPickupPt()."'";
 
+    $sessionPickupDate = "''";
+    if (isset($_SESSION['beeOrder']) && strlen($_SESSION['beeOrder']->getPickupDate()) > 0)
+        $sessionPickupDate = "'".$_SESSION['beeOrder']->getPickupDate()."'";
+
 
     //create Javascript vars
     echo "
@@ -58,6 +62,7 @@
             var doublePrice = $DOUBLE_PRICE;
             var queenPrice  = $QUEEN_PRICE;
             var sessionCustomDest = $sessionCustomDest;
+            var sessionPickupDate = $sessionPickupDate;
         </script>";
 ?>
 

@@ -220,6 +220,12 @@ class BeeOrder extends Order
     }
 
 
+    public function getPickupDate()
+    {
+        return $this->pickupDate_;
+    }
+
+
     public function getNotes()
     {
         return $this->notes_;
