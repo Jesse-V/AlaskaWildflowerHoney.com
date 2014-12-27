@@ -60,7 +60,9 @@ function getCart()
         $total += $subtotal;
         $cartStr .= '
             </table>
-            <div class="subtotal">Subtotal: $'.$subtotal.'</div>';
+            <div class="subtotal">Subtotal: $'
+            .number_format((float)$subtotal, 2, '.', '').
+            '</div>';
 
         if (isset($_SESSION['supplies']))
            $cartStr .= "<p>Pickup location: ".$_SESSION['supplies']->pickupLocation_."</p>";
@@ -113,7 +115,9 @@ function getCart()
         $total += $subtotal;
         $cartStr .= '
             </table>
-            <div class="subtotal">Subtotal: $'.$subtotal.'</div>';
+            <div class="subtotal">Subtotal: $'
+            .number_format((float)$subtotal, 2, '.', '').
+            '</div>';
     }
 
     $total = number_format((float)$total, 2, '.', '');

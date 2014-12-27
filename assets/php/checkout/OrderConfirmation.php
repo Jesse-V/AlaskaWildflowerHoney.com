@@ -1,13 +1,23 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/anet_php_sdk/AuthorizeNet.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
 
 
-    if (empty($_SESSION) || empty($_POST) || !isset($_POST['nextDestination']) || !isset($_POST['paymentMethod']))
+    if (empty($_SESSION) || empty($_POST))
     {
-        echo '<p>Oops! You seemed to have reached this page in error, as your cart is currently empty or not enough information was sent to this page.<br><br>Please visit the <a href="/order_supplies.php">Supplies store</a> or the <a href="/order_bees.php">Bees store</a>. Thanks!</p>';
+        echo '<p>Oops! You seemed to have reached this page in error, as your cart is currently empty or not enough information was sent to this page. Please visit the
+                <a href="/order_supplies.php">Supplies store</a> or the
+                <a href="/order_bees.php">Bees store</a>. Thanks!
+            </p>';
+    }
+    else if (!validInput($_POST)) //check for missing/invalid required information
+    {
+        echo '<p>Oops! It looks like you forgot to fill out some necessary information in the checkout page. Please go back and fill out the payment and contact information.
+                <br><br>
+                <form>
+                    <input type="submit" value="Back to Checkout"
+                        onClick="history.go(-1); return true;" class="fancy">
+                </form>
+            </p>';
     }
     else
     {
@@ -20,7 +30,7 @@
                 This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. If something needs adjustment, please click your browser's back button or use the Edit Cart button to the right. Thanks again for shopping with us!
             </p>";
 
-        echoCart($_SESSION['supplies']);
+        echoCart();
 
         if ($_POST['paymentMethod'] == "card")
         { //it's a confirmation of a card checkout
@@ -81,6 +91,42 @@
             <button type="submit" id="confirm" class="submit fancy">Confirm, this information is accurate.</button>
         </p>
         </form>';
+    }
+
+
+
+    //returns true if all required fields are present and valid
+    function validInput($fields)
+    {
+        if (!isset($fields['paymentMethod']) ||
+            ($fields['paymentMethod'] != "check" &&
+                $fields['paymentMethod'] != "card"))
+            return false;
+
+        if (!isset($fields['nextDestination']))
+            return false;
+
+        if (!isset($fields['x_ship_to_first_name']) ||
+            strlen($fields['x_ship_to_first_name']) < 2 ||
+            strlen($fields['x_ship_to_first_name']) > 40)
+            return false;
+
+        if (!isset($fields['x_ship_to_last_name']) ||
+            strlen($fields['x_ship_to_last_name']) < 2 ||
+            strlen($fields['x_ship_to_last_name']) > 25)
+            return false;
+
+        if (!isset($fields['primaryPhone']) ||
+            strlen($fields['primaryPhone']) < 7 ||
+            strlen($fields['primaryPhone']) > 15)
+            return false;
+
+        if (!isset($fields['x_email']) ||
+            strlen($fields['x_email']) < 5 ||
+            strlen($fields['x_email']) > 50)
+            return false;
+
+        return true;
     }
 
 

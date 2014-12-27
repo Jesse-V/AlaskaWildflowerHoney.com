@@ -14,28 +14,30 @@
 
     if (empty($_SESSION))
     {
-        echo "
-            <p>
-                Oops! We cannot show you a receipt because not enough information was sent to this page. One possible explanation is that you have already completed the transaction. If you feel that you have reached this message in error, please notify us by sending an email to <a href=\"mailto:jvictors@jessevictors.com?Subject=Receipt%20error\" target=\"_top\">jvictors@jessevictors.com</a> and we will try to address this issue promptly. We apologize for the inconvenience.
-            </p>";
+        echo "<p>
+                Sorry, something went wrong and we are unable to show you a receipt.<br>This most likely explanation is that you have already completed the transaction.
+            </p><br>";
     }
     else
     {
-        echoCart();
+        $total = getCart()['total'];
 
         $firstName = $_SESSION['contactInfo']['x_ship_to_first_name'];
         $lastName  = $_SESSION['contactInfo']['x_ship_to_last_name'];
 
         echo '
             <p>
-                Thank you '.$firstName.'! Your order has been sent to us. Please send your check to<br>
+                Thank you '.$firstName.'! Your order has been sent to us. Please send your check for $'.$total.' to<br>
                 Alaska Wildflower Honey<br>
                 7449 S. Babcock Blvd.<br>
                 Wasilla, AK 99623<br>
             </p>
             <p>
-                We will hold your order for two weeks, awaiting the arrival of your check. You will shortly receive an email receipt of your order. Thank you for ordering online!
-            </p>';
+                We will hold your order for two weeks, awaiting the arrival of your check.
+            </p>
+            <p>
+                You will shortly receive an email receipt of your order. Thank you for ordering online!
+            </p><br>';
 
         sendCheckCustomerEmail($_SESSION['contactInfo'],
             'Alaska Wildflower Honey <victors@mtaonline.net>',
