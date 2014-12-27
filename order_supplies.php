@@ -73,11 +73,9 @@
             <div class="option">
                 <input type="radio" name="pickupLoc" value="at the bee meeting"/>I will pick these up at the next SABA beekeepers meeting.
             </div>
-            <!--
             <div class="option">
-                <input type="radio" name="pickupLoc" value="along with the bee shipment"/>To be picked up with the spring bee shipment.
+                <input type="radio" name="pickupLoc" value="along with the bee shipment"/>To be picked up with the bee shipments in April.
             </div>
-            -->
         </p>
     </div>
 
