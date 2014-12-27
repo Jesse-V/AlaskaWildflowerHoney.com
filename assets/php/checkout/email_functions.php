@@ -5,10 +5,28 @@
 
     date_default_timezone_set('America/Anchorage');
 
+    /*
+        The email system works so that both parties get two emails each.
+        Payment by check
+            Both parties get one email each.
+            Customer:
+                From 5check_receipt, showing them their receipt
+            Dad:
+                From 5check_receipt, telling them to assemble & hold the order
+        Payment by card
+            Both parties get two email each.
+            Customer:
+                From 3order_submit, showing them their receipt
+                From Authorize.net, indicating success or failure of payment
+            Dad:
+                From 3order_submit, showing them the customer's receipt
+                From Authorize.net, indicating success or failure of payment
+    */
 
+
+    //order receipt to customer, before Authorize.net processing
     function sendCardCustomerEmail1($contactArray, $from, $subject, $firstName)
-    { //receipt email sent before the processing through Authorize.net
-
+    {
         $cartData = getCart();
         $lastFour = substr($contactArray['x_card_num'], -4);
         $html = '
@@ -40,7 +58,7 @@
         else if (isset($_SESSION['beeOrder']))
             $html .= "We will record your bee order";
 
-                        $html .= ' once the transaction has been approved on the card ending with '.$lastFour.'. Thank you for ordering online!
+                        $html .= ' once the transaction has been approved on the '.$lastFour.' card. Thank you for ordering online!
                     </p>
                     <p>
                         Your complete order is as follows:
@@ -58,9 +76,10 @@
     }
 
 
-    function sendCardDadEmail1($contactArray, $from, $subject, $firstName, $lastName)
-    { //sent to dad before customer's card is sent through Authorize.net
 
+    //order receipt to dad, before Authorize.net processing
+    function sendCardDadEmail1($contactArray, $from, $subject, $firstName, $lastName)
+    {
         $cartData = getCart();
         $html = '
             <html>
@@ -113,12 +132,11 @@
     }
 
 
-    //per ticket #21, if the customer's card goes through they will get an email from Authorize.net, so there's no need to send one ourself
 
-
+    //card payment receipt to dad, after Authorize.net processing
+    //per ticket #21, Authorize.net will sent customer a confirmation
     function sendCardDadEmail2($contactArray, $from, $subject, $firstName, $lastName, $transID)
-    { //sent to dad after the customer's card has been approved by Authorize.net
-
+    {
         $cartData = getCart();
         $lastFour = substr($contactArray['x_card_num'], -4);
         $html = '
@@ -144,11 +162,9 @@
 
             if (isset($_SESSION['beeOrder']))
                 $html .= '<pre>'.getBeeOrderString("card", $cartData['total']).'</pre><br>';
-                //echo '<pre>'.getBeeOrderString("card", $cartData['total']).'</pre><br>';
 
             if (isset($_SESSION['supplies']))
                 $html .= '<pre>'.getSuppliesOrderString("card", $cartData['total']).'</pre><br>';
-                //echo '<pre>'.getSuppliesOrderString("card", $cartData['total']).'</pre><br>';
 
             $html .= '
                     </p>
@@ -181,9 +197,10 @@
     }
 
 
-    function sendCheckCustomerEmail($contactArray, $from, $subject, $firstName)
-    { //sent to customer if they ordered by check
 
+    //order receipt to customer when they pay by check
+    function sendCheckCustomerEmail($contactArray, $from, $subject, $firstName)
+    {
         $cartData = getCart();
         $html = '
             <html>
@@ -229,9 +246,10 @@
     }
 
 
-    function sendCheckDadEmail($contactArray, $from, $subject, $firstName, $lastName)
-    { //receipt sent to dad if the customer ordered by check
 
+    //order receipt to dad when the customer will pay by check
+    function sendCheckDadEmail($contactArray, $from, $subject, $firstName, $lastName)
+    {
         $cartData = getCart();
         $html = '
             <html>
@@ -289,9 +307,10 @@
     }
 
 
-    function sendFailedCustomerEmail($contactArray, $from, $subject, $firstName, $resp)
-    { //alert sent to customer if their card failed
 
+    //alert sent to customer when Authorize.net processing failed
+    function sendFailedCustomerEmail($contactArray, $from, $subject, $firstName, $resp)
+    {
         $cartData = getCart();
         $html = '
             <html>
@@ -334,9 +353,10 @@
     }
 
 
-    function sendFailedDadEmail($contactArray, $from, $subject, $firstName, $lastName, $resp)
-    { //alert sent to dad if customer's card failed
 
+    //alert sent to dad when customer's Authorize.net processing failed
+    function sendFailedDadEmail($contactArray, $from, $subject, $firstName, $lastName, $resp)
+    {
         $cartData = getCart();
         $html = '
             <html>
@@ -380,8 +400,10 @@
     }
 
 
+
+    //sends an HTML-encoded email to an address, from an address
     function sendEmail($to, $from, $subject, $htmlMessage)
-    { //sends an HTML email
+    {
 
         $headers = 'MIME-Version: 1.0'."\r\n" .
             'Content-type: text/html; charset=iso-8859-1'."\r\n" .
@@ -393,10 +415,10 @@
     }
 
 
+
+    //CSS from cardTable.css, copied here to work around an encoding bug
     function getTableCSS()
     {
-        //I'm tired of fighting an encoding bug,
-        //  so this is an selection of cardTable.css
         return '
             .cartTable {
                 width: 100%;
@@ -434,12 +456,14 @@
 
 
 
+    //generate data string for a bee order
     function getBeeOrderString($paymentType, $total)
     {
         $beeOrder = $_SESSION['beeOrder'];
 
         $date = todaysDate();
         $pickupPoint = $beeOrder->getActualDestination();
+        $pickupDate = $beeOrder->getPickupDate();
         $notes = $beeOrder->getNotes();
 
         $numSingleIt = $beeOrder->getSingleItalianCount();
@@ -451,17 +475,18 @@
         $personalInfo = $paymentType == "check" ? $_SESSION['contactInfo'] : $_SESSION['paymentInfo'];
         $firstName = $personalInfo['x_ship_to_first_name'];
         $lastName  = $personalInfo['x_ship_to_last_name'];
-        $homePhone = $personalInfo['homePhone'];
-        $cellPhone = $personalInfo['cellPhone'];
-        $texting   = $personalInfo['textCapable'] == "yes" ? "y" : "n";
+        $primaryPhone = $personalInfo['primaryPhone'];
+        $backupPhone = $personalInfo['backupPhone'];
         $emailAddr = $personalInfo['x_email'];
 
         $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t$total\t$total\t$date";
 
-        return "$date\tws\t$pickupPoint\t\t$notes\t$numSingleIt\t$numDoubleIt\t$numSingleCarn\t$numDoubleCarn\t$totalPkgs\t$lastName\t$firstName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t\t$paymentInfo";
+        return "$date\tws\t$pickupPoint\t$pickupDate\t$notes\t$numSingleIt\t$numDoubleIt\t$numSingleCarn\t$numDoubleCarn\t$totalPkgs\t$lastName\t$firstName\t$primaryPhone\t$backupPhone\t\t\t\t\t\t\t$emailAddr\t\t$paymentInfo";
     }
 
 
+
+    //generate data string for a supplies order
     function getSuppliesOrderString($paymentType, $total)
     {
         $suppliesOrder = $_SESSION['supplies'];
@@ -472,9 +497,8 @@
         $personalInfo = $paymentType == "check" ? $_SESSION['contactInfo'] : $_SESSION['paymentInfo'];
         $firstName = $personalInfo['x_ship_to_first_name'];
         $lastName  = $personalInfo['x_ship_to_last_name'];
-        $homePhone = $personalInfo['homePhone'];
-        $cellPhone = $personalInfo['cellPhone'];
-        $texting   = $personalInfo['textCapable'] == "yes" ? "y" : "n";
+        $primaryPhone = $personalInfo['primaryPhone'];
+        $backupPhone = $personalInfo['backupPhone'];
         $emailAddr = $personalInfo['x_email'];
 
         $order = "";
@@ -485,10 +509,12 @@
 
         $paymentInfo = $paymentType == "check" ? "\t$total" : "cc\t$total\t$total\t$date";
 
-        return "$date\tws\t$pickupLoc\t\t\t\t\t\t\t\t$lastName\t$firstName\t$homePhone\t$cellPhone\t$texting\t\t\t\t\t$emailAddr\t$order\t$paymentInfo";
+        return "$date\tws\t$pickupLoc\t\t\t\t\t\t\t\t$lastName\t$firstName\t$primaryPhone\t$backupPhone\t\t\t\t\t\t\t$emailAddr\t$order\t$paymentInfo";
     }
 
 
+
+    //get a string encoding today's date
     function todaysDate()
     {
         $date = getdate();

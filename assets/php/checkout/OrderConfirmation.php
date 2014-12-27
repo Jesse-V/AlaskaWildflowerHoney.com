@@ -18,7 +18,7 @@
 
         echo "
             <p>
-                This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. If something needs adjustment, please click your browser's back button. Thanks again for shopping with us!
+                This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. If something needs adjustment, please click your browser's back button or use the Edit Cart button to the right. Thanks again for shopping with us!
             </p>";
 
         echoCart($_SESSION['supplies']);
@@ -30,8 +30,8 @@
             foreach ($_POST as $key => $cardField)
                 $_SESSION['paymentInfo'][$key] = htmlentities(strip_tags($cardField));
 
-            $_SESSION['paymentInfo']['homePhone'] = formatPhone($_SESSION['paymentInfo']['homePhone']);
-            $_SESSION['paymentInfo']['cellPhone'] = formatPhone($_SESSION['paymentInfo']['cellPhone']);
+            $_SESSION['paymentInfo']['primaryPhone'] = formatPhone($_SESSION['paymentInfo']['primaryPhone']);
+            $_SESSION['paymentInfo']['backupPhone'] = formatPhone($_SESSION['paymentInfo']['backupPhone']);
 
             $x = $_SESSION['paymentInfo']; //just a smaller variable name
             echo '
@@ -65,10 +65,10 @@
             foreach ($_POST as $key => $contactField)
                 $_SESSION['contactInfo'][$key] = htmlentities(strip_tags($contactField));
 
-            $homePhone = formatPhone($_SESSION['contactInfo']['homePhone']);
-            $cellPhone = formatPhone($_SESSION['contactInfo']['cellPhone']);
-            $_POST['homePhone'] = $_SESSION['contactInfo']['homePhone'] = $homePhone;
-            $_POST['cellPhone'] = $_SESSION['contactInfo']['cellPhone'] = $cellPhone;
+            $primaryPhone = formatPhone($_SESSION['contactInfo']['primaryPhone']);
+            $backupPhone = formatPhone($_SESSION['contactInfo']['backupPhone']);
+            $_POST['primaryPhone'] = $_SESSION['contactInfo']['primaryPhone'] = $primaryPhone;
+            $_POST['backupPhone'] = $_SESSION['contactInfo']['backupPhone'] = $backupPhone;
 
             echo '
                 <h3>Shipping and Contact</h3>

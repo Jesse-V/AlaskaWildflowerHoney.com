@@ -54,40 +54,47 @@ function updateTransportationMessage(radioB) {
                             checked25 + '/>' +
                         '<label>April 25th</label>' +
                     '</span>' +
-                '</p>');
+                '</p><input type="hidden" name="dateChoice" value="11/25"/>');
             return;
 
         case 'Soldotna':
-            tCharge.html('<p>There is a $5/package transportation charge for Soldotna. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
+            tCharge.html('<p>There is a $5/package transportation charge for Soldotna. <br><b>Expected arrival date is Saturday, April 18th.</b></p>' +
+                '<input type="hidden" name="dateChoice" value="18"/>');
             return;
 
         case 'Homer':
-            tCharge.html('<p class="mediumHeight">There is a $10/package transportation charge for Homer. Our farthest drop point is Soldotna, so half of this charge goes to compensate the beekeeper that drives up from Homer to collect the bees. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
+            tCharge.html('<p class="mediumHeight">There is a $10/package transportation charge for Homer. Our farthest drop point is Soldotna, so half of this charge goes to compensate the beekeeper that drives up from Homer to collect the bees. <br><b>Expected arrival date is Saturday, April 18th.</b></p>' +
+                '<input type="hidden" name="dateChoice" value="18"/>');
             return;
 
         case 'Healy':
-            tCharge.html('<p>There is a $10/package transportation charge for Healy. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
+            tCharge.html('<p>There is a $10/package transportation charge for Healy. <br><b>Expected arrival date is Saturday, April 18th.</b></p>' +
+                '<input type="hidden" name="dateChoice" value="18"/>');
             return;
 
         case 'Nenana':
-            tCharge.html('<p>There is a $10/package transportation charge for Nenana. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
+            tCharge.html('<p>There is a $10/package transportation charge for Nenana. <br><b>Expected arrival date is Saturday, April 18th.</b></p>' +
+                '<input type="hidden" name="dateChoice" value="18"/>');
             return;
 
         case 'Fairbanks':
-            tCharge.html('<p>There is a $10/package transportation charge for Fairbanks. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
+            tCharge.html('<p>There is a $10/package transportation charge for Fairbanks. <br><b>Expected arrival date is Saturday, April 18th.</b></p>' +
+                '<input type="hidden" name="dateChoice" value="18"/>');
             return;
 
         case 'Valdez (Copper River Basin)':
         case 'Palmer (Copper River Basin)':
-            tCharge.html('<p>Copper River Basin and Valdez bees are distributed by us as far as Palmer. In years past, we have had a beekeeper travel from the Basin to Palmer and pick up all of the bees going in that direction. This has worked well. It saves everyone from having to make the long journey. You should expect to contribute gas money. If you are uncomfortable having someone else transport your bees for you, please select the Palmer option. <br><b>Expected arrival date is Saturday, April 25th.</b></p>');
+            tCharge.html('<p>Copper River Basin and Valdez bees are distributed by us as far as Palmer. In years past, we have had a beekeeper travel from the Basin to Palmer and pick up all of the bees going in that direction. This has worked well. It saves everyone from having to make the long journey. You should expect to contribute gas money. If you are uncomfortable having someone else transport your bees for you, please select the Palmer option. <br><b>Expected arrival date is Saturday, April 25th.</b></p>' +
+                '<input type="hidden" name="dateChoice" value="25"/>');
             return;
 
         case 'Fairbanks (Delta Junction)':
-            tCharge.html('<p>Delta Junction bees are distributed by us as far as Fairbanks. This year, we have had a beekeeper volunteer to drive up to Fairbanks to collect the bees for the Delta area. It will save everyone from having to make the longer journey. You should expect to contribute gas money. If you are uncomfortable having someone else transport your bees for you, please select the Fairbanks option. <br><b>Expected arrival date is Saturday, April 18th.</b></p>');
+            tCharge.html('<p>Delta Junction bees are distributed by us as far as Fairbanks. This year, we have had a beekeeper volunteer to drive up to Fairbanks to collect the bees for the Delta area. It will save everyone from having to make the longer journey. You should expect to contribute gas money. If you are uncomfortable having someone else transport your bees for you, please select the Fairbanks option. <br><b>Expected arrival date is Saturday, April 18th.</b></p>' +
+                '<input type="hidden" name="dateChoice" value="18"/>');
             return;
 
         case 'Other':
-            tCharge.html('<p class="tallHeight">Please add your final destination to the notes box. If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $10/package drop-off fee.<br>Please provide the destination: <input type="text" name="customDest" value="' + sessionCustomDest + '" onkeyup="queueOrderUpdate();" style="padding: 2px 5px; 5px; margin-top: 4px;"/> <br> You can also provide additional instructions in the box below. <b>It will be necesssary for you to make all of the flight arrangements and complete any paperwork required by the air carrier.</b> We are dealing with hundreds of packages on the same day that yours need to be dropped off, so it is necessary that everything is prepared for the arrival of the bees at the drop-off point. </p>');
+            tCharge.html('<p class="tallHeight">Please add your final destination to the notes box. If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $10/package drop-off fee.<br>Please provide the destination: <input type="text" name="customDest" value="' + sessionCustomDest + '" onkeyup="queueOrderUpdate();" style="padding: 2px 5px; 5px; margin-top: 4px;"/> <br> You can also provide additional instructions in the box below. <b>It will be necesssary for you to make all of the flight arrangements and complete any paperwork required by the air carrier.</b> We are dealing with hundreds of packages on the same day that yours need to be dropped off, so it is necessary that everything is prepared for the arrival of the bees at the drop-off point.</p>');
             setTimeout(function() { tCharge.find("input[name=customDest]").focus(); }, 250);
             return;
     }
@@ -146,7 +153,10 @@ function updateSessionOrder() {
     pickup['pickupLoc'] = $('input[name=pickupLoc]:checked', 'table.pickup').val();
     pickup['notes'] = $(".notes textarea").val();
     pickup['customDest'] = $("input[name=customDest]").val();
+
     pickup['pickupDate'] = $("input[name=dateChoice]:checked").val();
+    if (pickup['pickupDate'] == undefined) //set based on hidden static date
+        pickup['pickupDate'] = $("input:hidden[name=dateChoice]").val();
 
     //AJAX to update supply order
     $.ajax({

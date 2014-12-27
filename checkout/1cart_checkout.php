@@ -3,7 +3,7 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/checkoutCartFields.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/checkoutPaymentForms.php');
     session_start();
 
     $_TITLE_ = "Cart Checkout - StevesBees.com";
@@ -23,8 +23,8 @@
     }
     else
     {
-        $total = echoCart($_SESSION['supplies']);
-        echoIntroGreeting();
+        $total = echoCart(); //print cart and total, get total
+        echoIntroGreeting(); //print introduction and buttons
         echoDynamicForm($total, "3order_submit.php");
     }
 
@@ -78,6 +78,7 @@
                 </form>
                 ';
 
+                //print check HTML (methods in checkoutPaymentForms.php)
                 echo getCheckForm("2order_confirmation.php", "5check_receipt.php");
                 echo getCommonFields();
 

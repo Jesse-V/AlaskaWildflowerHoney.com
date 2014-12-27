@@ -117,11 +117,11 @@ function getCommonFields()
                     <table id="phoneTable">
                         <tr>
                             <td><label>Primary Phone:</label></td>
-                            <td><input type="text" class="text" name="homePhone"/></td>
+                            <td><input type="text" class="text" name="primaryPhone"/></td>
                         </tr>
                         <tr>
                             <td><label>Secondary Phone:</label></td>
-                            <td><input type="text" class="text" name="cellPhone"/></td>
+                            <td><input type="text" class="text" name="backupPhone"/></td>
                         </tr>
                     </table>
                 </div>

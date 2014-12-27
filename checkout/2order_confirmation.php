@@ -7,6 +7,7 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php'); //opening HTML
 
 
+    //receive all the POSTed data, let the customer confirm accuracy before processing
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/OrderConfirmation.php');
 
 

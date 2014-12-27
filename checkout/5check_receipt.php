@@ -22,7 +22,7 @@
     }
     else
     {
-        echoCart($_SESSION['supplies']);
+        echoCart();
 
         $firstName = $_SESSION['contactInfo']['x_ship_to_first_name'];
         $lastName  = $_SESSION['contactInfo']['x_ship_to_last_name'];

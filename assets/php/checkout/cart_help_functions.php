@@ -5,6 +5,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/SuppliesOrder.php');
 require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/BeeOrder.php');
 
 
+//echos the cart's html, returns the total
 function echoCart()
 {
     $cart = getCart();
@@ -17,6 +18,7 @@ function echoCart()
 }
 
 
+//returns an array containing the carts html and total
 function getCart()
 {
     $total = 0;
@@ -37,6 +39,7 @@ function getCart()
         $items = $_SESSION['supplies']->getItems();
         $subtotal = 0;
 
+        //print each supply item as a table row
         foreach ($items as $item)
         {
             $price = $item->price_ * $item->quantity_;
@@ -75,6 +78,7 @@ function getCart()
                     <th>Price</th>
                 </tr>';
 
+        //print each supply bee order selection as a table row
         $subtotal = 0;
         $orderItems = $_SESSION['beeOrder']->getPackageOrder();
         foreach ($orderItems as $item)
@@ -88,22 +92,23 @@ function getCart()
             $subtotal += $item['quantity'] * $item['price'];
         }
 
+        //show transportation charges
         $transpCharge = $_SESSION['beeOrder']->getTransportationCharge();
-        if ($transpCharge > 0)
-        {
-            $dest = $_SESSION['beeOrder']->getPickupPoint();
-            if ($dest == "Other")
-                $dest = $_SESSION['beeOrder']->getCustomPickupPt();
+        $dest = $_SESSION['beeOrder']->getPickupPoint();
+        if ($dest == "Other")
+            $dest = $_SESSION['beeOrder']->getCustomPickupPt();
 
-            $cartStr .= "
-                <tr>
-                    <td>Transportation to $dest</td>
-                    <td></td>
-                    <td>$$transpCharge</td>
-                </tr>";
+        $eta = 'April '.$_SESSION['beeOrder']->getPickupDate().'th';
 
-            $subtotal += $transpCharge;
-        }
+        $cartStr .= "
+            <tr>
+                <td>Transportation to $dest on $eta
+                </td>
+                <td></td>
+                <td>$$transpCharge</td>
+            </tr>";
+
+        $subtotal += $transpCharge;
 
         $total += $subtotal;
         $cartStr .= '
@@ -122,9 +127,9 @@ function getShippingContact($x)
             <br>
             Email: '.$x['x_email'].'
             <br>
-            Primary Phone: '.$x['homePhone'].'
+            Primary Phone: '.$x['primaryPhone'].'
             <br>
-            Secondary Phone: '.$x['cellPhone'];
+            Secondary Phone: '.$x['backupPhone'];
 }
 
 ?>

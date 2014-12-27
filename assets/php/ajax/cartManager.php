@@ -133,7 +133,10 @@
                 $pickup['customDest'] = $_SESSION['beeOrder']->getCustomPickupPt();
         }
 
-        //$pickup['pickupDate'] //TODO
+        if (!isset($pickup['customDest']))
+            $pickup['customDest'] = "";
+        if (!isset($pickup['pickupDate']))
+            $pickup['pickupDate'] = "";
 
         $_SESSION['beeOrder'] = new BeeOrder(
             ltrim($selection['singleItalian'], "0"), //strip leading 0s (issue #46)
