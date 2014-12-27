@@ -3,12 +3,11 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
-    session_start();
 
 
     if (empty($_SESSION) || empty($_POST) || !isset($_POST['nextDestination']) || !isset($_POST['paymentMethod']))
     {
-        echo 'Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the Supplies page or the Bees page. Thanks!';
+        echo '<p>Oops! You seemed to have reached this page in error, as your cart is currently empty or not enough information was sent to this page.<br><br>Please visit the <a href="/order_supplies.php">Supplies store</a> or the <a href="/order_bees.php">Bees store</a>. Thanks!</p>';
     }
     else
     {

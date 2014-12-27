@@ -1,7 +1,6 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/email_functions.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
-    session_start();
 
     $_TITLE_ = "Card Receipt - StevesBees.com";
     $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",

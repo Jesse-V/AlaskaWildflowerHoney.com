@@ -3,7 +3,6 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/email_functions.php');
-    session_start();
 
     $_TITLE_ = "Check Receipt - StevesBees.com";
     $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",

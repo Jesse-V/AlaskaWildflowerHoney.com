@@ -2,7 +2,8 @@
     //used to render the HTML for the cart preview on the right-hand side
 
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
-    session_start();
+    if (!isset($_SESSION))
+        session_start();
 
 
     if (!empty($_GET))

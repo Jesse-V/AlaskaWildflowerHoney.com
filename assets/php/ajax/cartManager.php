@@ -3,7 +3,8 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/SuppliesOrder.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/BeeOrder.php');
 
-    session_start();
+    if (!isset($_SESSION))
+        session_start();
 
     try
     {

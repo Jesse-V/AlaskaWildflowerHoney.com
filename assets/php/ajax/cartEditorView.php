@@ -2,14 +2,17 @@
     //used to render the HTML for the cart in cartEditor.php
 
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
-    session_start();
+    if (!isset($_SESSION))
+        session_start();
 
 
-    if ($_GET['action'] == 'getHTML')
+    if (!isset($_GET['action']))
+    {}
+    else if ($_GET['action'] == 'getHTML')
         echo getEditorHTML();
-    if ($_GET['action'] == 'getTotal')
+    else if ($_GET['action'] == 'getTotal')
         echo getEditorTotal();
-    if ($_GET['action'] == 'getAll')
+    else if ($_GET['action'] == 'getAll')
     {
         header('Content-Type: application/json');
         echo json_encode(array('html' => getEditorHTML(), 'total' => getEditorTotal()));

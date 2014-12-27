@@ -4,7 +4,6 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/checkoutPaymentForms.php');
-    session_start();
 
     $_TITLE_ = "Cart Checkout - StevesBees.com";
     $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",
