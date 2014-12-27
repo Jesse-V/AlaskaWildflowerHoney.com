@@ -1,7 +1,7 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/SuppliesOrder.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/BeeOrder.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
 
     date_default_timezone_set('America/Anchorage');
 

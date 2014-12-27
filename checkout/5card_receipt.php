@@ -1,5 +1,5 @@
 <?php
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/email_functions.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/emailReceipts.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
 
     $_TITLE_ = "Card Receipt - StevesBees.com";

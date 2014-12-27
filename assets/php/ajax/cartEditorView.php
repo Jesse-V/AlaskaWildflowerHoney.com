@@ -1,7 +1,7 @@
 <?php
     //used to render the HTML for the cart in cartEditor.php
 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
     if (!isset($_SESSION))
         session_start();
 

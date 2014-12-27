@@ -1,7 +1,7 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/anet_php_sdk/AuthorizeNet.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/checkoutPaymentForms.php');
 

@@ -117,7 +117,7 @@ function getCommonFields()
                     <table id="phoneTable">
                         <tr>
                             <td><label>Primary Phone:</label></td>
-                            <td><input type="text" class="text" name="primaryPhone"/></td>
+                            <td><input required type="text" class="text" name="primaryPhone"/></td>
                         </tr>
                         <tr>
                             <td><label>Secondary Phone:</label></td>

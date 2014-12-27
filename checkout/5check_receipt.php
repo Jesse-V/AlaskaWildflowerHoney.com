@@ -1,8 +1,8 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/anet_php_sdk/AuthorizeNet.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cart_help_functions.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/email_functions.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/emailReceipts.php');
 
     $_TITLE_ = "Check Receipt - StevesBees.com";
     $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",
