@@ -464,7 +464,7 @@
         $date = todaysDate();
         $pickupPoint = $beeOrder->getActualDestination();
         $pickupDate = $beeOrder->getPickupDate();
-        $notes = $beeOrder->getNotes();
+        $notes = $string = trim(preg_replace('/\s+/', ' ', $beeOrder->getNotes()));
 
         $numSingleIt = $beeOrder->getSingleItalianCount();
         $numDoubleIt = $beeOrder->getDoubleItalianCount();
