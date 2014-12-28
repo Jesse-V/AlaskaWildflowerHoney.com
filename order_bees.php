@@ -6,13 +6,16 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     global $db;
 
+    //load the status of the bee and supply stores from the database
     $storeStatusSQL = $db->query("SELECT * FROM StoreStatus");
     if (!$storeStatusSQL)
         die("A fatal database issue was encountered in orderBees.php, storeStatus query. Specifically, ".$db->error);
 
+    //extract the status of each store
     while ($record = $storeStatusSQL->fetch_assoc())
         $storeData[$record['Store']] = $record;
 
+    //if the bee store is closed, show the closed message and no more
     if ($storeData['Bees']['Status'] == 0)
     {
         echo '<p>'.$storeData['Bees']['CloseText'].'</p>';
@@ -328,6 +331,7 @@
     <table id="footerNavigation">
         <tr>
             <?php
+                //if the supply store is open, show a link to it
                 if ($storeData['Supplies']['Status'] == 1)
                 {
                     echo '

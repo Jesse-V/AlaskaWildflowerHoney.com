@@ -12,7 +12,7 @@
 
     echo '<h1>Your receipt</h1>';
 
-    if (empty($_SESSION))
+    if (empty($_SESSION)) //check if the cart is empty, or if they refreshed the page
     {
         echo "<p>
                 Sorry, something went wrong and we are unable to show you a receipt.<br>This most likely explanation is that you have already completed the transaction.

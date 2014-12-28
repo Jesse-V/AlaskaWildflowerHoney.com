@@ -15,6 +15,7 @@
     }
     else
     {
+        //show editor view, and a simple nav button
         echo '<div id="cartEditorView">'.getEditorHTML().getEditorTotal().'</div>
             <form action="/checkout/1cart_checkout.php">
                 <input type="submit" class="fancy" value="Proceed to Checkout">

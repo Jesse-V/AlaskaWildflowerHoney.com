@@ -1,5 +1,6 @@
 <?php
 
+//returns an array of group information from the backend database
 function queryGroups()
 {
     global $db;
@@ -17,6 +18,8 @@ function queryGroups()
 }
 
 
+
+//returns an array of supplies in a given section
 function queryItems($sectionID)
 {
     global $db;
@@ -34,6 +37,8 @@ function queryItems($sectionID)
 }
 
 
+
+//given a list of items and groups, returns an array of them merged
 function groupItems($items, $groups)
 {
     $groupedItems = array();
@@ -49,6 +54,8 @@ function groupItems($items, $groups)
 }
 
 
+
+//get the inventory status of supply items
 function queryInventoryStatus()
 {
     global $db;
@@ -66,6 +73,8 @@ function queryInventoryStatus()
 }
 
 
+
+//prints a section of items, with items into collapsed groups
 function printSection($sectionRecord, $groups)
 {
     echo '
@@ -96,6 +105,7 @@ function printSection($sectionRecord, $groups)
                         <td></td>
                         <td>'.$groups[$item['groupID']]['name'];
 
+                //print group description if there is one
                 $desc = $groups[$item['groupID']]['description'];
                 if (strlen($desc) > 0)
                     echo '<div class="description">'.$desc.'</div>';
@@ -120,15 +130,17 @@ function printSection($sectionRecord, $groups)
 }
 
 
+
+//print a specific item with its inventory status, optionally part of a group
 function echoItem($item, $invStatus, $subItem = false)
 {
-    $quantity = 0; //zero, unless the customer has previously selected it
+    $quantity = 0; //zero, unless the customer wants the item
     if (isset($_SESSION['supplies']))
         foreach ($_SESSION['supplies']->getItems() as $sessionItem)
             if ($sessionItem->itemID_ == $item['itemID'])
                 $quantity = $sessionItem->quantity_;
 
-    if ($subItem)
+    if ($subItem) //if part of a group
     {
         if ($quantity > 0) //if so, show rather than hide (issue #43)
             echo '<tr class="subItem subItem'.$item['groupID'].'">';
@@ -139,7 +151,7 @@ function echoItem($item, $invStatus, $subItem = false)
                 <td>
                     <div class="subItemName">'.$item['name'].'</div>';
     }
-    else
+    else //not part of a group
     {
         echo '
             <tr>
@@ -154,6 +166,7 @@ function echoItem($item, $invStatus, $subItem = false)
     else if ($item['stockStatus'] > 1)
         echo '<div class="description stockStatus">'.$invStatus[$item['stockStatus']].'</div>';
 
+    //print price, formatted compactly
     $price = $item['price'];
     if (substr($price, -strlen(".00")) === ".00")
         $price = substr($price, 0, strlen($price) - strlen(".00"));

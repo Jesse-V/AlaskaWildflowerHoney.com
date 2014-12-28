@@ -11,7 +11,7 @@
     echo '<h1>Your receipt</h1>';
 
     if (empty($_GET) || !isset($_GET['rc']) || !isset($_GET['hash']) || empty($_SESSION))
-    {
+    { //check to see if we received the expected information
         echo "
             <p>
                 Oops! We cannot show you a receipt because not enough information was sent to this page. One possible explanation is that you have already completed the transaction. If you feel that you have reached this message in error, please notify us by sending an email to <a href=\"mailto:jvictors@jessevictors.com?Subject=Receipt%20error\" target=\"_top\">jvictors@jessevictors.com</a> and we will try to address this issue promptly. We apologize for the inconvenience.
@@ -20,7 +20,8 @@
     else if ($_GET['rc'] == 1 || strpos($_GET['resp'], "TESTMODE") !== false)
     {
         if ($_GET['hash'] == hash("sha256", $md5_setting.$_GET['rc'].$_GET['id'].$md5_setting))
-        {
+        { //check signature from Authorize.net and from us
+
             $firstName = $_SESSION['paymentInfo']['x_first_name'];
             $lastName  = $_SESSION['paymentInfo']['x_last_name'];
 

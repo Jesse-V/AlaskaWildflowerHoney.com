@@ -1,7 +1,7 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
 
-
+    //if the page was reached directly or otherwise with no input
     if (empty($_SESSION) || empty($_POST))
     {
         echo '<p>Oops! You seemed to have reached this page in error, as your cart is currently empty or not enough information was sent to this page. Please visit the
@@ -19,7 +19,7 @@
                 </form>
             </p>';
     }
-    else
+    else //everything is in order, show receipt and confirmation button
     {
         echo '
         <h1>Order Confirmation</h1>
@@ -30,18 +30,21 @@
                 This is a confirmation of your shopping cart and order information. Please take a moment to review everything before the order goes through. If it all looks good, please hit the confirmation button below. If something needs adjustment, please click your browser's back button or use the Edit Cart button to the right. Thanks again for shopping with us!
             </p>";
 
-        echoCart();
+        echoCart(); //print cartReceiptView
 
         if ($_POST['paymentMethod'] == "card")
         { //it's a confirmation of a card checkout
 
+            //save credit card information into the session
             $_SESSION['paymentInfo'] = array();
             foreach ($_POST as $key => $cardField)
                 $_SESSION['paymentInfo'][$key] = htmlentities(strip_tags($cardField));
 
+            //format the phone numbers into very readable formats
             $_SESSION['paymentInfo']['primaryPhone'] = formatPhone($_SESSION['paymentInfo']['primaryPhone']);
             $_SESSION['paymentInfo']['backupPhone'] = formatPhone($_SESSION['paymentInfo']['backupPhone']);
 
+            //print billing and shipping information
             $x = $_SESSION['paymentInfo']; //just a smaller variable name
             echo '
             <table class="paymentContact">
@@ -70,10 +73,12 @@
         else
         { //it's a confirmation of a check
 
+            //save contact information into the session
             $_SESSION['contactInfo'] = array();
             foreach ($_POST as $key => $contactField)
                 $_SESSION['contactInfo'][$key] = htmlentities(strip_tags($contactField));
 
+            //format the phone numbers into very readable formats
             $primaryPhone = formatPhone($_SESSION['contactInfo']['primaryPhone']);
             $backupPhone = formatPhone($_SESSION['contactInfo']['backupPhone']);
             $_POST['primaryPhone'] = $_SESSION['contactInfo']['primaryPhone'] = $primaryPhone;

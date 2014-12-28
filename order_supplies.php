@@ -90,6 +90,7 @@
 <table id="footerNavigation">
     <tr>
         <?php
+            //if the bee store is open, show a link to it
             if ($storeData['Bees']['Status'] == 1)
             {
                 echo '  <td>

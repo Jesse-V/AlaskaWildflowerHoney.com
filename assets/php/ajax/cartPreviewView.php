@@ -6,13 +6,14 @@
         session_start();
 
 
+    //take the appropriate action, or do nothing if no action was specified
     if (!empty($_GET))
     {
         if ($_GET['action'] == 'getHTML')
             echo getPreviewHTML();
-        if ($_GET['action'] == 'getTotal')
+        else if ($_GET['action'] == 'getTotal')
             echo getPreviewTotal();
-        if ($_GET['action'] == 'getAll')
+        else if ($_GET['action'] == 'getAll')
         {
             header('Content-Type: application/json');
             echo json_encode(array('html' => getPreviewHTML(), 'total' => getPreviewTotal()));
@@ -57,6 +58,7 @@
 
 
 
+    //get the cartReceiptView's calculated total, return as HTML
     function getPreviewTotal()
     {
         return '<div class="total">Total: $'.getCart()['total'].'</div>';

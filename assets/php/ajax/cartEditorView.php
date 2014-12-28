@@ -6,6 +6,7 @@
         session_start();
 
 
+    //take the appropriate action
     if (!isset($_GET['action']))
     {}
     else if ($_GET['action'] == 'getHTML')
@@ -13,7 +14,7 @@
     else if ($_GET['action'] == 'getTotal')
         echo getEditorTotal();
     else if ($_GET['action'] == 'getAll')
-    {
+    { //return a JSON-encoded array of the HTML and total
         header('Content-Type: application/json');
         echo json_encode(array('html' => getEditorHTML(), 'total' => getEditorTotal()));
     }
@@ -33,6 +34,7 @@
                         <th></th>
                     </tr>';
 
+            //print each item as a table row
             $items = $_SESSION['supplies']->getItems();
             foreach ($items as $item)
             {
@@ -59,6 +61,7 @@
                         <th></th>
                     </tr>';
 
+            //print each bee order item as a table row
             $orderItems = $_SESSION['beeOrder']->getPackageOrder();
             foreach ($orderItems as $key => $item)
             {
@@ -78,6 +81,7 @@
 
 
 
+    //get the cartReceiptView's calculated total, return as HTML
     function getEditorTotal()
     {
         return '<div class="total">Total: $'.getCart()['total'].'</div>';

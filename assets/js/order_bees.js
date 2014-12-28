@@ -18,6 +18,7 @@ $("table.pickup").find(".point").click(function() {
 
 
 
+//update session order, then show the new transportation message text
 function changePickupLocation(radioB) {
     var tChargeEl = $("#transCharge");
 
@@ -28,6 +29,8 @@ function changePickupLocation(radioB) {
 
 
 
+//inject the new transportation charge message according to the selected radio button
+    //some of the messages have additional fields that have their own processing
 function updateTransportationMessage(radioB) {
     var tCharge = $("#transCharge");
 
@@ -108,6 +111,8 @@ numInputs.change(handleQuantityUpdate);
 numInputs.keyup(handleQuantityUpdate);
 handleQuantityUpdate();
 
+
+//client-side filter the new quantity selection, then update the session
 function handleQuantityUpdate() {
     if (this.value != undefined)
     {
@@ -174,6 +179,7 @@ function updateSessionOrder() {
         if (retVal.status == "Success") {
             updateSidebarCartPreview(); //method in cartPreviewUpdater.js
 
+            //update the totals at the bottom of the page
             var summary = $(".summary");
             var total = retVal.subtotal + retVal.transCharge;
             summary.find("#beeSubtotal").html(retVal.subtotal.toFixed(2));

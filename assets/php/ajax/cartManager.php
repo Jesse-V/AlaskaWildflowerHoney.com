@@ -11,8 +11,10 @@
         if (empty($_POST['action']))
             return;
 
+        //if an item should be deleted
         if ($_POST['action'] == 'deleteItem')
         {
+            //if the item is a supplies item
             if ($_POST['table'] == 'suppliesTable')
             {
                 //remove supply selection by itemID
@@ -23,7 +25,7 @@
 
                 echo $success ? "Success" : "Failure";
             }
-            else if ($_POST['table'] == 'beesTable')
+            else if ($_POST['table'] == 'beesTable') //if it's a bee item
             {
                 //remove bee order by bee/queen name
                 $beeOrder = $_SESSION['beeOrder'];
@@ -35,7 +37,7 @@
                 echo $success ? "Success" : "Failure";
             }
         }
-        else if ($_POST['action'] == 'updateOrder')
+        else if ($_POST['action'] == 'updateOrder') //we are updating the order
         {
             //add items to order in batch, replacing any existing supplies order
             if ($_POST['page'] == 'supplies')
@@ -45,6 +47,7 @@
             }
             else if ($_POST['page'] == 'bees')
             {
+                //sum the number of selected packages and queens
                 $count = 0;
                 foreach ($_POST['selection'] as $item)
                     $count += $item;
@@ -52,7 +55,7 @@
                 header('Content-Type: application/json');
                 if ($count == 0) //if no packages or queens are selected
                 {
-                    unset($_SESSION['beeOrder']);
+                    unset($_SESSION['beeOrder']); //clear bee order
                     echo json_encode(array("status" => "Success",
                         "transCharge" => 0, "subtotal" => 0));
                 }
@@ -76,6 +79,7 @@
 
 
 
+    //updates the session's supplies order with the given selection and pickup info
     function updateSuppliesOrder($selection, $pickupLoc)
     {
         global $db;
@@ -90,7 +94,6 @@
         $suppliesSQL = $db->query("SELECT * FROM Supplies WHERE itemID IN ($itemIDs)");
         if (!$suppliesSQL)
             return false;
-            //die("A fatal database issue was encountered in cartManager.php, applySuppliesOrder. Specifically, ".$db->error);
 
         $groups = queryGroups();
         $suppliesOrder = new SuppliesOrder($pickupLoc);
@@ -122,6 +125,7 @@
 
 
 
+    //updates the session's bee order with the given selection and pickup info
     function updateBeeOrder($selection, $pickup)
     {
         if (isset($_SESSION['beeOrder']))
@@ -134,6 +138,7 @@
                 $pickup['customDest'] = $_SESSION['beeOrder']->getCustomPickupPt();
         }
 
+        //if they are undefined, make them blank to avoid server warnings
         if (!isset($pickup['customDest']))
             $pickup['customDest'] = "";
         if (!isset($pickup['pickupDate']))
@@ -157,7 +162,7 @@
 
 
 
-    function queryGroups() //duplicate of method in order_supplies.php
+    function queryGroups() //TODO: duplicate of method in order_supplies.php
     {
         global $db;
 

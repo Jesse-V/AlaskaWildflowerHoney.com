@@ -1,5 +1,6 @@
 <?php
 
+//returns HTML for filling out credit card information
 function getCardFields($amount, $fp_sequence, $api_login_id, $transaction_key, $prefill = false)
 {
     $time = time();
@@ -14,7 +15,7 @@ function getCardFields($amount, $fp_sequence, $api_login_id, $transaction_key, $
         'x_login'         => $api_login_id,
         )
     );
-//Same as recipient (below)
+
     return '
         '.$sim->getHiddenFieldString().'
         <fieldset>
@@ -70,6 +71,7 @@ function getCardFields($amount, $fp_sequence, $api_login_id, $transaction_key, $
 
 
 
+//there's no forms for a check, so this returns mainly informational HTML
 function getCheckForm($confirmDest, $nextDest)
 {
     return '
@@ -91,6 +93,7 @@ function getCheckForm($confirmDest, $nextDest)
 
 
 
+//common shipping and contact information fields for both payment types
 function getCommonFields()
 {
     return '

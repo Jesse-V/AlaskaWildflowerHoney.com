@@ -10,10 +10,10 @@ function updateSidebarCartPreview() {
     })
     .done(function(retVal) {
         var contents = $(".right_col .shoppingCart .contents");
-        if (retVal.total.indexOf('$0.00') >= 0) {
+        if (retVal.total.indexOf('$0.00') >= 0) { //if total is $0
             contents.html('<div class="empty">Currently empty</div>');
         }
-        else {
+        else { //if non-zero total, inject the cart's HTML and total
             contents.html(retVal.html + retVal.total +
                 '<div class="cartActions">' +
                     '<form action="/checkout/CartEditor.php">' +

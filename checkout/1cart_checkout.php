@@ -5,6 +5,7 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/checkoutPaymentForms.php');
 
+    //print header
     $_TITLE_ = "Cart Checkout - StevesBees.com";
     $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",
         "/assets/css/checkout_form.css",
@@ -14,7 +15,7 @@
 
     echo "<h1>Checkout</h1>";
 
-    if (empty($_SESSION))
+    if (empty($_SESSION)) //if cart is empty
     {
         echo '<p>
                 Oops! You seemed to have reached this page in error, as your cart is currently empty.<br><br>Please visit the <a href="/order_supplies.php">Supplies page</a> or the <a href="/order_bees.php">Bees page</a>. Thanks!
@@ -28,11 +29,13 @@
     }
 
 
+    //print footer
     $_JS_ = array("/assets/js/checkout_form.js");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/footer.php'); //closing HTML
     $db->close();
 
 
+    //prints introduction and instructions
     function echoIntroGreeting()
     {
         echo '
@@ -53,6 +56,7 @@
 
 
 
+    //prints both the card and the check forms, which will be fixed by JS
     function echoDynamicForm($total, $nextDest)
     {
         //"'.AuthorizeNetDPM::LIVE_URL.'"

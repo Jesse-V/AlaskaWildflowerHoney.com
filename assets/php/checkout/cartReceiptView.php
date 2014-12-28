@@ -125,6 +125,8 @@ function getCart()
 }
 
 
+
+//print customer's name and basic contact information
 function getShippingContact($x)
 {
     return  $x['x_ship_to_first_name'].' '.$x['x_ship_to_last_name'].'
