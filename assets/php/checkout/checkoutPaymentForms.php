@@ -113,11 +113,11 @@ function getCommonFields()
 
             <fieldset>
                 <div>
-                    <label>Phone numbers. If you have both cell and home numbers, please list both and click the "preferred" button accordingly.</label><br>
+                    <label>Phone numbers. If you have both cell and home numbers, please list both. We need this information to contact you in a timely manner.</label><br>
                     <table id="phoneTable">
                         <tr>
                             <td><label>Primary Phone:</label></td>
-                            <td><input required type="text" class="text" name="primaryPhone"/></td>
+                            <td><input type="text" class="text" name="primaryPhone"/></td>
                         </tr>
                         <tr>
                             <td><label>Secondary Phone:</label></td>

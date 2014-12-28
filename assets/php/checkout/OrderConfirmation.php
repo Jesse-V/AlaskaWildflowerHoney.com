@@ -11,7 +11,7 @@
     }
     else if (!validInput($_POST)) //check for missing/invalid required information
     {
-        echo '<p>Oops! It looks like you forgot to fill out some necessary information in the checkout page. Please go back and fill out the payment and contact information.
+        echo '<p>Something went wrong. It looks like you forgot to fill out some necessary information in the checkout page, or your information was otherwise invalid. Please go back and fill out the payment and contact information.
                 <br><br>
                 <form>
                     <input type="submit" value="Back to Checkout"
@@ -116,9 +116,23 @@
             strlen($fields['x_ship_to_last_name']) > 25)
             return false;
 
-        if (!isset($fields['primaryPhone']) ||
-            strlen($fields['primaryPhone']) < 7 ||
-            strlen($fields['primaryPhone']) > 15)
+        //resolves ticket #40: if payment by card, the phone number is optional
+            //but it still needs to be checked
+        if ($fields['paymentMethod'] == "check")
+        {
+            if (strlen($fields['primaryPhone']) > 15)
+                return false;
+        }
+        else if ($fields['paymentMethod'] == "card")
+        {
+            if (!isset($fields['primaryPhone']) ||
+                strlen($fields['primaryPhone']) < 7 ||
+                strlen($fields['primaryPhone']) > 15)
+                return false;
+        }
+
+        //always optional, but check it for sanity
+        if (strlen($fields['backupPhone']) > 15)
             return false;
 
         if (!isset($fields['x_email']) ||
