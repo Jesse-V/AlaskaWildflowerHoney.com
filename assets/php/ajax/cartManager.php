@@ -8,26 +8,26 @@
 
     try
     {
-        if (empty($_GET['action']))
+        if (empty($_POST['action']))
             return;
 
-        if ($_GET['action'] == 'deleteItem')
+        if ($_POST['action'] == 'deleteItem')
         {
-            if ($_GET['table'] == 'suppliesTable')
+            if ($_POST['table'] == 'suppliesTable')
             {
                 //remove supply selection by itemID
                 $suppliesOrder = $_SESSION['supplies'];
-                $success = $suppliesOrder->removeItemByID($_GET['element']);
+                $success = $suppliesOrder->removeItemByID($_POST['element']);
                 if (count($suppliesOrder->getItems()) == 0)
                     unset($_SESSION['supplies']);
 
                 echo $success ? "Success" : "Failure";
             }
-            else if ($_GET['table'] == 'beesTable')
+            else if ($_POST['table'] == 'beesTable')
             {
                 //remove bee order by bee/queen name
                 $beeOrder = $_SESSION['beeOrder'];
-                $success = $beeOrder->removeOrderByID($_GET['element']);
+                $success = $beeOrder->removeOrderByID($_POST['element']);
                 if ($beeOrder->countPackages() + $beeOrder->getItalianQueenCount() +
                     $beeOrder->getCarniolanQueenCount() == 0)
                     unset($_SESSION['beeOrder']);
@@ -35,18 +35,18 @@
                 echo $success ? "Success" : "Failure";
             }
         }
-        else if ($_GET['action'] == 'updateOrder')
+        else if ($_POST['action'] == 'updateOrder')
         {
             //add items to order in batch, replacing any existing supplies order
-            if ($_GET['page'] == 'supplies')
+            if ($_POST['page'] == 'supplies')
             {
-                $success = updateSuppliesOrder($_GET['selection'], $_GET['pickupLoc']);
+                $success = updateSuppliesOrder($_POST['selection'], $_POST['pickupLoc']);
                 echo $success ? "Success" : "Failure";
             }
-            else if ($_GET['page'] == 'bees')
+            else if ($_POST['page'] == 'bees')
             {
                 $count = 0;
-                foreach ($_GET['selection'] as $item)
+                foreach ($_POST['selection'] as $item)
                     $count += $item;
 
                 header('Content-Type: application/json');
@@ -58,8 +58,8 @@
                 }
                 else
                 {
-                    $success = updateBeeOrder($_GET['selection'],
-                        $_GET['pickup']) ? "Success" : "Failure";
+                    $success = updateBeeOrder($_POST['selection'],
+                        $_POST['pickup']) ? "Success" : "Failure";
                     $transCharge = $_SESSION['beeOrder']->getTransportationCharge();
                     $subtotal = $_SESSION['beeOrder']->getSubtotal();
 

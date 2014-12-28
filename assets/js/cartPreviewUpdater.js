@@ -3,6 +3,7 @@
 function updateSidebarCartPreview() {
     $.ajax({
         url: "/assets/php/ajax/cartPreviewView.php",
+        type: "get",
         data: {
             action: "getAll"
         }

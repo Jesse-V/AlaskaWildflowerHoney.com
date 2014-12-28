@@ -4,6 +4,7 @@ $("input.trash").click(function() {
 
     $.ajax({
         url: "/assets/php/ajax/cartManager.php",
+        type: "post",
         data: {
             action: "deleteItem",
             table: $(button).closest("table").attr('id'),
@@ -52,6 +53,7 @@ function updateTable(button) {
 function updateTotal() { //updates the cart editor's cart total
     $.ajax({
         url: "/assets/php/ajax/cartEditorView.php",
+        type: "get",
         data: {
             action: "getTotal"
         }

@@ -161,6 +161,7 @@ function updateSessionOrder() {
     //AJAX to update supply order
     $.ajax({
         url: "/assets/php/ajax/cartManager.php",
+        type: "post",
         data: {
             action: "updateOrder",
             page: "bees",
