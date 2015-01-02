@@ -28,14 +28,14 @@ that.find("table tr").click(function() {
 
 
 //take action whenever a quantity input changes
-var numInputs = $(".mid_col input[type=number]");
-numInputs.change(handleQuantityUpdate);
-numInputs.keyup(handleQuantityUpdate);
-updateTotal();
+var numInputs = $("#supplyOrder input[type=number]");
+numInputs.change(handleSuppliesQuantityUpdate);
+numInputs.keyup(handleSuppliesQuantityUpdate);
+updateSuppliesTotal();
 
 
 //filter input, update the total based on updated selection
-function handleQuantityUpdate() {
+function handleSuppliesQuantityUpdate() {
     if (this.value == "" || this.value.indexOf('.') > -1)
         this.value = ""; //Chrome/FF have "" if the field contains nonnumerics
 
@@ -47,22 +47,22 @@ function handleQuantityUpdate() {
     if (i > 0 && i != this.value.length)
         this.value = this.value.substring(i, this.value.length);
 
-    queueOrderUpdate();
-    updateTotal(); //TODO: AJAX-powered subtotal calculation?
+    queueSuppliesOrderUpdate();
+    updateSuppliesTotal(); //TODO: AJAX-powered subtotal calculation?
 }
 
 
 //triggers an order update after a timeout, regulating the refresh rate (#44)
 var updateCountdownID = 0;
-function queueOrderUpdate() {
+function queueSuppliesOrderUpdate() {
     clearTimeout(updateCountdownID);
-    updateCountdownID = setTimeout(updateSessionOrder, 250);
+    updateCountdownID = setTimeout(updateSuppliesSessionOrder, 250);
 }
 
 
 //AJAX call to update session order en-masse
-function updateSessionOrder() {
-    var inputs = $(".mid_col input[type=number]");
+function updateSuppliesSessionOrder() {
+    var inputs = $("#supplyOrder input[type=number]");
 
     //identify itemIDs and quantities of selected items
     var selection = {};
@@ -80,7 +80,7 @@ function updateSessionOrder() {
                 action: "updateOrder",
                 page: "supplies",
                 selection: selection,
-                pickupLoc: $('input[name=pickupLoc]:checked', '#pickupPoint').val()
+                pickupLoc: $('input[name=suppliesPickupLoc]:checked', '#pickupPoint').val()
             }
         })
         .done(function(retVal) {
@@ -103,7 +103,7 @@ function updateSessionOrder() {
 
 
 //recalculate the total
-function updateTotal() {
+function updateSuppliesTotal() {
     var total = 0;
     that.find("#supplyOrder tr").each(function() {
         var fields = $(this).find("td");

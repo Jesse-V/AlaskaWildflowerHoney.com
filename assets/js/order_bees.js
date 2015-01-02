@@ -22,7 +22,7 @@ $("table.pickup").find(".point").click(function() {
 function changePickupLocation(radioB) {
     var tChargeEl = $("#transCharge");
 
-    queueOrderUpdate();
+    queueBeeOrderUpdate();
     tChargeEl.hide();
     tChargeEl.fadeIn("slow");
 }
@@ -47,12 +47,12 @@ function updateTransportationMessage(radioB) {
             tCharge.html('<p id="dateChoice">' +
                     'Please choose the day you would like your bees to arrive:' +
                     '<br>' +
-                    '<span class="option" onclick="choseDate(this); queueOrderUpdate();">' +
+                    '<span class="option" onclick="choseDate(this); queueBeeOrderUpdate();">' +
                         '<input type="radio" name="dateChoice" value="11" ' +
                             checked11 + '/>' +
                         '<label>April 11th</label>' +
                     '</span>' +
-                    '<span class="option" onclick="choseDate(this); queueOrderUpdate();">' +
+                    '<span class="option" onclick="choseDate(this); queueBeeOrderUpdate();">' +
                         '<input type="radio" name="dateChoice" value="25" ' +
                             checked25 + '/>' +
                         '<label>April 25th</label>' +
@@ -97,7 +97,7 @@ function updateTransportationMessage(radioB) {
             return;
 
         case 'Other':
-            tCharge.html('<p class="tallHeight">Please add your final destination to the notes box. If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $10/package drop-off fee.<br>Please provide the destination: <input type="text" name="customDest" value="' + sessionCustomDest + '" onkeyup="queueOrderUpdate();" style="padding: 2px 5px; 5px; margin-top: 4px;"/> <br> You can also provide additional instructions in the box below. <b>It will be necesssary for you to make all of the flight arrangements and complete any paperwork required by the air carrier.</b> We are dealing with hundreds of packages on the same day that yours need to be dropped off, so it is necessary that everything is prepared for the arrival of the bees at the drop-off point.</p><input type="hidden" name="dateChoice" value="11/25"/>');
+            tCharge.html('<p class="tallHeight">Please add your final destination to the notes box. If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $10/package drop-off fee.<br>Please provide the destination: <input type="text" name="customDest" value="' + sessionCustomDest + '" onkeyup="queueBeeOrderUpdate();" style="padding: 2px 5px; 5px; margin-top: 4px;"/> <br> You can also provide additional instructions in the box below. <b>It will be necesssary for you to make all of the flight arrangements and complete any paperwork required by the air carrier.</b> We are dealing with hundreds of packages on the same day that yours need to be dropped off, so it is necessary that everything is prepared for the arrival of the bees at the drop-off point.</p><input type="hidden" name="dateChoice" value="11/25"/>');
             setTimeout(function() { tCharge.find("input[name=customDest]").focus(); }, 250);
             return;
     }
@@ -106,14 +106,14 @@ function updateTransportationMessage(radioB) {
 
 
 //update client-side total based on quantity update
-var numInputs = $(".mid_col input[type=number]");
-numInputs.change(handleQuantityUpdate);
-numInputs.keyup(handleQuantityUpdate);
-handleQuantityUpdate();
+var numInputs = $("table.order input[type=number], #transCharge input[type=number]");
+numInputs.change(handleBeesQuantityUpdate);
+numInputs.keyup(handleBeesQuantityUpdate);
+handleBeesQuantityUpdate();
 
 
 //client-side filter the new quantity selection, then update the session
-function handleQuantityUpdate() {
+function handleBeesQuantityUpdate() {
     if (this.value != undefined)
     {
         //same filter as order_supplies.js
@@ -130,22 +130,22 @@ function handleQuantityUpdate() {
             this.value = this.value.substring(i, this.value.length);
     }
 
-    queueOrderUpdate();
+    queueBeeOrderUpdate();
 }
 
 
 
 //triggers an order update after a timeout, regulating the refresh rate (#44)
 var updateCountdownID = 0;
-function queueOrderUpdate() {
+function queueBeeOrderUpdate() {
     clearTimeout(updateCountdownID);
-    updateCountdownID = setTimeout(updateSessionOrder, 500);
+    updateCountdownID = setTimeout(updateBeeSessionOrder, 500);
 }
 
 
 
 //AJAX call to update session order en-masse
-function updateSessionOrder() {
+function updateBeeSessionOrder() {
     var selection = {};
     selection['singleItalian'] = $("input[name=singleItalian]").val();
     selection['doubleItalian'] = $("input[name=doubleItalian]").val();
@@ -203,5 +203,5 @@ function updateSessionOrder() {
 
 //update session order when typing in the notes area
 $(".notes textarea").keyup(function() {
-    queueOrderUpdate();
+    queueBeeOrderUpdate();
 });

@@ -52,13 +52,13 @@
 
         <p class="options">
             <div class="option">
-                <input checked type="radio" name="pickupLoc" value="Big Lake"/>I will pick up my supplies at Big Lake.<br>
+                <input checked type="radio" name="suppliesPickupLoc" value="Big Lake"/>I will pick up my supplies at Big Lake.<br>
             </div>
             <div class="option">
-                <input type="radio" name="pickupLoc" value="at the bee meeting"/>I will pick these up at the next SABA beekeepers meeting.
+                <input type="radio" name="suppliesPickupLoc" value="at the bee meeting"/>I will pick these up at the next SABA beekeepers meeting.
             </div>
             <div class="option">
-                <input type="radio" name="pickupLoc" value="along with the bee shipment"/>To be picked up with the bee shipments in April.
+                <input type="radio" name="suppliesPickupLoc" value="along with the bee shipment"/>To be picked up with the bee shipments in April.
             </div>
         </p>
     </div>
