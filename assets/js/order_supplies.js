@@ -129,4 +129,5 @@ var pickup = $("#pickupPoint");
 pickup.find(".option").click(function() {
     var radioB = $(this).find("input");
     radioB.prop('checked', true);
+    queueSuppliesOrderUpdate();
 });
