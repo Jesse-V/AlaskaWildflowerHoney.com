@@ -32,30 +32,29 @@ class BeeOrder extends Order
 
 
 
-    public function changeQuantity($id, $newQuantity)
+    public function changeQuantity($name, $newQuantity)
     {
-        if (!is_numeric($id) ||         //sanitization check
-            !is_numeric($newQuantity) || $newQuantity > 500)
+        if (!is_numeric($newQuantity) || $newQuantity > 500) //sanitization check
             return false;
 
-        switch ($id)
+        switch ($name)
         {
-            case 1:
+            case "Single Italian Package":
                 $this->nSIts_ = $newQuantity;
                 return true;
-            case 2:
+            case "Double Italian Package":
                 $this->nDIts_ = $newQuantity;
                 return true;
-            case 3:
+            case "Single Carniolan Package":
                 $this->nSCarnis_ = $newQuantity;
                 return true;
-            case 4:
+            case "Double Carniolan Package":
                 $this->nDCarnis_ = $newQuantity;
                 return true;
-            case 5:
+            case "Separate Italian Queen Bee":
                 $this->nItQ_ = $newQuantity;
                 return true;
-            case 6:
+            case "Separate Carniolan Queen Bee":
                 $this->nCarniQ_ = $newQuantity;
                 return true;
         }
@@ -67,7 +66,33 @@ class BeeOrder extends Order
 
     public function removeOrderByID($id) //matches ids in getPackageOrder()
     {
-        return changeQuantity($id, 0);
+        if (!is_numeric($id) ||             //sanitization check
+            !is_numeric($newQuantity) || $newQuantity > 500)
+            return false;
+
+        switch ($id)
+        {
+            case 1:
+                $this->nSIts_ = 0;
+                return true;
+            case 2:
+                $this->nDIts_ = 0;
+                return true;
+            case 3:
+                $this->nSCarnis_ = 0;
+                return true;
+            case 4:
+                $this->nDCarnis_ = 0;
+                return true;
+            case 5:
+                $this->nItQ_ = 0;
+                return true;
+            case 6:
+                $this->nCarniQ_ = 0;
+                return true;
+        }
+
+        return false;
     }
 
 
