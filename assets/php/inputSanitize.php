@@ -6,7 +6,7 @@
     {
         $cleaned = array();
         foreach ($pageInput as $key => $value)
-            $cleaned[$key] = sanitizeVar($value);
+            $cleaned[$key] = is_array($value) ? sanitizeArray($value) : sanitizeVar($value);
         return $cleaned;
     }
 

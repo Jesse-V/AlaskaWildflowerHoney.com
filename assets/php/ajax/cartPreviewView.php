@@ -3,9 +3,9 @@
 
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/inputSanitize.php');
+
     if (!isset($_SESSION))
         session_start();
-
 
     $input = sanitizeArray($_GET);
 

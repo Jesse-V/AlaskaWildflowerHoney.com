@@ -1,7 +1,9 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/inputSanitize.php');
 
     $input = sanitizeArray($_POST);
+
 
     //if the page was reached directly or otherwise with no input
     if (empty($_SESSION) || empty($input))
@@ -34,18 +36,17 @@
 
         echoCart(); //print cartReceiptView
 
+        //format the phone numbers into very readable formats
+        $input['primaryPhone'] = formatPhone($input['primaryPhone']);
+        $input['backupPhone']  = formatPhone($input['backupPhone']);
+
         if ($input['paymentMethod'] == "card")
         { //it's a confirmation of a card checkout
-
-            //format the phone numbers into very readable formats
-            $_SESSION['paymentInfo']['primaryPhone'] = formatPhone($_SESSION['paymentInfo']['primaryPhone']);
-            $_SESSION['paymentInfo']['backupPhone'] = formatPhone($_SESSION['paymentInfo']['backupPhone']);
 
             //save credit card information into the session
             $_SESSION['paymentInfo'] = $input;
 
             //print billing and shipping information
-            $x = $_SESSION['paymentInfo']; //just a smaller variable name
             echo '
             <table class="paymentContact">
                 <tr>
@@ -54,30 +55,24 @@
                 </tr>
                 <tr>
                     <td>
-                        '.$x['x_card_num'].' ('.$x['x_card_code'].') Exp: '.$x['x_exp_date'].'
+                        '.$input['x_card_num'].' ('.$input['x_card_code'].') Exp: '.$input['x_exp_date'].'
                         <br>
-                        '.$x['x_first_name'].' '.$x['x_last_name'].'
+                        '.$input['x_first_name'].' '.$input['x_last_name'].'
                         <br>
-                        '.$x['x_address'].'
+                        '.$input['x_address'].'
                         <br>
-                        '.$x['x_city'].',
-                        '.$x['x_state'].'
-                        '.$x['x_zip'].'
+                        '.$input['x_city'].',
+                        '.$input['x_state'].'
+                        '.$input['x_zip'].'
                     </td>
                     <td>
-                        '.getShippingContact($x).'
+                        '.getShippingContact($input).'
                     </td>
                 </tr>
             </table>';
         }
         else
         { //it's a confirmation of a check
-
-            //format the phone numbers into very readable formats
-            $primaryPhone = formatPhone($_SESSION['contactInfo']['primaryPhone']);
-            $backupPhone = formatPhone($_SESSION['contactInfo']['backupPhone']);
-            $input['primaryPhone'] = $_SESSION['contactInfo']['primaryPhone'] = $primaryPhone;
-            $input['backupPhone'] = $_SESSION['contactInfo']['backupPhone'] = $backupPhone;
 
             //save contact information into the session
             $_SESSION['contactInfo'] = $input;

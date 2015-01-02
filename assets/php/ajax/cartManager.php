@@ -2,11 +2,13 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/SuppliesOrder.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/BeeOrder.php');
-
-    $input = sanitizeArray($_POST);
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/inputSanitize.php');
 
     if (!isset($_SESSION))
         session_start();
+
+    $input = sanitizeArray($_POST);
+
 
     try
     {
@@ -22,8 +24,8 @@
                 if (is_numeric($input['element'])) //sanitization check
                 {
                     //remove supply selection by itemID
-                    $success = $$_SESSION['supplies']->removeItemByID($input['element']);
-                    if (count($$_SESSION['supplies']->getItems()) == 0)
+                    $success = $_SESSION['supplies']->removeItemByID($input['element']);
+                    if (count($_SESSION['supplies']->getItems()) == 0)
                         unset($_SESSION['supplies']);
 
                     echo $success ? "Success" : "Failure";
