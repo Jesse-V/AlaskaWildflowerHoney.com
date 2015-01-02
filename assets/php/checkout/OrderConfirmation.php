@@ -37,14 +37,12 @@
         if ($input['paymentMethod'] == "card")
         { //it's a confirmation of a card checkout
 
-            //save credit card information into the session
-            $_SESSION['paymentInfo'] = array();
-            foreach ($input as $key => $cardField)
-                $_SESSION['paymentInfo'][$key] = sanitizeVar($cardField);
-
             //format the phone numbers into very readable formats
             $_SESSION['paymentInfo']['primaryPhone'] = formatPhone($_SESSION['paymentInfo']['primaryPhone']);
             $_SESSION['paymentInfo']['backupPhone'] = formatPhone($_SESSION['paymentInfo']['backupPhone']);
+
+            //save credit card information into the session
+            $_SESSION['paymentInfo'] = $input;
 
             //print billing and shipping information
             $x = $_SESSION['paymentInfo']; //just a smaller variable name
@@ -75,16 +73,14 @@
         else
         { //it's a confirmation of a check
 
-            //save contact information into the session
-            $_SESSION['contactInfo'] = array();
-            foreach ($input as $key => $contactField)
-                $_SESSION['contactInfo'][$key] = htmlentities(strip_tags($contactField));
-
             //format the phone numbers into very readable formats
             $primaryPhone = formatPhone($_SESSION['contactInfo']['primaryPhone']);
             $backupPhone = formatPhone($_SESSION['contactInfo']['backupPhone']);
             $input['primaryPhone'] = $_SESSION['contactInfo']['primaryPhone'] = $primaryPhone;
             $input['backupPhone'] = $_SESSION['contactInfo']['backupPhone'] = $backupPhone;
+
+            //save contact information into the session
+            $_SESSION['contactInfo'] = $input;
 
             echo '
                 <h3>Shipping and Contact</h3>
@@ -120,7 +116,7 @@
 
         if (!isset($fields['x_ship_to_last_name']) ||
             strlen($fields['x_ship_to_last_name']) < 2 ||
-            strlen($fields['x_ship_to_last_name']) > 25)
+            strlen($fields['x_ship_to_last_name']) > 40)
             return false;
 
         //resolves ticket #40: if payment by card, the phone number is optional

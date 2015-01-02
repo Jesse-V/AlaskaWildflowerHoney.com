@@ -19,13 +19,17 @@
             //if the item is a supplies item
             if ($input['table'] == 'suppliesTable')
             {
-                //remove supply selection by itemID
-                $suppliesOrder = $_SESSION['supplies'];
-                $success = $suppliesOrder->removeItemByID($input['element']);
-                if (count($suppliesOrder->getItems()) == 0)
-                    unset($_SESSION['supplies']);
+                if (is_numeric($input['element'])) //sanitization check
+                {
+                    //remove supply selection by itemID
+                    $success = $$_SESSION['supplies']->removeItemByID($input['element']);
+                    if (count($$_SESSION['supplies']->getItems()) == 0)
+                        unset($_SESSION['supplies']);
 
-                echo $success ? "Success" : "Failure";
+                    echo $success ? "Success" : "Failure";
+                }
+                else
+                    echo "Failure";
             }
             else if ($input['table'] == 'beesTable') //if it's a bee item
             {

@@ -67,12 +67,12 @@
         sendFailedCustomerEmail($_SESSION['paymentInfo'],
             'Alaska Wildflower Honey <victors@mtaonline.net>',
             "The transaction has failed",
-            $firstName, htmlentities($input['resp']));
+            $firstName, $input['resp']);
 
         sendFailedDadEmail($_SESSION['paymentInfo'],
             'AlaskaWildflowerHoney.com <DoNotReply@stevesbees.com>',
             $firstName.' '.$lastName."'s card transaction failed",
-            $firstName, $lastName, htmlentities($input['resp']));
+            $firstName, $lastName, $input['resp']);
 
         echo '
             <form method="get" action="1cart_checkout.php">
