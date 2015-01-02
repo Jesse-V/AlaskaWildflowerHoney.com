@@ -38,6 +38,11 @@
     font-size: 1.1em;
 }
 
+.mid_col table input {
+    padding-left: 2px;
+    width: 40px;
+}
+
 .mid_col input.trash {
     width: 33px;
     height: 36px;

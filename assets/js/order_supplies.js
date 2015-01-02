@@ -40,9 +40,8 @@ function handleQuantityUpdate() {
         this.value = ""; //Chrome/FF have "" if the field contains nonnumerics
 
     var i = 0;
-    while (i < this.value.length && this.value[i] == '0') {
+    while (i < this.value.length && this.value[i] == '0')
         i++;
-    }
 
     //trim leading zeros, except if the whole thing is zeros
     if (i > 0 && i != this.value.length)

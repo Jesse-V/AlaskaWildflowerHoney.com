@@ -34,7 +34,7 @@
                     <tr>
                         <th><b>Beekeeping Supplies</b></th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Price/ea</th>
                         <th></th>
                     </tr>';
 
@@ -46,8 +46,9 @@
 
                 $str .= '<tr>
                         <td>'.$name.'</td>
-                        <td>'.$item->quantity_.'</td>
-                        <td>$'.number_format($item->quantity_ * $item->price_, 2, '.', '').'</td>
+                        <td><input name="'.$item->itemID_.'" type="number" min="0"
+                            value="'.$item->quantity_.'"></td>
+                        <td>$'.number_format($item->price_, 2, '.', '').'</td>
                         <td><input type="button" name="'.$item->itemID_.'" class="trash" value=""></td>
                     </tr>';
             }
@@ -61,7 +62,7 @@
                     <tr>
                         <th><b>Packages of Honeybees</b></th>
                         <th>Quantity</th>
-                        <th>Price</th>
+                        <th>Price/ea</th>
                         <th></th>
                     </tr>';
 
@@ -71,8 +72,9 @@
             {
                 $str .= '<tr>
                         <td>'.$item['name'].'</td>
-                        <td>'.$item['quantity'].'</td>
-                        <td>$'.number_format($item['quantity'] * $item['price'], 2, '.', '').'</td>
+                        <td><input name="'.$item['name'].'" type="number" min="0"
+                            value="'.$item['quantity'].'"></td>
+                        <td>$'.number_format($item['price'], 2, '.', '').'</td>
                         <td><input type="button" name="'.$item['id'].'" class="trash" value=""></td>
                     </tr>';
             }

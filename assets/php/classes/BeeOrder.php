@@ -2,6 +2,7 @@
 
 require_once(__DIR__.'/Order.php');
 require_once(__DIR__.'/BeePrices.php');
+require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/inputSanitize.php');
 
 class BeeOrder extends Order
 {
@@ -14,48 +15,59 @@ class BeeOrder extends Order
     public function __construct($nSingleIt, $nDoubleIt, $nSingleC,
         $nDoubleC, $nItQ, $nCarniQ, $pickupPoint, $customPickupLoc, $pickupDate, $notes)
     {
-        $this->nSIts_ = htmlentities(strip_tags($nSingleIt == "" ? "0" : $nSingleIt));
-        $this->nDIts_ = htmlentities(strip_tags($nDoubleIt == "" ? "0" : $nDoubleIt));
+        $this->nSIts_ = sanitizeVar($nSingleIt == "" ? "0" : min($nSingleIt, 500));
+        $this->nDIts_ = sanitizeVar($nDoubleIt == "" ? "0" : min($nDoubleIt, 500));
 
-        $this->nSCarnis_ = htmlentities(strip_tags($nSingleC == "" ? "0" : $nSingleC));
-        $this->nDCarnis_ = htmlentities(strip_tags($nDoubleC == "" ? "0" : $nDoubleC));
+        $this->nSCarnis_ = sanitizeVar($nSingleC == "" ? "0" : min($nSingleC, 500));
+        $this->nDCarnis_ = sanitizeVar($nDoubleC == "" ? "0" : min($nDoubleC, 500));
 
-        $this->nItQ_    = htmlentities(strip_tags($nItQ == "" ? "0" : $nItQ));
-        $this->nCarniQ_ = htmlentities(strip_tags($nCarniQ == "" ? "0" : $nCarniQ));
+        $this->nItQ_    = sanitizeVar($nItQ == "" ? "0" : min($nItQ, 100));
+        $this->nCarniQ_ = sanitizeVar($nCarniQ == "" ? "0" : min($nCarniQ, 100));
 
-        $this->pickupPoint_ = htmlentities(strip_tags($pickupPoint));
-        $this->customLoc_   = htmlentities(strip_tags($customPickupLoc));
-        $this->pickupDate_   = htmlentities(strip_tags($pickupDate));
-        $this->notes_       = htmlentities(strip_tags($notes));
+        $this->pickupPoint_ = sanitizeVar($pickupPoint);
+        $this->customLoc_   = sanitizeVar($customPickupLoc);
+        $this->pickupDate_  = sanitizeVar($pickupDate);
+        $this->notes_       = sanitizeVar($notes);
+    }
+
+
+
+    public function changeQuantity($id, $newQuantity)
+    {
+        if (!is_numeric($id) ||         //sanitization check
+            !is_numeric($newQuantity) || $newQuantity > 500)
+            return false;
+
+        switch ($id)
+        {
+            case 1:
+                $this->nSIts_ = $newQuantity;
+                return true;
+            case 2:
+                $this->nDIts_ = $newQuantity;
+                return true;
+            case 3:
+                $this->nSCarnis_ = $newQuantity;
+                return true;
+            case 4:
+                $this->nDCarnis_ = $newQuantity;
+                return true;
+            case 5:
+                $this->nItQ_ = $newQuantity;
+                return true;
+            case 6:
+                $this->nCarniQ_ = $newQuantity;
+                return true;
+        }
+
+        return false;
     }
 
 
 
     public function removeOrderByID($id) //matches ids in getPackageOrder()
     {
-        switch ($id)
-        {
-            case 1:
-                $this->nSIts_ = 0;
-                return true;
-            case 2:
-                $this->nDIts_ = 0;
-                return true;
-            case 3:
-                $this->nSCarnis_ = 0;
-                return true;
-            case 4:
-                $this->nDCarnis_ = 0;
-                return true;
-            case 5:
-                $this->nItQ_ = 0;
-                return true;
-            case 6:
-                $this->nCarniQ_ = 0;
-                return true;
-        }
-
-        return false;
+        return changeQuantity($id, 0);
     }
 
 

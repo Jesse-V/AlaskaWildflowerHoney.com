@@ -21,17 +21,12 @@
             //if the item is a supplies item
             if ($input['table'] == 'suppliesTable')
             {
-                if (is_numeric($input['element'])) //sanitization check
-                {
-                    //remove supply selection by itemID
-                    $success = $_SESSION['supplies']->removeItemByID($input['element']);
-                    if (count($_SESSION['supplies']->getItems()) == 0)
-                        unset($_SESSION['supplies']);
+                //remove supply selection by itemID
+                $success = $_SESSION['supplies']->removeItemByID($input['element']);
+                if (count($_SESSION['supplies']->getItems()) == 0)
+                    unset($_SESSION['supplies']);
 
-                    echo $success ? "Success" : "Failure";
-                }
-                else
-                    echo "Failure";
+                echo $success ? "Success" : "Failure";
             }
             else if ($input['table'] == 'beesTable') //if it's a bee item
             {
@@ -77,6 +72,30 @@
                     echo json_encode(array("status" => $success,
                         "transCharge" => $transCharge, "subtotal" => $subtotal));
                 }
+            }
+        }
+        else if ($input['action'] == 'changeQuantity') //editing quantity via editor
+        {
+            //if the item is a supplies item
+            if ($input['table'] == 'suppliesTable')
+            {
+                $success = $_SESSION['supplies']->changeQuantityOnItem(
+                    $input['element'], $input['newQuantity']);
+                if (count($_SESSION['supplies']->getItems()) == 0)
+                    unset($_SESSION['supplies']);
+
+                echo $success ? "Success" : "Failure";
+            }
+            else if ($input['table'] == 'beesTable') //if it's a bee item
+            {
+                $beeOrder = $_SESSION['beeOrder'];
+                $success = $beeOrder->changeQuantity(
+                    $input['element'], $input['newQuantity']);
+                if ($beeOrder->countPackages() + $beeOrder->getItalianQueenCount() +
+                    $beeOrder->getCarniolanQueenCount() == 0)
+                    unset($_SESSION['beeOrder']);
+
+                echo $success ? "Success" : "Failure";
             }
         }
     }

@@ -22,15 +22,26 @@ class SuppliesOrder extends Order
 
 
 
-    public function removeItem($index)
-    { //https://stackoverflow.com/questions/369602/delete-an-element-from-an-array
+    public function changeQuantityOnItem($itemID, $newQuantity)
+    {
+        if (!is_numeric($itemID) ||         //sanitization check
+            !is_numeric($newQuantity) || $newQuantity > 500)
+            return false;
 
-        $countBefore = count($this->orderedItems_);
+        //lookup by itemID, find index in array
+        foreach ($this->orderedItems_ as $index => $item)
+            if ($item->itemID_ == $itemID)
+                break;
 
-        unset($this->orderedItems_[$index]);
-        $this->orderedItems_ = array_values($this->orderedItems_);
+        if ($newQuantity == 0)
+        {
+            unset($this->orderedItems_[$index]);
+            $this->orderedItems_ = array_values($this->orderedItems_);
+        }
+        else
+            $this->orderedItems_[$index]->quantity_ = $newQuantity;
 
-        return $countBefore != count($this->orderedItems_);
+        return true;
     }
 
 
@@ -38,15 +49,11 @@ class SuppliesOrder extends Order
     public function removeItemByID($itemID)
     { //https://stackoverflow.com/questions/369602/delete-an-element-from-an-array
 
+        if (!is_numeric($itemID)) //sanitization check
+            return false;
+
         $countBefore = count($this->orderedItems_);
-
-        foreach ($this->orderedItems_ as $index => $item)
-            if ($item->itemID_ == $itemID)
-                break;
-
-        unset($this->orderedItems_[$index]);
-        $this->orderedItems_ = array_values($this->orderedItems_);
-
+        changeQuantityOnItem($itemID, 0);
         return $countBefore != count($this->orderedItems_);
     }
 
