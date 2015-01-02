@@ -1,15 +1,17 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
 
+    $input = sanitizeArray($_POST);
+
     //if the page was reached directly or otherwise with no input
-    if (empty($_SESSION) || empty($_POST))
+    if (empty($_SESSION) || empty($input))
     {
         echo '<p>Oops! You seemed to have reached this page in error, as your cart is currently empty or not enough information was sent to this page. Please visit the
                 <a href="/order_supplies.php">Supplies store</a> or the
                 <a href="/order_bees.php">Bees store</a>. Thanks!
             </p>';
     }
-    else if (!validInput($_POST)) //check for missing/invalid required information
+    else if (!validInput($input)) //check for missing/invalid required information
     {
         echo '<p>Something went wrong. It looks like you forgot to fill out some necessary information in the checkout page, or your information was otherwise invalid. Please go back and fill out the payment and contact information.
                 <br><br>
@@ -23,7 +25,7 @@
     {
         echo '
         <h1>Order Confirmation</h1>
-        <form method="post" action="'.$_POST['nextDestination'].'">';
+        <form method="post" action="'.$input['nextDestination'].'">';
 
         echo "
             <p>
@@ -32,13 +34,13 @@
 
         echoCart(); //print cartReceiptView
 
-        if ($_POST['paymentMethod'] == "card")
+        if ($input['paymentMethod'] == "card")
         { //it's a confirmation of a card checkout
 
             //save credit card information into the session
             $_SESSION['paymentInfo'] = array();
-            foreach ($_POST as $key => $cardField)
-                $_SESSION['paymentInfo'][$key] = htmlentities(strip_tags($cardField));
+            foreach ($input as $key => $cardField)
+                $_SESSION['paymentInfo'][$key] = sanitizeVar($cardField);
 
             //format the phone numbers into very readable formats
             $_SESSION['paymentInfo']['primaryPhone'] = formatPhone($_SESSION['paymentInfo']['primaryPhone']);
@@ -75,19 +77,19 @@
 
             //save contact information into the session
             $_SESSION['contactInfo'] = array();
-            foreach ($_POST as $key => $contactField)
+            foreach ($input as $key => $contactField)
                 $_SESSION['contactInfo'][$key] = htmlentities(strip_tags($contactField));
 
             //format the phone numbers into very readable formats
             $primaryPhone = formatPhone($_SESSION['contactInfo']['primaryPhone']);
             $backupPhone = formatPhone($_SESSION['contactInfo']['backupPhone']);
-            $_POST['primaryPhone'] = $_SESSION['contactInfo']['primaryPhone'] = $primaryPhone;
-            $_POST['backupPhone'] = $_SESSION['contactInfo']['backupPhone'] = $backupPhone;
+            $input['primaryPhone'] = $_SESSION['contactInfo']['primaryPhone'] = $primaryPhone;
+            $input['backupPhone'] = $_SESSION['contactInfo']['backupPhone'] = $backupPhone;
 
             echo '
                 <h3>Shipping and Contact</h3>
                 <p>
-                    '.getShippingContact($_POST).'
+                    '.getShippingContact($input).'
                 </p>';
         }
 

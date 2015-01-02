@@ -2,18 +2,22 @@
     //used to render the HTML for the cart preview on the right-hand side
 
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/inputSanitize.php');
     if (!isset($_SESSION))
         session_start();
 
 
+    $input = sanitizeArray($_GET);
+
+
     //take the appropriate action, or do nothing if no action was specified
-    if (!empty($_GET))
+    if (!empty($input))
     {
-        if ($_GET['action'] == 'getHTML')
+        if ($input['action'] == 'getHTML')
             echo getPreviewHTML();
-        else if ($_GET['action'] == 'getTotal')
+        else if ($input['action'] == 'getTotal')
             echo getPreviewTotal();
-        else if ($_GET['action'] == 'getAll')
+        else if ($input['action'] == 'getAll')
         {
             header('Content-Type: application/json');
             echo json_encode(array('html' => getPreviewHTML(), 'total' => getPreviewTotal()));

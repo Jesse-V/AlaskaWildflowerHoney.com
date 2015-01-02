@@ -2,18 +2,22 @@
     //used to render the HTML for the cart in cartEditor.php
 
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/cartReceiptView.php');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/inputSanitize.php');
     if (!isset($_SESSION))
         session_start();
 
 
+    $input = sanitizeArray($_GET);
+
+
     //take the appropriate action
-    if (!isset($_GET['action']))
+    if (!isset($input['action']))
     {}
-    else if ($_GET['action'] == 'getHTML')
+    else if ($input['action'] == 'getHTML')
         echo getEditorHTML();
-    else if ($_GET['action'] == 'getTotal')
+    else if ($input['action'] == 'getTotal')
         echo getEditorTotal();
-    else if ($_GET['action'] == 'getAll')
+    else if ($input['action'] == 'getAll')
     { //return a JSON-encoded array of the HTML and total
         header('Content-Type: application/json');
         echo json_encode(array('html' => getEditorHTML(), 'total' => getEditorTotal()));

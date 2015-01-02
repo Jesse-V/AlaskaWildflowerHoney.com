@@ -3,33 +3,35 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/SuppliesOrder.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/classes/BeeOrder.php');
 
+    $input = sanitizeArray($_POST);
+
     if (!isset($_SESSION))
         session_start();
 
     try
     {
-        if (empty($_POST['action']))
+        if (empty($input['action']))
             return;
 
         //if an item should be deleted
-        if ($_POST['action'] == 'deleteItem')
+        if ($input['action'] == 'deleteItem')
         {
             //if the item is a supplies item
-            if ($_POST['table'] == 'suppliesTable')
+            if ($input['table'] == 'suppliesTable')
             {
                 //remove supply selection by itemID
                 $suppliesOrder = $_SESSION['supplies'];
-                $success = $suppliesOrder->removeItemByID($_POST['element']);
+                $success = $suppliesOrder->removeItemByID($input['element']);
                 if (count($suppliesOrder->getItems()) == 0)
                     unset($_SESSION['supplies']);
 
                 echo $success ? "Success" : "Failure";
             }
-            else if ($_POST['table'] == 'beesTable') //if it's a bee item
+            else if ($input['table'] == 'beesTable') //if it's a bee item
             {
                 //remove bee order by bee/queen name
                 $beeOrder = $_SESSION['beeOrder'];
-                $success = $beeOrder->removeOrderByID($_POST['element']);
+                $success = $beeOrder->removeOrderByID($input['element']);
                 if ($beeOrder->countPackages() + $beeOrder->getItalianQueenCount() +
                     $beeOrder->getCarniolanQueenCount() == 0)
                     unset($_SESSION['beeOrder']);
@@ -37,19 +39,19 @@
                 echo $success ? "Success" : "Failure";
             }
         }
-        else if ($_POST['action'] == 'updateOrder') //we are updating the order
+        else if ($input['action'] == 'updateOrder') //we are updating the order
         {
             //add items to order in batch, replacing any existing supplies order
-            if ($_POST['page'] == 'supplies')
+            if ($input['page'] == 'supplies')
             {
-                $success = updateSuppliesOrder($_POST['selection'], $_POST['pickupLoc']);
+                $success = updateSuppliesOrder($input['selection'], $input['pickupLoc']);
                 echo $success ? "Success" : "Failure";
             }
-            else if ($_POST['page'] == 'bees')
+            else if ($input['page'] == 'bees')
             {
                 //sum the number of selected packages and queens
                 $count = 0;
-                foreach ($_POST['selection'] as $item)
+                foreach ($input['selection'] as $item)
                     $count += $item;
 
                 header('Content-Type: application/json');
@@ -61,8 +63,8 @@
                 }
                 else
                 {
-                    $success = updateBeeOrder($_POST['selection'],
-                        $_POST['pickup']) ? "Success" : "Failure";
+                    $success = updateBeeOrder($input['selection'],
+                        $input['pickup']) ? "Success" : "Failure";
                     $transCharge = $_SESSION['beeOrder']->getTransportationCharge();
                     $subtotal = $_SESSION['beeOrder']->getSubtotal();
 

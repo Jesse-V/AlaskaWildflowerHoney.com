@@ -1,6 +1,7 @@
 <?php
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/emailReceipts.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/checkout/authorizeNetVars.secret');
+    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/inputSanitize.php');
 
     $_TITLE_ = "Card Receipt - StevesBees.com";
     $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",
@@ -8,11 +9,7 @@
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php'); //opening HTML
 
 
-    //XSS sanitize, https://stackoverflow.com/questions/1996122/how-to-prevent-xss-with-html-php
-    $input = array();
-    foreach ($_GET as $key => $value) {
-        $input[$key] = htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
-    }
+    $input = sanitizeArray($_GET);
 
 
     echo '<h1>Your receipt</h1>';
