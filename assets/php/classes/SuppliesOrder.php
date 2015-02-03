@@ -53,7 +53,7 @@ class SuppliesOrder extends Order
             return false;
 
         $countBefore = count($this->orderedItems_);
-        changeQuantityOnItem($itemID, 0);
+        $this->changeQuantityOnItem($itemID, 0);
         return $countBefore != count($this->orderedItems_);
     }
 
