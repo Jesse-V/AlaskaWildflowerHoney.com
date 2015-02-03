@@ -14,7 +14,7 @@ At mile 5.5 Big Lake road you will come to South Port Marina.  Echo Lake Drive t
         <br>Wasilla, AK 99623
     </p>
     <p>Phone: (907) 892-6175</p>
-    <p>Steve@AlaskaWildflowerHoney.com</p>
+    <p>steve@stevesbees.com</p>
     <img src="assets/images/half_pound.gif" alt="Half pound of honey."/>
 
 <?php

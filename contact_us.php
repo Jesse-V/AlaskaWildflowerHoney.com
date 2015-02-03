@@ -24,7 +24,7 @@
         <br>Wasilla, AK 99623
     </p>
     <p class="phone">Phone: (907) 892-6175</p>
-    <p class="email">Steve@AlaskaWildflowerHoney.com</p>
+    <p class="email">steve@stevesbees.com</p>
 
     <div class="honeyImgWrapper">
         <img class="honey" src="assets/images/half_pound.gif" alt="Half pound of honey."/>
