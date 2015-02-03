@@ -135,19 +135,19 @@
             //but it still needs to be checked
         if ($fields['paymentMethod'] == "check")
         {
-            if (strlen($fields['primaryPhone']) > 15)
+            if (strlen($fields['primaryPhone']) > 25)
                 return false;
         }
         else if ($fields['paymentMethod'] == "card")
         {
             if (!isset($fields['primaryPhone']) ||
-                strlen($fields['primaryPhone']) < 7 ||
-                strlen($fields['primaryPhone']) > 15)
+                strlen($fields['primaryPhone']) < 3 ||
+                strlen($fields['primaryPhone']) > 25)
                 return false;
         }
 
         //always optional, but check it for sanity
-        if (strlen($fields['backupPhone']) > 15)
+        if (strlen($fields['backupPhone']) > 25)
             return false;
 
         if (!isset($fields['x_email']) ||
