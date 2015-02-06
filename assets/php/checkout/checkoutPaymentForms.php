@@ -16,7 +16,7 @@ function getCardFields($amount, $fp_sequence, $api_login_id, $transaction_key, $
         )
     );
 
-    return '
+    $str = '
         '.$sim->getHiddenFieldString().'
         <fieldset>
             <div>
@@ -31,39 +31,43 @@ function getCardFields($amount, $fp_sequence, $api_login_id, $transaction_key, $
                 <label>CCV <span class="explanation">(three-letter security code on back)</span></label>
                 <input required type="text" class="text" size="4" name="x_card_code" value="'.($prefill ? '782' : '').'"></input>
             </div>
-        </fieldset>
+        </fieldset>';
+
+    $req = (!isset($_SESSION['customer']) || $_SESSION['customer']) ? "required" : "";
+
+    return $str.'
         <fieldset>
             <div>
                 <label>First Name on card</label>
-                <input required type="text" class="text" size="15" name="x_first_name" value="'.($prefill ? 'John' : '').'"></input>
+                <input '.$req.' type="text" class="text" size="15" name="x_first_name" value="'.($prefill ? 'John' : '').'"></input>
             </div>
             <div>
                 <label>Last Name on card</label>
-                <input required type="text" class="text" size="14" name="x_last_name" value="'.($prefill ? 'Doe' : '').'"></input>
+                <input '.$req.' type="text" class="text" size="14" name="x_last_name" value="'.($prefill ? 'Doe' : '').'"></input>
                 <input type="button" id="sameName" value="Also the order recipient" onClick="copyName()"></input>
             </div>
         </fieldset>
         <fieldset>
             <div>
                 <label>Billing Address</label>
-                <input required type="text" class="text" size="30" name="x_address" value="'.($prefill ? '123 Main Street' : '').'"></input>
+                <input '.$req.' type="text" class="text" size="30" name="x_address" value="'.($prefill ? '123 Main Street' : '').'"></input>
             </div>
             <div>
                 <label>City</label>
-                <input required type="text" class="text" size="15" name="x_city" value="'.($prefill ? 'Boston' : '').'"></input>
+                <input '.$req.' type="text" class="text" size="15" name="x_city" value="'.($prefill ? 'Boston' : '').'"></input>
             </div>
         </fieldset>
         <fieldset>
             <div>
                 <label>State</label>
-                <input required type="text" class="text" size="4" name="x_state" value="AK"></input>
+                <input '.$req.' type="text" class="text" size="4" name="x_state" value="AK"></input>
             </div>
             <div>
                 <label>Zip Code</label>
-                <input required type="text" class="text" size="9" name="x_zip" value="'.($prefill ? '02142' : '').'"></input>
+                <input '.$req.' type="text" class="text" size="9" name="x_zip" value="'.($prefill ? '02142' : '').'"></input>
             </div>
             <div>
-                <input required type="hidden" class="text" size="5" name="x_country" value="US"></input>
+                <input '.$req.' type="hidden" class="text" size="5" name="x_country" value="US"></input>
             </div>
         </fieldset>
     ';

@@ -2,6 +2,7 @@
     $_TITLE_ = "Harvest & Processing";
     $_STYLESHEETS_ = array("/assets/css/harvest_n_processing.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
+    $_SESSION['customer'] = true;
 ?>
 
     <h1>This page is under construction</h1>

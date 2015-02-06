@@ -2,6 +2,7 @@
     $_TITLE_ = "Services";
     $_STYLESHEETS_ = array("/assets/css/services.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
+    $_SESSION['customer'] = true;
 ?>
 
     <h1>Services</h1>

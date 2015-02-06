@@ -2,6 +2,7 @@
     $_TITLE_ = "Installing";
     $_STYLESHEETS_ = array();
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
+    $_SESSION['customer'] = true;
 ?>
 
     <img src="assets/images/map_to_house.gif" alt="Map of Big Lake showing how to get to our location."/>

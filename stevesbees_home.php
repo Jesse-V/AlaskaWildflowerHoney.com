@@ -3,6 +3,7 @@
     $_STYLESHEETS_ = array("/assets/css/stevesbees_home.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
+    $_SESSION['customer'] = true;
     global $db;
 
 

@@ -2,6 +2,7 @@
     $_TITLE_ = "Aerial View";
     $_STYLESHEETS_ = array('/assets/css/aerial_view.css');
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
+    $_SESSION['customer'] = true;
 ?>
 
     <img src="assets/images/matsu_google_earth.gif" alt="Google Earth map of Mat-Su, showing our location in Alaska."/>

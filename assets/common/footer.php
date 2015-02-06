@@ -78,7 +78,7 @@
                         <div class="title">Shopping Cart</div>
                         <div class="contents">
     <?php
-        if (empty($_SESSION))
+        if (!isset($_SESSION['supplies']) && !isset($_SESSION['beeOrder']))
         {
             echo '<div class="empty">Currently empty</div>';
         }

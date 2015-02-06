@@ -121,6 +121,10 @@
         if (!isset($fields['nextDestination']))
             return false;
 
+        // admin checkout, all other fields are optional
+        if (isset($_SESSION['customer']) && !$_SESSION['customer'])
+            return true;
+
         if (!isset($fields['x_ship_to_first_name']) ||
             strlen($fields['x_ship_to_first_name']) < 2 ||
             strlen($fields['x_ship_to_first_name']) > 40)

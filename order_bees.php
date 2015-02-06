@@ -3,6 +3,7 @@
     $_STYLESHEETS_ = array("/assets/css/fancyHRandButtons.css",
         "/assets/css/order_bees.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
+    $_SESSION['customer'] = true;
 ?>
 
     <div id="introLeft">

@@ -2,6 +2,7 @@
     $_TITLE_ = "Home";
     $_STYLESHEETS_ = array("/assets/css/index.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
+    $_SESSION['customer'] = true;
 ?>
 
     <div class="left half">
