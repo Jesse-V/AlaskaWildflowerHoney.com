@@ -7,7 +7,8 @@
 ?>
 
     <div id="introLeft">
-        <h1>Ready to order bees?<br><span class="subtitle">You've come to the right place.</span></h1>
+        <h1>Ready to order bees?<br><span class="subtitle">We are nearly sold out!</span></h1>
+            <!--<span class="subtitle">You've come to the right place.</span></h1>-->
     </div>
     <div id="introRight">
         <img src="/assets/images/Apis%20mellifera%2008.jpg" alt="A honeybee visiting a pink flower, courtesy Wikimedia."/>

@@ -44,20 +44,8 @@ function updateTransportationMessage(radioB) {
         case 'Palmer':
         case 'Eagle River':
         case 'Big Lake':
-            tCharge.html('<p id="dateChoice">' +
-                    'Please choose the day you would like your bees to arrive:' +
-                    '<br>' +
-                    '<span class="option" onclick="choseDate(this); queueBeeOrderUpdate();">' +
-                        '<input type="radio" name="dateChoice" value="11" ' +
-                            checked11 + '/>' +
-                        '<label>April 11th</label>' +
-                    '</span>' +
-                    '<span class="option" onclick="choseDate(this); queueBeeOrderUpdate();">' +
-                        '<input type="radio" name="dateChoice" value="25" ' +
-                            checked25 + '/>' +
-                        '<label>April 25th</label>' +
-                    '</span>' +
-                '</p><input type="hidden" name="dateChoice" value="11/25"/>');
+            tCharge.html('<p><b style="color: red;">Your bees will be scheduled for the 18th!</b> We will have a pickup location in Anchorage and making two pickup points in the Valley for this day.  Approximately 10:30 at the park and ride lot on Trunk and Parks Highway (Palmer) and AIH parking lot in Wasilla at 11:00.  We will call you on our way out of town so that you will know the exact time and can meet us there.</p>' +
+                '<input type="hidden" name="dateChoice" value="18"/>');
             return;
 
         case 'Soldotna':
@@ -97,7 +85,7 @@ function updateTransportationMessage(radioB) {
             return;
 
         case 'Other':
-            tCharge.html('<p class="tallHeight">Please add your final destination to the notes box. If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $10/package drop-off fee.<br>Please provide the destination: <input type="text" name="customDest" value="' + sessionCustomDest + '" onkeyup="queueBeeOrderUpdate();" style="padding: 2px 5px; 5px; margin-top: 4px;"/> <br> You can also provide additional instructions in the box below. <b>It will be necesssary for you to make all of the flight arrangements and complete any paperwork required by the air carrier.</b> We are dealing with hundreds of packages on the same day that yours need to be dropped off, so it is necessary that everything is prepared for the arrival of the bees at the drop-off point.</p><input type="hidden" name="dateChoice" value="11/25"/>');
+            tCharge.html('<p class="tallHeight">Please add your final destination to the notes box. If your order requires special handling and needs to be sent to a different location, choose this category. Charges vary depending on the drop-off point. For flights to the Bush or outside Anchorage, there is a $10/package drop-off fee.<br>Please provide the destination: <input type="text" name="customDest" value="' + sessionCustomDest + '" onkeyup="queueBeeOrderUpdate();" style="padding: 2px 5px; 5px; margin-top: 4px;"/> <br> You can also provide additional instructions in the box below. <b>It will be necesssary for you to make all of the flight arrangements and complete any paperwork required by the air carrier.</b> We are dealing with hundreds of packages on the same day that yours need to be dropped off, so it is necessary that everything is prepared for the arrival of the bees at the drop-off point.</p><input type="hidden" name="dateChoice" value="18"/>');
             setTimeout(function() { tCharge.find("input[name=customDest]").focus(); }, 250);
             return;
     }
