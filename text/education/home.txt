@@ -1,0 +1,83 @@
+
+# Education
+
+<div class="section documents">
+
+## Helpful Documents
+
+We not only provide honeybees and supplies to beekeepers throughout Alaska, but we are also provide quality customer assistance, advice, and beekeeping education. We hold two beekeeping courses in the spring, which we highly recommend. Throughout the season, we receive many questions on beekeeping; we have placed many of the common ones here as well as other articles that you may find useful. We have categorized the material by month. All of the material is also available through a topical guide.
+
+<table>
+  <tr>
+    <td>
+      <div class="title">March</div>
+      <a href="/text/education/March">
+        <span class="link"></span>
+      </a>
+    </td>
+    <td>
+      <div class="title">April</div>
+      <a href="/text/education/April">
+        <span class="link"></span>
+      </a>
+    </td>
+    <td>
+      <div class="title">May</div>
+      <a href="/text/education/May">
+        <span class="link"></span>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="title">June</div>
+      <a href="/text/education/June">
+        <span class="link"></span>
+      </a>
+    </td>
+    <td>
+      <div class="title">July</div>
+      <a href="/text/education/July">
+        <span class="link"></span>
+      </a>
+    </td>
+    <td>
+      <div class="title">August</div>
+      <a href="/text/education/August">
+        <span class="link"></span>
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="title">September</div>
+      <a href="/text/education/September">
+        <span class="link"></span>
+      </a>
+    </td>
+    <td>
+      <div class="title">October</div>
+      <a href="/text/education/October">
+        <span class="link"></span>
+      </a>
+    </td>
+    <td>
+      <div class="title">(Winter Months)</div>
+      <a href="/text/education/Winter">
+        <span class="link"></span>
+      </a>
+    </td>
+  </tr>
+</table>
+
+<br>
+<div class="guideboxWrap">
+  <div class="guidebox linkbox">
+    <div class="title">Topical Guide</div>
+    <a href="education_guide.php">
+      <span class="link"></span>
+    </a>
+  </div>
+</div>
+
+</div>

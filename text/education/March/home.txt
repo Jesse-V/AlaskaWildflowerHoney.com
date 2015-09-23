@@ -1,0 +1,68 @@
+
+# Beekeeping Topics for March
+
+<div class="article">
+
+  ## Hiving Bees from Packages
+
+  For a lot of beekeepers this information may be pretty basic but I hope that there is something in here that might increase the survival rate of the new bees for even the old timers. One of the important things to remember is that every bee that goes into the colony increases your honey crop. There has been a lot of news attention to the "no child left behind act" and Alaskan beekeepers follow the "no bee left behind act" when emptying a package. Bees that are left in the package often do not make it into the hive even if they are only a few inches from the entrance. If a bee is colder than about 45 degrees it is very difficult for them to move. Our hiving temperatures are frequently near this temperature or even colder.
+
+  Package bees are under a higher level of stress and as beekeepers we need to do as much as possible to help them establish a new colony. The new home needs to be as clean, dry, and as draft free as possible. A few frames of drawn comb are very useful if the hive is new and the bees are starting on foundation. They also need a food source right away so that energy replacement is easy to obtain. Giving your bees a spray of sugar water prior to hiving helps out with the dehydration as well as the energy levels.
+
+  If the packages are not to be installed right away they should be kept in a cool dark place and occasionally sprayed with sugar water. Make sure that the bees have lots of air circulation and are away from potential air pollutants of chemicals and exhaust. A practical limit of about 5 days is about as long as you can expect to hold them prior to installation.
+
+  Spray the package with sugar water again prior to installation to keep the bees from flying too much and to give them some of the energy that they will need as they get to know their new home.
+
+  When you get ready to shake the bees out of the package you might want to have an extra super on hand (an empty one) to act as a guide for the bees to land on the top bars of the hive. Place the empty super on top of the hive after removing several frames to make room for the bees. This will make a short wall around the top of the hive and prevent bees from ending up over the edge and down on the ground.
+
+  Speaking of things down on the ground, don't forget to wear some tall boots or take measures to prevent bees from getting lost up inside your pant legs. A simple wrap with tape will help a lot.
+
+  Keep the queen protected from the elements during the hiving process and remember that it takes a few days for the bees to get used to their new queen. Letting her hang in the cage inside the super is a good idea. Make sure that the other bees can feed her and place the cage so that the feeder jar does not drip on the queen. Release the queen into a calm hive in a few days.
+
+  Once the bees have been hived feed them continuously with supplemental sugar syrup and provide pollen substitute unless a pollen bloom is well underway.
+
+  If your hive is not established with drawn comb it might be a good idea to provide some insulation on the top of the hive to increase temperatures good for drawing comb. The use of entrance reducers is also useful in maintaining temperature in the hive. The population is small enough that the bees do not need a large entrance at this time.
+
+</div>
+<div class="article">
+
+  ## American Foulbrood
+
+  Most of the following information is taken from the New Zealand Beekeepers web site and from a booklet that they have online called *Elimination of American Foulbrood Without the Use of Drugs*. The book is fairly detailed and quite thorough so I have picked several topics that are covered in the book and have based the following article from my understanding of the subject
+
+  American Foulbrood is caused from the bacteria *Bacillus Larvae*. The life cycle goes through several stages and each stage is important for the beekeeper to understand. We generally see only the active stage when infection is present and recognizable in the hive. Dormant AFB is difficult to recognize but can have a serious impact on the beekeepers operation. Just as important as the recognition of AFB is the knowledge of how the disease is spread.
+
+  AFB infects primarily the developing Larvae of the hive. Young developing larvae either are fed brood food (honey/pollen mixture) that is contaminated with the bacteria spores or the spores are present in the comb where the egg is laid. In either case the larvae become infected with the bacteria and die before they mature into young emerging bees. Most of the time death of the larvae occurs after the bees have capped the brood and the larva dies under the capping. It is at this point that the infected and dead larvae are removed from the comb by the nurse bees and the contamination is spread through the hive. In the process of removing the dead larva the nurse bee contaminates the mouth that is used to feed the healthy larvae. Since bees routinely share food and move throughout the hive, the honey and stored pollen becomes contaminated with bacteria and the bacterial spores.
+
+  Bacterial spores are a dormant phase of the bacteria's life cycle. The shell of the spore is a tough and resistant membrane that will allow the bacteria to survive under harsh conditions. It is logical to compare the spore to the seed of a plant, capable of remaining alive during conditions that are unacceptable to the plant itself (winter, lack of rain...) in the case for the AFB spores, the viability extends for up to 50 years. The spores are not affected by cold temperatures and can survive in abandoned equipment or encapsulated in wax or propolis until they are exposed to young larvae by ingestion.
+
+  Symptoms of AFB should be recognizable by the beekeeper if the beekeeper has periodic close examinations of the brood pattern within the hive. Things to look for include the cappings of the brood that appear to be perforated or have a hole chewed in the center. Nurse bees will do this after the larva dies in an attempt to remove the body. The larva is somewhat liquefied and is difficult to remove. If a small stick is inserted into the infected cell and the larva is stirred slightly the stick is covered with sticky goo that will cling to both the stick and the remaining larva in the cell. The contents of the cell will rope out up to an inch from the cell when the stick is removed. There may be as few as 2 or 3 of these cells on a pattern of brood so it is necessary to have a very close look at the capped brood to find this. Since the dead larva is difficult to remove it often dries up to form a dead scale or hardened layer of dead larval remains in the cell. This is difficult for the worker bees to remove and the bees will be unable to clean the cell well enough to make it acceptable for the queen to lay an egg in. The brood pattern will have holes in it of unlaid cells. This may be easier to spot and should cause the beekeeper to examine the hive more closely. Decaying brood smells bad and a heavily infected hive may have a smell to it that has been described as a glue pot odor.
+
+  Keep in mind that the antibiotic Terramycin is used to treat AFB but only works on the active stage of the life cycle. The spores are unaffected by this drug and persist in the hive in a waiting game with the beekeeper. AFB is undetectable to most beekeepers in hives treated with antibiotics but can still be present. When the season comes along that the beekeeper does not treat the hive with antibiotics the spores will become active. Many beekeepers that have a few hives would rather know that they have a problem than have an underlying infection ready to contaminate other hives in the area. In either case the cure for AFB in the active stage is destruction of the hive by burning all frames and comb, and scorching all of the woodenware with a torch.
+
+  Most beekeepers concentrate on the prevention of the spread of the disease. It is most useful to know what are the factors in getting a case of AFB into your clean apiary. I have listed the most common factors in order of most risk to the ones of least risk. Since Alaska has a very low incidence of AFB some of the factors listed won't seem as great as if they would be in more populated areas.
+
+  1. Transfer of frames of brood between hives.
+  2. Mixing supers between hives during the next season
+  3. Allowing wet supers to be cleaned out that are from AFB hives
+  4. Robbing bees
+  5. Feeding commercial pollen or honey to a clean colony
+
+  Low on the list is: drifting bees, tools, hands and clothing
+
+</div>
+<div class="article">
+
+  ## Antibiotics
+
+  I thought that I would take a few moments to write about the practice of feeding bees antibiotics to prevent the outbreak of bacterial brood disease. Not too long ago it was considered standard practice to treat hives with routine applications of antibiotics just in case there might be Foul Brood out there that could destroy the peace and harmony of a well managed hive. While this practice was considered standard it was not logical. It would be the same as everyone taking antibiotics in case there was an outbreak of anthrax.
+
+  What has happened over the years is that AFB has become accustomed to low levels of antibiotics present in the hive all the time. Given enough timeAFB becomes resistant to the drug and there is no effective treatment to the disease.
+
+  This is only half of the story when it comes to AFB. The other half of the story is that the bacteria that forms AFB has a life cycle that part of the existence of the bacteria is in the spore stage. While the bacteria is in the spore stage it is not affected by antibiotics at all because the bacterium is not doing anything. It is just waiting for conditions to be right, waiting, waiting, waiting. In the meantime, whatever low level of resistant bacteria that are active are being spread around the apiary. How does this happen? Each time a hive is taken apart there is the chance that the components of the hive end up in another hive. My frames travel throughout my operation as individual frames are extracted, mixed with others and replaced or as whole supers are moved into and out of storage.
+
+  The problem becomes significant in one of two ways. First is that the bacterium becomes accustomed to and learns to ignore the antibiotics. Often there is a false sense of security when antibiotics are applied and careful checks of the brood nest are skipped. By the time the disease is noticed it may be widespread and difficult to contain. The second common way that problems arise is that medications may be halted and the spores are now able to reproduce easily.
+
+  As mentioned in the previous article the cure for AFB is fire. Beekeepers should be suspicious of brood problems in the hive whenever the bees are not performing as well as the beekeeper would like. Regular hive checks should be part of every beekeepers standard routine and at least one thorough hive check for disease each year prior to harvest can keep from spreading the problems around. If you don't look you will never see...
+
+</div>
