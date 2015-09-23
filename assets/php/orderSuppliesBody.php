@@ -43,12 +43,11 @@
     <hr class="fancy">
 
     <div id="pickupPoint">
-        <p>
-            We generally don't do mail order for supplies. Instead, our primary distribution point is <a href="contact_us.php">out of our house in Big Lake</a>. Ordering online allows us to gather your order and have it ready to be picked up at <a href="contact_us.php">in Big Lake</a> at your convenience.
-        </p>
-        <p>
-            If you wish to have your items brought to a local beekeeping meeting, into your area, please allow amble time for us to do that. Although we do our best to satisfy all the needs of all of our clients, our schedule may not allow us to gather materials on the same day as beekeeping meetings. When we receive an order, we will put your items on the shelf, sorted by location. Therefore, for example when we make a trip into Anchorage we can grab all of the Anchorage items at once. It will be important that you are able to meet us on our trips to town as it is impractical to deliver directly to your door. All items that we take into town and especially to the beekeeping meetings must be pre-paid.
-        </p>
+    <?php
+        $filename = $_SERVER['DOCUMENT_ROOT']."/text/supplies/bottom_footer.txt";
+        $contents = fread(fopen($filename, "r"), filesize($filename));
+        echo $converter->convertToHtml($contents);
+    ?>
 
         <p class="options">
             <div class="option">

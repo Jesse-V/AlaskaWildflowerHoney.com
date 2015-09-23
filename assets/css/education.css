@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+.mid_col .documents
+{
+    margin: 0px auto;
+}
+
+.mid_col .documents table
+{
+    border-collapse: collapse;
+    width: 90%;
+}
+
+.mid_col .documents td, .mid_col .linkbox
+{
+    width: 33%;
+
+    /* for div linking */
+    display: block;
+    position: relative;
+    float: left;
+
+    text-align: center;
+    font-weight: bold;
+}
+
+.mid_col .documents td .title, .mid_col .linkbox .title
+{
+    background-color: #fffacd;
+    border: 4px solid #e6e6fa;
+    border-radius: 15px;
+    margin: 3px;
+    padding: 10px 0px;
+}
+
+/* for div linking */
+.mid_col .documents td .link, .mid_col .linkbox .link
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+
+    /* edit: added z-index */
+    z-index: 1;
+}
+
+.mid_col .guideboxWrap
+{
+    width: 90%;
+}
+
+.mid_col .guidebox
+{
+    width: 40%;
+    margin: 0px auto;
+    float: none;
+}
+
+.mid_col .guidebox .title
+{
+    background-color: #e6e6fa;
+    border: 5px solid #fffacd;
+}

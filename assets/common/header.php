@@ -61,8 +61,8 @@
         </div>
         <div class="navItem">
             <img src="/assets/images/Apis Mellifera female.png" alt="Apis Mellifera female, modified from https://commons.wikimedia.org/wiki/File:Apis_mellifera_Female.jpg, taken by The Packer Lab: Bee Tribes of the World"/>
-            <div class="title">Harvest/Processing</div>
-            <a href="/harvest_n_processing.php"><span class="link"></span></a>
+            <div class="title">Education</div>
+            <a href="/education.php"><span class="link"></span></a>
         </div>
         <div class="navItem">
             <img src="/assets/images/Apis Mellifera female.png" alt="Apis Mellifera female, modified from https://commons.wikimedia.org/wiki/File:Apis_mellifera_Female.jpg, taken by The Packer Lab: Bee Tribes of the World"/>
