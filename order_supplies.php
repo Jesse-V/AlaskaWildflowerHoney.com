@@ -4,12 +4,18 @@
         "/assets/css/order_supplies.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
     $_SESSION['customer'] = true;
+
+    require_once("assets/CommonMark.php");
+    use League\CommonMark\CommonMarkConverter;
+    $converter = new CommonMarkConverter();
 ?>
 
     <div id="introLeft">
-        <h1>Supplies Store</h1>
-
-        <p>We offer a variety of beekeeping products, ranging from common items such as beehive components, tools, and processing equipment to rarer and specialty items. We carry primarily Mann Lake products, as well as some of our own. We are the largest distributor of beekeeping supplies in the state of Alaska. We hope you will find this store efficient and convenient.</p>
+    <?php
+        $filename = "text/supplies/top_introduction.txt";
+        $contents = fread(fopen($filename, "r"), filesize($filename));
+        echo $converter->convertToHtml($contents);
+    ?>
     </div>
 
     <div id="introRight">

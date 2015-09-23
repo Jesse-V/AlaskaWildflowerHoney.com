@@ -2,42 +2,16 @@
     $_TITLE_ = "StevesBees.com Home";
     $_STYLESHEETS_ = array("/assets/css/stevesbees_home.css");
     require_once($_SERVER['DOCUMENT_ROOT'].'/assets/common/header.php');
-    require_once($_SERVER['DOCUMENT_ROOT'].'/assets/php/databaseConnect.secret');
     $_SESSION['customer'] = true;
-    global $db;
 
+    $filename = "text/stevesbees_news.txt";
+    $contents = fread(fopen($filename, "r"), filesize($filename));
 
-    $newsSQL = $db->query("SELECT * FROM News ORDER BY ID DESC");
-    if (!$newsSQL)
-        die("A fatal database issue was encountered in home.php, News query. Specifically, ".$db->error);
+    require_once("assets/CommonMark.php");
+    use League\CommonMark\CommonMarkConverter;
 
-    echo "<h1>Steve's Bees - Packages of Honeybees</h1>";
-    while ($newsRecord = $newsSQL->fetch_assoc())
-        echo translateToHTML($newsRecord);
-
-
-    function wrapParagraphs(&$item1, $key)
-    {
-        $item1 = "<p>$item1</p>";
-    }
-
-
-    function translateToHTML($markedupObj)
-    {
-        $paragraphs = preg_split('/\n/', $markedupObj['content']);
-        array_walk($paragraphs, 'wrapParagraphs');
-        $content = implode("", $paragraphs);
-
-        $content = preg_replace('/\n\r/', "<p>$1</p>", $content);   //paragraphs
-        $content = preg_replace('/\*\*([^\*]+)\*\*/', "<b>$1</b>", $content); //bold
-        $content = preg_replace('/\*([^\*]+)\*/', "<i>$1</i>", $content); //italic
-
-        return '<div class="newsPiece">
-                    <h3>'.$markedupObj['date'].'</h3>
-                    <p><b>'.$markedupObj['title'].'</b></p>
-                    '.$content.'
-                </div>';
-    }
+    $converter = new CommonMarkConverter();
+    echo $converter->convertToHtml($contents);
 ?>
 
 <!--
